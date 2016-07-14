@@ -9,7 +9,6 @@ import org.springframework.data.domain.Pageable;
 
 /**
  * User service concrete class - to manager user objects
- *
  */
 public class UserService implements CrudService<User, Long> {
     
@@ -45,15 +44,6 @@ public class UserService implements CrudService<User, Long> {
         userRepository.delete(id);
     }
 
-    /**
-     * Find  and return all users
-     * @return 
-     **/
-    @Override
-    public List<User> findAll() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
      /**
      * Find and return all users by page
      * @param page
@@ -71,6 +61,15 @@ public class UserService implements CrudService<User, Long> {
      **/
     public User findByEmail(String email) {
         return userRepository.findByEmailId(email);
+    }
+    
+    /**
+     * Find  and return all users
+     * @return 
+     **/
+    @Override
+    public List<User> findAll() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }

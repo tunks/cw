@@ -6,12 +6,13 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 /**
  * FileDocument
  */
 @Entity
-@Table(name = "files")
+@Table(name = "file_documents")
 public class FileDocument extends Audit implements Serializable {
     /**
      * document id
@@ -32,6 +33,9 @@ public class FileDocument extends Audit implements Serializable {
     * resource type 
     **/
     private ResourceType resourceType;
+    
+    @OneToOne
+    private FileContent file;
 
     @Override
     public Long getId() {
@@ -62,4 +66,11 @@ public class FileDocument extends Audit implements Serializable {
         this.resourceType = resourceType;
     }
 
+    public FileContent getFile() {
+        return file;
+    }
+
+    public void setFile(FileContent file) {
+        this.file = file;
+    }
 }

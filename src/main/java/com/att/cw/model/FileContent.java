@@ -16,7 +16,7 @@ import javax.persistence.Table;
  * @author ebrimatunkara
  */
 @Entity
-@Table(name="file_content")
+@Table(name="files")
 public class FileContent extends Audit<Long>{
     private static final long serialVersionUID = 1L;
     @Id
@@ -25,6 +25,11 @@ public class FileContent extends Audit<Long>{
     
     private byte[] content;
 
+    private String contentType;
+    /*
+     * File size
+     */
+    private Integer size;
     @Override
     public Long getId() {
         return id;
@@ -36,5 +41,21 @@ public class FileContent extends Audit<Long>{
 
     public void setContent(byte[] content) {
         this.content = content;
+    }
+
+    public String getContentType() {
+        return contentType;
+    }
+
+    public void setContentType(String contentType) {
+        this.contentType = contentType;
+    }
+
+    public Integer getSize() {
+        return size;
+    }
+
+    public void setSize(Integer size) {
+        this.size = size;
     }
 }
