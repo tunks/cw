@@ -1,115 +1,90 @@
 package com.att.cw.controller.open;
 
-import java.util.Date;
-import java.util.List;
-
-import javax.servlet.ServletException;
-
+import com.att.cw.controller.BaseController;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
-
 import com.att.cw.model.User;
 import com.att.cw.service.UserService;
-
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.web.bind.annotation.PathVariable;
 
 @RestController
-@RequestMapping("user")
-public class UserController {
-	
-	private static final Logger logger = LoggerFactory.getLogger(UserController.class);
+@RequestMapping("users")
+public class UserController implements BaseController<User, Long> {
+    /**
+     * TODO logger using AOP
+     **/
+    private static final Logger logger = LoggerFactory.getLogger(UserController.class);
 
-	private UserService UserService;
-	
-	@Autowired(required=true)
-	@Qualifier(value="userService")
-	public void setUserService(UserService ps){
-		this.UserService = ps;
-	}
-	
-	@RequestMapping(value = "/list", method = RequestMethod.GET)
-	public List<User> listUsers() {
-		return this.UserService.listUsers();
-	}
-	
-	//For add and update User both
-	@RequestMapping(value= "/add", method = RequestMethod.POST)
-	@ResponseStatus(value = HttpStatus.OK)
-	public void addUser(@RequestBody User user){
-			
-			logger.info("add user request received : "+user.getName()+":"+user.getEnabled());
-			this.UserService.addUser(user);
-	}
-	
-	@RequestMapping(value = "login", method = RequestMethod.POST)
-    public LoginResponse login(@RequestBody final UserLogin login) throws ServletException 
-	{
-		User user= this.UserService.getUserByEmail(login.name);
-		if (user != null)
-		{
-			logger.info("User logged in successfully : "+user.getName()+":"+user.getEnabled());
-		
-			/* if (login.name == null || !userDb.containsKey(login.name)) 
-        	{
-        		ServletException e = new ServletException();
-        	
-            	throw new ServletException("Invalid login");
-        		//return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
-        		//return new ResponseEntity<String>(HttpStatus.BAD_REQUEST);
-        	}*/
-		
-			return new LoginResponse(Jwts.builder().setSubject(login.name)
-            .claim("roles", user.getEmailid()).setIssuedAt(new Date())
-            .signWith(SignatureAlgorithm.HS256, "secretkey").compact());
-		}
-		else 
-		{
-			logger.info("login failed....");
-			return null;
-		}
+    private UserService userService;
+
+    @Autowired(required = true)
+    @Qualifier(value = "userService")
+    public void setUserService(UserService us) {
+        this.userService = us;
     }
-	
-	 @SuppressWarnings("unused")
-	    private static class UserLogin {
-	        public String name;
-	        public String password;
-	    }
 
-	    @SuppressWarnings("unused")
-	    private static class LoginResponse {
-	        public String token;
-
-	        public LoginResponse(final String token) {
-	            this.token = token;
-	        }
-	    }
-	
-	/*@RequestMapping("/User/remove/{id}")
-    public String removeUser(@PathVariable("id") int id){
-		
-        this.UserService.removeUser(id);
-        return "redirect:/Users";
+    /**
+     * Find and return user by user id
+     *
+     */
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+    @Override
+    public User find(@PathVariable Long id) {
+        return userService.find(id);
     }
- 
-    @RequestMapping("/User/edit/{id}")
-    public String editUser(@PathVariable("id") int id, Model model){
-        model.addAttribute("User", this.UserService.getUserById(id));
-        model.addAttribute("listUsers", this.UserService.listUsers());
-        return "User";
-    }*/
-	
+
+    /**
+     * Delete user by id
+     *
+     */
+    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+    @Override
+    public void delete(Long id) {
+        userService.delete(id);
+    }
+
+    /**
+     * Create new user
+     *
+     */
+    @RequestMapping(value = "/{id}", method = RequestMethod.POST)
+    @Override
+    public User create(User object) {
+        return userService.save(object);
+    }
+
+    /**
+     * Update existing user 
+     *
+     */
+    @RequestMapping(method = RequestMethod.PUT)
+    @Override
+    public User update(User object) {
+        return userService.save(object);
+    }
+
+    /**
+     * Find all users by page
+     *
+     */
+    @RequestMapping(method = RequestMethod.GET)
+    Page<User> findAll(Pageable page) {
+        return userService.findAll(page);
+    }
+
+    /**
+     * Not implemented
+     *
+     */
+    @Override
+    public void deleteAll() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

@@ -6,8 +6,8 @@ import javax.validation.constraints.Size;
 import java.util.Set;
 
 @Entity
-@Table(name = "USER",indexes = {
-        @Index(columnList = "EMAILID", name = "user_email_index")
+@Table(name = "USER", indexes = {
+    @Index(columnList = "EMAILID", name = "user_email_index")
 })
 public class User {
 
@@ -20,7 +20,7 @@ public class User {
     @Column(name = "EMAILID", length = 200, unique = true)
     @NotNull
     @Size(min = 2, max = 200)
-    private String emailid;
+    private String emailId;
 
     @Column(name = "PASSWORD", length = 100)
     @NotNull
@@ -31,7 +31,7 @@ public class User {
     @NotNull
     @Size(min = 4, max = 100)
     private String name;
-    
+
     /*@Column(name = "COUNTRYCODE", length = 4)
     @NotNull
     @Size(min = 1, max = 4)
@@ -41,22 +41,21 @@ public class User {
     @NotNull
     @Size(min = 5, max = 15)
     private String phone;*/
-    
-
     @Column(name = "ENABLED", columnDefinition = "bit default 0")
     @NotNull
     private Boolean enabled;
-    
-   /* @Column(name = "LASTPASSWORDRESETDATE")
+
+    /* @Column(name = "LASTPASSWORDRESETDATE")
     @Temporal(TemporalType.TIMESTAMP)
     @NotNull
     private Date lastPasswordResetDate;*/
-
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(
             name = "USER_AUTHORITY",
-            joinColumns = {@JoinColumn(name = "USER_ID", referencedColumnName = "ID")},
-            inverseJoinColumns = {@JoinColumn(name = "AUTHORITY_ID", referencedColumnName = "ID")})
+            joinColumns = {
+                @JoinColumn(name = "USER_ID", referencedColumnName = "ID")},
+            inverseJoinColumns = {
+                @JoinColumn(name = "AUTHORITY_ID", referencedColumnName = "ID")})
     private Set<Authority> authorities;
 
     public Long getId() {
@@ -66,7 +65,6 @@ public class User {
     public void setId(Long id) {
         this.id = id;
     }
-
 
     public Boolean getEnabled() {
         return enabled;
@@ -84,31 +82,31 @@ public class User {
         this.authorities = authorities;
     }
 
-	public String getName() {
-		return name;
-	}
+    public String getName() {
+        return name;
+    }
 
-	public void setName(String name) {
-		this.name = name;
-	}
+    public void setName(String name) {
+        this.name = name;
+    }
 
-	public String getEmailid() {
-		return emailid;
-	}
+    public String getEmailId() {
+        return emailId;
+    }
 
-	public void setEmailid(String emailid) {
-		this.emailid = emailid;
-	}
+    public void setEmailId(String emailId) {
+        this.emailId = emailId;
+    }
 
-	public String getPassword() {
-		return password;
-	}
+    public String getPassword() {
+        return password;
+    }
 
-	public void setPassword(String password) {
-		this.password = password;
-	}
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
-   /* public Date getLastPasswordResetDate() {
+    /* public Date getLastPasswordResetDate() {
         return lastPasswordResetDate;
     }
 
