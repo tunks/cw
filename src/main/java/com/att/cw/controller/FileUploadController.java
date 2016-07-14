@@ -22,9 +22,14 @@ import org.springframework.web.multipart.MultipartFile;
  */
 @Controller
 public class FileUploadController {
+    /**
+     * TODO --upload file
+     * @param name
+     * @param file
+     * @return 
+     **/
     @RequestMapping(value="/upload", method=RequestMethod.POST)
-    public ResponseEntity handleFileUpload(@RequestParam("name") String name,
-            @RequestParam("file") MultipartFile file){
+    public ResponseEntity handleFileUpload(@RequestParam("name") String name, @RequestParam("file") MultipartFile file){
             String message;
         if (!file.isEmpty()) {
             try {

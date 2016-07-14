@@ -2,18 +2,22 @@ package com.att.cw.model;
 
 import com.att.cw.support.ResourceType;
 import java.io.Serializable;
+import javax.persistence.Basic;
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import javax.persistence.Lob;
 import javax.persistence.Table;
+
 /**
  * FileDocument
  */
 @Entity
 @Table(name = "file_documents")
-public class FileDocument extends Audit implements Serializable {
+public class FileDocument extends Audit<Long>{
     /**
      * document id
      */
@@ -27,19 +31,32 @@ public class FileDocument extends Audit implements Serializable {
     /*
      * resource id
      */
+    @Column(name="resource_id")
     private Long resourceId;
-    
-   /**
-    * resource type 
-    **/
+    /**
+     * resource type 
+    *
+     */
+    @Column(name="resource_type")
     private ResourceType resourceType;
-    
-    @OneToOne
-    private FileContent file;
+
+    /**
+     * File content in bytes
+     */
+    @Lob @Basic(fetch = FetchType.LAZY)
+    @Column(length=16777215)
+    private byte[] content;
+
+    @Column(name="content_type")
+    private String contentType;
+    /*
+     * File size
+     */
+    private Integer size;
 
     @Override
     public Long getId() {
-       return id;
+        return id;
     }
 
     public String getDescription() {
@@ -56,7 +73,7 @@ public class FileDocument extends Audit implements Serializable {
 
     public void setResourceId(Long resourceId) {
         this.resourceId = resourceId;
-    }    
+    }
 
     public ResourceType getResourceType() {
         return resourceType;
@@ -66,11 +83,28 @@ public class FileDocument extends Audit implements Serializable {
         this.resourceType = resourceType;
     }
 
-    public FileContent getFile() {
-        return file;
+    public byte[] getContent() {
+        return content;
     }
 
-    public void setFile(FileContent file) {
-        this.file = file;
+    public void setContent(byte[] content) {
+        this.content = content;
     }
+
+    public String getContentType() {
+        return contentType;
+    }
+
+    public void setContentType(String contentType) {
+        this.contentType = contentType;
+    }
+
+    public Integer getSize() {
+        return size;
+    }
+
+    public void setSize(Integer size) {
+        this.size = size;
+    }
+
 }
