@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @author ebrimatunkara
  */
 @RestController
-@RequestMapping("${spring.data.rest.base-path}/jobs")
+@RequestMapping("jobs")
 public class JobController implements BaseController<Job,Long>{
     /**
      * Job service instance

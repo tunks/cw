@@ -53,7 +53,7 @@ public class JobControllerTest {
     
     @Before
     public void setUp() {
-        endPointUrl = "/att/hr/v1/jobs";
+        endPointUrl = "/jobs";
         mockMvc = webAppContextSetup(context).build();
     }
     

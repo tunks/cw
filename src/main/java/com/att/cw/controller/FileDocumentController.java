@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @author ebrimatunkara
  */
 @RestController
-@RequestMapping("${spring.data.rest.base-path}/documents")
+@RequestMapping("/documents")
 public class FileDocumentController implements BaseController<FileDocument,Long>{
     /**
      * Job service instance
