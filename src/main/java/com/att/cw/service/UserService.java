@@ -6,10 +6,12 @@ import com.att.cw.model.User;
 import javax.annotation.Resource;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Service;
 
 /**
  * User service concrete class - to manager user objects
  */
+@Service("userService")
 public class UserService implements CrudService<User, Long> {
     
     @Resource
