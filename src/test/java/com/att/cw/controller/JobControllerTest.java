@@ -97,8 +97,6 @@ public class JobControllerTest {
     @Test
     public void testDelete() {
         System.out.println("delete");
-        Long id = null;
-
     }
 
     /**
