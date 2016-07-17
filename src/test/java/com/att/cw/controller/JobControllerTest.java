@@ -87,8 +87,7 @@ public class JobControllerTest {
      */
     @Test
     public void testDeleteAll() {
-        System.out.println("deleteAll");
-       
+        System.out.println("deleteAll");      
     }
 
     /**
