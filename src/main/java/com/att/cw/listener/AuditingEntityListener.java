@@ -17,20 +17,20 @@ public class AuditingEntityListener {
 	@PrePersist
 	void onCreate(Object entity) {
            if(entity instanceof Audit){
+             Date date = new Date();
              Audit audit = (Audit) entity;
-             audit.setCreatedDate(new Date());
-             //audit.setCreatedDate(new DateTime());
-             System.out.println("-------- on create ------");
+             audit.setCreatedDate(date);
+             audit.setLastModifiedDate(date);
            }
 	}
 	
 	@PreUpdate
 	void onPersist(Object entity) {
             if(entity instanceof Audit){
+               Date date = new Date();
                Audit audit = (Audit) entity;
-               audit.setLastModifiedDate(new Date());
-              //audit.setLastModifiedDate(new DateTime());
-               System.out.println("-------- last modified date ------");
+               audit.setLastModifiedDate(date);
+               audit.setLastModifiedDate(date);
             }	
 	}
 }

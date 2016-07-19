@@ -7,6 +7,7 @@ package com.att.cw.dao;
 
 import com.att.cw.model.User;
 import javax.annotation.Resource;
+import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -41,12 +42,13 @@ public class UserRepositoryTest {
     
     @Before
     public void setUp() {
-        emailId = "user1@att.com";
-        password = "fsd9232sd577s";  
+        emailId = RandomStringUtils.randomAlphanumeric(6).concat("@att.com");
+        password = RandomStringUtils.randomAlphabetic(16);  
     }
     
     @After
     public void tearDown() {
+        
         
     }
     
