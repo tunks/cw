@@ -1,15 +1,35 @@
 package com.att.cw.model;
 
-import javax.persistence.*;
+import java.io.Serializable;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.Set;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Index;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
+/***
+ * User Entity model
+ **/
 @Entity
-@Table(name = "USER", indexes = {
-    @Index(columnList = "EMAILID", name = "user_email_index")
-})
-public class User {
+@Table(name = "USER",
+       indexes = {
+            @Index(columnList = "EMAILID", name = "user_email_index")},
+       uniqueConstraints={@UniqueConstraint(columnNames={"EMAILID"})}
+     )
+public class User extends Audit {
 
     @Id
     @Column(name = "ID")
@@ -32,15 +52,6 @@ public class User {
     @Size(min = 4, max = 100)
     private String name;
 
-    /*@Column(name = "COUNTRYCODE", length = 4)
-    @NotNull
-    @Size(min = 1, max = 4)
-    private String countryCode;
-    
-    @Column(name = "PHONE", length = 15)
-    @NotNull
-    @Size(min = 5, max = 15)
-    private String phone;*/
     @Column(name = "ENABLED", columnDefinition = "bit default 0")
     @NotNull
     private Boolean enabled;
