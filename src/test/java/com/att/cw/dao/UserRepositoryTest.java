@@ -15,6 +15,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import org.junit.runner.RunWith;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
@@ -22,6 +23,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
  *
  * @author ebrimatunkara
  */
+@ActiveProfiles({"test","dev"})
 @ContextConfiguration(locations = "classpath:spring-jpa-config.xml")
 @RunWith(SpringJUnit4ClassRunner.class)
 public class UserRepositoryTest {

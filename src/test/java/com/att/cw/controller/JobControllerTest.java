@@ -12,6 +12,7 @@ import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.MediaType;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
@@ -26,7 +27,7 @@ import org.springframework.web.context.WebApplicationContext;
  * JobControllerTest
  * @author ebrimatunkara
  */
-
+@ActiveProfiles({"test","dev"})
 @RunWith(SpringJUnit4ClassRunner.class) 
 @ContextConfiguration(locations = {"classpath:spring-jpa-config.xml",  
      "file:src/main/webapp/WEB-INF/spring/appServlet/servlet-context.xml"})
