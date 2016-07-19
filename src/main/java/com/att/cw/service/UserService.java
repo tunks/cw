@@ -64,7 +64,16 @@ public class UserService implements CrudService<User, Long> {
     public User findByEmail(String email) {
         return userRepository.findByEmailId(email);
     }
-    
+   
+      /**
+     * Find  and return user by email and password
+     * @param email
+     * @param password
+     * @return 
+     **/
+    public User findByEmailAndPassword(String email,String password) {
+        return userRepository.findByEmailIdAndPassword(email, password);
+    }
     /**
      * Find  and return all users
      * @return 

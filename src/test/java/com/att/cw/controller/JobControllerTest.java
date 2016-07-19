@@ -38,6 +38,8 @@ public class JobControllerTest {
     @Mock
     private MockMvc mockMvc;
     
+    private  Job job;
+    
     private String endPointUrl;
     
     public JobControllerTest() {
@@ -55,10 +57,12 @@ public class JobControllerTest {
     public void setUp() {
         endPointUrl = "/jobs";
         mockMvc = webAppContextSetup(context).build();
+        job = new Job("Job3", "Job2 description");
     }
     
     @After
     public void tearDown() {
+        
     }
 
     /**
@@ -104,7 +108,6 @@ public class JobControllerTest {
      */
     @Test
     public void testCreate() throws Exception {
-           Job job = new Job("Job3", "Job2 description");
            mockMvc.perform(post(endPointUrl)
                            .contentType(MediaType.APPLICATION_JSON)
                            .param("title", job.getTitle())

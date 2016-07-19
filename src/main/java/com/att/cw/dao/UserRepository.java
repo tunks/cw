@@ -19,5 +19,5 @@ public interface UserRepository extends PagingAndSortingRepository<User, Long>{
         * @param password
         * @return user 
         */
-       public User findByEmailAndPassword(String emailId,String password);
+       public User findByEmailIdAndPassword(String emailId,String password);
 }

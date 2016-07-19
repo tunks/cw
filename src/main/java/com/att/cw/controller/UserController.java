@@ -1,4 +1,4 @@
-package com.att.cw.controller.open;
+package com.att.cw.controller;
 
 import com.att.cw.controller.BaseController;
 import org.slf4j.Logger;
@@ -21,14 +21,16 @@ public class UserController implements BaseController<User, Long> {
      * TODO logger using AOP
      **/
     private static final Logger logger = LoggerFactory.getLogger(UserController.class);
-
+    
+    @Autowired
+    //@Qualifier(value = "userService")
     private UserService userService;
 
-    @Autowired(required = true)
-    @Qualifier(value = "userService")
-    public void setUserService(UserService us) {
-        this.userService = us;
-    }
+//    @Autowired(required = true)
+//    @Qualifier(value = "userService")
+//    public void setUserService(UserService us) {
+//        this.userService = us;
+//    }
 
     /**
      * Find and return user by user id

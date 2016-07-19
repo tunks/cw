@@ -58,6 +58,9 @@ public class User {
                 @JoinColumn(name = "AUTHORITY_ID", referencedColumnName = "ID")})
     private Set<Authority> authorities;
 
+    @OneToOne(mappedBy = "user")
+    private UserProfile profile;
+
     public Long getId() {
         return id;
     }
@@ -113,4 +116,11 @@ public class User {
     public void setLastPasswordResetDate(Date lastPasswordResetDate) {
         this.lastPasswordResetDate = lastPasswordResetDate;
     }*/
+    public UserProfile getProfile() {
+        return profile;
+    }
+
+    public void setProfile(UserProfile profile) {
+        this.profile = profile;
+    }
 }
