@@ -2,6 +2,8 @@
 package com.att.cw.controller;
 
 import com.att.cw.model.Job;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -90,12 +92,15 @@ public class JobControllerTest {
 
     /**
      * Test of deleteAll method, of class JobController.
-     * @throws java.lang.Exception
      */
     @Test
-    public void testDeleteAll() throws Exception {
-      mockMvc.perform(delete(endPointUrl))
-              .andExpect(status().isMethodNotAllowed()); 
+    public void testDeleteAll()  {
+        try {
+            mockMvc.perform(delete(endPointUrl)) 
+                    .andExpect(status().isMethodNotAllowed());
+        } catch (Exception ex) {
+            Logger.getLogger(JobControllerTest.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -108,17 +113,20 @@ public class JobControllerTest {
 
     /**
      * Test of create method, of class JobController.
-     * @throws java.lang.Exception
      */
     @Test
-    public void testCreate() throws Exception {
-           mockMvc.perform(post(endPointUrl)
-                           .contentType(MediaType.APPLICATION_JSON)
-                           .param("title", job.getTitle())
-                           .param("description",job.getDescription()))
-           .andExpect(status().isOk())
-           .andExpect(jsonPath("title").value(job.getTitle()))
-           .andExpect(jsonPath("description").value(job.getDescription()));
+    public void testCreate()  {
+        try {
+            mockMvc.perform(post(endPointUrl)
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .param("title", job.getTitle())
+                    .param("description",job.getDescription()))
+                    .andExpect(status().isOk())
+                    .andExpect(jsonPath("title").value(job.getTitle()))
+                    .andExpect(jsonPath("description").value(job.getDescription()));
+        } catch (Exception ex) {
+            Logger.getLogger(JobControllerTest.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
