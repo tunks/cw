@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/documents")
 public class FileDocumentController implements BaseController<FileDocument,Long>{
+   public static final String NOT_SUPPORTED_YET = "Not supported yet.";
     /**
      * Job service instance
      **/
@@ -32,9 +33,9 @@ public class FileDocumentController implements BaseController<FileDocument,Long>
 
     @Override
     public void deleteAll() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        throw new UnsupportedOperationException(NOT_SUPPORTED_YET);
     }
-
+    
     /**
      * delete job entity by id
      **/
@@ -44,15 +45,15 @@ public class FileDocumentController implements BaseController<FileDocument,Long>
       documentService.delete(id);
     }
 
-
+   
     @Override
     public FileDocument create(FileDocument object) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        throw new UnsupportedOperationException(NOT_SUPPORTED_YET); 
     }
 
     @Override
     public FileDocument update(FileDocument object) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        throw new UnsupportedOperationException(NOT_SUPPORTED_YET);
     }
     
 }
