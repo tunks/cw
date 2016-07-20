@@ -95,7 +95,7 @@ public class JobControllerTest {
     @Test
     public void testDeleteAll() throws Exception {
       mockMvc.perform(delete(endPointUrl))
-              .andExpect(status().isOk())
+              .andExpect(status().isMethodNotAllowed())
               .andExpect(jsonPath("").isEmpty());
     }
 
