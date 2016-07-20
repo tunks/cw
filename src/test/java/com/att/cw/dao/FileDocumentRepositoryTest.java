@@ -27,8 +27,8 @@ import org.springframework.util.FileCopyUtils;
 public class FileDocumentRepositoryTest {
     @Resource
     FileDocumentRepository documentRepository;
-
     private FileDocument document;
+    private FileDocument result;
     private  byte [] content;
     @Before
     public void setUp() throws Exception {
@@ -47,11 +47,14 @@ public class FileDocumentRepositoryTest {
 
     @After
     public void tearDown() throws Exception {
+        if(result != null){
+           documentRepository.delete(result);
+        }
     }
 
     @Test
     public void test() {    
-         FileDocument result = documentRepository.save(document);
+         result = documentRepository.save(document);
          assertNotNull(result);
          Assert.assertArrayEquals(content,result.getContent());
     }

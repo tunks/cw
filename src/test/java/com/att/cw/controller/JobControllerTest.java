@@ -18,6 +18,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.setup.MockMvcBuilders.webAppContextSetup;
@@ -89,10 +90,13 @@ public class JobControllerTest {
 
     /**
      * Test of deleteAll method, of class JobController.
+     * @throws java.lang.Exception
      */
     @Test
-    public void testDeleteAll() {
-        System.out.println("deleteAll");      
+    public void testDeleteAll() throws Exception {
+      mockMvc.perform(delete(endPointUrl))
+              .andExpect(status().isOk())
+              .andExpect(jsonPath("").isEmpty());
     }
 
     /**
@@ -124,6 +128,7 @@ public class JobControllerTest {
     @Test
     public void testUpdate() {
         System.out.println("update"); 
+        
     }
     
 }

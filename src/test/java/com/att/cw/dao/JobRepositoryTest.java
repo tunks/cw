@@ -27,6 +27,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 public class JobRepositoryTest {
     @Resource
     private JobRepository jobRepository;
+    private Job  job, result;
     
     public JobRepositoryTest() {
     }
@@ -41,10 +42,12 @@ public class JobRepositoryTest {
     
     @Before
     public void setUp() {
+       job = new Job("Job1", "Job1 description");
     }
     
     @After
     public void tearDown() {
+        jobRepository.delete(job);
     }
 
     /**
@@ -52,8 +55,7 @@ public class JobRepositoryTest {
      */
     @Test
     public void testFindByOwnerId() {
-        Job job = new Job("Job1", "Job1 description");
-        Job result = jobRepository.save(job);
+        result = jobRepository.save(job);
         assertEquals(job.getTitle(), result.getTitle());
     }   
     
