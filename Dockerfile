@@ -2,10 +2,10 @@ FROM jboss/wildfly
 MAINTAINER ebrimatunkara@gmail.com,dileepmohanan@gmail.com
 
 #1 - WORKDIR and ENV
-ENV BUILDPATH ./
+ENV BUILDPATH .
 
 #2-COPY war file
-ADD ./target/cw-*.war $BUILDPATH/cw.war
+ADD target/cw-*.war $BUILDPATH/cw.war
 ADD  $BUILDPATH/cw.war /opt/wildfly/standalone/deployments/
 
 #3 - SET ADMIN PERMISSION
