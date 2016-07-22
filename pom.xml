@@ -273,6 +273,11 @@
                     </systemPropertyVariables>
                 </configuration>
             </plugin>
+            <plugin>
+                <groupId>org.wildfly.plugins</groupId>
+                <artifactId>wildfly-maven-plugin</artifactId>
+                <version>1.0.2.Final</version>
+            </plugin>
         </plugins>
         <finalName>${project.artifactId}</finalName>
     </build>
