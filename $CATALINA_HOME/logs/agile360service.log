@@ -1,932 +1,162 @@
-2016-07-16 20:53:33,688 INFO  [XmlBeanDefinitionReader] - Loading XML bean definitions from class path resource [spring-jpa-config.xml]
-2016-07-16 20:53:34,010 INFO  [XmlBeanDefinitionReader] - Loading XML bean definitions from URL [file:src/main/webapp/WEB-INF/spring/appServlet/servlet-context.xml]
-2016-07-16 20:53:34,186 INFO  [GenericWebApplicationContext] - Refreshing org.springframework.web.context.support.GenericWebApplicationContext@57e1b0c: startup date [Sat Jul 16 20:53:34 EDT 2016]; root of context hierarchy
-2016-07-16 20:53:34,374 INFO  [PropertySourcesPlaceholderConfigurer] - Loading properties file from class path resource [application.properties]
-2016-07-16 20:53:34,388 INFO  [AutowiredAnnotationBeanPostProcessor] - JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
-2016-07-16 20:53:34,609 INFO  [LogHelper] - HHH000204: Processing PersistenceUnitInfo [
+2016-07-19 11:56:06,424 INFO  [XmlBeanDefinitionReader] - Loading XML bean definitions from class path resource [spring-jpa-config.xml]
+2016-07-19 11:56:06,619 INFO  [XmlBeanDefinitionReader] - Loading XML bean definitions from URL [file:src/main/webapp/WEB-INF/spring/appServlet/servlet-context.xml]
+2016-07-19 11:56:06,776 INFO  [GenericWebApplicationContext] - Refreshing org.springframework.web.context.support.GenericWebApplicationContext@33c7e1bb: startup date [Tue Jul 19 11:56:06 EDT 2016]; root of context hierarchy
+2016-07-19 11:56:06,955 INFO  [PropertySourcesPlaceholderConfigurer] - Loading properties file from class path resource [application.properties]
+2016-07-19 11:56:06,967 INFO  [AutowiredAnnotationBeanPostProcessor] - JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+2016-07-19 11:56:07,122 INFO  [LogHelper] - HHH000204: Processing PersistenceUnitInfo [
 	name: default
 	...]
-2016-07-16 20:53:34,687 INFO  [Version] - HHH000412: Hibernate Core {4.3.5.Final}
-2016-07-16 20:53:34,688 INFO  [Environment] - HHH000206: hibernate.properties not found
-2016-07-16 20:53:34,690 INFO  [Environment] - HHH000021: Bytecode provider name : javassist
-2016-07-16 20:53:34,901 INFO  [Version] - HCANN000001: Hibernate Commons Annotations {4.0.4.Final}
-2016-07-16 20:53:35,468 INFO  [Dialect] - HHH000400: Using dialect: org.hibernate.dialect.MySQL5Dialect
-2016-07-16 20:53:35,680 INFO  [ASTQueryTranslatorFactory] - HHH000397: Using ASTQueryTranslatorFactory
-2016-07-16 20:53:36,029 INFO  [SchemaUpdate] - HHH000228: Running hbm2ddl schema update
-2016-07-16 20:53:36,029 INFO  [SchemaUpdate] - HHH000102: Fetching database metadata
-2016-07-16 20:53:36,036 INFO  [SchemaUpdate] - HHH000396: Updating schema
-2016-07-16 20:53:36,062 INFO  [TableMetadata] - HHH000261: Table found: cw_dev_db.AUTHORITY
-2016-07-16 20:53:36,062 INFO  [TableMetadata] - HHH000037: Columns: [name, id]
-2016-07-16 20:53:36,063 INFO  [TableMetadata] - HHH000108: Foreign keys: []
-2016-07-16 20:53:36,063 INFO  [TableMetadata] - HHH000126: Indexes: [uk_ana6i0racv9b9d5dx3mlwho9p, primary]
-2016-07-16 20:53:36,072 INFO  [TableMetadata] - HHH000261: Table found: cw_dev_db.USER
-2016-07-16 20:53:36,072 INFO  [TableMetadata] - HHH000037: Columns: [password, name, emailid, id, enabled]
-2016-07-16 20:53:36,072 INFO  [TableMetadata] - HHH000108: Foreign keys: []
-2016-07-16 20:53:36,072 INFO  [TableMetadata] - HHH000126: Indexes: [user_email_index, uk_tny7vhtvpf3hywynmjlodildh, primary]
-2016-07-16 20:53:36,085 INFO  [TableMetadata] - HHH000261: Table found: cw_dev_db.USER_AUTHORITY
-2016-07-16 20:53:36,085 INFO  [TableMetadata] - HHH000037: Columns: [user_id, authority_id]
-2016-07-16 20:53:36,085 INFO  [TableMetadata] - HHH000108: Foreign keys: [fk_dyo9anhb75hbjut13e8uovw2s, fk_jbm4yrlayhtksry4mwk0e47ls]
-2016-07-16 20:53:36,085 INFO  [TableMetadata] - HHH000126: Indexes: [fk_dyo9anhb75hbjut13e8uovw2s, primary]
-2016-07-16 20:53:36,094 INFO  [TableMetadata] - HHH000261: Table found: cw_dev_db.file_documents
-2016-07-16 20:53:36,094 INFO  [TableMetadata] - HHH000037: Columns: [resourceid, createddate, lastmodifieddate, resource_type, lastmodifiedby, description, version, resourcetype, content, contenttype, size, content_type, createdby, file_id, resource_id, id]
-2016-07-16 20:53:36,094 INFO  [TableMetadata] - HHH000108: Foreign keys: [fk_90g3q7f6ffikyfek2twiut7qx]
-2016-07-16 20:53:36,094 INFO  [TableMetadata] - HHH000126: Indexes: [fk_90g3q7f6ffikyfek2twiut7qx, primary]
-2016-07-16 20:53:36,101 INFO  [TableMetadata] - HHH000261: Table found: cw_dev_db.job_activities
-2016-07-16 20:53:36,101 INFO  [TableMetadata] - HHH000037: Columns: [workflow_id, createdby, createddate, lastmodifieddate, name, lastmodifiedby, id, version]
-2016-07-16 20:53:36,101 INFO  [TableMetadata] - HHH000108: Foreign keys: [fk_6i97tsgwc4y8avinvleaij5ye]
-2016-07-16 20:53:36,101 INFO  [TableMetadata] - HHH000126: Indexes: [fk_6i97tsgwc4y8avinvleaij5ye, primary]
-2016-07-16 20:53:36,108 INFO  [TableMetadata] - HHH000261: Table found: cw_dev_db.job_applications
-2016-07-16 20:53:36,108 INFO  [TableMetadata] - HHH000037: Columns: [candidate_id, workflow_id, datemodified, createdby, createddate, lastmodifieddate, lastmodifiedby, id, datecreated, version]
-2016-07-16 20:53:36,108 INFO  [TableMetadata] - HHH000108: Foreign keys: [fk_gnt5c2uebjgnulu4debnxuomc, fk_r42se08m018gbf90h9l5vmjdl]
-2016-07-16 20:53:36,109 INFO  [TableMetadata] - HHH000126: Indexes: [fk_gnt5c2uebjgnulu4debnxuomc, fk_r42se08m018gbf90h9l5vmjdl, primary]
-2016-07-16 20:53:36,114 INFO  [TableMetadata] - HHH000261: Table found: cw_dev_db.job_candidates
-2016-07-16 20:53:36,114 INFO  [TableMetadata] - HHH000037: Columns: [createdby, createddate, lastmodifieddate, lastmodifiedby, id, version, userid]
-2016-07-16 20:53:36,114 INFO  [TableMetadata] - HHH000108: Foreign keys: []
-2016-07-16 20:53:36,114 INFO  [TableMetadata] - HHH000126: Indexes: [primary]
-2016-07-16 20:53:36,122 INFO  [TableMetadata] - HHH000261: Table found: cw_dev_db.job_workflows
-2016-07-16 20:53:36,123 INFO  [TableMetadata] - HHH000037: Columns: [createdby, createddate, lastmodifieddate, lastmodifiedby, id, version]
-2016-07-16 20:53:36,123 INFO  [TableMetadata] - HHH000108: Foreign keys: []
-2016-07-16 20:53:36,123 INFO  [TableMetadata] - HHH000126: Indexes: [primary]
-2016-07-16 20:53:36,133 INFO  [TableMetadata] - HHH000261: Table found: cw_dev_db.job_workflows_job_activities
-2016-07-16 20:53:36,133 INFO  [TableMetadata] - HHH000037: Columns: [job_workflows_id, activities_id]
-2016-07-16 20:53:36,133 INFO  [TableMetadata] - HHH000108: Foreign keys: [fk_7gqb8uj4dkxg94b0lt2wpfxld, fk_k05olxsngknte6yos3q1vorlr]
-2016-07-16 20:53:36,133 INFO  [TableMetadata] - HHH000126: Indexes: [uk_7gqb8uj4dkxg94b0lt2wpfxld, primary]
-2016-07-16 20:53:36,143 INFO  [TableMetadata] - HHH000261: Table found: cw_dev_db.jobs
-2016-07-16 20:53:36,143 INFO  [TableMetadata] - HHH000037: Columns: [workflow_id, closedate, createdby, createddate, lastmodifieddate, lastmodifiedby, description, opendate, id, ownerid, title, version]
-2016-07-16 20:53:36,143 INFO  [TableMetadata] - HHH000108: Foreign keys: [fk_bmmf4ulukk632yxioukqcue5v]
-2016-07-16 20:53:36,143 INFO  [TableMetadata] - HHH000126: Indexes: [fk_bmmf4ulukk632yxioukqcue5v, primary]
-2016-07-16 20:53:36,151 INFO  [TableMetadata] - HHH000261: Table found: cw_dev_db.jobs_job_applications
-2016-07-16 20:53:36,151 INFO  [TableMetadata] - HHH000037: Columns: [applications_id, jobs_id]
-2016-07-16 20:53:36,151 INFO  [TableMetadata] - HHH000108: Foreign keys: [fk_21hd5m30nhvpg76kqqkekujgm, fk_6vrx0feebyfnyfwbcxtt4q5gd]
-2016-07-16 20:53:36,151 INFO  [TableMetadata] - HHH000126: Indexes: [uk_21hd5m30nhvpg76kqqkekujgm, primary]
-2016-07-16 20:53:36,153 INFO  [SchemaUpdate] - HHH000232: Schema update complete
-2016-07-16 20:53:36,627 INFO  [RequestMappingHandlerMapping] - Mapped "{[/documents/{id}],methods=[GET]}" onto public com.att.cw.model.FileDocument com.att.cw.controller.FileDocumentController.find(java.lang.Long)
-2016-07-16 20:53:36,628 INFO  [RequestMappingHandlerMapping] - Mapped "{[/documents/{id}],methods=[DELETE]}" onto public void com.att.cw.controller.FileDocumentController.delete(java.lang.Long)
-2016-07-16 20:53:36,631 INFO  [RequestMappingHandlerMapping] - Mapped "{[/upload],methods=[POST]}" onto public org.springframework.http.ResponseEntity com.att.cw.controller.FileUploadController.handleFileUpload(java.lang.String,org.springframework.web.multipart.MultipartFile)
-2016-07-16 20:53:36,644 INFO  [RequestMappingHandlerMapping] - Mapped "{[/jobs],methods=[PUT]}" onto public com.att.cw.model.Job com.att.cw.controller.JobController.update(com.att.cw.model.Job)
-2016-07-16 20:53:36,644 INFO  [RequestMappingHandlerMapping] - Mapped "{[/jobs/{id}],methods=[GET]}" onto public com.att.cw.model.Job com.att.cw.controller.JobController.find(java.lang.Long)
-2016-07-16 20:53:36,644 INFO  [RequestMappingHandlerMapping] - Mapped "{[/jobs/{id}],methods=[DELETE]}" onto public void com.att.cw.controller.JobController.delete(java.lang.Long)
-2016-07-16 20:53:36,645 INFO  [RequestMappingHandlerMapping] - Mapped "{[/jobs],methods=[POST]}" onto public com.att.cw.model.Job com.att.cw.controller.JobController.create(com.att.cw.model.Job)
-2016-07-16 20:53:36,645 INFO  [RequestMappingHandlerMapping] - Mapped "{[/jobs],methods=[GET]}" onto public org.springframework.data.domain.Page<com.att.cw.model.Job> com.att.cw.controller.JobController.findAllBy(java.lang.Long,org.springframework.data.domain.Pageable)
-2016-07-16 20:53:36,647 INFO  [RequestMappingHandlerMapping] - Mapped "{[/login],methods=[POST]}" onto public com.att.cw.controller.open.AuthenticationController$LoginResponse com.att.cw.controller.open.AuthenticationController.login(com.att.cw.controller.open.AuthenticationController$UserLogin) throws javax.servlet.ServletException
-2016-07-16 20:53:36,650 INFO  [RequestMappingHandlerMapping] - Mapped "{[/open/helloworld],methods=[GET],produces=[application/json]}" onto public java.lang.String com.att.cw.controller.open.HelloWorld.sayHelloWorld()
-2016-07-16 20:53:36,666 INFO  [RequestMappingHandlerMapping] - Mapped "{[/users],methods=[PUT]}" onto public com.att.cw.model.User com.att.cw.controller.open.UserController.update(com.att.cw.model.User)
-2016-07-16 20:53:36,666 INFO  [RequestMappingHandlerMapping] - Mapped "{[/users/{id}],methods=[GET]}" onto public com.att.cw.model.User com.att.cw.controller.open.UserController.find(java.lang.Long)
-2016-07-16 20:53:36,666 INFO  [RequestMappingHandlerMapping] - Mapped "{[/users/{id}],methods=[DELETE]}" onto public void com.att.cw.controller.open.UserController.delete(java.lang.Long)
-2016-07-16 20:53:36,667 INFO  [RequestMappingHandlerMapping] - Mapped "{[/users/{id}],methods=[POST]}" onto public com.att.cw.model.User com.att.cw.controller.open.UserController.create(com.att.cw.model.User)
-2016-07-16 20:53:36,667 INFO  [RequestMappingHandlerMapping] - Mapped "{[/users],methods=[GET]}" onto org.springframework.data.domain.Page<com.att.cw.model.User> com.att.cw.controller.open.UserController.findAll(org.springframework.data.domain.Pageable)
-2016-07-16 20:53:36,670 INFO  [RequestMappingHandlerMapping] - Mapped "{[/restricted/countries],methods=[GET],produces=[application/json]}" onto public java.util.List<com.att.cw.bean.Country> com.att.cw.controller.restricted.CountryController.getCountries()
-2016-07-16 20:53:36,670 INFO  [RequestMappingHandlerMapping] - Mapped "{[/restricted/country/{id}],methods=[GET],produces=[application/json]}" onto public com.att.cw.bean.Country com.att.cw.controller.restricted.CountryController.getCountryById(int)
-2016-07-16 20:53:36,670 INFO  [RequestMappingHandlerMapping] - Mapped "{[/restricted/newcountry],methods=[POST],produces=[application/json]}" onto public com.att.cw.bean.Country com.att.cw.controller.restricted.CountryController.createNewCountry(com.att.cw.bean.Country)
-2016-07-16 20:53:37,125 INFO  [RequestMappingHandlerAdapter] - Looking for @ControllerAdvice: org.springframework.web.context.support.GenericWebApplicationContext@57e1b0c: startup date [Sat Jul 16 20:53:34 EDT 2016]; root of context hierarchy
-2016-07-16 20:53:37,179 INFO  [RequestMappingHandlerAdapter] - Looking for @ControllerAdvice: org.springframework.web.context.support.GenericWebApplicationContext@57e1b0c: startup date [Sat Jul 16 20:53:34 EDT 2016]; root of context hierarchy
-2016-07-16 20:53:37,363 WARN  [GenericWebApplicationContext] - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'authenticate': Injection of autowired dependencies failed; nested exception is org.springframework.beans.factory.BeanCreationException: Could not autowire field: private com.att.cw.service.UserService com.att.cw.controller.open.AuthenticationController.userService; nested exception is org.springframework.beans.factory.NoSuchBeanDefinitionException: No qualifying bean of type [com.att.cw.service.UserService] found for dependency: expected at least 1 bean which qualifies as autowire candidate for this dependency. Dependency annotations: {@org.springframework.beans.factory.annotation.Autowired(required=true)}
-2016-07-16 20:53:37,374 ERROR [TestContextManager] - Caught exception while allowing TestExecutionListener [org.springframework.test.context.web.ServletTestExecutionListener@292158f8] to prepare test instance [com.att.cw.controller.JobControllerTest@53ec2968]
-java.lang.IllegalStateException: Failed to load ApplicationContext
-	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContext(DefaultCacheAwareContextLoaderDelegate.java:124)
-	at org.springframework.test.context.support.DefaultTestContext.getApplicationContext(DefaultTestContext.java:83)
-	at org.springframework.test.context.web.ServletTestExecutionListener.setUpRequestContextIfNecessary(ServletTestExecutionListener.java:183)
-	at org.springframework.test.context.web.ServletTestExecutionListener.prepareTestInstance(ServletTestExecutionListener.java:123)
-	at org.springframework.test.context.TestContextManager.prepareTestInstance(TestContextManager.java:228)
-	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.createTest(SpringJUnit4ClassRunner.java:230)
-	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner$1.runReflectiveCall(SpringJUnit4ClassRunner.java:289)
-	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
-	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.methodBlock(SpringJUnit4ClassRunner.java:291)
-	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:249)
-	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:89)
-	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:238)
-	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:63)
-	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:236)
-	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:53)
-	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:229)
-	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
-	at org.springframework.test.context.junit4.statements.RunBeforeTestClassCallbacks.evaluate(RunBeforeTestClassCallbacks.java:61)
-	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:27)
-	at org.springframework.test.context.junit4.statements.RunAfterTestClassCallbacks.evaluate(RunAfterTestClassCallbacks.java:70)
-	at org.junit.runners.ParentRunner.run(ParentRunner.java:309)
-	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.run(SpringJUnit4ClassRunner.java:193)
-	at org.apache.maven.surefire.junit4.JUnit4TestSet.execute(JUnit4TestSet.java:53)
-	at org.apache.maven.surefire.junit4.JUnit4Provider.executeTestSet(JUnit4Provider.java:123)
-	at org.apache.maven.surefire.junit4.JUnit4Provider.invoke(JUnit4Provider.java:104)
-	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.lang.reflect.Method.invoke(Method.java:497)
-	at org.apache.maven.surefire.util.ReflectionUtils.invokeMethodWithArray(ReflectionUtils.java:164)
-	at org.apache.maven.surefire.booter.ProviderFactory$ProviderProxy.invoke(ProviderFactory.java:110)
-	at org.apache.maven.surefire.booter.SurefireStarter.invokeProvider(SurefireStarter.java:175)
-	at org.apache.maven.surefire.booter.SurefireStarter.runSuitesInProcessWhenForked(SurefireStarter.java:107)
-	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:68)
-Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'authenticate': Injection of autowired dependencies failed; nested exception is org.springframework.beans.factory.BeanCreationException: Could not autowire field: private com.att.cw.service.UserService com.att.cw.controller.open.AuthenticationController.userService; nested exception is org.springframework.beans.factory.NoSuchBeanDefinitionException: No qualifying bean of type [com.att.cw.service.UserService] found for dependency: expected at least 1 bean which qualifies as autowire candidate for this dependency. Dependency annotations: {@org.springframework.beans.factory.annotation.Autowired(required=true)}
-	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.postProcessPropertyValues(AutowiredAnnotationBeanPostProcessor.java:334)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1214)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:543)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:482)
-	at org.springframework.beans.factory.support.AbstractBeanFactory$1.getObject(AbstractBeanFactory.java:306)
-	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:230)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:302)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:197)
-	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:772)
-	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:839)
-	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:538)
-	at org.springframework.test.context.web.AbstractGenericWebContextLoader.loadContext(AbstractGenericWebContextLoader.java:133)
-	at org.springframework.test.context.web.AbstractGenericWebContextLoader.loadContext(AbstractGenericWebContextLoader.java:60)
-	at org.springframework.test.context.support.AbstractDelegatingSmartContextLoader.delegateLoading(AbstractDelegatingSmartContextLoader.java:109)
-	at org.springframework.test.context.support.AbstractDelegatingSmartContextLoader.loadContext(AbstractDelegatingSmartContextLoader.java:261)
-	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContextInternal(DefaultCacheAwareContextLoaderDelegate.java:98)
-	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContext(DefaultCacheAwareContextLoaderDelegate.java:116)
-	... 33 more
-Caused by: org.springframework.beans.factory.BeanCreationException: Could not autowire field: private com.att.cw.service.UserService com.att.cw.controller.open.AuthenticationController.userService; nested exception is org.springframework.beans.factory.NoSuchBeanDefinitionException: No qualifying bean of type [com.att.cw.service.UserService] found for dependency: expected at least 1 bean which qualifies as autowire candidate for this dependency. Dependency annotations: {@org.springframework.beans.factory.annotation.Autowired(required=true)}
-	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.inject(AutowiredAnnotationBeanPostProcessor.java:573)
-	at org.springframework.beans.factory.annotation.InjectionMetadata.inject(InjectionMetadata.java:88)
-	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.postProcessPropertyValues(AutowiredAnnotationBeanPostProcessor.java:331)
-	... 49 more
-Caused by: org.springframework.beans.factory.NoSuchBeanDefinitionException: No qualifying bean of type [com.att.cw.service.UserService] found for dependency: expected at least 1 bean which qualifies as autowire candidate for this dependency. Dependency annotations: {@org.springframework.beans.factory.annotation.Autowired(required=true)}
-	at org.springframework.beans.factory.support.DefaultListableBeanFactory.raiseNoSuchBeanDefinitionException(DefaultListableBeanFactory.java:1373)
-	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1119)
-	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1014)
-	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.inject(AutowiredAnnotationBeanPostProcessor.java:545)
-	... 51 more
-2016-07-16 20:53:37,386 INFO  [XmlBeanDefinitionReader] - Loading XML bean definitions from class path resource [spring-jpa-config.xml]
-2016-07-16 20:53:37,450 INFO  [XmlBeanDefinitionReader] - Loading XML bean definitions from URL [file:src/main/webapp/WEB-INF/spring/appServlet/servlet-context.xml]
-2016-07-16 20:53:37,534 INFO  [GenericWebApplicationContext] - Refreshing org.springframework.web.context.support.GenericWebApplicationContext@2a3194c6: startup date [Sat Jul 16 20:53:37 EDT 2016]; root of context hierarchy
-2016-07-16 20:53:37,567 INFO  [PropertySourcesPlaceholderConfigurer] - Loading properties file from class path resource [application.properties]
-2016-07-16 20:53:37,570 INFO  [AutowiredAnnotationBeanPostProcessor] - JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
-2016-07-16 20:53:37,593 INFO  [LogHelper] - HHH000204: Processing PersistenceUnitInfo [
+2016-07-19 11:56:07,182 INFO  [Version] - HHH000412: Hibernate Core {4.3.5.Final}
+2016-07-19 11:56:07,183 INFO  [Environment] - HHH000206: hibernate.properties not found
+2016-07-19 11:56:07,184 INFO  [Environment] - HHH000021: Bytecode provider name : javassist
+2016-07-19 11:56:07,365 INFO  [Version] - HCANN000001: Hibernate Commons Annotations {4.0.4.Final}
+2016-07-19 11:56:07,793 INFO  [Dialect] - HHH000400: Using dialect: org.hibernate.dialect.MySQL5Dialect
+2016-07-19 11:56:07,925 WARN  [AnnotationBinder] - HHH000139: Illegal use of @Table in a subclass of a SINGLE_TABLE hierarchy: com.att.cw.model.UserProfile
+2016-07-19 11:56:07,992 INFO  [ASTQueryTranslatorFactory] - HHH000397: Using ASTQueryTranslatorFactory
+2016-07-19 11:56:08,345 INFO  [SchemaUpdate] - HHH000228: Running hbm2ddl schema update
+2016-07-19 11:56:08,345 INFO  [SchemaUpdate] - HHH000102: Fetching database metadata
+2016-07-19 11:56:08,353 INFO  [SchemaUpdate] - HHH000396: Updating schema
+2016-07-19 11:56:08,379 INFO  [TableMetadata] - HHH000261: Table found: cw_dev_db.AUTHORITY
+2016-07-19 11:56:08,380 INFO  [TableMetadata] - HHH000037: Columns: [name, id]
+2016-07-19 11:56:08,380 INFO  [TableMetadata] - HHH000108: Foreign keys: []
+2016-07-19 11:56:08,380 INFO  [TableMetadata] - HHH000126: Indexes: [uk_ana6i0racv9b9d5dx3mlwho9p, primary]
+2016-07-19 11:56:08,388 INFO  [TableMetadata] - HHH000261: Table found: cw_dev_db.Profile
+2016-07-19 11:56:08,388 INFO  [TableMetadata] - HHH000037: Columns: [createddate, lastmodifieddate, date_of_birth, address_id, dtype, lastmodifiedby, last_name, middle_name, version, createdby, user_id, phone_number, id, first_name]
+2016-07-19 11:56:08,388 INFO  [TableMetadata] - HHH000108: Foreign keys: [fk_22nop2trrp4xogf8t1fr2rd91, fk_hj3d4gw12cprp4j1p6pqa5av5]
+2016-07-19 11:56:08,388 INFO  [TableMetadata] - HHH000126: Indexes: [fk_22nop2trrp4xogf8t1fr2rd91, primary, fk_hj3d4gw12cprp4j1p6pqa5av5]
+2016-07-19 11:56:08,394 INFO  [TableMetadata] - HHH000261: Table found: cw_dev_db.USER
+2016-07-19 11:56:08,394 INFO  [TableMetadata] - HHH000037: Columns: [password, name, emailid, id, enabled]
+2016-07-19 11:56:08,394 INFO  [TableMetadata] - HHH000108: Foreign keys: []
+2016-07-19 11:56:08,394 INFO  [TableMetadata] - HHH000126: Indexes: [user_email_index, uk_tny7vhtvpf3hywynmjlodildh, primary]
+2016-07-19 11:56:08,401 INFO  [TableMetadata] - HHH000261: Table found: cw_dev_db.USER_AUTHORITY
+2016-07-19 11:56:08,401 INFO  [TableMetadata] - HHH000037: Columns: [user_id, authority_id]
+2016-07-19 11:56:08,401 INFO  [TableMetadata] - HHH000108: Foreign keys: [fk_dyo9anhb75hbjut13e8uovw2s, fk_jbm4yrlayhtksry4mwk0e47ls]
+2016-07-19 11:56:08,401 INFO  [TableMetadata] - HHH000126: Indexes: [fk_dyo9anhb75hbjut13e8uovw2s, primary]
+2016-07-19 11:56:08,409 INFO  [TableMetadata] - HHH000261: Table found: cw_dev_db.file_documents
+2016-07-19 11:56:08,409 INFO  [TableMetadata] - HHH000037: Columns: [resourceid, createddate, lastmodifieddate, resource_type, lastmodifiedby, description, version, resourcetype, content, contenttype, size, content_type, createdby, file_id, resource_id, id]
+2016-07-19 11:56:08,409 INFO  [TableMetadata] - HHH000108: Foreign keys: [fk_90g3q7f6ffikyfek2twiut7qx]
+2016-07-19 11:56:08,410 INFO  [TableMetadata] - HHH000126: Indexes: [fk_90g3q7f6ffikyfek2twiut7qx, primary]
+2016-07-19 11:56:08,417 INFO  [TableMetadata] - HHH000261: Table found: cw_dev_db.job_activities
+2016-07-19 11:56:08,417 INFO  [TableMetadata] - HHH000037: Columns: [workflow_id, createdby, createddate, lastmodifieddate, name, lastmodifiedby, id, version]
+2016-07-19 11:56:08,417 INFO  [TableMetadata] - HHH000108: Foreign keys: [fk_6i97tsgwc4y8avinvleaij5ye]
+2016-07-19 11:56:08,418 INFO  [TableMetadata] - HHH000126: Indexes: [fk_6i97tsgwc4y8avinvleaij5ye, primary]
+2016-07-19 11:56:08,425 INFO  [TableMetadata] - HHH000261: Table found: cw_dev_db.job_applications
+2016-07-19 11:56:08,426 INFO  [TableMetadata] - HHH000037: Columns: [candidate_id, workflow_id, datemodified, createdby, createddate, lastmodifieddate, lastmodifiedby, id, datecreated, version]
+2016-07-19 11:56:08,426 INFO  [TableMetadata] - HHH000108: Foreign keys: [fk_gnt5c2uebjgnulu4debnxuomc, fk_r42se08m018gbf90h9l5vmjdl]
+2016-07-19 11:56:08,426 INFO  [TableMetadata] - HHH000126: Indexes: [fk_gnt5c2uebjgnulu4debnxuomc, fk_r42se08m018gbf90h9l5vmjdl, primary]
+2016-07-19 11:56:08,432 INFO  [TableMetadata] - HHH000261: Table found: cw_dev_db.job_candidates
+2016-07-19 11:56:08,432 INFO  [TableMetadata] - HHH000037: Columns: [createdby, createddate, lastmodifieddate, lastmodifiedby, id, version, userid]
+2016-07-19 11:56:08,432 INFO  [TableMetadata] - HHH000108: Foreign keys: []
+2016-07-19 11:56:08,432 INFO  [TableMetadata] - HHH000126: Indexes: [primary]
+2016-07-19 11:56:08,440 INFO  [TableMetadata] - HHH000261: Table found: cw_dev_db.job_workflows
+2016-07-19 11:56:08,440 INFO  [TableMetadata] - HHH000037: Columns: [createdby, createddate, lastmodifieddate, lastmodifiedby, id, version]
+2016-07-19 11:56:08,440 INFO  [TableMetadata] - HHH000108: Foreign keys: []
+2016-07-19 11:56:08,440 INFO  [TableMetadata] - HHH000126: Indexes: [primary]
+2016-07-19 11:56:08,446 INFO  [TableMetadata] - HHH000261: Table found: cw_dev_db.job_workflows_job_activities
+2016-07-19 11:56:08,446 INFO  [TableMetadata] - HHH000037: Columns: [job_workflows_id, activities_id]
+2016-07-19 11:56:08,446 INFO  [TableMetadata] - HHH000108: Foreign keys: [fk_7gqb8uj4dkxg94b0lt2wpfxld, fk_k05olxsngknte6yos3q1vorlr]
+2016-07-19 11:56:08,446 INFO  [TableMetadata] - HHH000126: Indexes: [uk_7gqb8uj4dkxg94b0lt2wpfxld, primary]
+2016-07-19 11:56:08,457 INFO  [TableMetadata] - HHH000261: Table found: cw_dev_db.jobs
+2016-07-19 11:56:08,457 INFO  [TableMetadata] - HHH000037: Columns: [workflow_id, closedate, createdby, createddate, lastmodifieddate, lastmodifiedby, description, opendate, id, ownerid, title, version]
+2016-07-19 11:56:08,457 INFO  [TableMetadata] - HHH000108: Foreign keys: [fk_bmmf4ulukk632yxioukqcue5v]
+2016-07-19 11:56:08,457 INFO  [TableMetadata] - HHH000126: Indexes: [fk_bmmf4ulukk632yxioukqcue5v, primary]
+2016-07-19 11:56:08,463 INFO  [TableMetadata] - HHH000261: Table found: cw_dev_db.jobs_job_applications
+2016-07-19 11:56:08,463 INFO  [TableMetadata] - HHH000037: Columns: [applications_id, jobs_id]
+2016-07-19 11:56:08,463 INFO  [TableMetadata] - HHH000108: Foreign keys: [fk_21hd5m30nhvpg76kqqkekujgm, fk_6vrx0feebyfnyfwbcxtt4q5gd]
+2016-07-19 11:56:08,463 INFO  [TableMetadata] - HHH000126: Indexes: [uk_21hd5m30nhvpg76kqqkekujgm, primary]
+2016-07-19 11:56:08,470 INFO  [TableMetadata] - HHH000261: Table found: cw_dev_db.user_addresses
+2016-07-19 11:56:08,470 INFO  [TableMetadata] - HHH000037: Columns: [zipcode, country, createdby, createddate, city, lastmodifieddate, lastmodifiedby, id, statename, version]
+2016-07-19 11:56:08,470 INFO  [TableMetadata] - HHH000108: Foreign keys: []
+2016-07-19 11:56:08,470 INFO  [TableMetadata] - HHH000126: Indexes: [primary]
+2016-07-19 11:56:08,571 INFO  [SchemaUpdate] - HHH000232: Schema update complete
+2016-07-19 11:56:09,012 INFO  [RequestMappingHandlerMapping] - Mapped "{[/documents/{id}],methods=[GET]}" onto public com.att.cw.model.FileDocument com.att.cw.controller.FileDocumentController.find(java.lang.Long)
+2016-07-19 11:56:09,013 INFO  [RequestMappingHandlerMapping] - Mapped "{[/documents/{id}],methods=[DELETE]}" onto public void com.att.cw.controller.FileDocumentController.delete(java.lang.Long)
+2016-07-19 11:56:09,016 INFO  [RequestMappingHandlerMapping] - Mapped "{[/upload],methods=[POST]}" onto public org.springframework.http.ResponseEntity com.att.cw.controller.FileUploadController.handleFileUpload(java.lang.String,org.springframework.web.multipart.MultipartFile)
+2016-07-19 11:56:09,029 INFO  [RequestMappingHandlerMapping] - Mapped "{[/jobs],methods=[PUT]}" onto public com.att.cw.model.Job com.att.cw.controller.JobController.update(com.att.cw.model.Job)
+2016-07-19 11:56:09,029 INFO  [RequestMappingHandlerMapping] - Mapped "{[/jobs/{id}],methods=[GET]}" onto public com.att.cw.model.Job com.att.cw.controller.JobController.find(java.lang.Long)
+2016-07-19 11:56:09,030 INFO  [RequestMappingHandlerMapping] - Mapped "{[/jobs/{id}],methods=[DELETE]}" onto public void com.att.cw.controller.JobController.delete(java.lang.Long)
+2016-07-19 11:56:09,030 INFO  [RequestMappingHandlerMapping] - Mapped "{[/jobs],methods=[POST]}" onto public com.att.cw.model.Job com.att.cw.controller.JobController.create(com.att.cw.model.Job)
+2016-07-19 11:56:09,030 INFO  [RequestMappingHandlerMapping] - Mapped "{[/jobs],methods=[GET]}" onto public org.springframework.data.domain.Page<com.att.cw.model.Job> com.att.cw.controller.JobController.findAllBy(java.lang.Long,org.springframework.data.domain.Pageable)
+2016-07-19 11:56:09,033 INFO  [RequestMappingHandlerMapping] - Mapped "{[/login],methods=[POST]}" onto public org.springframework.http.ResponseEntity<com.att.cw.controller.open.AuthenticationController$LoginResponse> com.att.cw.controller.open.AuthenticationController.login(com.att.cw.controller.open.AuthenticationController$UserLogin) throws javax.servlet.ServletException
+2016-07-19 11:56:09,038 INFO  [RequestMappingHandlerMapping] - Mapped "{[/restricted/countries],methods=[GET],produces=[application/json]}" onto public java.util.List<com.att.cw.bean.Country> com.att.cw.controller.restricted.CountryController.getCountries()
+2016-07-19 11:56:09,039 INFO  [RequestMappingHandlerMapping] - Mapped "{[/restricted/country/{id}],methods=[GET],produces=[application/json]}" onto public com.att.cw.bean.Country com.att.cw.controller.restricted.CountryController.getCountryById(int)
+2016-07-19 11:56:09,039 INFO  [RequestMappingHandlerMapping] - Mapped "{[/restricted/newcountry],methods=[POST],produces=[application/json]}" onto public com.att.cw.bean.Country com.att.cw.controller.restricted.CountryController.createNewCountry(com.att.cw.bean.Country)
+2016-07-19 11:56:09,048 INFO  [RequestMappingHandlerMapping] - Mapped "{[/users],methods=[PUT]}" onto public com.att.cw.model.User com.att.cw.controller.UserController.update(com.att.cw.model.User)
+2016-07-19 11:56:09,048 INFO  [RequestMappingHandlerMapping] - Mapped "{[/users/{id}],methods=[GET]}" onto public com.att.cw.model.User com.att.cw.controller.UserController.find(java.lang.Long)
+2016-07-19 11:56:09,048 INFO  [RequestMappingHandlerMapping] - Mapped "{[/users/{id}],methods=[DELETE]}" onto public void com.att.cw.controller.UserController.delete(java.lang.Long)
+2016-07-19 11:56:09,048 INFO  [RequestMappingHandlerMapping] - Mapped "{[/users/{id}],methods=[POST]}" onto public com.att.cw.model.User com.att.cw.controller.UserController.create(com.att.cw.model.User)
+2016-07-19 11:56:09,049 INFO  [RequestMappingHandlerMapping] - Mapped "{[/users],methods=[GET]}" onto org.springframework.data.domain.Page<com.att.cw.model.User> com.att.cw.controller.UserController.findAll(org.springframework.data.domain.Pageable)
+2016-07-19 11:56:09,335 INFO  [RequestMappingHandlerAdapter] - Looking for @ControllerAdvice: org.springframework.web.context.support.GenericWebApplicationContext@33c7e1bb: startup date [Tue Jul 19 11:56:06 EDT 2016]; root of context hierarchy
+2016-07-19 11:56:09,376 INFO  [RequestMappingHandlerAdapter] - Looking for @ControllerAdvice: org.springframework.web.context.support.GenericWebApplicationContext@33c7e1bb: startup date [Tue Jul 19 11:56:06 EDT 2016]; root of context hierarchy
+2016-07-19 11:56:09,590 INFO  [SimpleUrlHandlerMapping] - Mapped URL path [/resources/**] onto handler 'org.springframework.web.servlet.resource.ResourceHttpRequestHandler#0'
+2016-07-19 11:56:10,085 INFO  [XmlBeanDefinitionReader] - Loading XML bean definitions from class path resource [spring-jpa-config.xml]
+2016-07-19 11:56:10,141 INFO  [GenericApplicationContext] - Refreshing org.springframework.context.support.GenericApplicationContext@2629d5dc: startup date [Tue Jul 19 11:56:10 EDT 2016]; root of context hierarchy
+2016-07-19 11:56:10,146 INFO  [PropertySourcesPlaceholderConfigurer] - Loading properties file from class path resource [application.properties]
+2016-07-19 11:56:10,147 INFO  [AutowiredAnnotationBeanPostProcessor] - JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+2016-07-19 11:56:10,162 INFO  [LogHelper] - HHH000204: Processing PersistenceUnitInfo [
 	name: default
 	...]
-2016-07-16 20:53:37,625 INFO  [Dialect] - HHH000400: Using dialect: org.hibernate.dialect.MySQL5Dialect
-2016-07-16 20:53:37,663 INFO  [ASTQueryTranslatorFactory] - HHH000397: Using ASTQueryTranslatorFactory
-2016-07-16 20:53:37,733 INFO  [SchemaUpdate] - HHH000228: Running hbm2ddl schema update
-2016-07-16 20:53:37,734 INFO  [SchemaUpdate] - HHH000102: Fetching database metadata
-2016-07-16 20:53:37,735 INFO  [SchemaUpdate] - HHH000396: Updating schema
-2016-07-16 20:53:37,744 INFO  [TableMetadata] - HHH000261: Table found: cw_dev_db.AUTHORITY
-2016-07-16 20:53:37,744 INFO  [TableMetadata] - HHH000037: Columns: [name, id]
-2016-07-16 20:53:37,744 INFO  [TableMetadata] - HHH000108: Foreign keys: []
-2016-07-16 20:53:37,745 INFO  [TableMetadata] - HHH000126: Indexes: [uk_ana6i0racv9b9d5dx3mlwho9p, primary]
-2016-07-16 20:53:37,751 INFO  [TableMetadata] - HHH000261: Table found: cw_dev_db.USER
-2016-07-16 20:53:37,751 INFO  [TableMetadata] - HHH000037: Columns: [password, name, emailid, id, enabled]
-2016-07-16 20:53:37,751 INFO  [TableMetadata] - HHH000108: Foreign keys: []
-2016-07-16 20:53:37,751 INFO  [TableMetadata] - HHH000126: Indexes: [user_email_index, uk_tny7vhtvpf3hywynmjlodildh, primary]
-2016-07-16 20:53:37,761 INFO  [TableMetadata] - HHH000261: Table found: cw_dev_db.USER_AUTHORITY
-2016-07-16 20:53:37,762 INFO  [TableMetadata] - HHH000037: Columns: [user_id, authority_id]
-2016-07-16 20:53:37,762 INFO  [TableMetadata] - HHH000108: Foreign keys: [fk_dyo9anhb75hbjut13e8uovw2s, fk_jbm4yrlayhtksry4mwk0e47ls]
-2016-07-16 20:53:37,762 INFO  [TableMetadata] - HHH000126: Indexes: [fk_dyo9anhb75hbjut13e8uovw2s, primary]
-2016-07-16 20:53:37,770 INFO  [TableMetadata] - HHH000261: Table found: cw_dev_db.file_documents
-2016-07-16 20:53:37,770 INFO  [TableMetadata] - HHH000037: Columns: [resourceid, createddate, lastmodifieddate, resource_type, lastmodifiedby, description, version, resourcetype, content, contenttype, size, content_type, createdby, file_id, resource_id, id]
-2016-07-16 20:53:37,770 INFO  [TableMetadata] - HHH000108: Foreign keys: [fk_90g3q7f6ffikyfek2twiut7qx]
-2016-07-16 20:53:37,770 INFO  [TableMetadata] - HHH000126: Indexes: [fk_90g3q7f6ffikyfek2twiut7qx, primary]
-2016-07-16 20:53:37,776 INFO  [TableMetadata] - HHH000261: Table found: cw_dev_db.job_activities
-2016-07-16 20:53:37,776 INFO  [TableMetadata] - HHH000037: Columns: [workflow_id, createdby, createddate, lastmodifieddate, name, lastmodifiedby, id, version]
-2016-07-16 20:53:37,776 INFO  [TableMetadata] - HHH000108: Foreign keys: [fk_6i97tsgwc4y8avinvleaij5ye]
-2016-07-16 20:53:37,776 INFO  [TableMetadata] - HHH000126: Indexes: [fk_6i97tsgwc4y8avinvleaij5ye, primary]
-2016-07-16 20:53:37,783 INFO  [TableMetadata] - HHH000261: Table found: cw_dev_db.job_applications
-2016-07-16 20:53:37,783 INFO  [TableMetadata] - HHH000037: Columns: [candidate_id, workflow_id, datemodified, createdby, createddate, lastmodifieddate, lastmodifiedby, id, datecreated, version]
-2016-07-16 20:53:37,783 INFO  [TableMetadata] - HHH000108: Foreign keys: [fk_gnt5c2uebjgnulu4debnxuomc, fk_r42se08m018gbf90h9l5vmjdl]
-2016-07-16 20:53:37,783 INFO  [TableMetadata] - HHH000126: Indexes: [fk_gnt5c2uebjgnulu4debnxuomc, fk_r42se08m018gbf90h9l5vmjdl, primary]
-2016-07-16 20:53:37,792 INFO  [TableMetadata] - HHH000261: Table found: cw_dev_db.job_candidates
-2016-07-16 20:53:37,792 INFO  [TableMetadata] - HHH000037: Columns: [createdby, createddate, lastmodifieddate, lastmodifiedby, id, version, userid]
-2016-07-16 20:53:37,793 INFO  [TableMetadata] - HHH000108: Foreign keys: []
-2016-07-16 20:53:37,793 INFO  [TableMetadata] - HHH000126: Indexes: [primary]
-2016-07-16 20:53:37,799 INFO  [TableMetadata] - HHH000261: Table found: cw_dev_db.job_workflows
-2016-07-16 20:53:37,799 INFO  [TableMetadata] - HHH000037: Columns: [createdby, createddate, lastmodifieddate, lastmodifiedby, id, version]
-2016-07-16 20:53:37,800 INFO  [TableMetadata] - HHH000108: Foreign keys: []
-2016-07-16 20:53:37,800 INFO  [TableMetadata] - HHH000126: Indexes: [primary]
-2016-07-16 20:53:37,806 INFO  [TableMetadata] - HHH000261: Table found: cw_dev_db.job_workflows_job_activities
-2016-07-16 20:53:37,806 INFO  [TableMetadata] - HHH000037: Columns: [job_workflows_id, activities_id]
-2016-07-16 20:53:37,807 INFO  [TableMetadata] - HHH000108: Foreign keys: [fk_7gqb8uj4dkxg94b0lt2wpfxld, fk_k05olxsngknte6yos3q1vorlr]
-2016-07-16 20:53:37,807 INFO  [TableMetadata] - HHH000126: Indexes: [uk_7gqb8uj4dkxg94b0lt2wpfxld, primary]
-2016-07-16 20:53:37,815 INFO  [TableMetadata] - HHH000261: Table found: cw_dev_db.jobs
-2016-07-16 20:53:37,815 INFO  [TableMetadata] - HHH000037: Columns: [workflow_id, closedate, createdby, createddate, lastmodifieddate, lastmodifiedby, description, opendate, id, ownerid, title, version]
-2016-07-16 20:53:37,816 INFO  [TableMetadata] - HHH000108: Foreign keys: [fk_bmmf4ulukk632yxioukqcue5v]
-2016-07-16 20:53:37,816 INFO  [TableMetadata] - HHH000126: Indexes: [fk_bmmf4ulukk632yxioukqcue5v, primary]
-2016-07-16 20:53:37,821 INFO  [TableMetadata] - HHH000261: Table found: cw_dev_db.jobs_job_applications
-2016-07-16 20:53:37,822 INFO  [TableMetadata] - HHH000037: Columns: [applications_id, jobs_id]
-2016-07-16 20:53:37,822 INFO  [TableMetadata] - HHH000108: Foreign keys: [fk_21hd5m30nhvpg76kqqkekujgm, fk_6vrx0feebyfnyfwbcxtt4q5gd]
-2016-07-16 20:53:37,822 INFO  [TableMetadata] - HHH000126: Indexes: [uk_21hd5m30nhvpg76kqqkekujgm, primary]
-2016-07-16 20:53:37,823 INFO  [SchemaUpdate] - HHH000232: Schema update complete
-2016-07-16 20:53:37,978 INFO  [RequestMappingHandlerMapping] - Mapped "{[/documents/{id}],methods=[GET]}" onto public com.att.cw.model.FileDocument com.att.cw.controller.FileDocumentController.find(java.lang.Long)
-2016-07-16 20:53:37,979 INFO  [RequestMappingHandlerMapping] - Mapped "{[/documents/{id}],methods=[DELETE]}" onto public void com.att.cw.controller.FileDocumentController.delete(java.lang.Long)
-2016-07-16 20:53:37,979 INFO  [RequestMappingHandlerMapping] - Mapped "{[/upload],methods=[POST]}" onto public org.springframework.http.ResponseEntity com.att.cw.controller.FileUploadController.handleFileUpload(java.lang.String,org.springframework.web.multipart.MultipartFile)
-2016-07-16 20:53:37,984 INFO  [RequestMappingHandlerMapping] - Mapped "{[/jobs],methods=[PUT]}" onto public com.att.cw.model.Job com.att.cw.controller.JobController.update(com.att.cw.model.Job)
-2016-07-16 20:53:37,984 INFO  [RequestMappingHandlerMapping] - Mapped "{[/jobs/{id}],methods=[GET]}" onto public com.att.cw.model.Job com.att.cw.controller.JobController.find(java.lang.Long)
-2016-07-16 20:53:37,984 INFO  [RequestMappingHandlerMapping] - Mapped "{[/jobs/{id}],methods=[DELETE]}" onto public void com.att.cw.controller.JobController.delete(java.lang.Long)
-2016-07-16 20:53:37,985 INFO  [RequestMappingHandlerMapping] - Mapped "{[/jobs],methods=[POST]}" onto public com.att.cw.model.Job com.att.cw.controller.JobController.create(com.att.cw.model.Job)
-2016-07-16 20:53:37,985 INFO  [RequestMappingHandlerMapping] - Mapped "{[/jobs],methods=[GET]}" onto public org.springframework.data.domain.Page<com.att.cw.model.Job> com.att.cw.controller.JobController.findAllBy(java.lang.Long,org.springframework.data.domain.Pageable)
-2016-07-16 20:53:37,985 INFO  [RequestMappingHandlerMapping] - Mapped "{[/login],methods=[POST]}" onto public com.att.cw.controller.open.AuthenticationController$LoginResponse com.att.cw.controller.open.AuthenticationController.login(com.att.cw.controller.open.AuthenticationController$UserLogin) throws javax.servlet.ServletException
-2016-07-16 20:53:37,986 INFO  [RequestMappingHandlerMapping] - Mapped "{[/open/helloworld],methods=[GET],produces=[application/json]}" onto public java.lang.String com.att.cw.controller.open.HelloWorld.sayHelloWorld()
-2016-07-16 20:53:37,989 INFO  [RequestMappingHandlerMapping] - Mapped "{[/users],methods=[PUT]}" onto public com.att.cw.model.User com.att.cw.controller.open.UserController.update(com.att.cw.model.User)
-2016-07-16 20:53:37,989 INFO  [RequestMappingHandlerMapping] - Mapped "{[/users/{id}],methods=[GET]}" onto public com.att.cw.model.User com.att.cw.controller.open.UserController.find(java.lang.Long)
-2016-07-16 20:53:37,990 INFO  [RequestMappingHandlerMapping] - Mapped "{[/users/{id}],methods=[DELETE]}" onto public void com.att.cw.controller.open.UserController.delete(java.lang.Long)
-2016-07-16 20:53:37,990 INFO  [RequestMappingHandlerMapping] - Mapped "{[/users/{id}],methods=[POST]}" onto public com.att.cw.model.User com.att.cw.controller.open.UserController.create(com.att.cw.model.User)
-2016-07-16 20:53:37,990 INFO  [RequestMappingHandlerMapping] - Mapped "{[/users],methods=[GET]}" onto org.springframework.data.domain.Page<com.att.cw.model.User> com.att.cw.controller.open.UserController.findAll(org.springframework.data.domain.Pageable)
-2016-07-16 20:53:37,991 INFO  [RequestMappingHandlerMapping] - Mapped "{[/restricted/countries],methods=[GET],produces=[application/json]}" onto public java.util.List<com.att.cw.bean.Country> com.att.cw.controller.restricted.CountryController.getCountries()
-2016-07-16 20:53:37,992 INFO  [RequestMappingHandlerMapping] - Mapped "{[/restricted/country/{id}],methods=[GET],produces=[application/json]}" onto public com.att.cw.bean.Country com.att.cw.controller.restricted.CountryController.getCountryById(int)
-2016-07-16 20:53:37,992 INFO  [RequestMappingHandlerMapping] - Mapped "{[/restricted/newcountry],methods=[POST],produces=[application/json]}" onto public com.att.cw.bean.Country com.att.cw.controller.restricted.CountryController.createNewCountry(com.att.cw.bean.Country)
-2016-07-16 20:53:38,020 INFO  [RequestMappingHandlerAdapter] - Looking for @ControllerAdvice: org.springframework.web.context.support.GenericWebApplicationContext@2a3194c6: startup date [Sat Jul 16 20:53:37 EDT 2016]; root of context hierarchy
-2016-07-16 20:53:38,045 INFO  [RequestMappingHandlerAdapter] - Looking for @ControllerAdvice: org.springframework.web.context.support.GenericWebApplicationContext@2a3194c6: startup date [Sat Jul 16 20:53:37 EDT 2016]; root of context hierarchy
-2016-07-16 20:53:38,096 WARN  [GenericWebApplicationContext] - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'authenticate': Injection of autowired dependencies failed; nested exception is org.springframework.beans.factory.BeanCreationException: Could not autowire field: private com.att.cw.service.UserService com.att.cw.controller.open.AuthenticationController.userService; nested exception is org.springframework.beans.factory.NoSuchBeanDefinitionException: No qualifying bean of type [com.att.cw.service.UserService] found for dependency: expected at least 1 bean which qualifies as autowire candidate for this dependency. Dependency annotations: {@org.springframework.beans.factory.annotation.Autowired(required=true)}
-2016-07-16 20:53:38,100 ERROR [TestContextManager] - Caught exception while allowing TestExecutionListener [org.springframework.test.context.web.ServletTestExecutionListener@292158f8] to prepare test instance [com.att.cw.controller.JobControllerTest@75a0c890]
-java.lang.IllegalStateException: Failed to load ApplicationContext
-	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContext(DefaultCacheAwareContextLoaderDelegate.java:124)
-	at org.springframework.test.context.support.DefaultTestContext.getApplicationContext(DefaultTestContext.java:83)
-	at org.springframework.test.context.web.ServletTestExecutionListener.setUpRequestContextIfNecessary(ServletTestExecutionListener.java:183)
-	at org.springframework.test.context.web.ServletTestExecutionListener.prepareTestInstance(ServletTestExecutionListener.java:123)
-	at org.springframework.test.context.TestContextManager.prepareTestInstance(TestContextManager.java:228)
-	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.createTest(SpringJUnit4ClassRunner.java:230)
-	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner$1.runReflectiveCall(SpringJUnit4ClassRunner.java:289)
-	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
-	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.methodBlock(SpringJUnit4ClassRunner.java:291)
-	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:249)
-	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:89)
-	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:238)
-	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:63)
-	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:236)
-	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:53)
-	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:229)
-	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
-	at org.springframework.test.context.junit4.statements.RunBeforeTestClassCallbacks.evaluate(RunBeforeTestClassCallbacks.java:61)
-	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:27)
-	at org.springframework.test.context.junit4.statements.RunAfterTestClassCallbacks.evaluate(RunAfterTestClassCallbacks.java:70)
-	at org.junit.runners.ParentRunner.run(ParentRunner.java:309)
-	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.run(SpringJUnit4ClassRunner.java:193)
-	at org.apache.maven.surefire.junit4.JUnit4TestSet.execute(JUnit4TestSet.java:53)
-	at org.apache.maven.surefire.junit4.JUnit4Provider.executeTestSet(JUnit4Provider.java:123)
-	at org.apache.maven.surefire.junit4.JUnit4Provider.invoke(JUnit4Provider.java:104)
-	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.lang.reflect.Method.invoke(Method.java:497)
-	at org.apache.maven.surefire.util.ReflectionUtils.invokeMethodWithArray(ReflectionUtils.java:164)
-	at org.apache.maven.surefire.booter.ProviderFactory$ProviderProxy.invoke(ProviderFactory.java:110)
-	at org.apache.maven.surefire.booter.SurefireStarter.invokeProvider(SurefireStarter.java:175)
-	at org.apache.maven.surefire.booter.SurefireStarter.runSuitesInProcessWhenForked(SurefireStarter.java:107)
-	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:68)
-Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'authenticate': Injection of autowired dependencies failed; nested exception is org.springframework.beans.factory.BeanCreationException: Could not autowire field: private com.att.cw.service.UserService com.att.cw.controller.open.AuthenticationController.userService; nested exception is org.springframework.beans.factory.NoSuchBeanDefinitionException: No qualifying bean of type [com.att.cw.service.UserService] found for dependency: expected at least 1 bean which qualifies as autowire candidate for this dependency. Dependency annotations: {@org.springframework.beans.factory.annotation.Autowired(required=true)}
-	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.postProcessPropertyValues(AutowiredAnnotationBeanPostProcessor.java:334)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1214)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:543)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:482)
-	at org.springframework.beans.factory.support.AbstractBeanFactory$1.getObject(AbstractBeanFactory.java:306)
-	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:230)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:302)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:197)
-	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:772)
-	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:839)
-	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:538)
-	at org.springframework.test.context.web.AbstractGenericWebContextLoader.loadContext(AbstractGenericWebContextLoader.java:133)
-	at org.springframework.test.context.web.AbstractGenericWebContextLoader.loadContext(AbstractGenericWebContextLoader.java:60)
-	at org.springframework.test.context.support.AbstractDelegatingSmartContextLoader.delegateLoading(AbstractDelegatingSmartContextLoader.java:109)
-	at org.springframework.test.context.support.AbstractDelegatingSmartContextLoader.loadContext(AbstractDelegatingSmartContextLoader.java:261)
-	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContextInternal(DefaultCacheAwareContextLoaderDelegate.java:98)
-	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContext(DefaultCacheAwareContextLoaderDelegate.java:116)
-	... 33 more
-Caused by: org.springframework.beans.factory.BeanCreationException: Could not autowire field: private com.att.cw.service.UserService com.att.cw.controller.open.AuthenticationController.userService; nested exception is org.springframework.beans.factory.NoSuchBeanDefinitionException: No qualifying bean of type [com.att.cw.service.UserService] found for dependency: expected at least 1 bean which qualifies as autowire candidate for this dependency. Dependency annotations: {@org.springframework.beans.factory.annotation.Autowired(required=true)}
-	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.inject(AutowiredAnnotationBeanPostProcessor.java:573)
-	at org.springframework.beans.factory.annotation.InjectionMetadata.inject(InjectionMetadata.java:88)
-	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.postProcessPropertyValues(AutowiredAnnotationBeanPostProcessor.java:331)
-	... 49 more
-Caused by: org.springframework.beans.factory.NoSuchBeanDefinitionException: No qualifying bean of type [com.att.cw.service.UserService] found for dependency: expected at least 1 bean which qualifies as autowire candidate for this dependency. Dependency annotations: {@org.springframework.beans.factory.annotation.Autowired(required=true)}
-	at org.springframework.beans.factory.support.DefaultListableBeanFactory.raiseNoSuchBeanDefinitionException(DefaultListableBeanFactory.java:1373)
-	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1119)
-	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1014)
-	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.inject(AutowiredAnnotationBeanPostProcessor.java:545)
-	... 51 more
-2016-07-16 20:53:38,106 INFO  [XmlBeanDefinitionReader] - Loading XML bean definitions from class path resource [spring-jpa-config.xml]
-2016-07-16 20:53:38,160 INFO  [XmlBeanDefinitionReader] - Loading XML bean definitions from URL [file:src/main/webapp/WEB-INF/spring/appServlet/servlet-context.xml]
-2016-07-16 20:53:38,211 INFO  [GenericWebApplicationContext] - Refreshing org.springframework.web.context.support.GenericWebApplicationContext@574b7f4a: startup date [Sat Jul 16 20:53:38 EDT 2016]; root of context hierarchy
-2016-07-16 20:53:38,238 INFO  [PropertySourcesPlaceholderConfigurer] - Loading properties file from class path resource [application.properties]
-2016-07-16 20:53:38,243 INFO  [AutowiredAnnotationBeanPostProcessor] - JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
-2016-07-16 20:53:38,258 INFO  [LogHelper] - HHH000204: Processing PersistenceUnitInfo [
-	name: default
-	...]
-2016-07-16 20:53:38,278 INFO  [Dialect] - HHH000400: Using dialect: org.hibernate.dialect.MySQL5Dialect
-2016-07-16 20:53:38,310 INFO  [ASTQueryTranslatorFactory] - HHH000397: Using ASTQueryTranslatorFactory
-2016-07-16 20:53:38,360 INFO  [SchemaUpdate] - HHH000228: Running hbm2ddl schema update
-2016-07-16 20:53:38,360 INFO  [SchemaUpdate] - HHH000102: Fetching database metadata
-2016-07-16 20:53:38,361 INFO  [SchemaUpdate] - HHH000396: Updating schema
-2016-07-16 20:53:38,369 INFO  [TableMetadata] - HHH000261: Table found: cw_dev_db.AUTHORITY
-2016-07-16 20:53:38,369 INFO  [TableMetadata] - HHH000037: Columns: [name, id]
-2016-07-16 20:53:38,369 INFO  [TableMetadata] - HHH000108: Foreign keys: []
-2016-07-16 20:53:38,369 INFO  [TableMetadata] - HHH000126: Indexes: [uk_ana6i0racv9b9d5dx3mlwho9p, primary]
-2016-07-16 20:53:38,377 INFO  [TableMetadata] - HHH000261: Table found: cw_dev_db.USER
-2016-07-16 20:53:38,377 INFO  [TableMetadata] - HHH000037: Columns: [password, name, emailid, id, enabled]
-2016-07-16 20:53:38,377 INFO  [TableMetadata] - HHH000108: Foreign keys: []
-2016-07-16 20:53:38,377 INFO  [TableMetadata] - HHH000126: Indexes: [user_email_index, uk_tny7vhtvpf3hywynmjlodildh, primary]
-2016-07-16 20:53:38,384 INFO  [TableMetadata] - HHH000261: Table found: cw_dev_db.USER_AUTHORITY
-2016-07-16 20:53:38,384 INFO  [TableMetadata] - HHH000037: Columns: [user_id, authority_id]
-2016-07-16 20:53:38,384 INFO  [TableMetadata] - HHH000108: Foreign keys: [fk_dyo9anhb75hbjut13e8uovw2s, fk_jbm4yrlayhtksry4mwk0e47ls]
-2016-07-16 20:53:38,384 INFO  [TableMetadata] - HHH000126: Indexes: [fk_dyo9anhb75hbjut13e8uovw2s, primary]
-2016-07-16 20:53:38,392 INFO  [TableMetadata] - HHH000261: Table found: cw_dev_db.file_documents
-2016-07-16 20:53:38,392 INFO  [TableMetadata] - HHH000037: Columns: [resourceid, createddate, lastmodifieddate, resource_type, lastmodifiedby, description, version, resourcetype, content, contenttype, size, content_type, createdby, file_id, resource_id, id]
-2016-07-16 20:53:38,392 INFO  [TableMetadata] - HHH000108: Foreign keys: [fk_90g3q7f6ffikyfek2twiut7qx]
-2016-07-16 20:53:38,392 INFO  [TableMetadata] - HHH000126: Indexes: [fk_90g3q7f6ffikyfek2twiut7qx, primary]
-2016-07-16 20:53:38,399 INFO  [TableMetadata] - HHH000261: Table found: cw_dev_db.job_activities
-2016-07-16 20:53:38,399 INFO  [TableMetadata] - HHH000037: Columns: [workflow_id, createdby, createddate, lastmodifieddate, name, lastmodifiedby, id, version]
-2016-07-16 20:53:38,399 INFO  [TableMetadata] - HHH000108: Foreign keys: [fk_6i97tsgwc4y8avinvleaij5ye]
-2016-07-16 20:53:38,399 INFO  [TableMetadata] - HHH000126: Indexes: [fk_6i97tsgwc4y8avinvleaij5ye, primary]
-2016-07-16 20:53:38,408 INFO  [TableMetadata] - HHH000261: Table found: cw_dev_db.job_applications
-2016-07-16 20:53:38,408 INFO  [TableMetadata] - HHH000037: Columns: [candidate_id, workflow_id, datemodified, createdby, createddate, lastmodifieddate, lastmodifiedby, id, datecreated, version]
-2016-07-16 20:53:38,408 INFO  [TableMetadata] - HHH000108: Foreign keys: [fk_gnt5c2uebjgnulu4debnxuomc, fk_r42se08m018gbf90h9l5vmjdl]
-2016-07-16 20:53:38,409 INFO  [TableMetadata] - HHH000126: Indexes: [fk_gnt5c2uebjgnulu4debnxuomc, fk_r42se08m018gbf90h9l5vmjdl, primary]
-2016-07-16 20:53:38,414 INFO  [TableMetadata] - HHH000261: Table found: cw_dev_db.job_candidates
-2016-07-16 20:53:38,414 INFO  [TableMetadata] - HHH000037: Columns: [createdby, createddate, lastmodifieddate, lastmodifiedby, id, version, userid]
-2016-07-16 20:53:38,414 INFO  [TableMetadata] - HHH000108: Foreign keys: []
-2016-07-16 20:53:38,414 INFO  [TableMetadata] - HHH000126: Indexes: [primary]
-2016-07-16 20:53:38,419 INFO  [TableMetadata] - HHH000261: Table found: cw_dev_db.job_workflows
-2016-07-16 20:53:38,419 INFO  [TableMetadata] - HHH000037: Columns: [createdby, createddate, lastmodifieddate, lastmodifiedby, id, version]
-2016-07-16 20:53:38,419 INFO  [TableMetadata] - HHH000108: Foreign keys: []
-2016-07-16 20:53:38,419 INFO  [TableMetadata] - HHH000126: Indexes: [primary]
-2016-07-16 20:53:38,427 INFO  [TableMetadata] - HHH000261: Table found: cw_dev_db.job_workflows_job_activities
-2016-07-16 20:53:38,427 INFO  [TableMetadata] - HHH000037: Columns: [job_workflows_id, activities_id]
-2016-07-16 20:53:38,427 INFO  [TableMetadata] - HHH000108: Foreign keys: [fk_7gqb8uj4dkxg94b0lt2wpfxld, fk_k05olxsngknte6yos3q1vorlr]
-2016-07-16 20:53:38,427 INFO  [TableMetadata] - HHH000126: Indexes: [uk_7gqb8uj4dkxg94b0lt2wpfxld, primary]
-2016-07-16 20:53:38,433 INFO  [TableMetadata] - HHH000261: Table found: cw_dev_db.jobs
-2016-07-16 20:53:38,434 INFO  [TableMetadata] - HHH000037: Columns: [workflow_id, closedate, createdby, createddate, lastmodifieddate, lastmodifiedby, description, opendate, id, ownerid, title, version]
-2016-07-16 20:53:38,434 INFO  [TableMetadata] - HHH000108: Foreign keys: [fk_bmmf4ulukk632yxioukqcue5v]
-2016-07-16 20:53:38,434 INFO  [TableMetadata] - HHH000126: Indexes: [fk_bmmf4ulukk632yxioukqcue5v, primary]
-2016-07-16 20:53:38,438 INFO  [TableMetadata] - HHH000261: Table found: cw_dev_db.jobs_job_applications
-2016-07-16 20:53:38,438 INFO  [TableMetadata] - HHH000037: Columns: [applications_id, jobs_id]
-2016-07-16 20:53:38,438 INFO  [TableMetadata] - HHH000108: Foreign keys: [fk_21hd5m30nhvpg76kqqkekujgm, fk_6vrx0feebyfnyfwbcxtt4q5gd]
-2016-07-16 20:53:38,438 INFO  [TableMetadata] - HHH000126: Indexes: [uk_21hd5m30nhvpg76kqqkekujgm, primary]
-2016-07-16 20:53:38,438 INFO  [SchemaUpdate] - HHH000232: Schema update complete
-2016-07-16 20:53:38,480 INFO  [RequestMappingHandlerMapping] - Mapped "{[/documents/{id}],methods=[GET]}" onto public com.att.cw.model.FileDocument com.att.cw.controller.FileDocumentController.find(java.lang.Long)
-2016-07-16 20:53:38,481 INFO  [RequestMappingHandlerMapping] - Mapped "{[/documents/{id}],methods=[DELETE]}" onto public void com.att.cw.controller.FileDocumentController.delete(java.lang.Long)
-2016-07-16 20:53:38,481 INFO  [RequestMappingHandlerMapping] - Mapped "{[/upload],methods=[POST]}" onto public org.springframework.http.ResponseEntity com.att.cw.controller.FileUploadController.handleFileUpload(java.lang.String,org.springframework.web.multipart.MultipartFile)
-2016-07-16 20:53:38,484 INFO  [RequestMappingHandlerMapping] - Mapped "{[/jobs],methods=[PUT]}" onto public com.att.cw.model.Job com.att.cw.controller.JobController.update(com.att.cw.model.Job)
-2016-07-16 20:53:38,484 INFO  [RequestMappingHandlerMapping] - Mapped "{[/jobs/{id}],methods=[GET]}" onto public com.att.cw.model.Job com.att.cw.controller.JobController.find(java.lang.Long)
-2016-07-16 20:53:38,484 INFO  [RequestMappingHandlerMapping] - Mapped "{[/jobs/{id}],methods=[DELETE]}" onto public void com.att.cw.controller.JobController.delete(java.lang.Long)
-2016-07-16 20:53:38,484 INFO  [RequestMappingHandlerMapping] - Mapped "{[/jobs],methods=[POST]}" onto public com.att.cw.model.Job com.att.cw.controller.JobController.create(com.att.cw.model.Job)
-2016-07-16 20:53:38,484 INFO  [RequestMappingHandlerMapping] - Mapped "{[/jobs],methods=[GET]}" onto public org.springframework.data.domain.Page<com.att.cw.model.Job> com.att.cw.controller.JobController.findAllBy(java.lang.Long,org.springframework.data.domain.Pageable)
-2016-07-16 20:53:38,485 INFO  [RequestMappingHandlerMapping] - Mapped "{[/login],methods=[POST]}" onto public com.att.cw.controller.open.AuthenticationController$LoginResponse com.att.cw.controller.open.AuthenticationController.login(com.att.cw.controller.open.AuthenticationController$UserLogin) throws javax.servlet.ServletException
-2016-07-16 20:53:38,485 INFO  [RequestMappingHandlerMapping] - Mapped "{[/open/helloworld],methods=[GET],produces=[application/json]}" onto public java.lang.String com.att.cw.controller.open.HelloWorld.sayHelloWorld()
-2016-07-16 20:53:38,489 INFO  [RequestMappingHandlerMapping] - Mapped "{[/users],methods=[PUT]}" onto public com.att.cw.model.User com.att.cw.controller.open.UserController.update(com.att.cw.model.User)
-2016-07-16 20:53:38,490 INFO  [RequestMappingHandlerMapping] - Mapped "{[/users/{id}],methods=[GET]}" onto public com.att.cw.model.User com.att.cw.controller.open.UserController.find(java.lang.Long)
-2016-07-16 20:53:38,490 INFO  [RequestMappingHandlerMapping] - Mapped "{[/users/{id}],methods=[DELETE]}" onto public void com.att.cw.controller.open.UserController.delete(java.lang.Long)
-2016-07-16 20:53:38,490 INFO  [RequestMappingHandlerMapping] - Mapped "{[/users/{id}],methods=[POST]}" onto public com.att.cw.model.User com.att.cw.controller.open.UserController.create(com.att.cw.model.User)
-2016-07-16 20:53:38,490 INFO  [RequestMappingHandlerMapping] - Mapped "{[/users],methods=[GET]}" onto org.springframework.data.domain.Page<com.att.cw.model.User> com.att.cw.controller.open.UserController.findAll(org.springframework.data.domain.Pageable)
-2016-07-16 20:53:38,493 INFO  [RequestMappingHandlerMapping] - Mapped "{[/restricted/countries],methods=[GET],produces=[application/json]}" onto public java.util.List<com.att.cw.bean.Country> com.att.cw.controller.restricted.CountryController.getCountries()
-2016-07-16 20:53:38,493 INFO  [RequestMappingHandlerMapping] - Mapped "{[/restricted/country/{id}],methods=[GET],produces=[application/json]}" onto public com.att.cw.bean.Country com.att.cw.controller.restricted.CountryController.getCountryById(int)
-2016-07-16 20:53:38,493 INFO  [RequestMappingHandlerMapping] - Mapped "{[/restricted/newcountry],methods=[POST],produces=[application/json]}" onto public com.att.cw.bean.Country com.att.cw.controller.restricted.CountryController.createNewCountry(com.att.cw.bean.Country)
-2016-07-16 20:53:38,528 INFO  [RequestMappingHandlerAdapter] - Looking for @ControllerAdvice: org.springframework.web.context.support.GenericWebApplicationContext@574b7f4a: startup date [Sat Jul 16 20:53:38 EDT 2016]; root of context hierarchy
-2016-07-16 20:53:38,551 INFO  [RequestMappingHandlerAdapter] - Looking for @ControllerAdvice: org.springframework.web.context.support.GenericWebApplicationContext@574b7f4a: startup date [Sat Jul 16 20:53:38 EDT 2016]; root of context hierarchy
-2016-07-16 20:53:38,601 WARN  [GenericWebApplicationContext] - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'authenticate': Injection of autowired dependencies failed; nested exception is org.springframework.beans.factory.BeanCreationException: Could not autowire field: private com.att.cw.service.UserService com.att.cw.controller.open.AuthenticationController.userService; nested exception is org.springframework.beans.factory.NoSuchBeanDefinitionException: No qualifying bean of type [com.att.cw.service.UserService] found for dependency: expected at least 1 bean which qualifies as autowire candidate for this dependency. Dependency annotations: {@org.springframework.beans.factory.annotation.Autowired(required=true)}
-2016-07-16 20:53:38,603 ERROR [TestContextManager] - Caught exception while allowing TestExecutionListener [org.springframework.test.context.web.ServletTestExecutionListener@292158f8] to prepare test instance [com.att.cw.controller.JobControllerTest@ceddaf8]
-java.lang.IllegalStateException: Failed to load ApplicationContext
-	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContext(DefaultCacheAwareContextLoaderDelegate.java:124)
-	at org.springframework.test.context.support.DefaultTestContext.getApplicationContext(DefaultTestContext.java:83)
-	at org.springframework.test.context.web.ServletTestExecutionListener.setUpRequestContextIfNecessary(ServletTestExecutionListener.java:183)
-	at org.springframework.test.context.web.ServletTestExecutionListener.prepareTestInstance(ServletTestExecutionListener.java:123)
-	at org.springframework.test.context.TestContextManager.prepareTestInstance(TestContextManager.java:228)
-	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.createTest(SpringJUnit4ClassRunner.java:230)
-	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner$1.runReflectiveCall(SpringJUnit4ClassRunner.java:289)
-	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
-	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.methodBlock(SpringJUnit4ClassRunner.java:291)
-	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:249)
-	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:89)
-	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:238)
-	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:63)
-	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:236)
-	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:53)
-	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:229)
-	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
-	at org.springframework.test.context.junit4.statements.RunBeforeTestClassCallbacks.evaluate(RunBeforeTestClassCallbacks.java:61)
-	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:27)
-	at org.springframework.test.context.junit4.statements.RunAfterTestClassCallbacks.evaluate(RunAfterTestClassCallbacks.java:70)
-	at org.junit.runners.ParentRunner.run(ParentRunner.java:309)
-	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.run(SpringJUnit4ClassRunner.java:193)
-	at org.apache.maven.surefire.junit4.JUnit4TestSet.execute(JUnit4TestSet.java:53)
-	at org.apache.maven.surefire.junit4.JUnit4Provider.executeTestSet(JUnit4Provider.java:123)
-	at org.apache.maven.surefire.junit4.JUnit4Provider.invoke(JUnit4Provider.java:104)
-	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.lang.reflect.Method.invoke(Method.java:497)
-	at org.apache.maven.surefire.util.ReflectionUtils.invokeMethodWithArray(ReflectionUtils.java:164)
-	at org.apache.maven.surefire.booter.ProviderFactory$ProviderProxy.invoke(ProviderFactory.java:110)
-	at org.apache.maven.surefire.booter.SurefireStarter.invokeProvider(SurefireStarter.java:175)
-	at org.apache.maven.surefire.booter.SurefireStarter.runSuitesInProcessWhenForked(SurefireStarter.java:107)
-	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:68)
-Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'authenticate': Injection of autowired dependencies failed; nested exception is org.springframework.beans.factory.BeanCreationException: Could not autowire field: private com.att.cw.service.UserService com.att.cw.controller.open.AuthenticationController.userService; nested exception is org.springframework.beans.factory.NoSuchBeanDefinitionException: No qualifying bean of type [com.att.cw.service.UserService] found for dependency: expected at least 1 bean which qualifies as autowire candidate for this dependency. Dependency annotations: {@org.springframework.beans.factory.annotation.Autowired(required=true)}
-	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.postProcessPropertyValues(AutowiredAnnotationBeanPostProcessor.java:334)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1214)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:543)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:482)
-	at org.springframework.beans.factory.support.AbstractBeanFactory$1.getObject(AbstractBeanFactory.java:306)
-	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:230)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:302)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:197)
-	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:772)
-	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:839)
-	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:538)
-	at org.springframework.test.context.web.AbstractGenericWebContextLoader.loadContext(AbstractGenericWebContextLoader.java:133)
-	at org.springframework.test.context.web.AbstractGenericWebContextLoader.loadContext(AbstractGenericWebContextLoader.java:60)
-	at org.springframework.test.context.support.AbstractDelegatingSmartContextLoader.delegateLoading(AbstractDelegatingSmartContextLoader.java:109)
-	at org.springframework.test.context.support.AbstractDelegatingSmartContextLoader.loadContext(AbstractDelegatingSmartContextLoader.java:261)
-	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContextInternal(DefaultCacheAwareContextLoaderDelegate.java:98)
-	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContext(DefaultCacheAwareContextLoaderDelegate.java:116)
-	... 33 more
-Caused by: org.springframework.beans.factory.BeanCreationException: Could not autowire field: private com.att.cw.service.UserService com.att.cw.controller.open.AuthenticationController.userService; nested exception is org.springframework.beans.factory.NoSuchBeanDefinitionException: No qualifying bean of type [com.att.cw.service.UserService] found for dependency: expected at least 1 bean which qualifies as autowire candidate for this dependency. Dependency annotations: {@org.springframework.beans.factory.annotation.Autowired(required=true)}
-	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.inject(AutowiredAnnotationBeanPostProcessor.java:573)
-	at org.springframework.beans.factory.annotation.InjectionMetadata.inject(InjectionMetadata.java:88)
-	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.postProcessPropertyValues(AutowiredAnnotationBeanPostProcessor.java:331)
-	... 49 more
-Caused by: org.springframework.beans.factory.NoSuchBeanDefinitionException: No qualifying bean of type [com.att.cw.service.UserService] found for dependency: expected at least 1 bean which qualifies as autowire candidate for this dependency. Dependency annotations: {@org.springframework.beans.factory.annotation.Autowired(required=true)}
-	at org.springframework.beans.factory.support.DefaultListableBeanFactory.raiseNoSuchBeanDefinitionException(DefaultListableBeanFactory.java:1373)
-	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1119)
-	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1014)
-	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.inject(AutowiredAnnotationBeanPostProcessor.java:545)
-	... 51 more
-2016-07-16 20:53:38,607 INFO  [XmlBeanDefinitionReader] - Loading XML bean definitions from class path resource [spring-jpa-config.xml]
-2016-07-16 20:53:38,664 INFO  [XmlBeanDefinitionReader] - Loading XML bean definitions from URL [file:src/main/webapp/WEB-INF/spring/appServlet/servlet-context.xml]
-2016-07-16 20:53:38,706 INFO  [GenericWebApplicationContext] - Refreshing org.springframework.web.context.support.GenericWebApplicationContext@27329d2a: startup date [Sat Jul 16 20:53:38 EDT 2016]; root of context hierarchy
-2016-07-16 20:53:38,726 INFO  [PropertySourcesPlaceholderConfigurer] - Loading properties file from class path resource [application.properties]
-2016-07-16 20:53:38,728 INFO  [AutowiredAnnotationBeanPostProcessor] - JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
-2016-07-16 20:53:38,745 INFO  [LogHelper] - HHH000204: Processing PersistenceUnitInfo [
-	name: default
-	...]
-2016-07-16 20:53:38,770 INFO  [Dialect] - HHH000400: Using dialect: org.hibernate.dialect.MySQL5Dialect
-2016-07-16 20:53:38,801 INFO  [ASTQueryTranslatorFactory] - HHH000397: Using ASTQueryTranslatorFactory
-2016-07-16 20:53:38,843 INFO  [SchemaUpdate] - HHH000228: Running hbm2ddl schema update
-2016-07-16 20:53:38,843 INFO  [SchemaUpdate] - HHH000102: Fetching database metadata
-2016-07-16 20:53:38,844 INFO  [SchemaUpdate] - HHH000396: Updating schema
-2016-07-16 20:53:38,851 INFO  [TableMetadata] - HHH000261: Table found: cw_dev_db.AUTHORITY
-2016-07-16 20:53:38,851 INFO  [TableMetadata] - HHH000037: Columns: [name, id]
-2016-07-16 20:53:38,851 INFO  [TableMetadata] - HHH000108: Foreign keys: []
-2016-07-16 20:53:38,851 INFO  [TableMetadata] - HHH000126: Indexes: [uk_ana6i0racv9b9d5dx3mlwho9p, primary]
-2016-07-16 20:53:38,854 INFO  [TableMetadata] - HHH000261: Table found: cw_dev_db.USER
-2016-07-16 20:53:38,854 INFO  [TableMetadata] - HHH000037: Columns: [password, name, emailid, id, enabled]
-2016-07-16 20:53:38,855 INFO  [TableMetadata] - HHH000108: Foreign keys: []
-2016-07-16 20:53:38,855 INFO  [TableMetadata] - HHH000126: Indexes: [user_email_index, uk_tny7vhtvpf3hywynmjlodildh, primary]
-2016-07-16 20:53:38,860 INFO  [TableMetadata] - HHH000261: Table found: cw_dev_db.USER_AUTHORITY
-2016-07-16 20:53:38,861 INFO  [TableMetadata] - HHH000037: Columns: [user_id, authority_id]
-2016-07-16 20:53:38,861 INFO  [TableMetadata] - HHH000108: Foreign keys: [fk_dyo9anhb75hbjut13e8uovw2s, fk_jbm4yrlayhtksry4mwk0e47ls]
-2016-07-16 20:53:38,861 INFO  [TableMetadata] - HHH000126: Indexes: [fk_dyo9anhb75hbjut13e8uovw2s, primary]
-2016-07-16 20:53:38,865 INFO  [TableMetadata] - HHH000261: Table found: cw_dev_db.file_documents
-2016-07-16 20:53:38,865 INFO  [TableMetadata] - HHH000037: Columns: [resourceid, createddate, lastmodifieddate, resource_type, lastmodifiedby, description, version, resourcetype, content, contenttype, size, content_type, createdby, file_id, resource_id, id]
-2016-07-16 20:53:38,865 INFO  [TableMetadata] - HHH000108: Foreign keys: [fk_90g3q7f6ffikyfek2twiut7qx]
-2016-07-16 20:53:38,866 INFO  [TableMetadata] - HHH000126: Indexes: [fk_90g3q7f6ffikyfek2twiut7qx, primary]
-2016-07-16 20:53:38,869 INFO  [TableMetadata] - HHH000261: Table found: cw_dev_db.job_activities
-2016-07-16 20:53:38,869 INFO  [TableMetadata] - HHH000037: Columns: [workflow_id, createdby, createddate, lastmodifieddate, name, lastmodifiedby, id, version]
-2016-07-16 20:53:38,869 INFO  [TableMetadata] - HHH000108: Foreign keys: [fk_6i97tsgwc4y8avinvleaij5ye]
-2016-07-16 20:53:38,869 INFO  [TableMetadata] - HHH000126: Indexes: [fk_6i97tsgwc4y8avinvleaij5ye, primary]
-2016-07-16 20:53:38,879 INFO  [TableMetadata] - HHH000261: Table found: cw_dev_db.job_applications
-2016-07-16 20:53:38,879 INFO  [TableMetadata] - HHH000037: Columns: [candidate_id, workflow_id, datemodified, createdby, createddate, lastmodifieddate, lastmodifiedby, id, datecreated, version]
-2016-07-16 20:53:38,879 INFO  [TableMetadata] - HHH000108: Foreign keys: [fk_gnt5c2uebjgnulu4debnxuomc, fk_r42se08m018gbf90h9l5vmjdl]
-2016-07-16 20:53:38,880 INFO  [TableMetadata] - HHH000126: Indexes: [fk_gnt5c2uebjgnulu4debnxuomc, fk_r42se08m018gbf90h9l5vmjdl, primary]
-2016-07-16 20:53:38,886 INFO  [TableMetadata] - HHH000261: Table found: cw_dev_db.job_candidates
-2016-07-16 20:53:38,886 INFO  [TableMetadata] - HHH000037: Columns: [createdby, createddate, lastmodifieddate, lastmodifiedby, id, version, userid]
-2016-07-16 20:53:38,886 INFO  [TableMetadata] - HHH000108: Foreign keys: []
-2016-07-16 20:53:38,886 INFO  [TableMetadata] - HHH000126: Indexes: [primary]
-2016-07-16 20:53:38,892 INFO  [TableMetadata] - HHH000261: Table found: cw_dev_db.job_workflows
-2016-07-16 20:53:38,893 INFO  [TableMetadata] - HHH000037: Columns: [createdby, createddate, lastmodifieddate, lastmodifiedby, id, version]
-2016-07-16 20:53:38,893 INFO  [TableMetadata] - HHH000108: Foreign keys: []
-2016-07-16 20:53:38,893 INFO  [TableMetadata] - HHH000126: Indexes: [primary]
-2016-07-16 20:53:38,898 INFO  [TableMetadata] - HHH000261: Table found: cw_dev_db.job_workflows_job_activities
-2016-07-16 20:53:38,898 INFO  [TableMetadata] - HHH000037: Columns: [job_workflows_id, activities_id]
-2016-07-16 20:53:38,898 INFO  [TableMetadata] - HHH000108: Foreign keys: [fk_7gqb8uj4dkxg94b0lt2wpfxld, fk_k05olxsngknte6yos3q1vorlr]
-2016-07-16 20:53:38,898 INFO  [TableMetadata] - HHH000126: Indexes: [uk_7gqb8uj4dkxg94b0lt2wpfxld, primary]
-2016-07-16 20:53:38,903 INFO  [TableMetadata] - HHH000261: Table found: cw_dev_db.jobs
-2016-07-16 20:53:38,903 INFO  [TableMetadata] - HHH000037: Columns: [workflow_id, closedate, createdby, createddate, lastmodifieddate, lastmodifiedby, description, opendate, id, ownerid, title, version]
-2016-07-16 20:53:38,903 INFO  [TableMetadata] - HHH000108: Foreign keys: [fk_bmmf4ulukk632yxioukqcue5v]
-2016-07-16 20:53:38,903 INFO  [TableMetadata] - HHH000126: Indexes: [fk_bmmf4ulukk632yxioukqcue5v, primary]
-2016-07-16 20:53:38,910 INFO  [TableMetadata] - HHH000261: Table found: cw_dev_db.jobs_job_applications
-2016-07-16 20:53:38,910 INFO  [TableMetadata] - HHH000037: Columns: [applications_id, jobs_id]
-2016-07-16 20:53:38,910 INFO  [TableMetadata] - HHH000108: Foreign keys: [fk_21hd5m30nhvpg76kqqkekujgm, fk_6vrx0feebyfnyfwbcxtt4q5gd]
-2016-07-16 20:53:38,910 INFO  [TableMetadata] - HHH000126: Indexes: [uk_21hd5m30nhvpg76kqqkekujgm, primary]
-2016-07-16 20:53:38,910 INFO  [SchemaUpdate] - HHH000232: Schema update complete
-2016-07-16 20:53:38,954 INFO  [RequestMappingHandlerMapping] - Mapped "{[/documents/{id}],methods=[GET]}" onto public com.att.cw.model.FileDocument com.att.cw.controller.FileDocumentController.find(java.lang.Long)
-2016-07-16 20:53:38,955 INFO  [RequestMappingHandlerMapping] - Mapped "{[/documents/{id}],methods=[DELETE]}" onto public void com.att.cw.controller.FileDocumentController.delete(java.lang.Long)
-2016-07-16 20:53:38,955 INFO  [RequestMappingHandlerMapping] - Mapped "{[/upload],methods=[POST]}" onto public org.springframework.http.ResponseEntity com.att.cw.controller.FileUploadController.handleFileUpload(java.lang.String,org.springframework.web.multipart.MultipartFile)
-2016-07-16 20:53:38,959 INFO  [RequestMappingHandlerMapping] - Mapped "{[/jobs],methods=[PUT]}" onto public com.att.cw.model.Job com.att.cw.controller.JobController.update(com.att.cw.model.Job)
-2016-07-16 20:53:38,959 INFO  [RequestMappingHandlerMapping] - Mapped "{[/jobs/{id}],methods=[GET]}" onto public com.att.cw.model.Job com.att.cw.controller.JobController.find(java.lang.Long)
-2016-07-16 20:53:38,960 INFO  [RequestMappingHandlerMapping] - Mapped "{[/jobs/{id}],methods=[DELETE]}" onto public void com.att.cw.controller.JobController.delete(java.lang.Long)
-2016-07-16 20:53:38,960 INFO  [RequestMappingHandlerMapping] - Mapped "{[/jobs],methods=[POST]}" onto public com.att.cw.model.Job com.att.cw.controller.JobController.create(com.att.cw.model.Job)
-2016-07-16 20:53:38,960 INFO  [RequestMappingHandlerMapping] - Mapped "{[/jobs],methods=[GET]}" onto public org.springframework.data.domain.Page<com.att.cw.model.Job> com.att.cw.controller.JobController.findAllBy(java.lang.Long,org.springframework.data.domain.Pageable)
-2016-07-16 20:53:38,960 INFO  [RequestMappingHandlerMapping] - Mapped "{[/login],methods=[POST]}" onto public com.att.cw.controller.open.AuthenticationController$LoginResponse com.att.cw.controller.open.AuthenticationController.login(com.att.cw.controller.open.AuthenticationController$UserLogin) throws javax.servlet.ServletException
-2016-07-16 20:53:38,961 INFO  [RequestMappingHandlerMapping] - Mapped "{[/open/helloworld],methods=[GET],produces=[application/json]}" onto public java.lang.String com.att.cw.controller.open.HelloWorld.sayHelloWorld()
-2016-07-16 20:53:38,964 INFO  [RequestMappingHandlerMapping] - Mapped "{[/users],methods=[PUT]}" onto public com.att.cw.model.User com.att.cw.controller.open.UserController.update(com.att.cw.model.User)
-2016-07-16 20:53:38,965 INFO  [RequestMappingHandlerMapping] - Mapped "{[/users/{id}],methods=[GET]}" onto public com.att.cw.model.User com.att.cw.controller.open.UserController.find(java.lang.Long)
-2016-07-16 20:53:38,965 INFO  [RequestMappingHandlerMapping] - Mapped "{[/users/{id}],methods=[DELETE]}" onto public void com.att.cw.controller.open.UserController.delete(java.lang.Long)
-2016-07-16 20:53:38,965 INFO  [RequestMappingHandlerMapping] - Mapped "{[/users/{id}],methods=[POST]}" onto public com.att.cw.model.User com.att.cw.controller.open.UserController.create(com.att.cw.model.User)
-2016-07-16 20:53:38,965 INFO  [RequestMappingHandlerMapping] - Mapped "{[/users],methods=[GET]}" onto org.springframework.data.domain.Page<com.att.cw.model.User> com.att.cw.controller.open.UserController.findAll(org.springframework.data.domain.Pageable)
-2016-07-16 20:53:38,966 INFO  [RequestMappingHandlerMapping] - Mapped "{[/restricted/countries],methods=[GET],produces=[application/json]}" onto public java.util.List<com.att.cw.bean.Country> com.att.cw.controller.restricted.CountryController.getCountries()
-2016-07-16 20:53:38,967 INFO  [RequestMappingHandlerMapping] - Mapped "{[/restricted/country/{id}],methods=[GET],produces=[application/json]}" onto public com.att.cw.bean.Country com.att.cw.controller.restricted.CountryController.getCountryById(int)
-2016-07-16 20:53:38,967 INFO  [RequestMappingHandlerMapping] - Mapped "{[/restricted/newcountry],methods=[POST],produces=[application/json]}" onto public com.att.cw.bean.Country com.att.cw.controller.restricted.CountryController.createNewCountry(com.att.cw.bean.Country)
-2016-07-16 20:53:39,003 INFO  [RequestMappingHandlerAdapter] - Looking for @ControllerAdvice: org.springframework.web.context.support.GenericWebApplicationContext@27329d2a: startup date [Sat Jul 16 20:53:38 EDT 2016]; root of context hierarchy
-2016-07-16 20:53:39,020 INFO  [RequestMappingHandlerAdapter] - Looking for @ControllerAdvice: org.springframework.web.context.support.GenericWebApplicationContext@27329d2a: startup date [Sat Jul 16 20:53:38 EDT 2016]; root of context hierarchy
-2016-07-16 20:53:39,062 WARN  [GenericWebApplicationContext] - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'authenticate': Injection of autowired dependencies failed; nested exception is org.springframework.beans.factory.BeanCreationException: Could not autowire field: private com.att.cw.service.UserService com.att.cw.controller.open.AuthenticationController.userService; nested exception is org.springframework.beans.factory.NoSuchBeanDefinitionException: No qualifying bean of type [com.att.cw.service.UserService] found for dependency: expected at least 1 bean which qualifies as autowire candidate for this dependency. Dependency annotations: {@org.springframework.beans.factory.annotation.Autowired(required=true)}
-2016-07-16 20:53:39,066 ERROR [TestContextManager] - Caught exception while allowing TestExecutionListener [org.springframework.test.context.web.ServletTestExecutionListener@292158f8] to prepare test instance [com.att.cw.controller.JobControllerTest@343e225a]
-java.lang.IllegalStateException: Failed to load ApplicationContext
-	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContext(DefaultCacheAwareContextLoaderDelegate.java:124)
-	at org.springframework.test.context.support.DefaultTestContext.getApplicationContext(DefaultTestContext.java:83)
-	at org.springframework.test.context.web.ServletTestExecutionListener.setUpRequestContextIfNecessary(ServletTestExecutionListener.java:183)
-	at org.springframework.test.context.web.ServletTestExecutionListener.prepareTestInstance(ServletTestExecutionListener.java:123)
-	at org.springframework.test.context.TestContextManager.prepareTestInstance(TestContextManager.java:228)
-	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.createTest(SpringJUnit4ClassRunner.java:230)
-	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner$1.runReflectiveCall(SpringJUnit4ClassRunner.java:289)
-	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
-	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.methodBlock(SpringJUnit4ClassRunner.java:291)
-	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:249)
-	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:89)
-	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:238)
-	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:63)
-	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:236)
-	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:53)
-	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:229)
-	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
-	at org.springframework.test.context.junit4.statements.RunBeforeTestClassCallbacks.evaluate(RunBeforeTestClassCallbacks.java:61)
-	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:27)
-	at org.springframework.test.context.junit4.statements.RunAfterTestClassCallbacks.evaluate(RunAfterTestClassCallbacks.java:70)
-	at org.junit.runners.ParentRunner.run(ParentRunner.java:309)
-	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.run(SpringJUnit4ClassRunner.java:193)
-	at org.apache.maven.surefire.junit4.JUnit4TestSet.execute(JUnit4TestSet.java:53)
-	at org.apache.maven.surefire.junit4.JUnit4Provider.executeTestSet(JUnit4Provider.java:123)
-	at org.apache.maven.surefire.junit4.JUnit4Provider.invoke(JUnit4Provider.java:104)
-	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.lang.reflect.Method.invoke(Method.java:497)
-	at org.apache.maven.surefire.util.ReflectionUtils.invokeMethodWithArray(ReflectionUtils.java:164)
-	at org.apache.maven.surefire.booter.ProviderFactory$ProviderProxy.invoke(ProviderFactory.java:110)
-	at org.apache.maven.surefire.booter.SurefireStarter.invokeProvider(SurefireStarter.java:175)
-	at org.apache.maven.surefire.booter.SurefireStarter.runSuitesInProcessWhenForked(SurefireStarter.java:107)
-	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:68)
-Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'authenticate': Injection of autowired dependencies failed; nested exception is org.springframework.beans.factory.BeanCreationException: Could not autowire field: private com.att.cw.service.UserService com.att.cw.controller.open.AuthenticationController.userService; nested exception is org.springframework.beans.factory.NoSuchBeanDefinitionException: No qualifying bean of type [com.att.cw.service.UserService] found for dependency: expected at least 1 bean which qualifies as autowire candidate for this dependency. Dependency annotations: {@org.springframework.beans.factory.annotation.Autowired(required=true)}
-	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.postProcessPropertyValues(AutowiredAnnotationBeanPostProcessor.java:334)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1214)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:543)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:482)
-	at org.springframework.beans.factory.support.AbstractBeanFactory$1.getObject(AbstractBeanFactory.java:306)
-	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:230)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:302)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:197)
-	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:772)
-	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:839)
-	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:538)
-	at org.springframework.test.context.web.AbstractGenericWebContextLoader.loadContext(AbstractGenericWebContextLoader.java:133)
-	at org.springframework.test.context.web.AbstractGenericWebContextLoader.loadContext(AbstractGenericWebContextLoader.java:60)
-	at org.springframework.test.context.support.AbstractDelegatingSmartContextLoader.delegateLoading(AbstractDelegatingSmartContextLoader.java:109)
-	at org.springframework.test.context.support.AbstractDelegatingSmartContextLoader.loadContext(AbstractDelegatingSmartContextLoader.java:261)
-	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContextInternal(DefaultCacheAwareContextLoaderDelegate.java:98)
-	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContext(DefaultCacheAwareContextLoaderDelegate.java:116)
-	... 33 more
-Caused by: org.springframework.beans.factory.BeanCreationException: Could not autowire field: private com.att.cw.service.UserService com.att.cw.controller.open.AuthenticationController.userService; nested exception is org.springframework.beans.factory.NoSuchBeanDefinitionException: No qualifying bean of type [com.att.cw.service.UserService] found for dependency: expected at least 1 bean which qualifies as autowire candidate for this dependency. Dependency annotations: {@org.springframework.beans.factory.annotation.Autowired(required=true)}
-	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.inject(AutowiredAnnotationBeanPostProcessor.java:573)
-	at org.springframework.beans.factory.annotation.InjectionMetadata.inject(InjectionMetadata.java:88)
-	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.postProcessPropertyValues(AutowiredAnnotationBeanPostProcessor.java:331)
-	... 49 more
-Caused by: org.springframework.beans.factory.NoSuchBeanDefinitionException: No qualifying bean of type [com.att.cw.service.UserService] found for dependency: expected at least 1 bean which qualifies as autowire candidate for this dependency. Dependency annotations: {@org.springframework.beans.factory.annotation.Autowired(required=true)}
-	at org.springframework.beans.factory.support.DefaultListableBeanFactory.raiseNoSuchBeanDefinitionException(DefaultListableBeanFactory.java:1373)
-	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1119)
-	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1014)
-	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.inject(AutowiredAnnotationBeanPostProcessor.java:545)
-	... 51 more
-2016-07-16 20:53:39,069 INFO  [XmlBeanDefinitionReader] - Loading XML bean definitions from class path resource [spring-jpa-config.xml]
-2016-07-16 20:53:39,119 INFO  [XmlBeanDefinitionReader] - Loading XML bean definitions from URL [file:src/main/webapp/WEB-INF/spring/appServlet/servlet-context.xml]
-2016-07-16 20:53:39,158 INFO  [GenericWebApplicationContext] - Refreshing org.springframework.web.context.support.GenericWebApplicationContext@36aab105: startup date [Sat Jul 16 20:53:39 EDT 2016]; root of context hierarchy
-2016-07-16 20:53:39,196 INFO  [PropertySourcesPlaceholderConfigurer] - Loading properties file from class path resource [application.properties]
-2016-07-16 20:53:39,199 INFO  [AutowiredAnnotationBeanPostProcessor] - JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
-2016-07-16 20:53:39,212 INFO  [LogHelper] - HHH000204: Processing PersistenceUnitInfo [
-	name: default
-	...]
-2016-07-16 20:53:39,237 INFO  [Dialect] - HHH000400: Using dialect: org.hibernate.dialect.MySQL5Dialect
-2016-07-16 20:53:39,258 INFO  [ASTQueryTranslatorFactory] - HHH000397: Using ASTQueryTranslatorFactory
-2016-07-16 20:53:39,313 INFO  [SchemaUpdate] - HHH000228: Running hbm2ddl schema update
-2016-07-16 20:53:39,313 INFO  [SchemaUpdate] - HHH000102: Fetching database metadata
-2016-07-16 20:53:39,314 INFO  [SchemaUpdate] - HHH000396: Updating schema
-2016-07-16 20:53:39,322 INFO  [TableMetadata] - HHH000261: Table found: cw_dev_db.AUTHORITY
-2016-07-16 20:53:39,322 INFO  [TableMetadata] - HHH000037: Columns: [name, id]
-2016-07-16 20:53:39,322 INFO  [TableMetadata] - HHH000108: Foreign keys: []
-2016-07-16 20:53:39,322 INFO  [TableMetadata] - HHH000126: Indexes: [uk_ana6i0racv9b9d5dx3mlwho9p, primary]
-2016-07-16 20:53:39,326 INFO  [TableMetadata] - HHH000261: Table found: cw_dev_db.USER
-2016-07-16 20:53:39,326 INFO  [TableMetadata] - HHH000037: Columns: [password, name, emailid, id, enabled]
-2016-07-16 20:53:39,326 INFO  [TableMetadata] - HHH000108: Foreign keys: []
-2016-07-16 20:53:39,326 INFO  [TableMetadata] - HHH000126: Indexes: [user_email_index, uk_tny7vhtvpf3hywynmjlodildh, primary]
-2016-07-16 20:53:39,333 INFO  [TableMetadata] - HHH000261: Table found: cw_dev_db.USER_AUTHORITY
-2016-07-16 20:53:39,334 INFO  [TableMetadata] - HHH000037: Columns: [user_id, authority_id]
-2016-07-16 20:53:39,334 INFO  [TableMetadata] - HHH000108: Foreign keys: [fk_dyo9anhb75hbjut13e8uovw2s, fk_jbm4yrlayhtksry4mwk0e47ls]
-2016-07-16 20:53:39,334 INFO  [TableMetadata] - HHH000126: Indexes: [fk_dyo9anhb75hbjut13e8uovw2s, primary]
-2016-07-16 20:53:39,339 INFO  [TableMetadata] - HHH000261: Table found: cw_dev_db.file_documents
-2016-07-16 20:53:39,339 INFO  [TableMetadata] - HHH000037: Columns: [resourceid, createddate, lastmodifieddate, resource_type, lastmodifiedby, description, version, resourcetype, content, contenttype, size, content_type, createdby, file_id, resource_id, id]
-2016-07-16 20:53:39,339 INFO  [TableMetadata] - HHH000108: Foreign keys: [fk_90g3q7f6ffikyfek2twiut7qx]
-2016-07-16 20:53:39,339 INFO  [TableMetadata] - HHH000126: Indexes: [fk_90g3q7f6ffikyfek2twiut7qx, primary]
-2016-07-16 20:53:39,346 INFO  [TableMetadata] - HHH000261: Table found: cw_dev_db.job_activities
-2016-07-16 20:53:39,346 INFO  [TableMetadata] - HHH000037: Columns: [workflow_id, createdby, createddate, lastmodifieddate, name, lastmodifiedby, id, version]
-2016-07-16 20:53:39,346 INFO  [TableMetadata] - HHH000108: Foreign keys: [fk_6i97tsgwc4y8avinvleaij5ye]
-2016-07-16 20:53:39,346 INFO  [TableMetadata] - HHH000126: Indexes: [fk_6i97tsgwc4y8avinvleaij5ye, primary]
-2016-07-16 20:53:39,351 INFO  [TableMetadata] - HHH000261: Table found: cw_dev_db.job_applications
-2016-07-16 20:53:39,351 INFO  [TableMetadata] - HHH000037: Columns: [candidate_id, workflow_id, datemodified, createdby, createddate, lastmodifieddate, lastmodifiedby, id, datecreated, version]
-2016-07-16 20:53:39,351 INFO  [TableMetadata] - HHH000108: Foreign keys: [fk_gnt5c2uebjgnulu4debnxuomc, fk_r42se08m018gbf90h9l5vmjdl]
-2016-07-16 20:53:39,351 INFO  [TableMetadata] - HHH000126: Indexes: [fk_gnt5c2uebjgnulu4debnxuomc, fk_r42se08m018gbf90h9l5vmjdl, primary]
-2016-07-16 20:53:39,354 INFO  [TableMetadata] - HHH000261: Table found: cw_dev_db.job_candidates
-2016-07-16 20:53:39,354 INFO  [TableMetadata] - HHH000037: Columns: [createdby, createddate, lastmodifieddate, lastmodifiedby, id, version, userid]
-2016-07-16 20:53:39,355 INFO  [TableMetadata] - HHH000108: Foreign keys: []
-2016-07-16 20:53:39,355 INFO  [TableMetadata] - HHH000126: Indexes: [primary]
-2016-07-16 20:53:39,359 INFO  [TableMetadata] - HHH000261: Table found: cw_dev_db.job_workflows
-2016-07-16 20:53:39,359 INFO  [TableMetadata] - HHH000037: Columns: [createdby, createddate, lastmodifieddate, lastmodifiedby, id, version]
-2016-07-16 20:53:39,359 INFO  [TableMetadata] - HHH000108: Foreign keys: []
-2016-07-16 20:53:39,359 INFO  [TableMetadata] - HHH000126: Indexes: [primary]
-2016-07-16 20:53:39,363 INFO  [TableMetadata] - HHH000261: Table found: cw_dev_db.job_workflows_job_activities
-2016-07-16 20:53:39,363 INFO  [TableMetadata] - HHH000037: Columns: [job_workflows_id, activities_id]
-2016-07-16 20:53:39,363 INFO  [TableMetadata] - HHH000108: Foreign keys: [fk_7gqb8uj4dkxg94b0lt2wpfxld, fk_k05olxsngknte6yos3q1vorlr]
-2016-07-16 20:53:39,363 INFO  [TableMetadata] - HHH000126: Indexes: [uk_7gqb8uj4dkxg94b0lt2wpfxld, primary]
-2016-07-16 20:53:39,367 INFO  [TableMetadata] - HHH000261: Table found: cw_dev_db.jobs
-2016-07-16 20:53:39,367 INFO  [TableMetadata] - HHH000037: Columns: [workflow_id, closedate, createdby, createddate, lastmodifieddate, lastmodifiedby, description, opendate, id, ownerid, title, version]
-2016-07-16 20:53:39,368 INFO  [TableMetadata] - HHH000108: Foreign keys: [fk_bmmf4ulukk632yxioukqcue5v]
-2016-07-16 20:53:39,368 INFO  [TableMetadata] - HHH000126: Indexes: [fk_bmmf4ulukk632yxioukqcue5v, primary]
-2016-07-16 20:53:39,375 INFO  [TableMetadata] - HHH000261: Table found: cw_dev_db.jobs_job_applications
-2016-07-16 20:53:39,375 INFO  [TableMetadata] - HHH000037: Columns: [applications_id, jobs_id]
-2016-07-16 20:53:39,375 INFO  [TableMetadata] - HHH000108: Foreign keys: [fk_21hd5m30nhvpg76kqqkekujgm, fk_6vrx0feebyfnyfwbcxtt4q5gd]
-2016-07-16 20:53:39,375 INFO  [TableMetadata] - HHH000126: Indexes: [uk_21hd5m30nhvpg76kqqkekujgm, primary]
-2016-07-16 20:53:39,377 INFO  [SchemaUpdate] - HHH000232: Schema update complete
-2016-07-16 20:53:39,419 INFO  [RequestMappingHandlerMapping] - Mapped "{[/documents/{id}],methods=[GET]}" onto public com.att.cw.model.FileDocument com.att.cw.controller.FileDocumentController.find(java.lang.Long)
-2016-07-16 20:53:39,419 INFO  [RequestMappingHandlerMapping] - Mapped "{[/documents/{id}],methods=[DELETE]}" onto public void com.att.cw.controller.FileDocumentController.delete(java.lang.Long)
-2016-07-16 20:53:39,420 INFO  [RequestMappingHandlerMapping] - Mapped "{[/upload],methods=[POST]}" onto public org.springframework.http.ResponseEntity com.att.cw.controller.FileUploadController.handleFileUpload(java.lang.String,org.springframework.web.multipart.MultipartFile)
-2016-07-16 20:53:39,424 INFO  [RequestMappingHandlerMapping] - Mapped "{[/jobs],methods=[PUT]}" onto public com.att.cw.model.Job com.att.cw.controller.JobController.update(com.att.cw.model.Job)
-2016-07-16 20:53:39,424 INFO  [RequestMappingHandlerMapping] - Mapped "{[/jobs/{id}],methods=[GET]}" onto public com.att.cw.model.Job com.att.cw.controller.JobController.find(java.lang.Long)
-2016-07-16 20:53:39,424 INFO  [RequestMappingHandlerMapping] - Mapped "{[/jobs/{id}],methods=[DELETE]}" onto public void com.att.cw.controller.JobController.delete(java.lang.Long)
-2016-07-16 20:53:39,424 INFO  [RequestMappingHandlerMapping] - Mapped "{[/jobs],methods=[POST]}" onto public com.att.cw.model.Job com.att.cw.controller.JobController.create(com.att.cw.model.Job)
-2016-07-16 20:53:39,424 INFO  [RequestMappingHandlerMapping] - Mapped "{[/jobs],methods=[GET]}" onto public org.springframework.data.domain.Page<com.att.cw.model.Job> com.att.cw.controller.JobController.findAllBy(java.lang.Long,org.springframework.data.domain.Pageable)
-2016-07-16 20:53:39,425 INFO  [RequestMappingHandlerMapping] - Mapped "{[/login],methods=[POST]}" onto public com.att.cw.controller.open.AuthenticationController$LoginResponse com.att.cw.controller.open.AuthenticationController.login(com.att.cw.controller.open.AuthenticationController$UserLogin) throws javax.servlet.ServletException
-2016-07-16 20:53:39,425 INFO  [RequestMappingHandlerMapping] - Mapped "{[/open/helloworld],methods=[GET],produces=[application/json]}" onto public java.lang.String com.att.cw.controller.open.HelloWorld.sayHelloWorld()
-2016-07-16 20:53:39,429 INFO  [RequestMappingHandlerMapping] - Mapped "{[/users],methods=[PUT]}" onto public com.att.cw.model.User com.att.cw.controller.open.UserController.update(com.att.cw.model.User)
-2016-07-16 20:53:39,429 INFO  [RequestMappingHandlerMapping] - Mapped "{[/users/{id}],methods=[GET]}" onto public com.att.cw.model.User com.att.cw.controller.open.UserController.find(java.lang.Long)
-2016-07-16 20:53:39,429 INFO  [RequestMappingHandlerMapping] - Mapped "{[/users/{id}],methods=[DELETE]}" onto public void com.att.cw.controller.open.UserController.delete(java.lang.Long)
-2016-07-16 20:53:39,429 INFO  [RequestMappingHandlerMapping] - Mapped "{[/users/{id}],methods=[POST]}" onto public com.att.cw.model.User com.att.cw.controller.open.UserController.create(com.att.cw.model.User)
-2016-07-16 20:53:39,430 INFO  [RequestMappingHandlerMapping] - Mapped "{[/users],methods=[GET]}" onto org.springframework.data.domain.Page<com.att.cw.model.User> com.att.cw.controller.open.UserController.findAll(org.springframework.data.domain.Pageable)
-2016-07-16 20:53:39,432 INFO  [RequestMappingHandlerMapping] - Mapped "{[/restricted/countries],methods=[GET],produces=[application/json]}" onto public java.util.List<com.att.cw.bean.Country> com.att.cw.controller.restricted.CountryController.getCountries()
-2016-07-16 20:53:39,433 INFO  [RequestMappingHandlerMapping] - Mapped "{[/restricted/country/{id}],methods=[GET],produces=[application/json]}" onto public com.att.cw.bean.Country com.att.cw.controller.restricted.CountryController.getCountryById(int)
-2016-07-16 20:53:39,433 INFO  [RequestMappingHandlerMapping] - Mapped "{[/restricted/newcountry],methods=[POST],produces=[application/json]}" onto public com.att.cw.bean.Country com.att.cw.controller.restricted.CountryController.createNewCountry(com.att.cw.bean.Country)
-2016-07-16 20:53:39,463 INFO  [RequestMappingHandlerAdapter] - Looking for @ControllerAdvice: org.springframework.web.context.support.GenericWebApplicationContext@36aab105: startup date [Sat Jul 16 20:53:39 EDT 2016]; root of context hierarchy
-2016-07-16 20:53:39,484 INFO  [RequestMappingHandlerAdapter] - Looking for @ControllerAdvice: org.springframework.web.context.support.GenericWebApplicationContext@36aab105: startup date [Sat Jul 16 20:53:39 EDT 2016]; root of context hierarchy
-2016-07-16 20:53:39,534 WARN  [GenericWebApplicationContext] - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'authenticate': Injection of autowired dependencies failed; nested exception is org.springframework.beans.factory.BeanCreationException: Could not autowire field: private com.att.cw.service.UserService com.att.cw.controller.open.AuthenticationController.userService; nested exception is org.springframework.beans.factory.NoSuchBeanDefinitionException: No qualifying bean of type [com.att.cw.service.UserService] found for dependency: expected at least 1 bean which qualifies as autowire candidate for this dependency. Dependency annotations: {@org.springframework.beans.factory.annotation.Autowired(required=true)}
-2016-07-16 20:53:39,535 ERROR [TestContextManager] - Caught exception while allowing TestExecutionListener [org.springframework.test.context.web.ServletTestExecutionListener@292158f8] to prepare test instance [com.att.cw.controller.JobControllerTest@606a1bc4]
-java.lang.IllegalStateException: Failed to load ApplicationContext
-	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContext(DefaultCacheAwareContextLoaderDelegate.java:124)
-	at org.springframework.test.context.support.DefaultTestContext.getApplicationContext(DefaultTestContext.java:83)
-	at org.springframework.test.context.web.ServletTestExecutionListener.setUpRequestContextIfNecessary(ServletTestExecutionListener.java:183)
-	at org.springframework.test.context.web.ServletTestExecutionListener.prepareTestInstance(ServletTestExecutionListener.java:123)
-	at org.springframework.test.context.TestContextManager.prepareTestInstance(TestContextManager.java:228)
-	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.createTest(SpringJUnit4ClassRunner.java:230)
-	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner$1.runReflectiveCall(SpringJUnit4ClassRunner.java:289)
-	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
-	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.methodBlock(SpringJUnit4ClassRunner.java:291)
-	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:249)
-	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:89)
-	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:238)
-	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:63)
-	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:236)
-	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:53)
-	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:229)
-	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
-	at org.springframework.test.context.junit4.statements.RunBeforeTestClassCallbacks.evaluate(RunBeforeTestClassCallbacks.java:61)
-	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:27)
-	at org.springframework.test.context.junit4.statements.RunAfterTestClassCallbacks.evaluate(RunAfterTestClassCallbacks.java:70)
-	at org.junit.runners.ParentRunner.run(ParentRunner.java:309)
-	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.run(SpringJUnit4ClassRunner.java:193)
-	at org.apache.maven.surefire.junit4.JUnit4TestSet.execute(JUnit4TestSet.java:53)
-	at org.apache.maven.surefire.junit4.JUnit4Provider.executeTestSet(JUnit4Provider.java:123)
-	at org.apache.maven.surefire.junit4.JUnit4Provider.invoke(JUnit4Provider.java:104)
-	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.lang.reflect.Method.invoke(Method.java:497)
-	at org.apache.maven.surefire.util.ReflectionUtils.invokeMethodWithArray(ReflectionUtils.java:164)
-	at org.apache.maven.surefire.booter.ProviderFactory$ProviderProxy.invoke(ProviderFactory.java:110)
-	at org.apache.maven.surefire.booter.SurefireStarter.invokeProvider(SurefireStarter.java:175)
-	at org.apache.maven.surefire.booter.SurefireStarter.runSuitesInProcessWhenForked(SurefireStarter.java:107)
-	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:68)
-Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'authenticate': Injection of autowired dependencies failed; nested exception is org.springframework.beans.factory.BeanCreationException: Could not autowire field: private com.att.cw.service.UserService com.att.cw.controller.open.AuthenticationController.userService; nested exception is org.springframework.beans.factory.NoSuchBeanDefinitionException: No qualifying bean of type [com.att.cw.service.UserService] found for dependency: expected at least 1 bean which qualifies as autowire candidate for this dependency. Dependency annotations: {@org.springframework.beans.factory.annotation.Autowired(required=true)}
-	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.postProcessPropertyValues(AutowiredAnnotationBeanPostProcessor.java:334)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1214)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:543)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:482)
-	at org.springframework.beans.factory.support.AbstractBeanFactory$1.getObject(AbstractBeanFactory.java:306)
-	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:230)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:302)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:197)
-	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:772)
-	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:839)
-	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:538)
-	at org.springframework.test.context.web.AbstractGenericWebContextLoader.loadContext(AbstractGenericWebContextLoader.java:133)
-	at org.springframework.test.context.web.AbstractGenericWebContextLoader.loadContext(AbstractGenericWebContextLoader.java:60)
-	at org.springframework.test.context.support.AbstractDelegatingSmartContextLoader.delegateLoading(AbstractDelegatingSmartContextLoader.java:109)
-	at org.springframework.test.context.support.AbstractDelegatingSmartContextLoader.loadContext(AbstractDelegatingSmartContextLoader.java:261)
-	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContextInternal(DefaultCacheAwareContextLoaderDelegate.java:98)
-	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContext(DefaultCacheAwareContextLoaderDelegate.java:116)
-	... 33 more
-Caused by: org.springframework.beans.factory.BeanCreationException: Could not autowire field: private com.att.cw.service.UserService com.att.cw.controller.open.AuthenticationController.userService; nested exception is org.springframework.beans.factory.NoSuchBeanDefinitionException: No qualifying bean of type [com.att.cw.service.UserService] found for dependency: expected at least 1 bean which qualifies as autowire candidate for this dependency. Dependency annotations: {@org.springframework.beans.factory.annotation.Autowired(required=true)}
-	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.inject(AutowiredAnnotationBeanPostProcessor.java:573)
-	at org.springframework.beans.factory.annotation.InjectionMetadata.inject(InjectionMetadata.java:88)
-	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.postProcessPropertyValues(AutowiredAnnotationBeanPostProcessor.java:331)
-	... 49 more
-Caused by: org.springframework.beans.factory.NoSuchBeanDefinitionException: No qualifying bean of type [com.att.cw.service.UserService] found for dependency: expected at least 1 bean which qualifies as autowire candidate for this dependency. Dependency annotations: {@org.springframework.beans.factory.annotation.Autowired(required=true)}
-	at org.springframework.beans.factory.support.DefaultListableBeanFactory.raiseNoSuchBeanDefinitionException(DefaultListableBeanFactory.java:1373)
-	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1119)
-	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1014)
-	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.inject(AutowiredAnnotationBeanPostProcessor.java:545)
-	... 51 more
-2016-07-16 20:53:39,538 INFO  [XmlBeanDefinitionReader] - Loading XML bean definitions from class path resource [spring-jpa-config.xml]
-2016-07-16 20:53:39,579 INFO  [XmlBeanDefinitionReader] - Loading XML bean definitions from URL [file:src/main/webapp/WEB-INF/spring/appServlet/servlet-context.xml]
-2016-07-16 20:53:39,612 INFO  [GenericWebApplicationContext] - Refreshing org.springframework.web.context.support.GenericWebApplicationContext@29896529: startup date [Sat Jul 16 20:53:39 EDT 2016]; root of context hierarchy
-2016-07-16 20:53:39,629 INFO  [PropertySourcesPlaceholderConfigurer] - Loading properties file from class path resource [application.properties]
-2016-07-16 20:53:39,634 INFO  [AutowiredAnnotationBeanPostProcessor] - JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
-2016-07-16 20:53:39,653 INFO  [LogHelper] - HHH000204: Processing PersistenceUnitInfo [
-	name: default
-	...]
-2016-07-16 20:53:39,681 INFO  [Dialect] - HHH000400: Using dialect: org.hibernate.dialect.MySQL5Dialect
-2016-07-16 20:53:39,707 INFO  [ASTQueryTranslatorFactory] - HHH000397: Using ASTQueryTranslatorFactory
-2016-07-16 20:53:39,749 INFO  [SchemaUpdate] - HHH000228: Running hbm2ddl schema update
-2016-07-16 20:53:39,749 INFO  [SchemaUpdate] - HHH000102: Fetching database metadata
-2016-07-16 20:53:39,750 INFO  [SchemaUpdate] - HHH000396: Updating schema
-2016-07-16 20:53:39,756 INFO  [TableMetadata] - HHH000261: Table found: cw_dev_db.AUTHORITY
-2016-07-16 20:53:39,757 INFO  [TableMetadata] - HHH000037: Columns: [name, id]
-2016-07-16 20:53:39,757 INFO  [TableMetadata] - HHH000108: Foreign keys: []
-2016-07-16 20:53:39,757 INFO  [TableMetadata] - HHH000126: Indexes: [uk_ana6i0racv9b9d5dx3mlwho9p, primary]
-2016-07-16 20:53:39,760 INFO  [TableMetadata] - HHH000261: Table found: cw_dev_db.USER
-2016-07-16 20:53:39,760 INFO  [TableMetadata] - HHH000037: Columns: [password, name, emailid, id, enabled]
-2016-07-16 20:53:39,760 INFO  [TableMetadata] - HHH000108: Foreign keys: []
-2016-07-16 20:53:39,760 INFO  [TableMetadata] - HHH000126: Indexes: [user_email_index, uk_tny7vhtvpf3hywynmjlodildh, primary]
-2016-07-16 20:53:39,764 INFO  [TableMetadata] - HHH000261: Table found: cw_dev_db.USER_AUTHORITY
-2016-07-16 20:53:39,764 INFO  [TableMetadata] - HHH000037: Columns: [user_id, authority_id]
-2016-07-16 20:53:39,764 INFO  [TableMetadata] - HHH000108: Foreign keys: [fk_dyo9anhb75hbjut13e8uovw2s, fk_jbm4yrlayhtksry4mwk0e47ls]
-2016-07-16 20:53:39,764 INFO  [TableMetadata] - HHH000126: Indexes: [fk_dyo9anhb75hbjut13e8uovw2s, primary]
-2016-07-16 20:53:39,771 INFO  [TableMetadata] - HHH000261: Table found: cw_dev_db.file_documents
-2016-07-16 20:53:39,771 INFO  [TableMetadata] - HHH000037: Columns: [resourceid, createddate, lastmodifieddate, resource_type, lastmodifiedby, description, version, resourcetype, content, contenttype, size, content_type, createdby, file_id, resource_id, id]
-2016-07-16 20:53:39,771 INFO  [TableMetadata] - HHH000108: Foreign keys: [fk_90g3q7f6ffikyfek2twiut7qx]
-2016-07-16 20:53:39,771 INFO  [TableMetadata] - HHH000126: Indexes: [fk_90g3q7f6ffikyfek2twiut7qx, primary]
-2016-07-16 20:53:39,779 INFO  [TableMetadata] - HHH000261: Table found: cw_dev_db.job_activities
-2016-07-16 20:53:39,779 INFO  [TableMetadata] - HHH000037: Columns: [workflow_id, createdby, createddate, lastmodifieddate, name, lastmodifiedby, id, version]
-2016-07-16 20:53:39,779 INFO  [TableMetadata] - HHH000108: Foreign keys: [fk_6i97tsgwc4y8avinvleaij5ye]
-2016-07-16 20:53:39,779 INFO  [TableMetadata] - HHH000126: Indexes: [fk_6i97tsgwc4y8avinvleaij5ye, primary]
-2016-07-16 20:53:39,784 INFO  [TableMetadata] - HHH000261: Table found: cw_dev_db.job_applications
-2016-07-16 20:53:39,785 INFO  [TableMetadata] - HHH000037: Columns: [candidate_id, workflow_id, datemodified, createdby, createddate, lastmodifieddate, lastmodifiedby, id, datecreated, version]
-2016-07-16 20:53:39,785 INFO  [TableMetadata] - HHH000108: Foreign keys: [fk_gnt5c2uebjgnulu4debnxuomc, fk_r42se08m018gbf90h9l5vmjdl]
-2016-07-16 20:53:39,785 INFO  [TableMetadata] - HHH000126: Indexes: [fk_gnt5c2uebjgnulu4debnxuomc, fk_r42se08m018gbf90h9l5vmjdl, primary]
-2016-07-16 20:53:39,791 INFO  [TableMetadata] - HHH000261: Table found: cw_dev_db.job_candidates
-2016-07-16 20:53:39,791 INFO  [TableMetadata] - HHH000037: Columns: [createdby, createddate, lastmodifieddate, lastmodifiedby, id, version, userid]
-2016-07-16 20:53:39,791 INFO  [TableMetadata] - HHH000108: Foreign keys: []
-2016-07-16 20:53:39,791 INFO  [TableMetadata] - HHH000126: Indexes: [primary]
-2016-07-16 20:53:39,797 INFO  [TableMetadata] - HHH000261: Table found: cw_dev_db.job_workflows
-2016-07-16 20:53:39,797 INFO  [TableMetadata] - HHH000037: Columns: [createdby, createddate, lastmodifieddate, lastmodifiedby, id, version]
-2016-07-16 20:53:39,798 INFO  [TableMetadata] - HHH000108: Foreign keys: []
-2016-07-16 20:53:39,798 INFO  [TableMetadata] - HHH000126: Indexes: [primary]
-2016-07-16 20:53:39,802 INFO  [TableMetadata] - HHH000261: Table found: cw_dev_db.job_workflows_job_activities
-2016-07-16 20:53:39,802 INFO  [TableMetadata] - HHH000037: Columns: [job_workflows_id, activities_id]
-2016-07-16 20:53:39,802 INFO  [TableMetadata] - HHH000108: Foreign keys: [fk_7gqb8uj4dkxg94b0lt2wpfxld, fk_k05olxsngknte6yos3q1vorlr]
-2016-07-16 20:53:39,802 INFO  [TableMetadata] - HHH000126: Indexes: [uk_7gqb8uj4dkxg94b0lt2wpfxld, primary]
-2016-07-16 20:53:39,807 INFO  [TableMetadata] - HHH000261: Table found: cw_dev_db.jobs
-2016-07-16 20:53:39,808 INFO  [TableMetadata] - HHH000037: Columns: [workflow_id, closedate, createdby, createddate, lastmodifieddate, lastmodifiedby, description, opendate, id, ownerid, title, version]
-2016-07-16 20:53:39,808 INFO  [TableMetadata] - HHH000108: Foreign keys: [fk_bmmf4ulukk632yxioukqcue5v]
-2016-07-16 20:53:39,808 INFO  [TableMetadata] - HHH000126: Indexes: [fk_bmmf4ulukk632yxioukqcue5v, primary]
-2016-07-16 20:53:39,813 INFO  [TableMetadata] - HHH000261: Table found: cw_dev_db.jobs_job_applications
-2016-07-16 20:53:39,814 INFO  [TableMetadata] - HHH000037: Columns: [applications_id, jobs_id]
-2016-07-16 20:53:39,814 INFO  [TableMetadata] - HHH000108: Foreign keys: [fk_21hd5m30nhvpg76kqqkekujgm, fk_6vrx0feebyfnyfwbcxtt4q5gd]
-2016-07-16 20:53:39,814 INFO  [TableMetadata] - HHH000126: Indexes: [uk_21hd5m30nhvpg76kqqkekujgm, primary]
-2016-07-16 20:53:39,814 INFO  [SchemaUpdate] - HHH000232: Schema update complete
-2016-07-16 20:53:39,862 INFO  [RequestMappingHandlerMapping] - Mapped "{[/documents/{id}],methods=[GET]}" onto public com.att.cw.model.FileDocument com.att.cw.controller.FileDocumentController.find(java.lang.Long)
-2016-07-16 20:53:39,862 INFO  [RequestMappingHandlerMapping] - Mapped "{[/documents/{id}],methods=[DELETE]}" onto public void com.att.cw.controller.FileDocumentController.delete(java.lang.Long)
-2016-07-16 20:53:39,863 INFO  [RequestMappingHandlerMapping] - Mapped "{[/upload],methods=[POST]}" onto public org.springframework.http.ResponseEntity com.att.cw.controller.FileUploadController.handleFileUpload(java.lang.String,org.springframework.web.multipart.MultipartFile)
-2016-07-16 20:53:39,866 INFO  [RequestMappingHandlerMapping] - Mapped "{[/jobs],methods=[PUT]}" onto public com.att.cw.model.Job com.att.cw.controller.JobController.update(com.att.cw.model.Job)
-2016-07-16 20:53:39,866 INFO  [RequestMappingHandlerMapping] - Mapped "{[/jobs/{id}],methods=[GET]}" onto public com.att.cw.model.Job com.att.cw.controller.JobController.find(java.lang.Long)
-2016-07-16 20:53:39,866 INFO  [RequestMappingHandlerMapping] - Mapped "{[/jobs/{id}],methods=[DELETE]}" onto public void com.att.cw.controller.JobController.delete(java.lang.Long)
-2016-07-16 20:53:39,867 INFO  [RequestMappingHandlerMapping] - Mapped "{[/jobs],methods=[POST]}" onto public com.att.cw.model.Job com.att.cw.controller.JobController.create(com.att.cw.model.Job)
-2016-07-16 20:53:39,867 INFO  [RequestMappingHandlerMapping] - Mapped "{[/jobs],methods=[GET]}" onto public org.springframework.data.domain.Page<com.att.cw.model.Job> com.att.cw.controller.JobController.findAllBy(java.lang.Long,org.springframework.data.domain.Pageable)
-2016-07-16 20:53:39,867 INFO  [RequestMappingHandlerMapping] - Mapped "{[/login],methods=[POST]}" onto public com.att.cw.controller.open.AuthenticationController$LoginResponse com.att.cw.controller.open.AuthenticationController.login(com.att.cw.controller.open.AuthenticationController$UserLogin) throws javax.servlet.ServletException
-2016-07-16 20:53:39,868 INFO  [RequestMappingHandlerMapping] - Mapped "{[/open/helloworld],methods=[GET],produces=[application/json]}" onto public java.lang.String com.att.cw.controller.open.HelloWorld.sayHelloWorld()
-2016-07-16 20:53:39,871 INFO  [RequestMappingHandlerMapping] - Mapped "{[/users],methods=[PUT]}" onto public com.att.cw.model.User com.att.cw.controller.open.UserController.update(com.att.cw.model.User)
-2016-07-16 20:53:39,871 INFO  [RequestMappingHandlerMapping] - Mapped "{[/users/{id}],methods=[GET]}" onto public com.att.cw.model.User com.att.cw.controller.open.UserController.find(java.lang.Long)
-2016-07-16 20:53:39,871 INFO  [RequestMappingHandlerMapping] - Mapped "{[/users/{id}],methods=[DELETE]}" onto public void com.att.cw.controller.open.UserController.delete(java.lang.Long)
-2016-07-16 20:53:39,871 INFO  [RequestMappingHandlerMapping] - Mapped "{[/users/{id}],methods=[POST]}" onto public com.att.cw.model.User com.att.cw.controller.open.UserController.create(com.att.cw.model.User)
-2016-07-16 20:53:39,871 INFO  [RequestMappingHandlerMapping] - Mapped "{[/users],methods=[GET]}" onto org.springframework.data.domain.Page<com.att.cw.model.User> com.att.cw.controller.open.UserController.findAll(org.springframework.data.domain.Pageable)
-2016-07-16 20:53:39,872 INFO  [RequestMappingHandlerMapping] - Mapped "{[/restricted/countries],methods=[GET],produces=[application/json]}" onto public java.util.List<com.att.cw.bean.Country> com.att.cw.controller.restricted.CountryController.getCountries()
-2016-07-16 20:53:39,873 INFO  [RequestMappingHandlerMapping] - Mapped "{[/restricted/country/{id}],methods=[GET],produces=[application/json]}" onto public com.att.cw.bean.Country com.att.cw.controller.restricted.CountryController.getCountryById(int)
-2016-07-16 20:53:39,873 INFO  [RequestMappingHandlerMapping] - Mapped "{[/restricted/newcountry],methods=[POST],produces=[application/json]}" onto public com.att.cw.bean.Country com.att.cw.controller.restricted.CountryController.createNewCountry(com.att.cw.bean.Country)
-2016-07-16 20:53:39,896 INFO  [RequestMappingHandlerAdapter] - Looking for @ControllerAdvice: org.springframework.web.context.support.GenericWebApplicationContext@29896529: startup date [Sat Jul 16 20:53:39 EDT 2016]; root of context hierarchy
-2016-07-16 20:53:39,907 INFO  [RequestMappingHandlerAdapter] - Looking for @ControllerAdvice: org.springframework.web.context.support.GenericWebApplicationContext@29896529: startup date [Sat Jul 16 20:53:39 EDT 2016]; root of context hierarchy
-2016-07-16 20:53:39,939 WARN  [GenericWebApplicationContext] - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'authenticate': Injection of autowired dependencies failed; nested exception is org.springframework.beans.factory.BeanCreationException: Could not autowire field: private com.att.cw.service.UserService com.att.cw.controller.open.AuthenticationController.userService; nested exception is org.springframework.beans.factory.NoSuchBeanDefinitionException: No qualifying bean of type [com.att.cw.service.UserService] found for dependency: expected at least 1 bean which qualifies as autowire candidate for this dependency. Dependency annotations: {@org.springframework.beans.factory.annotation.Autowired(required=true)}
-2016-07-16 20:53:39,941 ERROR [TestContextManager] - Caught exception while allowing TestExecutionListener [org.springframework.test.context.web.ServletTestExecutionListener@292158f8] to prepare test instance [com.att.cw.controller.JobControllerTest@19da993b]
-java.lang.IllegalStateException: Failed to load ApplicationContext
-	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContext(DefaultCacheAwareContextLoaderDelegate.java:124)
-	at org.springframework.test.context.support.DefaultTestContext.getApplicationContext(DefaultTestContext.java:83)
-	at org.springframework.test.context.web.ServletTestExecutionListener.setUpRequestContextIfNecessary(ServletTestExecutionListener.java:183)
-	at org.springframework.test.context.web.ServletTestExecutionListener.prepareTestInstance(ServletTestExecutionListener.java:123)
-	at org.springframework.test.context.TestContextManager.prepareTestInstance(TestContextManager.java:228)
-	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.createTest(SpringJUnit4ClassRunner.java:230)
-	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner$1.runReflectiveCall(SpringJUnit4ClassRunner.java:289)
-	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
-	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.methodBlock(SpringJUnit4ClassRunner.java:291)
-	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:249)
-	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:89)
-	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:238)
-	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:63)
-	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:236)
-	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:53)
-	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:229)
-	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
-	at org.springframework.test.context.junit4.statements.RunBeforeTestClassCallbacks.evaluate(RunBeforeTestClassCallbacks.java:61)
-	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:27)
-	at org.springframework.test.context.junit4.statements.RunAfterTestClassCallbacks.evaluate(RunAfterTestClassCallbacks.java:70)
-	at org.junit.runners.ParentRunner.run(ParentRunner.java:309)
-	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.run(SpringJUnit4ClassRunner.java:193)
-	at org.apache.maven.surefire.junit4.JUnit4TestSet.execute(JUnit4TestSet.java:53)
-	at org.apache.maven.surefire.junit4.JUnit4Provider.executeTestSet(JUnit4Provider.java:123)
-	at org.apache.maven.surefire.junit4.JUnit4Provider.invoke(JUnit4Provider.java:104)
-	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.lang.reflect.Method.invoke(Method.java:497)
-	at org.apache.maven.surefire.util.ReflectionUtils.invokeMethodWithArray(ReflectionUtils.java:164)
-	at org.apache.maven.surefire.booter.ProviderFactory$ProviderProxy.invoke(ProviderFactory.java:110)
-	at org.apache.maven.surefire.booter.SurefireStarter.invokeProvider(SurefireStarter.java:175)
-	at org.apache.maven.surefire.booter.SurefireStarter.runSuitesInProcessWhenForked(SurefireStarter.java:107)
-	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:68)
-Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'authenticate': Injection of autowired dependencies failed; nested exception is org.springframework.beans.factory.BeanCreationException: Could not autowire field: private com.att.cw.service.UserService com.att.cw.controller.open.AuthenticationController.userService; nested exception is org.springframework.beans.factory.NoSuchBeanDefinitionException: No qualifying bean of type [com.att.cw.service.UserService] found for dependency: expected at least 1 bean which qualifies as autowire candidate for this dependency. Dependency annotations: {@org.springframework.beans.factory.annotation.Autowired(required=true)}
-	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.postProcessPropertyValues(AutowiredAnnotationBeanPostProcessor.java:334)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1214)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:543)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:482)
-	at org.springframework.beans.factory.support.AbstractBeanFactory$1.getObject(AbstractBeanFactory.java:306)
-	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:230)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:302)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:197)
-	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:772)
-	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:839)
-	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:538)
-	at org.springframework.test.context.web.AbstractGenericWebContextLoader.loadContext(AbstractGenericWebContextLoader.java:133)
-	at org.springframework.test.context.web.AbstractGenericWebContextLoader.loadContext(AbstractGenericWebContextLoader.java:60)
-	at org.springframework.test.context.support.AbstractDelegatingSmartContextLoader.delegateLoading(AbstractDelegatingSmartContextLoader.java:109)
-	at org.springframework.test.context.support.AbstractDelegatingSmartContextLoader.loadContext(AbstractDelegatingSmartContextLoader.java:261)
-	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContextInternal(DefaultCacheAwareContextLoaderDelegate.java:98)
-	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContext(DefaultCacheAwareContextLoaderDelegate.java:116)
-	... 33 more
-Caused by: org.springframework.beans.factory.BeanCreationException: Could not autowire field: private com.att.cw.service.UserService com.att.cw.controller.open.AuthenticationController.userService; nested exception is org.springframework.beans.factory.NoSuchBeanDefinitionException: No qualifying bean of type [com.att.cw.service.UserService] found for dependency: expected at least 1 bean which qualifies as autowire candidate for this dependency. Dependency annotations: {@org.springframework.beans.factory.annotation.Autowired(required=true)}
-	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.inject(AutowiredAnnotationBeanPostProcessor.java:573)
-	at org.springframework.beans.factory.annotation.InjectionMetadata.inject(InjectionMetadata.java:88)
-	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.postProcessPropertyValues(AutowiredAnnotationBeanPostProcessor.java:331)
-	... 49 more
-Caused by: org.springframework.beans.factory.NoSuchBeanDefinitionException: No qualifying bean of type [com.att.cw.service.UserService] found for dependency: expected at least 1 bean which qualifies as autowire candidate for this dependency. Dependency annotations: {@org.springframework.beans.factory.annotation.Autowired(required=true)}
-	at org.springframework.beans.factory.support.DefaultListableBeanFactory.raiseNoSuchBeanDefinitionException(DefaultListableBeanFactory.java:1373)
-	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1119)
-	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1014)
-	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.inject(AutowiredAnnotationBeanPostProcessor.java:545)
-	... 51 more
-2016-07-16 20:53:39,952 INFO  [XmlBeanDefinitionReader] - Loading XML bean definitions from class path resource [spring-jpa-config.xml]
-2016-07-16 20:53:39,989 INFO  [GenericApplicationContext] - Refreshing org.springframework.context.support.GenericApplicationContext@1320e68a: startup date [Sat Jul 16 20:53:39 EDT 2016]; root of context hierarchy
-2016-07-16 20:53:39,996 INFO  [PropertySourcesPlaceholderConfigurer] - Loading properties file from class path resource [application.properties]
-2016-07-16 20:53:39,998 INFO  [AutowiredAnnotationBeanPostProcessor] - JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
-2016-07-16 20:53:40,008 INFO  [LogHelper] - HHH000204: Processing PersistenceUnitInfo [
-	name: default
-	...]
-2016-07-16 20:53:40,023 INFO  [Dialect] - HHH000400: Using dialect: org.hibernate.dialect.MySQL5Dialect
-2016-07-16 20:53:40,040 INFO  [ASTQueryTranslatorFactory] - HHH000397: Using ASTQueryTranslatorFactory
-2016-07-16 20:53:40,068 INFO  [SchemaUpdate] - HHH000228: Running hbm2ddl schema update
-2016-07-16 20:53:40,068 INFO  [SchemaUpdate] - HHH000102: Fetching database metadata
-2016-07-16 20:53:40,068 INFO  [SchemaUpdate] - HHH000396: Updating schema
-2016-07-16 20:53:40,074 INFO  [TableMetadata] - HHH000261: Table found: cw_dev_db.AUTHORITY
-2016-07-16 20:53:40,074 INFO  [TableMetadata] - HHH000037: Columns: [name, id]
-2016-07-16 20:53:40,074 INFO  [TableMetadata] - HHH000108: Foreign keys: []
-2016-07-16 20:53:40,074 INFO  [TableMetadata] - HHH000126: Indexes: [uk_ana6i0racv9b9d5dx3mlwho9p, primary]
-2016-07-16 20:53:40,078 INFO  [TableMetadata] - HHH000261: Table found: cw_dev_db.USER
-2016-07-16 20:53:40,078 INFO  [TableMetadata] - HHH000037: Columns: [password, name, emailid, id, enabled]
-2016-07-16 20:53:40,078 INFO  [TableMetadata] - HHH000108: Foreign keys: []
-2016-07-16 20:53:40,078 INFO  [TableMetadata] - HHH000126: Indexes: [user_email_index, uk_tny7vhtvpf3hywynmjlodildh, primary]
-2016-07-16 20:53:40,082 INFO  [TableMetadata] - HHH000261: Table found: cw_dev_db.USER_AUTHORITY
-2016-07-16 20:53:40,082 INFO  [TableMetadata] - HHH000037: Columns: [user_id, authority_id]
-2016-07-16 20:53:40,082 INFO  [TableMetadata] - HHH000108: Foreign keys: [fk_dyo9anhb75hbjut13e8uovw2s, fk_jbm4yrlayhtksry4mwk0e47ls]
-2016-07-16 20:53:40,082 INFO  [TableMetadata] - HHH000126: Indexes: [fk_dyo9anhb75hbjut13e8uovw2s, primary]
-2016-07-16 20:53:40,086 INFO  [TableMetadata] - HHH000261: Table found: cw_dev_db.file_documents
-2016-07-16 20:53:40,087 INFO  [TableMetadata] - HHH000037: Columns: [resourceid, createddate, lastmodifieddate, resource_type, lastmodifiedby, description, version, resourcetype, content, contenttype, size, content_type, createdby, file_id, resource_id, id]
-2016-07-16 20:53:40,087 INFO  [TableMetadata] - HHH000108: Foreign keys: [fk_90g3q7f6ffikyfek2twiut7qx]
-2016-07-16 20:53:40,087 INFO  [TableMetadata] - HHH000126: Indexes: [fk_90g3q7f6ffikyfek2twiut7qx, primary]
-2016-07-16 20:53:40,090 INFO  [TableMetadata] - HHH000261: Table found: cw_dev_db.job_activities
-2016-07-16 20:53:40,091 INFO  [TableMetadata] - HHH000037: Columns: [workflow_id, createdby, createddate, lastmodifieddate, name, lastmodifiedby, id, version]
-2016-07-16 20:53:40,091 INFO  [TableMetadata] - HHH000108: Foreign keys: [fk_6i97tsgwc4y8avinvleaij5ye]
-2016-07-16 20:53:40,091 INFO  [TableMetadata] - HHH000126: Indexes: [fk_6i97tsgwc4y8avinvleaij5ye, primary]
-2016-07-16 20:53:40,094 INFO  [TableMetadata] - HHH000261: Table found: cw_dev_db.job_applications
-2016-07-16 20:53:40,094 INFO  [TableMetadata] - HHH000037: Columns: [candidate_id, workflow_id, datemodified, createdby, createddate, lastmodifieddate, lastmodifiedby, id, datecreated, version]
-2016-07-16 20:53:40,094 INFO  [TableMetadata] - HHH000108: Foreign keys: [fk_gnt5c2uebjgnulu4debnxuomc, fk_r42se08m018gbf90h9l5vmjdl]
-2016-07-16 20:53:40,094 INFO  [TableMetadata] - HHH000126: Indexes: [fk_gnt5c2uebjgnulu4debnxuomc, fk_r42se08m018gbf90h9l5vmjdl, primary]
-2016-07-16 20:53:40,097 INFO  [TableMetadata] - HHH000261: Table found: cw_dev_db.job_candidates
-2016-07-16 20:53:40,097 INFO  [TableMetadata] - HHH000037: Columns: [createdby, createddate, lastmodifieddate, lastmodifiedby, id, version, userid]
-2016-07-16 20:53:40,097 INFO  [TableMetadata] - HHH000108: Foreign keys: []
-2016-07-16 20:53:40,097 INFO  [TableMetadata] - HHH000126: Indexes: [primary]
-2016-07-16 20:53:40,100 INFO  [TableMetadata] - HHH000261: Table found: cw_dev_db.job_workflows
-2016-07-16 20:53:40,100 INFO  [TableMetadata] - HHH000037: Columns: [createdby, createddate, lastmodifieddate, lastmodifiedby, id, version]
-2016-07-16 20:53:40,100 INFO  [TableMetadata] - HHH000108: Foreign keys: []
-2016-07-16 20:53:40,100 INFO  [TableMetadata] - HHH000126: Indexes: [primary]
-2016-07-16 20:53:40,103 INFO  [TableMetadata] - HHH000261: Table found: cw_dev_db.job_workflows_job_activities
-2016-07-16 20:53:40,104 INFO  [TableMetadata] - HHH000037: Columns: [job_workflows_id, activities_id]
-2016-07-16 20:53:40,104 INFO  [TableMetadata] - HHH000108: Foreign keys: [fk_7gqb8uj4dkxg94b0lt2wpfxld, fk_k05olxsngknte6yos3q1vorlr]
-2016-07-16 20:53:40,104 INFO  [TableMetadata] - HHH000126: Indexes: [uk_7gqb8uj4dkxg94b0lt2wpfxld, primary]
-2016-07-16 20:53:40,107 INFO  [TableMetadata] - HHH000261: Table found: cw_dev_db.jobs
-2016-07-16 20:53:40,107 INFO  [TableMetadata] - HHH000037: Columns: [workflow_id, closedate, createdby, createddate, lastmodifieddate, lastmodifiedby, description, opendate, id, ownerid, title, version]
-2016-07-16 20:53:40,107 INFO  [TableMetadata] - HHH000108: Foreign keys: [fk_bmmf4ulukk632yxioukqcue5v]
-2016-07-16 20:53:40,107 INFO  [TableMetadata] - HHH000126: Indexes: [fk_bmmf4ulukk632yxioukqcue5v, primary]
-2016-07-16 20:53:40,111 INFO  [TableMetadata] - HHH000261: Table found: cw_dev_db.jobs_job_applications
-2016-07-16 20:53:40,111 INFO  [TableMetadata] - HHH000037: Columns: [applications_id, jobs_id]
-2016-07-16 20:53:40,111 INFO  [TableMetadata] - HHH000108: Foreign keys: [fk_21hd5m30nhvpg76kqqkekujgm, fk_6vrx0feebyfnyfwbcxtt4q5gd]
-2016-07-16 20:53:40,111 INFO  [TableMetadata] - HHH000126: Indexes: [uk_21hd5m30nhvpg76kqqkekujgm, primary]
-2016-07-16 20:53:40,111 INFO  [SchemaUpdate] - HHH000232: Schema update complete
-2016-07-16 20:53:40,298 INFO  [GenericApplicationContext] - Closing org.springframework.context.support.GenericApplicationContext@1320e68a: startup date [Sat Jul 16 20:53:39 EDT 2016]; root of context hierarchy
+2016-07-19 11:56:10,191 INFO  [Dialect] - HHH000400: Using dialect: org.hibernate.dialect.MySQL5Dialect
+2016-07-19 11:56:10,198 WARN  [AnnotationBinder] - HHH000139: Illegal use of @Table in a subclass of a SINGLE_TABLE hierarchy: com.att.cw.model.UserProfile
+2016-07-19 11:56:10,224 INFO  [ASTQueryTranslatorFactory] - HHH000397: Using ASTQueryTranslatorFactory
+2016-07-19 11:56:10,288 INFO  [SchemaUpdate] - HHH000228: Running hbm2ddl schema update
+2016-07-19 11:56:10,288 INFO  [SchemaUpdate] - HHH000102: Fetching database metadata
+2016-07-19 11:56:10,289 INFO  [SchemaUpdate] - HHH000396: Updating schema
+2016-07-19 11:56:10,299 INFO  [TableMetadata] - HHH000261: Table found: cw_dev_db.AUTHORITY
+2016-07-19 11:56:10,299 INFO  [TableMetadata] - HHH000037: Columns: [name, id]
+2016-07-19 11:56:10,299 INFO  [TableMetadata] - HHH000108: Foreign keys: []
+2016-07-19 11:56:10,299 INFO  [TableMetadata] - HHH000126: Indexes: [uk_ana6i0racv9b9d5dx3mlwho9p, primary]
+2016-07-19 11:56:10,310 INFO  [TableMetadata] - HHH000261: Table found: cw_dev_db.Profile
+2016-07-19 11:56:10,310 INFO  [TableMetadata] - HHH000037: Columns: [createddate, lastmodifieddate, date_of_birth, address_id, dtype, lastmodifiedby, last_name, middle_name, version, createdby, user_id, phone_number, id, first_name]
+2016-07-19 11:56:10,310 INFO  [TableMetadata] - HHH000108: Foreign keys: [fk_22nop2trrp4xogf8t1fr2rd91, fk_hj3d4gw12cprp4j1p6pqa5av5]
+2016-07-19 11:56:10,310 INFO  [TableMetadata] - HHH000126: Indexes: [fk_22nop2trrp4xogf8t1fr2rd91, primary, fk_hj3d4gw12cprp4j1p6pqa5av5]
+2016-07-19 11:56:10,327 INFO  [TableMetadata] - HHH000261: Table found: cw_dev_db.USER
+2016-07-19 11:56:10,327 INFO  [TableMetadata] - HHH000037: Columns: [password, createdby, createddate, lastmodifieddate, name, lastmodifiedby, emailid, id, version, enabled]
+2016-07-19 11:56:10,327 INFO  [TableMetadata] - HHH000108: Foreign keys: []
+2016-07-19 11:56:10,327 INFO  [TableMetadata] - HHH000126: Indexes: [user_email_index, uk_tny7vhtvpf3hywynmjlodildh, primary]
+2016-07-19 11:56:10,336 INFO  [TableMetadata] - HHH000261: Table found: cw_dev_db.USER_AUTHORITY
+2016-07-19 11:56:10,336 INFO  [TableMetadata] - HHH000037: Columns: [user_id, authority_id]
+2016-07-19 11:56:10,336 INFO  [TableMetadata] - HHH000108: Foreign keys: [fk_dyo9anhb75hbjut13e8uovw2s, fk_jbm4yrlayhtksry4mwk0e47ls]
+2016-07-19 11:56:10,336 INFO  [TableMetadata] - HHH000126: Indexes: [fk_dyo9anhb75hbjut13e8uovw2s, primary]
+2016-07-19 11:56:10,349 INFO  [TableMetadata] - HHH000261: Table found: cw_dev_db.file_documents
+2016-07-19 11:56:10,349 INFO  [TableMetadata] - HHH000037: Columns: [resourceid, createddate, lastmodifieddate, resource_type, lastmodifiedby, description, version, resourcetype, content, contenttype, size, content_type, createdby, file_id, resource_id, id]
+2016-07-19 11:56:10,349 INFO  [TableMetadata] - HHH000108: Foreign keys: [fk_90g3q7f6ffikyfek2twiut7qx]
+2016-07-19 11:56:10,349 INFO  [TableMetadata] - HHH000126: Indexes: [fk_90g3q7f6ffikyfek2twiut7qx, primary]
+2016-07-19 11:56:10,362 INFO  [TableMetadata] - HHH000261: Table found: cw_dev_db.job_activities
+2016-07-19 11:56:10,362 INFO  [TableMetadata] - HHH000037: Columns: [workflow_id, createdby, createddate, lastmodifieddate, name, lastmodifiedby, id, version]
+2016-07-19 11:56:10,363 INFO  [TableMetadata] - HHH000108: Foreign keys: [fk_6i97tsgwc4y8avinvleaij5ye]
+2016-07-19 11:56:10,363 INFO  [TableMetadata] - HHH000126: Indexes: [fk_6i97tsgwc4y8avinvleaij5ye, primary]
+2016-07-19 11:56:10,375 INFO  [TableMetadata] - HHH000261: Table found: cw_dev_db.job_applications
+2016-07-19 11:56:10,375 INFO  [TableMetadata] - HHH000037: Columns: [candidate_id, workflow_id, datemodified, createdby, createddate, lastmodifieddate, lastmodifiedby, id, datecreated, version]
+2016-07-19 11:56:10,375 INFO  [TableMetadata] - HHH000108: Foreign keys: [fk_gnt5c2uebjgnulu4debnxuomc, fk_r42se08m018gbf90h9l5vmjdl]
+2016-07-19 11:56:10,375 INFO  [TableMetadata] - HHH000126: Indexes: [fk_gnt5c2uebjgnulu4debnxuomc, fk_r42se08m018gbf90h9l5vmjdl, primary]
+2016-07-19 11:56:10,384 INFO  [TableMetadata] - HHH000261: Table found: cw_dev_db.job_candidates
+2016-07-19 11:56:10,384 INFO  [TableMetadata] - HHH000037: Columns: [createdby, createddate, lastmodifieddate, lastmodifiedby, id, version, userid]
+2016-07-19 11:56:10,384 INFO  [TableMetadata] - HHH000108: Foreign keys: []
+2016-07-19 11:56:10,384 INFO  [TableMetadata] - HHH000126: Indexes: [primary]
+2016-07-19 11:56:10,393 INFO  [TableMetadata] - HHH000261: Table found: cw_dev_db.job_workflows
+2016-07-19 11:56:10,394 INFO  [TableMetadata] - HHH000037: Columns: [createdby, createddate, lastmodifieddate, lastmodifiedby, id, version]
+2016-07-19 11:56:10,394 INFO  [TableMetadata] - HHH000108: Foreign keys: []
+2016-07-19 11:56:10,394 INFO  [TableMetadata] - HHH000126: Indexes: [primary]
+2016-07-19 11:56:10,408 INFO  [TableMetadata] - HHH000261: Table found: cw_dev_db.job_workflows_job_activities
+2016-07-19 11:56:10,408 INFO  [TableMetadata] - HHH000037: Columns: [job_workflows_id, activities_id]
+2016-07-19 11:56:10,408 INFO  [TableMetadata] - HHH000108: Foreign keys: [fk_7gqb8uj4dkxg94b0lt2wpfxld, fk_k05olxsngknte6yos3q1vorlr]
+2016-07-19 11:56:10,408 INFO  [TableMetadata] - HHH000126: Indexes: [uk_7gqb8uj4dkxg94b0lt2wpfxld, primary]
+2016-07-19 11:56:10,422 INFO  [TableMetadata] - HHH000261: Table found: cw_dev_db.jobs
+2016-07-19 11:56:10,422 INFO  [TableMetadata] - HHH000037: Columns: [workflow_id, closedate, createdby, createddate, lastmodifieddate, lastmodifiedby, description, opendate, id, ownerid, title, version]
+2016-07-19 11:56:10,423 INFO  [TableMetadata] - HHH000108: Foreign keys: [fk_bmmf4ulukk632yxioukqcue5v]
+2016-07-19 11:56:10,423 INFO  [TableMetadata] - HHH000126: Indexes: [fk_bmmf4ulukk632yxioukqcue5v, primary]
+2016-07-19 11:56:10,434 INFO  [TableMetadata] - HHH000261: Table found: cw_dev_db.jobs_job_applications
+2016-07-19 11:56:10,434 INFO  [TableMetadata] - HHH000037: Columns: [applications_id, jobs_id]
+2016-07-19 11:56:10,434 INFO  [TableMetadata] - HHH000108: Foreign keys: [fk_21hd5m30nhvpg76kqqkekujgm, fk_6vrx0feebyfnyfwbcxtt4q5gd]
+2016-07-19 11:56:10,434 INFO  [TableMetadata] - HHH000126: Indexes: [uk_21hd5m30nhvpg76kqqkekujgm, primary]
+2016-07-19 11:56:10,447 INFO  [TableMetadata] - HHH000261: Table found: cw_dev_db.user_addresses
+2016-07-19 11:56:10,447 INFO  [TableMetadata] - HHH000037: Columns: [zipcode, country, createdby, createddate, city, lastmodifieddate, lastmodifiedby, id, statename, version]
+2016-07-19 11:56:10,447 INFO  [TableMetadata] - HHH000108: Foreign keys: []
+2016-07-19 11:56:10,447 INFO  [TableMetadata] - HHH000126: Indexes: [primary]
+2016-07-19 11:56:10,449 INFO  [SchemaUpdate] - HHH000232: Schema update complete
+2016-07-19 11:56:10,458 WARN  [EntityManagerFactoryRegistry] - HHH000436: Entity manager factory name (default) is already registered.  If entity manager will be clustered or passivated, specify a unique value for property 'hibernate.ejb.entitymanager_factory_name'
+2016-07-19 11:56:10,597 WARN  [SqlExceptionHelper] - SQL Error: 1062, SQLState: 23000
+2016-07-19 11:56:10,597 ERROR [SqlExceptionHelper] - Duplicate entry 'user1@att.com' for key 'UK_tny7vhtvpf3hywynmjlodildh'
+2016-07-19 11:56:10,621 INFO  [GenericWebApplicationContext] - Closing org.springframework.web.context.support.GenericWebApplicationContext@33c7e1bb: startup date [Tue Jul 19 11:56:06 EDT 2016]; root of context hierarchy
+2016-07-19 11:56:10,621 INFO  [GenericApplicationContext] - Closing org.springframework.context.support.GenericApplicationContext@2629d5dc: startup date [Tue Jul 19 11:56:10 EDT 2016]; root of context hierarchy
