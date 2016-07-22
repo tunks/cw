@@ -2,7 +2,7 @@ FROM jboss/wildfly
 MAINTAINER ebrimatunkara@gmail.com,dileepmohanan@gmail.com
 
 #1 - WORKDIR and ENV
-ENV BUILDPATH build
+ENV BUILDPATH ./
 
 #2-COPY war file
 ADD ./target/cw-*.war $BUILDPATH/cw.war
