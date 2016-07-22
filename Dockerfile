@@ -5,8 +5,7 @@ MAINTAINER ebrimatunkara@gmail.com,dileepmohanan@gmail.com
 ENV BUILDPATH build
 
 #2-COPY war file
-ADD target/cw-service.war $BUILDPATH/cw.war
-ADD $BUILDPATH/cw.war /opt/wildfly/standalone/deployments/
+ADD target/cw-service.war /opt/wildfly/standalone/deployments/
 
 #3 - SET ADMIN PERMISSION
 RUN /opt/jboss/wildfly/bin/add-user.sh cw cw#2016 --silent
