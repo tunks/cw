@@ -52,8 +52,4 @@
         <property name="validationQuery" value="SELECT 1"/>
         <property name="testOnBorrow" value="true"/>
     </bean>
-
-    <beans profile="dev">
-        <context:property-placeholder location="classpath:application-dev.properties" ignore-resource-not-found="true" />
-    </beans>  
 </beans>

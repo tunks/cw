@@ -5,15 +5,12 @@
  */
 package com.att.cw.controller.open;
 
-import com.att.cw.controller.UserController;
 import com.att.cw.model.User;
 import com.att.cw.service.UserService;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import java.util.Date;
 import javax.servlet.ServletException;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -34,7 +31,7 @@ public class AuthenticationController {
      * TODO logger using AOP
      *
      */
-    private static final Logger logger = LoggerFactory.getLogger(UserController.class);
+    //private static final Logger logger = LoggerFactory.getLogger(UserController.class);
     @Autowired
     private UserService userService;
 
