@@ -1,15 +1,35 @@
 package com.att.cw.model;
 
-import javax.persistence.*;
+import java.io.Serializable;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.Set;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Index;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
+/***
+ * User Entity model
+ **/
 @Entity
-@Table(name = "USER",indexes = {
-        @Index(columnList = "EMAILID", name = "user_email_index")
-})
-public class User {
+@Table(name = "USER",
+       indexes = {
+            @Index(columnList = "EMAILID", name = "user_email_index")},
+       uniqueConstraints={@UniqueConstraint(columnNames={"EMAILID"})}
+     )
+public class User extends Audit {
 
     @Id
     @Column(name = "ID")
@@ -20,7 +40,7 @@ public class User {
     @Column(name = "EMAILID", length = 200, unique = true)
     @NotNull
     @Size(min = 2, max = 200)
-    private String emailid;
+    private String emailId;
 
     @Column(name = "PASSWORD", length = 100)
     @NotNull
@@ -31,33 +51,26 @@ public class User {
     @NotNull
     @Size(min = 4, max = 100)
     private String name;
-    
-    /*@Column(name = "COUNTRYCODE", length = 4)
-    @NotNull
-    @Size(min = 1, max = 4)
-    private String countryCode;
-    
-    @Column(name = "PHONE", length = 15)
-    @NotNull
-    @Size(min = 5, max = 15)
-    private String phone;*/
-    
 
     @Column(name = "ENABLED", columnDefinition = "bit default 0")
     @NotNull
     private Boolean enabled;
-    
-   /* @Column(name = "LASTPASSWORDRESETDATE")
+
+    /* @Column(name = "LASTPASSWORDRESETDATE")
     @Temporal(TemporalType.TIMESTAMP)
     @NotNull
     private Date lastPasswordResetDate;*/
-
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(
             name = "USER_AUTHORITY",
-            joinColumns = {@JoinColumn(name = "USER_ID", referencedColumnName = "ID")},
-            inverseJoinColumns = {@JoinColumn(name = "AUTHORITY_ID", referencedColumnName = "ID")})
+            joinColumns = {
+                @JoinColumn(name = "USER_ID", referencedColumnName = "ID")},
+            inverseJoinColumns = {
+                @JoinColumn(name = "AUTHORITY_ID", referencedColumnName = "ID")})
     private Set<Authority> authorities;
+
+    @OneToOne(mappedBy = "user")
+    private UserProfile profile;
 
     public Long getId() {
         return id;
@@ -66,7 +79,6 @@ public class User {
     public void setId(Long id) {
         this.id = id;
     }
-
 
     public Boolean getEnabled() {
         return enabled;
@@ -84,35 +96,42 @@ public class User {
         this.authorities = authorities;
     }
 
-	public String getName() {
-		return name;
-	}
+    public String getName() {
+        return name;
+    }
 
-	public void setName(String name) {
-		this.name = name;
-	}
+    public void setName(String name) {
+        this.name = name;
+    }
 
-	public String getEmailid() {
-		return emailid;
-	}
+    public String getEmailId() {
+        return emailId;
+    }
 
-	public void setEmailid(String emailid) {
-		this.emailid = emailid;
-	}
+    public void setEmailId(String emailId) {
+        this.emailId = emailId;
+    }
 
-	public String getPassword() {
-		return password;
-	}
+    public String getPassword() {
+        return password;
+    }
 
-	public void setPassword(String password) {
-		this.password = password;
-	}
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
-   /* public Date getLastPasswordResetDate() {
+    /* public Date getLastPasswordResetDate() {
         return lastPasswordResetDate;
     }
 
     public void setLastPasswordResetDate(Date lastPasswordResetDate) {
         this.lastPasswordResetDate = lastPasswordResetDate;
     }*/
+    public UserProfile getProfile() {
+        return profile;
+    }
+
+    public void setProfile(UserProfile profile) {
+        this.profile = profile;
+    }
 }
