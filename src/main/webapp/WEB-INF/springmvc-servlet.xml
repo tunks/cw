@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" 
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd 
+                http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
+       
+        <aop:aspectj-autoproxy proxy-target-class="true"/>
+        
+        <import resource="classpath*:spring-jpa-config.xml" />
+	<!-- Enables the Spring MVC @Controller programming model -->
+        <mvc:annotation-driven /> 
+        <context:annotation-config/>
+         <!-- scan service components-->
+        <context:component-scan base-package="com.att.cw.service" />     
+        <!-- scan controller components -->    
+        <context:component-scan base-package="com.att.cw.controller" />
+        <!-- scan aspectj components-->
+        <bean id="emailAdvice" class="com.att.cw.advice.EmailAdvice"/>
+</beans>

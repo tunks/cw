@@ -11,6 +11,7 @@ import javax.persistence.Entity;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
+import javax.validation.constraints.NotNull;
 
 /**
  * UserProfile entity model
@@ -21,20 +22,27 @@ import javax.persistence.Temporal;
 @Table(name = "user_profile")
 public class UserProfile extends Profile {
     @Column(name="first_name")
+    @NotNull
     private String firstName;
+    
     @Column(name="middle_name")
     private String middleName;
+    
     @Column(name="last_name")
+    @NotNull
     private String lastName;
     
     @Column(name="date_of_birth")
+    @NotNull
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date dateOfBirth;
+    
     @Column(name="phone_number")
     private String phoneNumber;
 
     @OneToOne
     private User user;
+
     @OneToOne
     private Address address;
 

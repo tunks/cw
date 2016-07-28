@@ -48,7 +48,6 @@ public class User extends Audit {
     private String password;
 
     @Column(name = "NAME", length = 100)
-    @NotNull
     @Size(min = 4, max = 100)
     private String name;
 
@@ -70,8 +69,10 @@ public class User extends Audit {
     private Set<Authority> authorities;
 
     @OneToOne(mappedBy = "user")
+    @NotNull
     private UserProfile profile;
 
+    @Override
     public Long getId() {
         return id;
     }

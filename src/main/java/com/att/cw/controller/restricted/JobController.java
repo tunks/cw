@@ -1,6 +1,9 @@
-package com.att.cw.controller;
+package com.att.cw.controller.restricted;
 
 
+
+
+import com.att.cw.controller.BaseController;
 import com.att.cw.model.Job;
 import com.att.cw.service.JobService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +13,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -17,7 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @author ebrimatunkara
  */
 @RestController
-@RequestMapping("jobs")
+@RequestMapping("/jobs")
 public class JobController implements BaseController<Job,Long>{
     /**
      * Job service instance
@@ -56,6 +60,7 @@ public class JobController implements BaseController<Job,Long>{
      **/
     @RequestMapping(value="/{id}", method=RequestMethod.DELETE)
     @Override
+    @ResponseBody
     public void delete(@PathVariable Long id) {
        jobService.delete(id);
     }

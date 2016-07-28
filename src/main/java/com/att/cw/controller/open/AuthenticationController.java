@@ -9,6 +9,7 @@ import com.att.cw.model.User;
 import com.att.cw.service.UserService;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import java.io.Serializable;
 import java.util.Date;
 import javax.servlet.ServletException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,50 +19,79 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+
 
 /**
- * Authentication controller -- Responsible for authentication mechanism via the
- * web
- *
+ * Authentication controller -- Responsible for user login authentication 
  * @author ebrimatunkara
  */
-@Controller("authenticate")
+@Controller
+@RequestMapping("/authenticate")
 public class AuthenticationController {
     /**
      * TODO logger using AOP
-     *
      */
     //private static final Logger logger = LoggerFactory.getLogger(UserController.class);
     @Autowired
     private UserService userService;
-
+    /**
+     * Authenticated user login
+     * @param login, user credentials
+     * @return response
+     * @throws javax.servlet.ServletException
+     */
     @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public ResponseEntity<LoginResponse> login(@RequestBody final UserLogin login) throws ServletException {
+    public ResponseEntity<LoginResponse> login(final UserLogin login) throws ServletException {
         LoginResponse response = null;
-        User user = userService.findByEmail(login.name);
+        User user = userService.findByEmailAndPassword(login.name,login.password);
         if (user != null) {
-            //logger.info("User logged in successfully : " + user.getName() + ":" + user.getEnabled());
+            //TODO --refactor
+           // logger.info("User logged in successfully : " + user.getName() + ":" + user.getEnabled());
             response = new LoginResponse(Jwts.builder().setSubject(login.name)
                     .claim("roles", user.getEmailId()).setIssuedAt(new Date())
                     .signWith(SignatureAlgorithm.HS256, "secretkey").compact());
             return new ResponseEntity(response, HttpStatus.ACCEPTED);
         }
         //logger.info("login failed....");
-        return new ResponseEntity(response, HttpStatus.NOT_ACCEPTABLE);
-
+        return new ResponseEntity(response, HttpStatus.FORBIDDEN);
     }
-
-    @SuppressWarnings("unused")
-    public static class LoginResponse {
+    
+    public static class LoginResponse implements Serializable{
         public String token;
         public LoginResponse(final String token) {
             this.token = token;
         }
+
+        public String getToken() {
+            return token;
+        }
+
+        public void setToken(String token) {
+            this.token = token;
+        }
     }
 
-    @SuppressWarnings("unused")
-    public static class UserLogin {
+    public static class UserLogin implements Serializable{
         public String name;
         public String password;
+
+        public String getName() {
+            return name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
+
+        public String getPassword() {
+            return password;
+        }
+
+        public void setPassword(String password) {
+            this.password = password;
+        }
+        
+        
     }
 }
