@@ -42,10 +42,11 @@ public class AuthenticationController {
      * @throws javax.servlet.ServletException
      */
     @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public ResponseEntity<LoginResponse> login(@RequestBody final UserLogin login) throws ServletException {
+    public ResponseEntity<LoginResponse> login(final UserLogin login) throws ServletException {
         LoginResponse response = null;
-        User user = userService.findByEmailOrName(login.name,login.name);
+        User user = userService.findByEmailAndPassword(login.name,login.password);
         if (user != null) {
+            //TODO --refactor
            // logger.info("User logged in successfully : " + user.getName() + ":" + user.getEnabled());
             response = new LoginResponse(Jwts.builder().setSubject(login.name)
                     .claim("roles", user.getEmailId()).setIssuedAt(new Date())

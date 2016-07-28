@@ -9,6 +9,7 @@ import com.att.cw.model.User;
 import com.jayway.jsonpath.JsonPath;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -46,14 +47,11 @@ public class AuthenticationControllerTest {
 
     @Mock
     private MockMvc mockMvc;
-
     private String loginUrl;
-
     private String registerUrl;
-    String content = "{\"name\": \"ebrima@localhost\",\"password\":\"123\"}";
+    private String emailId;
+    private String password;
 
-    String respondContent;
-    Long registeredUserId;
     public AuthenticationControllerTest() {
     }
 
@@ -69,18 +67,18 @@ public class AuthenticationControllerTest {
     public void setUp() {
         try {
             loginUrl = "/authenticate/login";
-            registerUrl = "/users/";
+            registerUrl = "/register/new";
             mockMvc = webAppContextSetup(context).build();
+            
+            //mock user email and password
+            emailId = RandomStringUtils.randomAlphanumeric(6)
+                                       .concat("@localhost");
+            password = RandomStringUtils.randomAlphanumeric(12);
             //register new user
             mockMvc.perform(post(registerUrl)
                     .contentType(MediaType.APPLICATION_JSON)
-                    .param("name", "ebrima@localhost")
-                    .param("password", "123"))
-                    .andDo((MvcResult result) -> {
-                        String json = result.getResponse().getContentAsString();
-                        System.out.println("json results "+json);
-                       registeredUserId = JsonPath.parse(json).read("$['id']",Long.class);
-            });
+                    .param("email", emailId)
+                    .param("password", password));
         } catch (Exception ex) {
             Logger.getLogger(AuthenticationControllerTest.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -89,13 +87,13 @@ public class AuthenticationControllerTest {
 
     @After
     public void tearDown() {
-        try {
-            System.out.println("Results >>>> " + registeredUserId);               
-            mockMvc.perform(delete(registerUrl + "{id}",registeredUserId))
-                   .andExpect(status().isOk());
-        } catch (Exception ex) {
-            Logger.getLogger(AuthenticationControllerTest.class.getName()).log(Level.SEVERE, null, ex);
-        }
+//        try {
+//            System.out.println("Results >>>> " + registeredUserId);               
+//            mockMvc.perform(delete(registerUrl + "{id}",registeredUserId))
+//                   .andExpect(status().isOk());
+//        } catch (Exception ex) {
+//            Logger.getLogger(AuthenticationControllerTest.class.getName()).log(Level.SEVERE, null, ex);
+//        }
     }
 
     /**
@@ -107,7 +105,8 @@ public class AuthenticationControllerTest {
             System.out.println("login");
             mockMvc.perform(post(loginUrl)
                     .contentType(MediaType.APPLICATION_JSON)
-                    .content(content))
+                    .param("email", emailId)
+                    .param("password", password))
                     .andExpect(status().isAccepted());
         } catch (Exception ex) {
             Logger.getLogger(AuthenticationControllerTest.class.getName()).log(Level.SEVERE, null, ex);

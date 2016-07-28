@@ -1,95 +1,158 @@
-2016-07-28 19:01:23,841 INFO  [ContextLoader] - Root WebApplicationContext: initialization started
-2016-07-28 19:01:23,911 INFO  [XmlWebApplicationContext] - Refreshing Root WebApplicationContext: startup date [Thu Jul 28 19:01:23 EDT 2016]; root of context hierarchy
-2016-07-28 19:01:23,939 INFO  [XmlBeanDefinitionReader] - Loading XML bean definitions from ServletContext resource [/WEB-INF/root-context.xml]
-2016-07-28 19:01:24,011 INFO  [ContextLoader] - Root WebApplicationContext: initialization completed in 170 ms
-2016-07-28 19:01:24,049 INFO  [DispatcherServlet] - FrameworkServlet 'springmvc': initialization started
-2016-07-28 19:01:24,051 INFO  [XmlWebApplicationContext] - Refreshing WebApplicationContext for namespace 'springmvc-servlet': startup date [Thu Jul 28 19:01:24 EDT 2016]; parent: Root WebApplicationContext
-2016-07-28 19:01:24,052 INFO  [XmlBeanDefinitionReader] - Loading XML bean definitions from ServletContext resource [/WEB-INF/springmvc-servlet.xml]
-2016-07-28 19:01:24,119 INFO  [XmlBeanDefinitionReader] - Loading XML bean definitions from URL [file:/Users/ebrimatunkara/development/projects/ATT/HR/cw-service/target/classes/spring-jpa-config.xml]
-2016-07-28 19:01:24,330 INFO  [PropertySourcesPlaceholderConfigurer] - Loading properties file from class path resource [application.properties]
-2016-07-28 19:01:24,331 INFO  [PropertySourcesPlaceholderConfigurer] - Loading properties file from class path resource [application-dev.properties]
-2016-07-28 19:01:24,338 INFO  [AutowiredAnnotationBeanPostProcessor] - JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
-2016-07-28 19:01:24,550 INFO  [LogHelper] - HHH000204: Processing PersistenceUnitInfo [
+2016-07-28 19:35:16,078 INFO  [XmlBeanDefinitionReader] - Loading XML bean definitions from class path resource [springmvc-servlet.xml]
+2016-07-28 19:35:16,192 INFO  [XmlBeanDefinitionReader] - Loading XML bean definitions from URL [file:/Users/ebrimatunkara/development/projects/ATT/HR/cw-service/target/classes/spring-jpa-config.xml]
+2016-07-28 19:35:16,350 INFO  [GenericWebApplicationContext] - Refreshing org.springframework.web.context.support.GenericWebApplicationContext@3234e239: startup date [Thu Jul 28 19:35:16 EDT 2016]; root of context hierarchy
+2016-07-28 19:35:16,461 INFO  [PropertySourcesPlaceholderConfigurer] - Loading properties file from class path resource [application.properties]
+2016-07-28 19:35:16,461 INFO  [PropertySourcesPlaceholderConfigurer] - Loading properties file from class path resource [application-dev.properties]
+2016-07-28 19:35:16,685 INFO  [LogHelper] - HHH000204: Processing PersistenceUnitInfo [
 	name: default
 	...]
-2016-07-28 19:01:24,599 INFO  [Version] - HHH000412: Hibernate Core {4.3.5.Final}
-2016-07-28 19:01:24,600 INFO  [Environment] - HHH000206: hibernate.properties not found
-2016-07-28 19:01:24,601 INFO  [Environment] - HHH000021: Bytecode provider name : javassist
-2016-07-28 19:01:24,725 INFO  [Version] - HCANN000001: Hibernate Commons Annotations {4.0.4.Final}
-2016-07-28 19:01:25,142 INFO  [Dialect] - HHH000400: Using dialect: org.hibernate.dialect.MySQL5Dialect
-2016-07-28 19:01:25,250 WARN  [AnnotationBinder] - HHH000139: Illegal use of @Table in a subclass of a SINGLE_TABLE hierarchy: com.att.cw.model.UserProfile
-2016-07-28 19:01:25,292 INFO  [ASTQueryTranslatorFactory] - HHH000397: Using ASTQueryTranslatorFactory
-2016-07-28 19:01:25,543 INFO  [SchemaUpdate] - HHH000228: Running hbm2ddl schema update
-2016-07-28 19:01:25,543 INFO  [SchemaUpdate] - HHH000102: Fetching database metadata
-2016-07-28 19:01:25,545 INFO  [SchemaUpdate] - HHH000396: Updating schema
-2016-07-28 19:01:25,561 INFO  [TableMetadata] - HHH000261: Table found: cw.AUTHORITY
-2016-07-28 19:01:25,561 INFO  [TableMetadata] - HHH000037: Columns: [name, id]
-2016-07-28 19:01:25,561 INFO  [TableMetadata] - HHH000108: Foreign keys: []
-2016-07-28 19:01:25,561 INFO  [TableMetadata] - HHH000126: Indexes: [uk_ana6i0racv9b9d5dx3mlwho9p, primary]
-2016-07-28 19:01:25,568 INFO  [TableMetadata] - HHH000261: Table found: cw.Profile
-2016-07-28 19:01:25,568 INFO  [TableMetadata] - HHH000037: Columns: [createddate, lastmodifieddate, date_of_birth, address_id, dtype, lastmodifiedby, last_name, middle_name, version, createdby, user_id, phone_number, id, first_name]
-2016-07-28 19:01:25,568 INFO  [TableMetadata] - HHH000108: Foreign keys: [fk_22nop2trrp4xogf8t1fr2rd91, fk_hj3d4gw12cprp4j1p6pqa5av5]
-2016-07-28 19:01:25,568 INFO  [TableMetadata] - HHH000126: Indexes: [fk_22nop2trrp4xogf8t1fr2rd91, primary, fk_hj3d4gw12cprp4j1p6pqa5av5]
-2016-07-28 19:01:25,573 INFO  [TableMetadata] - HHH000261: Table found: cw.USER
-2016-07-28 19:01:25,573 INFO  [TableMetadata] - HHH000037: Columns: [password, createdby, createddate, lastmodifieddate, name, lastmodifiedby, emailid, id, version, enabled]
-2016-07-28 19:01:25,573 INFO  [TableMetadata] - HHH000108: Foreign keys: []
-2016-07-28 19:01:25,573 INFO  [TableMetadata] - HHH000126: Indexes: [user_email_index, uk_tny7vhtvpf3hywynmjlodildh, primary]
-2016-07-28 19:01:25,577 INFO  [TableMetadata] - HHH000261: Table found: cw.USER_AUTHORITY
-2016-07-28 19:01:25,577 INFO  [TableMetadata] - HHH000037: Columns: [user_id, authority_id]
-2016-07-28 19:01:25,577 INFO  [TableMetadata] - HHH000108: Foreign keys: [fk_dyo9anhb75hbjut13e8uovw2s, fk_jbm4yrlayhtksry4mwk0e47ls]
-2016-07-28 19:01:25,577 INFO  [TableMetadata] - HHH000126: Indexes: [fk_dyo9anhb75hbjut13e8uovw2s, primary]
-2016-07-28 19:01:25,582 INFO  [TableMetadata] - HHH000261: Table found: cw.file_documents
-2016-07-28 19:01:25,582 INFO  [TableMetadata] - HHH000037: Columns: [content_type, size, createdby, createddate, lastmodifieddate, resource_type, lastmodifiedby, description, resource_id, id, version, content]
-2016-07-28 19:01:25,582 INFO  [TableMetadata] - HHH000108: Foreign keys: []
-2016-07-28 19:01:25,582 INFO  [TableMetadata] - HHH000126: Indexes: [primary]
-2016-07-28 19:01:25,587 INFO  [TableMetadata] - HHH000261: Table found: cw.job_activities
-2016-07-28 19:01:25,587 INFO  [TableMetadata] - HHH000037: Columns: [workflow_id, createdby, createddate, lastmodifieddate, name, lastmodifiedby, id, version]
-2016-07-28 19:01:25,587 INFO  [TableMetadata] - HHH000108: Foreign keys: [fk_6i97tsgwc4y8avinvleaij5ye]
-2016-07-28 19:01:25,587 INFO  [TableMetadata] - HHH000126: Indexes: [fk_6i97tsgwc4y8avinvleaij5ye, primary]
-2016-07-28 19:01:25,591 INFO  [TableMetadata] - HHH000261: Table found: cw.job_applications
-2016-07-28 19:01:25,591 INFO  [TableMetadata] - HHH000037: Columns: [candidate_id, workflow_id, datemodified, createdby, createddate, lastmodifieddate, lastmodifiedby, id, datecreated, version]
-2016-07-28 19:01:25,591 INFO  [TableMetadata] - HHH000108: Foreign keys: [fk_gnt5c2uebjgnulu4debnxuomc, fk_r42se08m018gbf90h9l5vmjdl]
-2016-07-28 19:01:25,591 INFO  [TableMetadata] - HHH000126: Indexes: [fk_gnt5c2uebjgnulu4debnxuomc, fk_r42se08m018gbf90h9l5vmjdl, primary]
-2016-07-28 19:01:25,594 INFO  [TableMetadata] - HHH000261: Table found: cw.job_candidates
-2016-07-28 19:01:25,594 INFO  [TableMetadata] - HHH000037: Columns: [createdby, createddate, lastmodifieddate, lastmodifiedby, id, version, userid]
-2016-07-28 19:01:25,594 INFO  [TableMetadata] - HHH000108: Foreign keys: []
-2016-07-28 19:01:25,594 INFO  [TableMetadata] - HHH000126: Indexes: [primary]
-2016-07-28 19:01:25,598 INFO  [TableMetadata] - HHH000261: Table found: cw.job_workflows
-2016-07-28 19:01:25,598 INFO  [TableMetadata] - HHH000037: Columns: [createdby, createddate, lastmodifieddate, lastmodifiedby, id, version]
-2016-07-28 19:01:25,598 INFO  [TableMetadata] - HHH000108: Foreign keys: []
-2016-07-28 19:01:25,598 INFO  [TableMetadata] - HHH000126: Indexes: [primary]
-2016-07-28 19:01:25,601 INFO  [TableMetadata] - HHH000261: Table found: cw.job_workflows_job_activities
-2016-07-28 19:01:25,602 INFO  [TableMetadata] - HHH000037: Columns: [job_workflows_id, activities_id]
-2016-07-28 19:01:25,602 INFO  [TableMetadata] - HHH000108: Foreign keys: [fk_7gqb8uj4dkxg94b0lt2wpfxld, fk_k05olxsngknte6yos3q1vorlr]
-2016-07-28 19:01:25,602 INFO  [TableMetadata] - HHH000126: Indexes: [uk_7gqb8uj4dkxg94b0lt2wpfxld, primary]
-2016-07-28 19:01:25,605 INFO  [TableMetadata] - HHH000261: Table found: cw.jobs
-2016-07-28 19:01:25,605 INFO  [TableMetadata] - HHH000037: Columns: [workflow_id, closedate, createdby, createddate, lastmodifieddate, lastmodifiedby, description, opendate, id, ownerid, title, version]
-2016-07-28 19:01:25,605 INFO  [TableMetadata] - HHH000108: Foreign keys: [fk_bmmf4ulukk632yxioukqcue5v]
-2016-07-28 19:01:25,605 INFO  [TableMetadata] - HHH000126: Indexes: [fk_bmmf4ulukk632yxioukqcue5v, primary]
-2016-07-28 19:01:25,608 INFO  [TableMetadata] - HHH000261: Table found: cw.jobs_job_applications
-2016-07-28 19:01:25,609 INFO  [TableMetadata] - HHH000037: Columns: [applications_id, jobs_id]
-2016-07-28 19:01:25,609 INFO  [TableMetadata] - HHH000108: Foreign keys: [fk_21hd5m30nhvpg76kqqkekujgm, fk_6vrx0feebyfnyfwbcxtt4q5gd]
-2016-07-28 19:01:25,609 INFO  [TableMetadata] - HHH000126: Indexes: [uk_21hd5m30nhvpg76kqqkekujgm, primary]
-2016-07-28 19:01:25,612 INFO  [TableMetadata] - HHH000261: Table found: cw.user_addresses
-2016-07-28 19:01:25,612 INFO  [TableMetadata] - HHH000037: Columns: [zipcode, country, createdby, createddate, city, lastmodifieddate, lastmodifiedby, id, statename, version]
-2016-07-28 19:01:25,612 INFO  [TableMetadata] - HHH000108: Foreign keys: []
-2016-07-28 19:01:25,612 INFO  [TableMetadata] - HHH000126: Indexes: [primary]
-2016-07-28 19:01:25,613 INFO  [SchemaUpdate] - HHH000232: Schema update complete
-2016-07-28 19:01:25,844 INFO  [RequestMappingHandlerMapping] - Mapped "{[/authenticate/login],methods=[POST]}" onto public org.springframework.http.ResponseEntity<com.att.cw.controller.open.AuthenticationController$LoginResponse> com.att.cw.controller.open.AuthenticationController.login(com.att.cw.controller.open.AuthenticationController$UserLogin) throws javax.servlet.ServletException
-2016-07-28 19:01:25,845 INFO  [RequestMappingHandlerMapping] - Mapped "{[/register/new],methods=[POST]}" onto public org.springframework.http.ResponseEntity com.att.cw.controller.open.RegistrationController.registerUser(com.att.cw.model.User)
-2016-07-28 19:01:25,849 INFO  [RequestMappingHandlerMapping] - Mapped "{[/documents/{id}],methods=[GET]}" onto public com.att.cw.model.FileDocument com.att.cw.controller.restricted.FileDocumentController.find(java.lang.Long)
-2016-07-28 19:01:25,849 INFO  [RequestMappingHandlerMapping] - Mapped "{[/documents/{id}],methods=[DELETE]}" onto public void com.att.cw.controller.restricted.FileDocumentController.delete(java.lang.Long)
-2016-07-28 19:01:25,849 INFO  [RequestMappingHandlerMapping] - Mapped "{[/upload],methods=[POST]}" onto public org.springframework.http.ResponseEntity com.att.cw.controller.restricted.FileUploadController.handleFileUpload(java.lang.String,org.springframework.web.multipart.MultipartFile)
-2016-07-28 19:01:25,854 INFO  [RequestMappingHandlerMapping] - Mapped "{[/jobs],methods=[PUT]}" onto public com.att.cw.model.Job com.att.cw.controller.restricted.JobController.update(com.att.cw.model.Job)
-2016-07-28 19:01:25,854 INFO  [RequestMappingHandlerMapping] - Mapped "{[/jobs/{id}],methods=[GET]}" onto public com.att.cw.model.Job com.att.cw.controller.restricted.JobController.find(java.lang.Long)
-2016-07-28 19:01:25,855 INFO  [RequestMappingHandlerMapping] - Mapped "{[/jobs/{id}],methods=[DELETE]}" onto public void com.att.cw.controller.restricted.JobController.delete(java.lang.Long)
-2016-07-28 19:01:25,855 INFO  [RequestMappingHandlerMapping] - Mapped "{[/jobs],methods=[POST]}" onto public com.att.cw.model.Job com.att.cw.controller.restricted.JobController.create(com.att.cw.model.Job)
-2016-07-28 19:01:25,855 INFO  [RequestMappingHandlerMapping] - Mapped "{[/jobs],methods=[GET]}" onto public org.springframework.data.domain.Page<com.att.cw.model.Job> com.att.cw.controller.restricted.JobController.findAllBy(java.lang.Long,org.springframework.data.domain.Pageable)
-2016-07-28 19:01:25,858 INFO  [RequestMappingHandlerMapping] - Mapped "{[/users],methods=[PUT]}" onto public com.att.cw.model.User com.att.cw.controller.restricted.UserController.update(com.att.cw.model.User)
-2016-07-28 19:01:25,858 INFO  [RequestMappingHandlerMapping] - Mapped "{[/users/{id}],methods=[GET]}" onto public com.att.cw.model.User com.att.cw.controller.restricted.UserController.find(java.lang.Long)
-2016-07-28 19:01:25,859 INFO  [RequestMappingHandlerMapping] - Mapped "{[/users/{id}],methods=[DELETE]}" onto public void com.att.cw.controller.restricted.UserController.delete(java.lang.Long)
-2016-07-28 19:01:25,859 INFO  [RequestMappingHandlerMapping] - Mapped "{[/users],methods=[POST]}" onto public com.att.cw.model.User com.att.cw.controller.restricted.UserController.create(com.att.cw.model.User)
-2016-07-28 19:01:25,859 INFO  [RequestMappingHandlerMapping] - Mapped "{[/users],methods=[GET]}" onto org.springframework.data.domain.Page<com.att.cw.model.User> com.att.cw.controller.restricted.UserController.findAll(org.springframework.data.domain.Pageable)
-2016-07-28 19:01:26,076 INFO  [RequestMappingHandlerAdapter] - Looking for @ControllerAdvice: WebApplicationContext for namespace 'springmvc-servlet': startup date [Thu Jul 28 19:01:24 EDT 2016]; parent: Root WebApplicationContext
-2016-07-28 19:01:26,108 INFO  [RequestMappingHandlerAdapter] - Looking for @ControllerAdvice: WebApplicationContext for namespace 'springmvc-servlet': startup date [Thu Jul 28 19:01:24 EDT 2016]; parent: Root WebApplicationContext
-2016-07-28 19:01:26,354 INFO  [DispatcherServlet] - FrameworkServlet 'springmvc': initialization completed in 2305 ms
+2016-07-28 19:35:16,730 INFO  [Version] - HHH000412: Hibernate Core {4.3.5.Final}
+2016-07-28 19:35:16,731 INFO  [Environment] - HHH000206: hibernate.properties not found
+2016-07-28 19:35:16,733 INFO  [Environment] - HHH000021: Bytecode provider name : javassist
+2016-07-28 19:35:16,888 INFO  [Version] - HCANN000001: Hibernate Commons Annotations {4.0.4.Final}
+2016-07-28 19:35:17,216 INFO  [Dialect] - HHH000400: Using dialect: org.hibernate.dialect.MySQL5Dialect
+2016-07-28 19:35:17,319 WARN  [AnnotationBinder] - HHH000139: Illegal use of @Table in a subclass of a SINGLE_TABLE hierarchy: com.att.cw.model.UserProfile
+2016-07-28 19:35:17,363 INFO  [ASTQueryTranslatorFactory] - HHH000397: Using ASTQueryTranslatorFactory
+2016-07-28 19:35:17,628 INFO  [SchemaUpdate] - HHH000228: Running hbm2ddl schema update
+2016-07-28 19:35:17,628 INFO  [SchemaUpdate] - HHH000102: Fetching database metadata
+2016-07-28 19:35:17,631 INFO  [SchemaUpdate] - HHH000396: Updating schema
+2016-07-28 19:35:17,647 INFO  [TableMetadata] - HHH000261: Table found: cw.AUTHORITY
+2016-07-28 19:35:17,647 INFO  [TableMetadata] - HHH000037: Columns: [name, id]
+2016-07-28 19:35:17,647 INFO  [TableMetadata] - HHH000108: Foreign keys: []
+2016-07-28 19:35:17,647 INFO  [TableMetadata] - HHH000126: Indexes: [uk_ana6i0racv9b9d5dx3mlwho9p, primary]
+2016-07-28 19:35:17,654 INFO  [TableMetadata] - HHH000261: Table found: cw.Profile
+2016-07-28 19:35:17,654 INFO  [TableMetadata] - HHH000037: Columns: [createddate, lastmodifieddate, date_of_birth, address_id, dtype, lastmodifiedby, last_name, middle_name, version, createdby, user_id, phone_number, id, first_name]
+2016-07-28 19:35:17,654 INFO  [TableMetadata] - HHH000108: Foreign keys: [fk_22nop2trrp4xogf8t1fr2rd91, fk_hj3d4gw12cprp4j1p6pqa5av5]
+2016-07-28 19:35:17,654 INFO  [TableMetadata] - HHH000126: Indexes: [fk_22nop2trrp4xogf8t1fr2rd91, primary, fk_hj3d4gw12cprp4j1p6pqa5av5]
+2016-07-28 19:35:17,658 INFO  [TableMetadata] - HHH000261: Table found: cw.USER
+2016-07-28 19:35:17,658 INFO  [TableMetadata] - HHH000037: Columns: [password, createdby, createddate, lastmodifieddate, name, lastmodifiedby, emailid, id, version, enabled]
+2016-07-28 19:35:17,658 INFO  [TableMetadata] - HHH000108: Foreign keys: []
+2016-07-28 19:35:17,658 INFO  [TableMetadata] - HHH000126: Indexes: [user_email_index, uk_tny7vhtvpf3hywynmjlodildh, primary]
+2016-07-28 19:35:17,662 INFO  [TableMetadata] - HHH000261: Table found: cw.USER_AUTHORITY
+2016-07-28 19:35:17,662 INFO  [TableMetadata] - HHH000037: Columns: [user_id, authority_id]
+2016-07-28 19:35:17,662 INFO  [TableMetadata] - HHH000108: Foreign keys: [fk_dyo9anhb75hbjut13e8uovw2s, fk_jbm4yrlayhtksry4mwk0e47ls]
+2016-07-28 19:35:17,662 INFO  [TableMetadata] - HHH000126: Indexes: [fk_dyo9anhb75hbjut13e8uovw2s, primary]
+2016-07-28 19:35:17,666 INFO  [TableMetadata] - HHH000261: Table found: cw.file_documents
+2016-07-28 19:35:17,666 INFO  [TableMetadata] - HHH000037: Columns: [content_type, size, createdby, createddate, lastmodifieddate, resource_type, lastmodifiedby, description, resource_id, id, version, content]
+2016-07-28 19:35:17,667 INFO  [TableMetadata] - HHH000108: Foreign keys: []
+2016-07-28 19:35:17,667 INFO  [TableMetadata] - HHH000126: Indexes: [primary]
+2016-07-28 19:35:17,671 INFO  [TableMetadata] - HHH000261: Table found: cw.job_activities
+2016-07-28 19:35:17,671 INFO  [TableMetadata] - HHH000037: Columns: [workflow_id, createdby, createddate, lastmodifieddate, name, lastmodifiedby, id, version]
+2016-07-28 19:35:17,671 INFO  [TableMetadata] - HHH000108: Foreign keys: [fk_6i97tsgwc4y8avinvleaij5ye]
+2016-07-28 19:35:17,671 INFO  [TableMetadata] - HHH000126: Indexes: [fk_6i97tsgwc4y8avinvleaij5ye, primary]
+2016-07-28 19:35:17,676 INFO  [TableMetadata] - HHH000261: Table found: cw.job_applications
+2016-07-28 19:35:17,676 INFO  [TableMetadata] - HHH000037: Columns: [candidate_id, workflow_id, datemodified, createdby, createddate, lastmodifieddate, lastmodifiedby, id, datecreated, version]
+2016-07-28 19:35:17,676 INFO  [TableMetadata] - HHH000108: Foreign keys: [fk_gnt5c2uebjgnulu4debnxuomc, fk_r42se08m018gbf90h9l5vmjdl]
+2016-07-28 19:35:17,676 INFO  [TableMetadata] - HHH000126: Indexes: [fk_gnt5c2uebjgnulu4debnxuomc, fk_r42se08m018gbf90h9l5vmjdl, primary]
+2016-07-28 19:35:17,681 INFO  [TableMetadata] - HHH000261: Table found: cw.job_candidates
+2016-07-28 19:35:17,681 INFO  [TableMetadata] - HHH000037: Columns: [createdby, createddate, lastmodifieddate, lastmodifiedby, id, version, userid]
+2016-07-28 19:35:17,681 INFO  [TableMetadata] - HHH000108: Foreign keys: []
+2016-07-28 19:35:17,681 INFO  [TableMetadata] - HHH000126: Indexes: [primary]
+2016-07-28 19:35:17,685 INFO  [TableMetadata] - HHH000261: Table found: cw.job_workflows
+2016-07-28 19:35:17,685 INFO  [TableMetadata] - HHH000037: Columns: [createdby, createddate, lastmodifieddate, lastmodifiedby, id, version]
+2016-07-28 19:35:17,685 INFO  [TableMetadata] - HHH000108: Foreign keys: []
+2016-07-28 19:35:17,685 INFO  [TableMetadata] - HHH000126: Indexes: [primary]
+2016-07-28 19:35:17,689 INFO  [TableMetadata] - HHH000261: Table found: cw.job_workflows_job_activities
+2016-07-28 19:35:17,689 INFO  [TableMetadata] - HHH000037: Columns: [job_workflows_id, activities_id]
+2016-07-28 19:35:17,689 INFO  [TableMetadata] - HHH000108: Foreign keys: [fk_7gqb8uj4dkxg94b0lt2wpfxld, fk_k05olxsngknte6yos3q1vorlr]
+2016-07-28 19:35:17,689 INFO  [TableMetadata] - HHH000126: Indexes: [uk_7gqb8uj4dkxg94b0lt2wpfxld, primary]
+2016-07-28 19:35:17,693 INFO  [TableMetadata] - HHH000261: Table found: cw.jobs
+2016-07-28 19:35:17,693 INFO  [TableMetadata] - HHH000037: Columns: [workflow_id, closedate, createdby, createddate, lastmodifieddate, lastmodifiedby, description, opendate, id, ownerid, title, version]
+2016-07-28 19:35:17,693 INFO  [TableMetadata] - HHH000108: Foreign keys: [fk_bmmf4ulukk632yxioukqcue5v]
+2016-07-28 19:35:17,693 INFO  [TableMetadata] - HHH000126: Indexes: [fk_bmmf4ulukk632yxioukqcue5v, primary]
+2016-07-28 19:35:17,697 INFO  [TableMetadata] - HHH000261: Table found: cw.jobs_job_applications
+2016-07-28 19:35:17,697 INFO  [TableMetadata] - HHH000037: Columns: [applications_id, jobs_id]
+2016-07-28 19:35:17,697 INFO  [TableMetadata] - HHH000108: Foreign keys: [fk_21hd5m30nhvpg76kqqkekujgm, fk_6vrx0feebyfnyfwbcxtt4q5gd]
+2016-07-28 19:35:17,697 INFO  [TableMetadata] - HHH000126: Indexes: [uk_21hd5m30nhvpg76kqqkekujgm, primary]
+2016-07-28 19:35:17,701 INFO  [TableMetadata] - HHH000261: Table found: cw.user_addresses
+2016-07-28 19:35:17,701 INFO  [TableMetadata] - HHH000037: Columns: [zipcode, country, createdby, createddate, city, lastmodifieddate, lastmodifiedby, id, statename, version]
+2016-07-28 19:35:17,701 INFO  [TableMetadata] - HHH000108: Foreign keys: []
+2016-07-28 19:35:17,701 INFO  [TableMetadata] - HHH000126: Indexes: [primary]
+2016-07-28 19:35:17,702 INFO  [SchemaUpdate] - HHH000232: Schema update complete
+2016-07-28 19:35:17,926 INFO  [RequestMappingHandlerMapping] - Mapped "{[/authenticate/login],methods=[POST]}" onto public org.springframework.http.ResponseEntity<com.att.cw.controller.open.AuthenticationController$LoginResponse> com.att.cw.controller.open.AuthenticationController.login(com.att.cw.controller.open.AuthenticationController$UserLogin) throws javax.servlet.ServletException
+2016-07-28 19:35:17,928 INFO  [RequestMappingHandlerMapping] - Mapped "{[/register/new],methods=[POST]}" onto public org.springframework.http.ResponseEntity com.att.cw.controller.open.RegistrationController.registerUser(com.att.cw.model.User)
+2016-07-28 19:35:17,932 INFO  [RequestMappingHandlerMapping] - Mapped "{[/documents/{id}],methods=[GET]}" onto public com.att.cw.model.FileDocument com.att.cw.controller.restricted.FileDocumentController.find(java.lang.Long)
+2016-07-28 19:35:17,932 INFO  [RequestMappingHandlerMapping] - Mapped "{[/documents/{id}],methods=[DELETE]}" onto public void com.att.cw.controller.restricted.FileDocumentController.delete(java.lang.Long)
+2016-07-28 19:35:17,933 INFO  [RequestMappingHandlerMapping] - Mapped "{[/upload],methods=[POST]}" onto public org.springframework.http.ResponseEntity com.att.cw.controller.restricted.FileUploadController.handleFileUpload(java.lang.String,org.springframework.web.multipart.MultipartFile)
+2016-07-28 19:35:17,937 INFO  [RequestMappingHandlerMapping] - Mapped "{[/jobs],methods=[PUT]}" onto public com.att.cw.model.Job com.att.cw.controller.restricted.JobController.update(com.att.cw.model.Job)
+2016-07-28 19:35:17,938 INFO  [RequestMappingHandlerMapping] - Mapped "{[/jobs/{id}],methods=[GET]}" onto public com.att.cw.model.Job com.att.cw.controller.restricted.JobController.find(java.lang.Long)
+2016-07-28 19:35:17,938 INFO  [RequestMappingHandlerMapping] - Mapped "{[/jobs/{id}],methods=[DELETE]}" onto public void com.att.cw.controller.restricted.JobController.delete(java.lang.Long)
+2016-07-28 19:35:17,938 INFO  [RequestMappingHandlerMapping] - Mapped "{[/jobs],methods=[POST]}" onto public com.att.cw.model.Job com.att.cw.controller.restricted.JobController.create(com.att.cw.model.Job)
+2016-07-28 19:35:17,938 INFO  [RequestMappingHandlerMapping] - Mapped "{[/jobs],methods=[GET]}" onto public org.springframework.data.domain.Page<com.att.cw.model.Job> com.att.cw.controller.restricted.JobController.findAllBy(java.lang.Long,org.springframework.data.domain.Pageable)
+2016-07-28 19:35:17,942 INFO  [RequestMappingHandlerMapping] - Mapped "{[/users],methods=[PUT]}" onto public com.att.cw.model.User com.att.cw.controller.restricted.UserController.update(com.att.cw.model.User)
+2016-07-28 19:35:17,942 INFO  [RequestMappingHandlerMapping] - Mapped "{[/users/{id}],methods=[GET]}" onto public com.att.cw.model.User com.att.cw.controller.restricted.UserController.find(java.lang.Long)
+2016-07-28 19:35:17,942 INFO  [RequestMappingHandlerMapping] - Mapped "{[/users/{id}],methods=[DELETE]}" onto public void com.att.cw.controller.restricted.UserController.delete(java.lang.Long)
+2016-07-28 19:35:17,943 INFO  [RequestMappingHandlerMapping] - Mapped "{[/users],methods=[POST]}" onto public com.att.cw.model.User com.att.cw.controller.restricted.UserController.create(com.att.cw.model.User)
+2016-07-28 19:35:17,943 INFO  [RequestMappingHandlerMapping] - Mapped "{[/users],methods=[GET]}" onto org.springframework.data.domain.Page<com.att.cw.model.User> com.att.cw.controller.restricted.UserController.findAll(org.springframework.data.domain.Pageable)
+2016-07-28 19:35:18,234 INFO  [RequestMappingHandlerAdapter] - Looking for @ControllerAdvice: org.springframework.web.context.support.GenericWebApplicationContext@3234e239: startup date [Thu Jul 28 19:35:16 EDT 2016]; root of context hierarchy
+2016-07-28 19:35:18,263 INFO  [RequestMappingHandlerAdapter] - Looking for @ControllerAdvice: org.springframework.web.context.support.GenericWebApplicationContext@3234e239: startup date [Thu Jul 28 19:35:16 EDT 2016]; root of context hierarchy
+2016-07-28 19:35:19,000 WARN  [PageNotFound] - Request method 'DELETE' not supported
+2016-07-28 19:35:19,098 INFO  [XmlBeanDefinitionReader] - Loading XML bean definitions from class path resource [spring-jpa-config.xml]
+2016-07-28 19:35:19,162 INFO  [GenericApplicationContext] - Refreshing org.springframework.context.support.GenericApplicationContext@5190010f: startup date [Thu Jul 28 19:35:19 EDT 2016]; root of context hierarchy
+2016-07-28 19:35:19,167 INFO  [PropertySourcesPlaceholderConfigurer] - Loading properties file from class path resource [application.properties]
+2016-07-28 19:35:19,167 INFO  [PropertySourcesPlaceholderConfigurer] - Loading properties file from class path resource [application-dev.properties]
+2016-07-28 19:35:19,182 INFO  [LogHelper] - HHH000204: Processing PersistenceUnitInfo [
+	name: default
+	...]
+2016-07-28 19:35:19,199 INFO  [Dialect] - HHH000400: Using dialect: org.hibernate.dialect.MySQL5Dialect
+2016-07-28 19:35:19,204 WARN  [AnnotationBinder] - HHH000139: Illegal use of @Table in a subclass of a SINGLE_TABLE hierarchy: com.att.cw.model.UserProfile
+2016-07-28 19:35:19,221 INFO  [ASTQueryTranslatorFactory] - HHH000397: Using ASTQueryTranslatorFactory
+2016-07-28 19:35:19,268 INFO  [SchemaUpdate] - HHH000228: Running hbm2ddl schema update
+2016-07-28 19:35:19,268 INFO  [SchemaUpdate] - HHH000102: Fetching database metadata
+2016-07-28 19:35:19,269 INFO  [SchemaUpdate] - HHH000396: Updating schema
+2016-07-28 19:35:19,274 INFO  [TableMetadata] - HHH000261: Table found: cw.AUTHORITY
+2016-07-28 19:35:19,274 INFO  [TableMetadata] - HHH000037: Columns: [name, id]
+2016-07-28 19:35:19,274 INFO  [TableMetadata] - HHH000108: Foreign keys: []
+2016-07-28 19:35:19,274 INFO  [TableMetadata] - HHH000126: Indexes: [uk_ana6i0racv9b9d5dx3mlwho9p, primary]
+2016-07-28 19:35:19,278 INFO  [TableMetadata] - HHH000261: Table found: cw.Profile
+2016-07-28 19:35:19,278 INFO  [TableMetadata] - HHH000037: Columns: [createddate, lastmodifieddate, date_of_birth, address_id, dtype, lastmodifiedby, last_name, middle_name, version, createdby, user_id, phone_number, id, first_name]
+2016-07-28 19:35:19,278 INFO  [TableMetadata] - HHH000108: Foreign keys: [fk_22nop2trrp4xogf8t1fr2rd91, fk_hj3d4gw12cprp4j1p6pqa5av5]
+2016-07-28 19:35:19,278 INFO  [TableMetadata] - HHH000126: Indexes: [fk_22nop2trrp4xogf8t1fr2rd91, primary, fk_hj3d4gw12cprp4j1p6pqa5av5]
+2016-07-28 19:35:19,281 INFO  [TableMetadata] - HHH000261: Table found: cw.USER
+2016-07-28 19:35:19,281 INFO  [TableMetadata] - HHH000037: Columns: [password, createdby, createddate, lastmodifieddate, name, lastmodifiedby, emailid, id, version, enabled]
+2016-07-28 19:35:19,282 INFO  [TableMetadata] - HHH000108: Foreign keys: []
+2016-07-28 19:35:19,282 INFO  [TableMetadata] - HHH000126: Indexes: [user_email_index, uk_tny7vhtvpf3hywynmjlodildh, primary]
+2016-07-28 19:35:19,285 INFO  [TableMetadata] - HHH000261: Table found: cw.USER_AUTHORITY
+2016-07-28 19:35:19,285 INFO  [TableMetadata] - HHH000037: Columns: [user_id, authority_id]
+2016-07-28 19:35:19,285 INFO  [TableMetadata] - HHH000108: Foreign keys: [fk_dyo9anhb75hbjut13e8uovw2s, fk_jbm4yrlayhtksry4mwk0e47ls]
+2016-07-28 19:35:19,285 INFO  [TableMetadata] - HHH000126: Indexes: [fk_dyo9anhb75hbjut13e8uovw2s, primary]
+2016-07-28 19:35:19,288 INFO  [TableMetadata] - HHH000261: Table found: cw.file_documents
+2016-07-28 19:35:19,288 INFO  [TableMetadata] - HHH000037: Columns: [content_type, size, createdby, createddate, lastmodifieddate, resource_type, lastmodifiedby, description, resource_id, id, version, content]
+2016-07-28 19:35:19,288 INFO  [TableMetadata] - HHH000108: Foreign keys: []
+2016-07-28 19:35:19,288 INFO  [TableMetadata] - HHH000126: Indexes: [primary]
+2016-07-28 19:35:19,291 INFO  [TableMetadata] - HHH000261: Table found: cw.job_activities
+2016-07-28 19:35:19,291 INFO  [TableMetadata] - HHH000037: Columns: [workflow_id, createdby, createddate, lastmodifieddate, name, lastmodifiedby, id, version]
+2016-07-28 19:35:19,291 INFO  [TableMetadata] - HHH000108: Foreign keys: [fk_6i97tsgwc4y8avinvleaij5ye]
+2016-07-28 19:35:19,291 INFO  [TableMetadata] - HHH000126: Indexes: [fk_6i97tsgwc4y8avinvleaij5ye, primary]
+2016-07-28 19:35:19,295 INFO  [TableMetadata] - HHH000261: Table found: cw.job_applications
+2016-07-28 19:35:19,295 INFO  [TableMetadata] - HHH000037: Columns: [candidate_id, workflow_id, datemodified, createdby, createddate, lastmodifieddate, lastmodifiedby, id, datecreated, version]
+2016-07-28 19:35:19,295 INFO  [TableMetadata] - HHH000108: Foreign keys: [fk_gnt5c2uebjgnulu4debnxuomc, fk_r42se08m018gbf90h9l5vmjdl]
+2016-07-28 19:35:19,295 INFO  [TableMetadata] - HHH000126: Indexes: [fk_gnt5c2uebjgnulu4debnxuomc, fk_r42se08m018gbf90h9l5vmjdl, primary]
+2016-07-28 19:35:19,298 INFO  [TableMetadata] - HHH000261: Table found: cw.job_candidates
+2016-07-28 19:35:19,298 INFO  [TableMetadata] - HHH000037: Columns: [createdby, createddate, lastmodifieddate, lastmodifiedby, id, version, userid]
+2016-07-28 19:35:19,298 INFO  [TableMetadata] - HHH000108: Foreign keys: []
+2016-07-28 19:35:19,298 INFO  [TableMetadata] - HHH000126: Indexes: [primary]
+2016-07-28 19:35:19,301 INFO  [TableMetadata] - HHH000261: Table found: cw.job_workflows
+2016-07-28 19:35:19,301 INFO  [TableMetadata] - HHH000037: Columns: [createdby, createddate, lastmodifieddate, lastmodifiedby, id, version]
+2016-07-28 19:35:19,301 INFO  [TableMetadata] - HHH000108: Foreign keys: []
+2016-07-28 19:35:19,301 INFO  [TableMetadata] - HHH000126: Indexes: [primary]
+2016-07-28 19:35:19,304 INFO  [TableMetadata] - HHH000261: Table found: cw.job_workflows_job_activities
+2016-07-28 19:35:19,304 INFO  [TableMetadata] - HHH000037: Columns: [job_workflows_id, activities_id]
+2016-07-28 19:35:19,304 INFO  [TableMetadata] - HHH000108: Foreign keys: [fk_7gqb8uj4dkxg94b0lt2wpfxld, fk_k05olxsngknte6yos3q1vorlr]
+2016-07-28 19:35:19,304 INFO  [TableMetadata] - HHH000126: Indexes: [uk_7gqb8uj4dkxg94b0lt2wpfxld, primary]
+2016-07-28 19:35:19,307 INFO  [TableMetadata] - HHH000261: Table found: cw.jobs
+2016-07-28 19:35:19,307 INFO  [TableMetadata] - HHH000037: Columns: [workflow_id, closedate, createdby, createddate, lastmodifieddate, lastmodifiedby, description, opendate, id, ownerid, title, version]
+2016-07-28 19:35:19,307 INFO  [TableMetadata] - HHH000108: Foreign keys: [fk_bmmf4ulukk632yxioukqcue5v]
+2016-07-28 19:35:19,307 INFO  [TableMetadata] - HHH000126: Indexes: [fk_bmmf4ulukk632yxioukqcue5v, primary]
+2016-07-28 19:35:19,311 INFO  [TableMetadata] - HHH000261: Table found: cw.jobs_job_applications
+2016-07-28 19:35:19,311 INFO  [TableMetadata] - HHH000037: Columns: [applications_id, jobs_id]
+2016-07-28 19:35:19,311 INFO  [TableMetadata] - HHH000108: Foreign keys: [fk_21hd5m30nhvpg76kqqkekujgm, fk_6vrx0feebyfnyfwbcxtt4q5gd]
+2016-07-28 19:35:19,311 INFO  [TableMetadata] - HHH000126: Indexes: [uk_21hd5m30nhvpg76kqqkekujgm, primary]
+2016-07-28 19:35:19,313 INFO  [TableMetadata] - HHH000261: Table found: cw.user_addresses
+2016-07-28 19:35:19,313 INFO  [TableMetadata] - HHH000037: Columns: [zipcode, country, createdby, createddate, city, lastmodifieddate, lastmodifiedby, id, statename, version]
+2016-07-28 19:35:19,313 INFO  [TableMetadata] - HHH000108: Foreign keys: []
+2016-07-28 19:35:19,313 INFO  [TableMetadata] - HHH000126: Indexes: [primary]
+2016-07-28 19:35:19,314 INFO  [SchemaUpdate] - HHH000232: Schema update complete
+2016-07-28 19:35:19,318 WARN  [EntityManagerFactoryRegistry] - HHH000436: Entity manager factory name (default) is already registered.  If entity manager will be clustered or passivated, specify a unique value for property 'hibernate.ejb.entitymanager_factory_name'
+2016-07-28 19:35:19,431 INFO  [GenericApplicationContext] - Closing org.springframework.context.support.GenericApplicationContext@5190010f: startup date [Thu Jul 28 19:35:19 EDT 2016]; root of context hierarchy
+2016-07-28 19:35:19,431 INFO  [GenericWebApplicationContext] - Closing org.springframework.web.context.support.GenericWebApplicationContext@3234e239: startup date [Thu Jul 28 19:35:16 EDT 2016]; root of context hierarchy

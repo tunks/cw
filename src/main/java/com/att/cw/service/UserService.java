@@ -63,11 +63,18 @@ public class UserService implements CrudService<User, Long> {
     public User findByEmail(String email) {
         return userRepository.findByEmailId(email);
     }
-
-    
+/**
+     * Find by email/name and return user
+     * @param emailOrName
+     * @return 
+     **/
+    public User findByEmailOrName(String emailOrName) {
+        return userRepository.findByEmailIdOrName(emailOrName,emailOrName);
+    }
      /**
      * Find by email/name and return user
      * @param email
+     * @param name
      * @return 
      **/
     public User findByEmailOrName(String email, String name) {
