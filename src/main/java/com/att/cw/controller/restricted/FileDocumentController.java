@@ -1,19 +1,18 @@
-package com.att.cw.controller;
+package com.att.cw.controller.restricted;
 
-
+import com.att.cw.controller.BaseController;
 import com.att.cw.model.FileDocument;
 import com.att.cw.service.FileDocumentService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
-
 /**
  * JobController concrete implementation of BaseController
  * @author ebrimatunkara
  */
-@RestController
+@Controller
 @RequestMapping("/documents")
 public class FileDocumentController implements BaseController<FileDocument,Long>{
    public static final String NOT_SUPPORTED_YET = "Not supported yet.";

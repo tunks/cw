@@ -1,4 +1,6 @@
-package com.att.cw.controller;
+package com.att.cw.controller.restricted;
+
+
 
 import com.att.cw.controller.BaseController;
 import org.slf4j.Logger;
@@ -13,9 +15,11 @@ import com.att.cw.service.UserService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 @RestController
-@RequestMapping("users")
+@RequestMapping("/users")
 public class UserController implements BaseController<User, Long> {
     /**
      * TODO logger using AOP
@@ -23,15 +27,9 @@ public class UserController implements BaseController<User, Long> {
     private static final Logger logger = LoggerFactory.getLogger(UserController.class);
     
     @Autowired
-    //@Qualifier(value = "userService")
+    @Qualifier(value = "userService")
     private UserService userService;
-
-//    @Autowired(required = true)
-//    @Qualifier(value = "userService")
-//    public void setUserService(UserService us) {
-//        this.userService = us;
-//    }
-
+    
     /**
      * Find and return user by user id
      *
@@ -41,14 +39,14 @@ public class UserController implements BaseController<User, Long> {
     public User find(@PathVariable Long id) {
         return userService.find(id);
     }
-
     /**
      * Delete user by id
      *
      */
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     @Override
-    public void delete(Long id) {
+    @ResponseBody
+    public void delete(@PathVariable Long id) {
         userService.delete(id);
     }
 
@@ -56,7 +54,7 @@ public class UserController implements BaseController<User, Long> {
      * Create new user
      *
      */
-    @RequestMapping(value = "/{id}", method = RequestMethod.POST)
+    @RequestMapping(method = RequestMethod.POST)
     @Override
     public User create(User object) {
         return userService.save(object);

@@ -17,8 +17,9 @@
 		http://www.springframework.org/schema/data/jpa
 		http://www.springframework.org/schema/data/jpa/spring-jpa.xsd">
   
+    <!-- TODO setup properties profile -->
     <context:property-placeholder location="classpath:application.properties,
-                                            classpath:application-${profile}.properties" 
+                                            classpath:application-dev.properties" 
                                   ignore-resource-not-found="true" />
 
     <jpa:repositories base-package="com.att.cw.dao" />

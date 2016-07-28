@@ -13,7 +13,6 @@ import org.springframework.stereotype.Service;
  */
 @Service("userService")
 public class UserService implements CrudService<User, Long> {
-    
     @Resource
     private UserRepository userRepository;
 
@@ -64,7 +63,16 @@ public class UserService implements CrudService<User, Long> {
     public User findByEmail(String email) {
         return userRepository.findByEmailId(email);
     }
-   
+
+    
+     /**
+     * Find by email/name and return user
+     * @param email
+     * @return 
+     **/
+    public User findByEmailOrName(String email, String name) {
+        return userRepository.findByEmailIdOrName(email,name);
+    }
       /**
      * Find  and return user by email and password
      * @param email

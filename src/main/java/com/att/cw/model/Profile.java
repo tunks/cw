@@ -24,7 +24,5 @@ public class Profile extends Audit<Long>{
     @Override
     public Long getId() {
            return id;
-    }
-    
-    
+    } 
 }

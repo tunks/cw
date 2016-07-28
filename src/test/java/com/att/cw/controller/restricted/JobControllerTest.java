@@ -1,5 +1,5 @@
 
-package com.att.cw.controller;
+package com.att.cw.controller.restricted;
 
 import com.att.cw.model.Job;
 import java.util.logging.Level;
@@ -32,8 +32,7 @@ import org.springframework.web.context.WebApplicationContext;
  */
 @ActiveProfiles({"test","dev"})
 @RunWith(SpringJUnit4ClassRunner.class) 
-@ContextConfiguration(locations = {"classpath:spring-jpa-config.xml",  
-     "file:src/main/webapp/WEB-INF/spring/appServlet/servlet-context.xml"})
+@ContextConfiguration(locations = {"classpath:springmvc-servlet.xml"})
 @WebAppConfiguration 
 public class JobControllerTest {
     @Autowired
@@ -45,6 +44,7 @@ public class JobControllerTest {
     private  Job job;
     
     private String endPointUrl;
+    private String content;
     
     public JobControllerTest() {
     }
@@ -62,6 +62,8 @@ public class JobControllerTest {
         endPointUrl = "/jobs";
         mockMvc = webAppContextSetup(context).build();
         job = new Job("Job3", "Job2 description");
+        content = "{\"title\": \""+job.getTitle()+"\",\"description\": \""+job.getDescription()+"\"}";
+
     }
     
     @After
@@ -120,7 +122,8 @@ public class JobControllerTest {
             mockMvc.perform(post(endPointUrl)
                     .contentType(MediaType.APPLICATION_JSON)
                     .param("title", job.getTitle())
-                    .param("description",job.getDescription()))
+                    .param("description", job.getDescription()))
+                    //.content(content.getBytes()))
                     .andExpect(status().isOk())
                     .andExpect(jsonPath("title").value(job.getTitle()))
                     .andExpect(jsonPath("description").value(job.getDescription()));
