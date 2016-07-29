@@ -7,7 +7,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 /**
  * FileDocument Repository interface - extending Paging,sorting and CRUD interface operations
- * See http://docs.spring.io/spring-data/jpa/docs/1.9.4.RELEASE/reference/html/
+ * Spring data - http://docs.spring.io/spring-data/jpa/docs/1.9.4.RELEASE/reference/html/
  **/
 public interface FileDocumentRepository extends PagingAndSortingRepository<FileDocument, Long>{
        /**
