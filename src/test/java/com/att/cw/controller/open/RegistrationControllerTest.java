@@ -66,7 +66,7 @@ public class RegistrationControllerTest {
         //Generate random email address
         String name = RandomStringUtils.randomAlphanumeric(6);
         String email = name.concat("@att.com");
-        userJson= "{\"name\": \""+name+"\",\"emailId\": \""+email+"\",\"password\":\"123\"}";
+        userJson= "{\"name\": \""+name+"\",\"email\": \""+email+"\",\"password\":\"123\"}";
     }
 
     @After

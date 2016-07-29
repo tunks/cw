@@ -49,9 +49,9 @@ public class AuthenticationControllerTest {
     private MockMvc mockMvc;
     private String loginUrl;
     private String registerUrl;
-    private String emailId;
+    private String email;
     private String password;
-
+    private String content;
     public AuthenticationControllerTest() {
     }
 
@@ -71,14 +71,15 @@ public class AuthenticationControllerTest {
             mockMvc = webAppContextSetup(context).build();
             
             //mock user email and password
-            emailId = RandomStringUtils.randomAlphanumeric(6)
+            email = RandomStringUtils.randomAlphanumeric(6)
                                        .concat("@localhost");
             password = RandomStringUtils.randomAlphanumeric(12);
             //register new user
+             content = "{\"email\": \""+email+"\",\"password\":\""+password+"\"}";
+
             mockMvc.perform(post(registerUrl)
                     .contentType(MediaType.APPLICATION_JSON)
-                    .param("email", emailId)
-                    .param("password", password));
+                   .content(content));
         } catch (Exception ex) {
             Logger.getLogger(AuthenticationControllerTest.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -105,8 +106,7 @@ public class AuthenticationControllerTest {
             System.out.println("login");
             mockMvc.perform(post(loginUrl)
                     .contentType(MediaType.APPLICATION_JSON)
-                    .param("email", emailId)
-                    .param("password", password))
+                    .content(content))
                     .andExpect(status().isAccepted());
         } catch (Exception ex) {
             Logger.getLogger(AuthenticationControllerTest.class.getName()).log(Level.SEVERE, null, ex);

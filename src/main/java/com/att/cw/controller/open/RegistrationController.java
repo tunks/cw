@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -19,20 +20,28 @@ import org.springframework.web.bind.annotation.RequestMethod;
  * @author ebrimatunkara
  */
 @Controller
-@RequestMapping("register")
+@RequestMapping("/register")
 public class RegistrationController {
    @Autowired
    private UserService userService;
     
+   /**
+    * Register new user account
+    * TODO - Controller exception handling https://spring.io/blog/2013/11/01/exception-handling-in-spring-mvc
+    * @param user
+    * @return 
+    */
    @RequestMapping(value="/new", method = RequestMethod.POST) 
-   public ResponseEntity registerUser(final User user){
-        User registeredUser = userService.save(user);
-        if(registeredUser != null){
-          /**
-           * TODO send email asynchronously for confirmation using AOP
-           **/
-          return new ResponseEntity(HttpStatus.CREATED);
+   public ResponseEntity registerUser(@RequestBody final User user){
+        if(!userService.existsByEmail(user.getEmail())){
+            User registeredUser = userService.save(user);
+            /**
+             * TODO send email asynchronously for confirmation using AOP
+            **/
+            return new ResponseEntity("User is successfully registered, check your email to activate your account!",HttpStatus.CREATED);
         }
-        return new ResponseEntity(HttpStatus.NOT_ACCEPTABLE);
+        else{
+             return new ResponseEntity("Sorry, user account already registered!",HttpStatus.NOT_ACCEPTABLE);
+        }
    }
 }

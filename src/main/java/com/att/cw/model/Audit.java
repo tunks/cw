@@ -30,6 +30,7 @@ public abstract class Audit<ID extends Serializable> implements Serializable{
     private Date lastModifiedDate;
 
     public abstract ID getId();
+    
     public Long getVersion() {
         return version;
     }
