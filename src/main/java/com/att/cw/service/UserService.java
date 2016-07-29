@@ -61,7 +61,7 @@ public class UserService implements CrudService<User, Long> {
      * @return 
      **/
     public User findByEmail(String email) {
-        return userRepository.findByEmailId(email);
+        return userRepository.findByEmail(email);
     }
 /**
      * Find by email/name and return user
@@ -69,7 +69,7 @@ public class UserService implements CrudService<User, Long> {
      * @return 
      **/
     public User findByEmailOrName(String emailOrName) {
-        return userRepository.findByEmailIdOrName(emailOrName,emailOrName);
+        return userRepository.findByEmailOrName(emailOrName,emailOrName);
     }
      /**
      * Find by email/name and return user
@@ -78,7 +78,7 @@ public class UserService implements CrudService<User, Long> {
      * @return 
      **/
     public User findByEmailOrName(String email, String name) {
-        return userRepository.findByEmailIdOrName(email,name);
+        return userRepository.findByEmailOrName(email,name);
     }
       /**
      * Find  and return user by email and password
@@ -87,7 +87,7 @@ public class UserService implements CrudService<User, Long> {
      * @return 
      **/
     public User findByEmailAndPassword(String email,String password) {
-        return userRepository.findByEmailIdAndPassword(email, password);
+        return userRepository.findByEmailAndPassword(email, password);
     }
     /**
      * Find  and return all users

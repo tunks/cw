@@ -29,7 +29,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 public class UserRepositoryTest {
     @Resource
     private UserRepository userRepository;
-    private String emailId;
+    private String email;
     private String password;
     public UserRepositoryTest() {
     }
@@ -44,7 +44,7 @@ public class UserRepositoryTest {
     
     @Before
     public void setUp() {
-        emailId = RandomStringUtils.randomAlphanumeric(6).concat("@att.com");
+        email= RandomStringUtils.randomAlphanumeric(6).concat("@att.com");
         password = RandomStringUtils.randomAlphabetic(16);  
     }
     
@@ -61,7 +61,7 @@ public class UserRepositoryTest {
     public void testSave() {
         System.out.println("save");
         User user = new User();
-        user.setEmailId(emailId);
+        user.setEmail(email);
         user.setPassword(password);
         User result = userRepository.save(user);
         assertEquals(user, result);

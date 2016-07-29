@@ -31,8 +31,8 @@ public class RegistrationController {
           /**
            * TODO send email asynchronously for confirmation using AOP
            **/
-          return new ResponseEntity(HttpStatus.CREATED);
+          return new ResponseEntity("User is successfully registered, check your email to activate your account!",HttpStatus.CREATED);
         }
-        return new ResponseEntity(HttpStatus.NOT_ACCEPTABLE);
+        return new ResponseEntity("Sorry, user account not registered!",HttpStatus.NOT_ACCEPTABLE);
    }
 }

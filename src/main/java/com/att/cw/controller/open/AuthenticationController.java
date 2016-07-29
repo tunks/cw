@@ -16,11 +16,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
-
 
 /**
  * Authentication controller -- Responsible for user login authentication 
@@ -43,18 +40,17 @@ public class AuthenticationController {
      */
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public ResponseEntity<LoginResponse> login(final UserLogin login) throws ServletException {
-        LoginResponse response = null;
-        User user = userService.findByEmailAndPassword(login.name,login.password);
+        User user = userService.findByEmailAndPassword(login.getEmail(),login.getPassword());
         if (user != null) {
             //TODO --refactor
            // logger.info("User logged in successfully : " + user.getName() + ":" + user.getEnabled());
-            response = new LoginResponse(Jwts.builder().setSubject(login.name)
-                    .claim("roles", user.getEmailId()).setIssuedAt(new Date())
+           LoginResponse response = new LoginResponse(Jwts.builder().setSubject(login.getEmail())
+                    .claim("roles", user.getEmail()).setIssuedAt(new Date())
                     .signWith(SignatureAlgorithm.HS256, "secretkey").compact());
             return new ResponseEntity(response, HttpStatus.ACCEPTED);
         }
         //logger.info("login failed....");
-        return new ResponseEntity(response, HttpStatus.FORBIDDEN);
+        return new ResponseEntity("Invalid crendentials!!", HttpStatus.FORBIDDEN);
     }
     
     public static class LoginResponse implements Serializable{
@@ -73,15 +69,15 @@ public class AuthenticationController {
     }
 
     public static class UserLogin implements Serializable{
-        public String name;
+        public String email;
         public String password;
 
-        public String getName() {
-            return name;
+        public String getEmail() {
+            return email;
         }
 
-        public void setName(String name) {
-            this.name = name;
+        public void setEmail(String email) {
+            this.email = email;
         }
 
         public String getPassword() {
@@ -91,7 +87,5 @@ public class AuthenticationController {
         public void setPassword(String password) {
             this.password = password;
         }
-        
-        
     }
 }

@@ -10,12 +10,11 @@ import org.springframework.data.repository.PagingAndSortingRepository;
  * http://docs.spring.io/spring-data/jpa/docs/1.9.4.RELEASE/reference/html/
  */
 public interface UserRepository extends PagingAndSortingRepository<User, Long> {
-
     /* find and return user by email
      * @param emailId
      * @return user 
      */
-    public User findByEmailId(String emailId);
+    public User findByEmail(String email);
 
     /**
      * Find user by name or email
@@ -24,13 +23,13 @@ public interface UserRepository extends PagingAndSortingRepository<User, Long> {
      * @param name
      * @return
      */
-    public User findByEmailIdOrName(String email,String  name);
+    public User findByEmailOrName(String email,String  name);
 
     /** 
      * find and return user by email and password
-     * @param emailId
+     * @param email
      * @param password
      * @return user 
      */
-    public User findByEmailIdAndPassword(String emailId, String password);
+    public User findByEmailAndPassword(String email, String password);
 }

@@ -26,8 +26,8 @@ import javax.persistence.UniqueConstraint;
 @Entity
 @Table(name = "USER",
        indexes = {
-            @Index(columnList = "EMAILID", name = "user_email_index")},
-       uniqueConstraints={@UniqueConstraint(columnNames={"EMAILID"})}
+            @Index(columnList = "EMAIL", name = "user_email_index")},
+       uniqueConstraints={@UniqueConstraint(columnNames={"EMAIL"})}
      )
 public class User extends Audit {
 
@@ -37,10 +37,10 @@ public class User extends Audit {
     @SequenceGenerator(name = "user_seq", sequenceName = "user_seq", allocationSize = 1)
     private Long id;
 
-    @Column(name = "EMAILID", length = 200, unique = true)
+    @Column(name = "EMAIL", length = 200, unique = true,nullable=false )
     @NotNull
     @Size(min = 2, max = 200)
-    private String emailId;
+    private String email;
 
     @Column(name = "PASSWORD", length = 100)
     @NotNull
@@ -105,12 +105,12 @@ public class User extends Audit {
         this.name = name;
     }
 
-    public String getEmailId() {
-        return emailId;
+    public String getEmail() {
+        return email;
     }
 
-    public void setEmailId(String emailId) {
-        this.emailId = emailId;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getPassword() {
@@ -121,13 +121,6 @@ public class User extends Audit {
         this.password = password;
     }
 
-    /* public Date getLastPasswordResetDate() {
-        return lastPasswordResetDate;
-    }
-
-    public void setLastPasswordResetDate(Date lastPasswordResetDate) {
-        this.lastPasswordResetDate = lastPasswordResetDate;
-    }*/
     public UserProfile getProfile() {
         return profile;
     }
