@@ -16,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -34,12 +35,13 @@ public class AuthenticationController {
     private UserService userService;
     /**
      * Authenticated user login
+     * TODO -- controller exception https://spring.io/blog/2013/11/01/exception-handling-in-spring-mvc
      * @param login, user credentials
      * @return response
      * @throws javax.servlet.ServletException
      */
     @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public ResponseEntity<LoginResponse> login(final UserLogin login) throws ServletException {
+    public ResponseEntity<LoginResponse> login(@RequestBody final UserLogin login) throws ServletException {
         User user = userService.findByEmailAndPassword(login.getEmail(),login.getPassword());
         if (user != null) {
             //TODO --refactor

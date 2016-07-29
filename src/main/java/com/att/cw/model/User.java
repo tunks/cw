@@ -30,7 +30,6 @@ import javax.persistence.UniqueConstraint;
        uniqueConstraints={@UniqueConstraint(columnNames={"EMAIL"})}
      )
 public class User extends Audit {
-
     @Id
     @Column(name = "ID")
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "user_seq")

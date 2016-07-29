@@ -97,5 +97,15 @@ public class UserService implements CrudService<User, Long> {
     public List<User> findAll() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+    
+    /**
+     * Determine if user exists
+     * @param email
+     * @return 
+     */
+     public boolean existsByEmail(String email){
+         User user = userRepository.findByEmail(email);
+         return (user != null);
+     }
 
 }
