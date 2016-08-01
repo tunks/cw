@@ -5,9 +5,11 @@
  */
 package com.att.cw.advice;
 
+import com.att.cw.support.message.MessageProcessor;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.Aspect;
+import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  * EmailAdvice- Aspect Oriented class that deligates email messages on pointcut
@@ -17,7 +19,8 @@ import org.aspectj.lang.annotation.Aspect;
  */
 @Aspect
 public class EmailAdvice {
-
+    @Autowired
+    private MessageProcessor mailMessageProcessor;
     /**
      * Send email when new user is created and registered
      * @param joinPoint
@@ -27,6 +30,7 @@ public class EmailAdvice {
             pointcut = "execution(* com.att.cw.service.UserService.save(..))",
             returning = "retVal")
     public void userRegistered(JoinPoint joinPoint, Object retVal) {
-            System.out.println("User is saved !!");
+            System.out.println("Sending email here !!");
+            //mailMessageProcessor.process(retVal);
     }
 }

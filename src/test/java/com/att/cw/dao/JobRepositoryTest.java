@@ -22,8 +22,8 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
  * @author ebrimatunkara
  */
 @ActiveProfiles({"test","dev"})
-@ContextConfiguration(locations = "classpath:spring-jpa-config.xml")
-@RunWith(SpringJUnit4ClassRunner.class)
+@RunWith(SpringJUnit4ClassRunner.class) 
+@ContextConfiguration(locations = {"classpath:springmvc-servlet.xml"})
 public class JobRepositoryTest {
     @Resource
     private JobRepository jobRepository;

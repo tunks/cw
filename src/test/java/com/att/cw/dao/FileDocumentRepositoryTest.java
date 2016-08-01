@@ -22,8 +22,8 @@ import org.springframework.util.FileCopyUtils;
  * FileDocumentRepository test implementation
  **/
 @ActiveProfiles({"test","dev"})
-@ContextConfiguration(locations = "classpath:spring-jpa-config.xml")
-@RunWith(SpringJUnit4ClassRunner.class)
+@RunWith(SpringJUnit4ClassRunner.class) 
+@ContextConfiguration(locations = {"classpath:springmvc-servlet.xml"})
 public class FileDocumentRepositoryTest {
     @Resource
     FileDocumentRepository documentRepository;

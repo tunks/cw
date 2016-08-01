@@ -49,10 +49,13 @@ public class User extends Audit {
     @Column(name = "NAME", length = 100)
     @Size(min = 4, max = 100)
     private String name;
-
+    
+    /**
+     * User account will be disabled by default until it is activated
+     */
     @Column(name = "ENABLED", columnDefinition = "bit default 0")
     @NotNull
-    private Boolean enabled;
+    private Boolean enabled= false;
 
     /* @Column(name = "LASTPASSWORDRESETDATE")
     @Temporal(TemporalType.TIMESTAMP)
