@@ -46,9 +46,12 @@ public class AuthenticationController {
         if (user != null) {
             //TODO --refactor
            // logger.info("User logged in successfully : " + user.getName() + ":" + user.getEnabled());
-           LoginResponse response = new LoginResponse(Jwts.builder().setSubject(login.getEmail())
-                    .claim("roles", user.getEmail()).setIssuedAt(new Date())
-                    .signWith(SignatureAlgorithm.HS256, "secretkey").compact());
+           LoginResponse response = new LoginResponse(Jwts.builder()
+                                                          .setSubject(login.getEmail())
+                                                          .claim("roles", user.getEmail())
+                                                          .setIssuedAt(new Date())
+                                                          .signWith(SignatureAlgorithm.HS256, "secretkey")
+                                                          .compact());
             return new ResponseEntity(response, HttpStatus.ACCEPTED);
         }
         //logger.info("login failed....");

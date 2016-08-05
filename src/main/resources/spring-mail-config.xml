@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.2.xsd
+          http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.2.xsd
+          http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.2.xsd">
+
+    <bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+        <property name="host" value="${mail.host}"/>
+        <property name="port" value="${mail.port}"/>
+        <property name="username" value="${mail.username}"/>
+        <property name="password" value="${${mail.password}"/>
+        <property name="javaMailProperties">
+            <props>
+                <prop key="mail.transport.protocol">${mail.properties.smtp.protocol}</prop>
+                <prop key="mail.smtp.auth">${mail.properties.smtp.auth}</prop>
+                <prop key="mail.smtp.starttls.enable">${mail.properties.smtp.starttls.enable}</prop>
+                <prop key="mail.debug">${mail.properties.smtp.debug}</prop>
+            </props>
+        </property>
+    </bean>
+    <!-- scan aspectj components-->
+    <bean id="emailAdvice" class="com.att.cw.advice.EmailAdvice"/>
+    <!-- mail html content -->
+    <bean id="activateMailContent" class="java.lang.String">
+        <constructor-arg>
+            <bean class="org.springframework.util.FileCopyUtils" factory-method="copyToByteArray">
+                <constructor-arg value="classpath:templates/activate-mail.html" type="java.io.InputStream" />
+            </bean>     
+        </constructor-arg>
+    </bean>
+</beans>
