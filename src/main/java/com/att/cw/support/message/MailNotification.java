@@ -4,6 +4,8 @@
  */
 package com.att.cw.support.message;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,11 +29,11 @@ public class MailNotification implements Notification<SimpleMailMessage> {
      **/
     @Override
     public void send(SimpleMailMessage message) {
-//        try {
-//            mailSender.send(createMimeMessage(message));
-//        } catch (MessagingException ex) {
-//            Logger.getLogger(MailNotification.class.getName()).log(Level.SEVERE, null, ex);
-//        }
+        try {
+            mailSender.send(createMimeMessage(message));
+        } catch (MessagingException ex) {
+            Logger.getLogger(MailNotification.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     /* create mime message */
     private MimeMessage createMimeMessage(SimpleMailMessage message) throws MessagingException {

@@ -10,6 +10,7 @@ import java.util.Map;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.SimpleMailMessage;
 import org.springframework.stereotype.Component;
 
 /**
@@ -17,22 +18,17 @@ import org.springframework.stereotype.Component;
  * @author ebrimatunkara
  */
 @Component("mailMessageProcessor")
-public class MailMessageProcessor implements MessageProcessor<Message>{
+public class MailMessageProcessor implements MessageProcessor<SimpleMailMessage>{
     /**
      * EmailNotification service
      */
     @Autowired
     private Notification mailNotificaton;
-    /**
-     * Mail message builder 
-     **/
-    @Autowired
-    private MailMessageBuilder  mailMessageBuilder;
     
     private final ExecutorService executor = Executors.newFixedThreadPool(50);
     
     @Override
-    public  void process(Message payload){
+    public  void process(SimpleMailMessage payload){
           mailNotificaton.send(payload);
     }
 
