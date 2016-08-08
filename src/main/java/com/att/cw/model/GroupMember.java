@@ -9,7 +9,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -18,48 +17,35 @@ import javax.persistence.Table;
  * @author ebrimatunkara
  */
 @Entity
-@Table(name = "MESSAGE")
-public class Message extends Audit<Long> {
-    /**
-     * id
-     */
+@Table(name="GROUP_MEMBER")
+public class GroupMember extends Audit<Long>{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-
-    private String subject;
     
-    private String content;
+    private boolean active = false;    
     
     @OneToOne
-    private MessageHeader header;
-    
+    private User user;
+   
     @Override
     public Long getId() {
         return id;
     }
 
-    public MessageHeader getHeader() {
-        return header;
+    public boolean isActive() {
+        return active;
     }
 
-    public void setHeader(MessageHeader header) {
-        this.header = header;
+    public void setActive(boolean active) {
+        this.active = active;
     }
 
-    public String getSubject() {
-        return subject;
+    public User getUser() {
+        return user;
     }
 
-    public void setSubject(String subject) {
-        this.subject = subject;
-    }
-
-    public String getContent() {
-        return content;
-    }
-
-    public void setContent(String content) {
-        this.content = content;
+    public void setUser(User user) {
+        this.user = user;
     }
 }

@@ -16,7 +16,7 @@ import javax.persistence.Table;
  * FileDocument
  */
 @Entity
-@Table(name = "file_documents")
+@Table(name = "FILE_DOCUMENT")
 public class FileDocument extends Audit<Long>{
     /**
      * document id
@@ -43,7 +43,8 @@ public class FileDocument extends Audit<Long>{
     /**
      * File content in bytes
      */
-    @Lob @Basic(fetch = FetchType.LAZY)
+    @Lob 
+    @Basic(fetch = FetchType.LAZY)
     @Column(length=16777215)
     private byte[] content;
 

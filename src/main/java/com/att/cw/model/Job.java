@@ -1,25 +1,20 @@
 package com.att.cw.model;
 
-import java.io.Serializable;
-import java.sql.Date;
 import java.util.Set;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 
 /**
  * Job entity class
- *
  */
 @Entity
-@Table(name = "jobs")
+@Table(name = "JOB")
 public class Job extends Audit<Long>{
      private static final long serialVersionUID = 1L;
     /**
@@ -38,28 +33,15 @@ public class Job extends Audit<Long>{
      */
     @NotNull
     private String description;
+
+   // @OneToMany(mappedBy = "job")
+    //private Set<JobVacancy> jobVacancies;
     /**
-     * job opening start date
+     * department or group that owns the job
      */
-    private Date openDate;
-    /**
-     * job deadline closing date
-     */
-    private Date closeDate;
-    /*
-     * department or group id  that owns the job
-     */
-    private Long ownerId;
-    /**
-     * job candidate applications
-     */
-    @OneToMany
-    private Set<JobApplication> applications;
-    /**
-     * job posting work flow process
-     */
-    @OneToOne
-    private JobWorkFlow workflow;
+    
+    //@ManyToOne
+    //private Group ownerGroup;
 
     public Job() {}
 
@@ -93,43 +75,19 @@ public class Job extends Audit<Long>{
         this.description = description;
     }
 
-    public Date getOpenDate() {
-        return openDate;
-    }
+//    public Set<JobVacancy> getJobVacancies() {
+//        return jobVacancies;
+//    }
+//
+//    public void setJobVacancies(Set<JobVacancy> jobVacancies) {
+//        this.jobVacancies = jobVacancies;
+//    }
 
-    public void setOpenDate(Date openDate) {
-        this.openDate = openDate;
-    }
-
-    public Date getCloseDate() {
-        return closeDate;
-    }
-
-    public void setCloseDate(Date closeDate) {
-        this.closeDate = closeDate;
-    }
-
-    public Long getOwnerId() {
-        return ownerId;
-    }
-
-    public void setOwnerId(Long ownerId) {
-        this.ownerId = ownerId;
-    }
-
-    public Set<JobApplication> getApplications() {
-        return applications;
-    }
-
-    public void setApplications(Set<JobApplication> applications) {
-        this.applications = applications;
-    }
-
-    public JobWorkFlow getWorkflow() {
-        return workflow;
-    }
-
-    public void setWorkflow(JobWorkFlow workflow) {
-        this.workflow = workflow;
-    }
+//    public Group getOwnerGroup() {
+//        return ownerGroup;
+//    }
+//
+//    public void setOwnerGroup(Group ownerGroup) {
+//        this.ownerGroup = ownerGroup;
+//    }
 }

@@ -18,7 +18,7 @@ import javax.persistence.Table;
  * @author ebrimatunkara
  */
 @Entity
-@Table(name = "message_header")
+@Table(name = "MESSAGE_HEADER")
 public class MessageHeader extends Audit<Long> {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

@@ -19,7 +19,7 @@ import javax.validation.constraints.NotNull;
  * @author ebrimatunkara
  */
 @Entity
-@Table(name = "user_profile")
+@Table(name = "USER_PROFILE")
 public class UserProfile extends Profile {
     @Column(name="first_name")
     @NotNull

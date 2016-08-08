@@ -37,8 +37,8 @@ public class JobController implements BaseController<Job,Long>{
      **/
     @RequestMapping(method=RequestMethod.GET)
     public Page<Job> findAllBy(@RequestParam(value="groupId", required=false) Long ownerId, Pageable page){
-       if(ownerId != null)
-           return jobService.findAllByOwner(ownerId, page);
+      // if(ownerId != null)
+        //   return jobService.findAllByOwner(ownerId, page);
        return jobService.findAll(page);
     }
     /**

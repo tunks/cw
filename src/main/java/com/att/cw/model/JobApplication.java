@@ -9,7 +9,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "job_applications")
+@Table(name = "JOB_APPLICATION")
 public class JobApplication  extends Audit<Long> {
     private static final long serialVersionUID = 1L;
     

@@ -24,7 +24,7 @@ import javax.persistence.Temporal;
  * @author ebrimatunkara
  */
 @Entity
-@Table(name = "activation_token")
+@Table(name = "ACTIVATION_TOKEN")
 @EntityListeners(ActivationTokenEntityListener.class)
 public class ActivationToken extends Audit<Long> {
     @Id

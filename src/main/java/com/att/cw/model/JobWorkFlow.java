@@ -13,7 +13,7 @@ import javax.persistence.Table;
  *
  */
 @Entity
-@Table(name = "job_workflows")
+@Table(name = "JOB_WORKFLOW")
 public class JobWorkFlow extends Audit<Long> {
      private static final long serialVersionUID = 1L;
     /**

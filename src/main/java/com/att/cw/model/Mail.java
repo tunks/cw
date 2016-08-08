@@ -4,24 +4,38 @@
  */
 package com.att.cw.model;
 
-import org.springframework.data.annotation.Id;
+import java.io.Serializable;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
 /**
  *
  * @author ebrimatunkara
  */
-
-public class Mail {
-    @Id
+@Entity
+@Table(name="MAIL")
+public class Mail extends Audit{
+    @Id  
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private String id;
-    private Message message;
     
-    public String getRecipient() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    @OneToOne
+    private Message message;
+
+    @Override
+    public Serializable getId() {
+      return id;
+    }    
+
+    public Message getMessage() {
+        return message;
     }
 
-    public String getSubject() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void setMessage(Message message) {
+        this.message = message;
     }
-    
 }

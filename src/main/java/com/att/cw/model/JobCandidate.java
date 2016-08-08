@@ -11,7 +11,7 @@ import javax.persistence.Table;
  * JobCandidate entity class
  **/
 @Entity
-@Table(name = "job_candidates")
+@Table(name = "JOB_CANDIDATE")
 public class JobCandidate extends Audit<Long>{
         private static final long serialVersionUID = 1L;
 	/**

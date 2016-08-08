@@ -1,6 +1,5 @@
 package com.att.cw.model;
 
-import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -8,13 +7,11 @@ import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
-
 /**
  * Job Activity
- *
  */
 @Entity
-@Table(name = "job_activities")
+@Table(name = "JOB_ACTIVITYZ")
 public class JobActivity extends Audit<Long> {
      private static final long serialVersionUID = 1L;
     /**
@@ -29,11 +26,16 @@ public class JobActivity extends Audit<Long> {
     @NotNull
     private String name;
     /**
+     *  Activity description
+     */
+    private String description;
+    /**
      * Activity parent work flow
      */
     @OneToOne
     private JobWorkFlow workflow;
 
+    @Override
     public Long getId() {
         return id;
     }
@@ -56,5 +58,13 @@ public class JobActivity extends Audit<Long> {
 
     public void setWorkflow(JobWorkFlow workflow) {
         this.workflow = workflow;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 }

@@ -26,7 +26,10 @@ public class MailMessageProcessor implements MessageProcessor<SimpleMailMessage>
     private Notification mailNotificaton;
     
     private final ExecutorService executor = Executors.newFixedThreadPool(50);
-    
+    /**
+     * TODO -- asynchronous thread
+     * @param payload
+     */
     @Override
     public  void process(SimpleMailMessage payload){
           mailNotificaton.send(payload);

@@ -3,11 +3,12 @@ package com.att.cw.model;
 import com.att.cw.listener.AuditingEntityListener;
 import java.io.Serializable;
 import java.util.Date;
+import javax.persistence.Column;
 import javax.persistence.EntityListeners;
 import javax.persistence.MappedSuperclass;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import org.springframework.data.annotation.Version;
+import javax.persistence.Version;
 /**
  * @author ebrimatunkara 
  * Audit class that will provide the auditing for model entities
@@ -17,15 +18,21 @@ import org.springframework.data.annotation.Version;
 @EntityListeners(AuditingEntityListener.class)
 public abstract class Audit<ID extends Serializable> implements Serializable{
     private static final long serialVersionUID = 1L;
-    @Version
-    private Long version;
-
-    private String createdBy;
-    private String lastModifiedBy;
     
+    //@Version
+    private Long version;
+    
+    @Column(name="created_by")
+    private String createdBy;
+    
+    @Column(name="last_modified_by")
+    private String lastModifiedBy;
+
+    @Column(name="created_date", updatable=true)
     @Temporal(TemporalType.TIMESTAMP)
     private Date createdDate;
     
+    @Column(name="last_modified_date")
     @Temporal(TemporalType.TIMESTAMP)
     private Date lastModifiedDate;
 

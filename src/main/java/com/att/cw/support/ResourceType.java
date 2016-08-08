@@ -6,6 +6,7 @@ package com.att.cw.support;
  */
 public enum ResourceType {
     USER,
+    USER_PROFILE,
     JOB_APPLICATION,
     JOB_ACTIVITY
 }

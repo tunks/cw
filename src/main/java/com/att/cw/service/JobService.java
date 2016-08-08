@@ -65,9 +65,9 @@ public class JobService implements CrudService<Job,Long>{
      * @param page
      * @return 
      **/
-    public Page<Job> findAllByOwner(Long ownerId ,Pageable page){
-           return jobRepository.findByOwnerId(ownerId, page);
-    }
+//    public Page<Job> findAllByOwner(Long ownerId ,Pageable page){
+//           return jobRepository.findByOwnerId(ownerId, page);
+//    }
 
      /**
      * Find and return all jobs
