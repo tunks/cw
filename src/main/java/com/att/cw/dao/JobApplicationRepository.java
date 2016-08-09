@@ -23,4 +23,11 @@ public interface JobApplicationRepository extends PagingAndSortingRepository<Job
        * @return 
        */
       public Page<JobApplication> findByJob(Job job, Pageable page);
+      /**
+       * Find job application by id and job
+       * @param id
+       * @param job
+       * @return 
+       */
+      public JobApplication findByIdAndJob(Long id, Job job);
 }

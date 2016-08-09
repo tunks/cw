@@ -57,7 +57,11 @@ public class JobApplicationService implements CrudService<JobApplication,Long>{
     public Page<JobApplication> findAll(Pageable page) {
         return  jobApplicationRepository.findAll(page);
     }
-
+   
+    /**
+     * Delete job application 
+     * @param id
+     */
     @Override
     public void delete(Long id) {
          jobApplicationRepository.delete(id);
@@ -71,5 +75,15 @@ public class JobApplicationService implements CrudService<JobApplication,Long>{
      */    
     public Page<JobApplication> findByJob(Job job, Pageable page){
         return jobApplicationRepository.findByJob(job, page);
+    }
+    
+    /**
+     * Find job application by id and job
+     * @param id
+     * @param job
+     * @return 
+     */
+    public JobApplication findByIdAndJob(Long id, Job job){
+       return jobApplicationRepository.findByIdAndJob(id,job);
     }
 }
