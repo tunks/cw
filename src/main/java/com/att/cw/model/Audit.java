@@ -19,7 +19,7 @@ import javax.persistence.Version;
 public abstract class Audit<ID extends Serializable> implements Serializable{
     private static final long serialVersionUID = 1L;
     
-    //@Version
+    @Version
     private Long version;
     
     @Column(name="created_by")

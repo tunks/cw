@@ -64,7 +64,7 @@ public class JobService implements CrudService<Job,Long>{
      * @param ownerId
      * @param page
      * @return 
-     **/
+     */
 //    public Page<Job> findAllByOwner(Long ownerId ,Pageable page){
 //           return jobRepository.findByOwnerId(ownerId, page);
 //    }
@@ -75,6 +75,6 @@ public class JobService implements CrudService<Job,Long>{
      **/
     @Override
     public List<Job> findAll() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+         return (List<Job>) jobRepository.findAll();
     }
 }

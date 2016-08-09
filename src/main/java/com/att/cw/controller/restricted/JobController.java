@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -70,7 +71,7 @@ public class JobController implements BaseController<Job,Long>{
      **/
     @RequestMapping(method=RequestMethod.POST)
     @Override
-    public Job create(Job object) {
+    public Job create(@RequestBody Job object) {
         return jobService.save(object);
     }
 
@@ -79,7 +80,7 @@ public class JobController implements BaseController<Job,Long>{
      **/
     @RequestMapping(method=RequestMethod.PUT)
     @Override
-    public Job update(Job object) {
+    public Job update(@RequestBody Job object) {
         return jobService.save(object);
     }
     

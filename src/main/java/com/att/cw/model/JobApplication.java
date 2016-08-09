@@ -20,16 +20,17 @@ public class JobApplication  extends Audit<Long> {
     private Date dateModified;
     /**
      * JobApplication candidate
-         *
      */
     @OneToOne
     private JobCandidate candidate;
     /**
      * JobApplication work flow process
-         *
      */
     @OneToOne
     private JobWorkFlow workflow;
+    
+    @OneToOne
+    private Job job;
 
     public JobApplication() {
 
@@ -74,5 +75,13 @@ public class JobApplication  extends Audit<Long> {
     public void setWorkflow(JobWorkFlow workflow) {
         this.workflow = workflow;
     }
+
+    public Job getJob() {
+        return job;
+    }
+
+    public void setJob(Job job) {
+        this.job = job;
+    } 
 
 }

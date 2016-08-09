@@ -5,55 +5,39 @@
  */
 package com.att.cw.model;
 
-import java.sql.Date;
-import java.util.Set;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
+import java.io.Serializable;
+import java.util.Date;
+import javax.persistence.Column;
+import javax.persistence.Embeddable;
+import javax.persistence.Temporal;
 
 /**
  * Job Vacancies
  * @author ebrimatunkara
  */
-@Entity
-@Table(name="JOB_VACANCY")
-public class JobVacancy extends Audit<Long>{
-    /**
-     * job positing  id
-     */
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+@Embeddable
+public class JobVacancy implements Serializable{
     /**
      * job opening start date
      */
+    @Column(name="open_date", nullable=false)
+    @Temporal(javax.persistence.TemporalType.TIMESTAMP)
     private Date openDate;
     /**
      * job deadline closing date
      */
+    @Column(name="close_date", nullable=false)
+    @Temporal(javax.persistence.TemporalType.TIMESTAMP)
     private Date closeDate;
     
-//    @ManyToOne
-//    private Job job;
-    /**
-     * job posting work flow process
-     */
-    @OneToOne
-    private JobWorkFlow workflow;
-        /**
-     * job candidate applications
-     */
-    @OneToMany
-    private Set<JobApplication> applications;
-    
-    @Override
-    public Long getId() {
-       return id;
+    private boolean open=false;
+
+    public JobVacancy() {
+    }
+
+    public JobVacancy(Date openDate, Date closeDate) {
+        this.openDate = openDate;
+        this.closeDate = closeDate;
     }
     
     public Date getOpenDate() {
@@ -70,29 +54,5 @@ public class JobVacancy extends Audit<Long>{
 
     public void setCloseDate(Date closeDate) {
         this.closeDate = closeDate;
-    }
-//
-//    public Job getJob() {
-//        return job;
-//    }
-//
-//    public void setJob(Job job) {
-//        this.job = job;
-//    }
-//     
-    public Set<JobApplication> getApplications() {
-        return applications;
-    }
-
-    public void setApplications(Set<JobApplication> applications) {
-        this.applications = applications;
-    }
-
-    public JobWorkFlow getWorkflow() {
-        return workflow;
-    }
-
-    public void setWorkflow(JobWorkFlow workflow) {
-        this.workflow = workflow;
-    }
+    }   
 }
