@@ -31,6 +31,10 @@ public class JobApplication  extends Audit<Long> {
     
     @OneToOne
     private Job job;
+    /**
+     * Job resume 
+     */
+    private Resume resume;
 
     public JobApplication() {
 
@@ -85,4 +89,11 @@ public class JobApplication  extends Audit<Long> {
         this.job = job;
     } 
 
+    public Resume getResume() {
+        return resume;
+    }
+
+    public void setResume(Resume resume) {
+        this.resume = resume;
+    }
 }

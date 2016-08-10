@@ -28,11 +28,6 @@ public class FileDocument extends Audit<Long>{
      * document description
      */
     private String description;
-    /*
-     * resource id
-     */
-    @Column(name="resource_id")
-    private Long resourceId;
     /**
      * resource type 
     *
@@ -66,14 +61,6 @@ public class FileDocument extends Audit<Long>{
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    public Long getResourceId() {
-        return resourceId;
-    }
-
-    public void setResourceId(Long resourceId) {
-        this.resourceId = resourceId;
     }
 
     public ResourceType getResourceType() {

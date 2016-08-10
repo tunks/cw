@@ -5,9 +5,19 @@
  */
 package com.att.cw.service;
 
+import com.att.cw.dao.FileDocumentRepository;
+import com.att.cw.dao.FileDocumentRepositoryTest;
+import com.att.cw.model.FileDocument;
 import com.att.cw.model.Job;
 import com.att.cw.model.JobApplication;
+import com.att.cw.model.JobVacancy;
+import com.att.cw.model.Resume;
+import com.att.cw.support.ResourceType;
+import java.io.IOException;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+import javax.annotation.Resource;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -23,15 +33,29 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 /**
- *
+ * Job application service test class
  * @author ebrimatunkara
  */
 @ActiveProfiles({"test","dev"})
 @RunWith(SpringJUnit4ClassRunner.class) 
 @ContextConfiguration(locations = {"classpath:springmvc-servlet.xml"})
 public class JobApplicationServiceTest {
-     @Autowired
+    @Autowired
+    private JobService  jobService;
+    
+    @Autowired
     private JobApplicationService jobApplicationService;
+    
+    @Autowired
+    private ResumeService resumeService;
+    
+    @Autowired
+    private FileDocumentService documentService;
+    
+    private JobApplication application;
+    
+    Job jobResult;
+     
     public JobApplicationServiceTest() {
     }
     
@@ -44,7 +68,29 @@ public class JobApplicationServiceTest {
     }
     
     @Before
-    public void setUp() {
+    public void setUp() throws IOException {
+        Calendar cal = Calendar.getInstance();
+        Date startDate = cal.getTime();
+        cal.set(Calendar.MONTH, 2);
+        Date closeDate = cal.getTime();
+        JobVacancy vacancy = new JobVacancy();
+        vacancy.setOpenDate(startDate);
+        vacancy.setCloseDate(closeDate);
+        Job job = new Job("Java developer II","Experience in java technologies");
+        job.setVacancy(vacancy);
+        //save job
+        jobResult = jobService.save(job);
+        FileDocument document = FileDocumentRepositoryTest.createMockDocument();
+        document.setResourceType(ResourceType.JOB_APPLICATION);
+        //save document
+        documentService.save(document);
+        //job resume
+        Resume resume = new Resume();
+        resume.setDocument(document);
+        resumeService.save(resume);
+//        //job application
+//        application = new JobApplication();
+//        application.setResume(resume);
     }
     
     @After
@@ -56,14 +102,8 @@ public class JobApplicationServiceTest {
      */
     @Test
     public void testSave() {
-        System.out.println("save");
-        JobApplication object = null;
-        JobApplicationService instance = new JobApplicationService();
-        JobApplication expResult = null;
-        JobApplication result = instance.save(object);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        //JobApplication result = jobApplicationService.save(application);
+        //assertNotNull(result);
     }
 
     /**
@@ -72,13 +112,6 @@ public class JobApplicationServiceTest {
     @Test
     public void testFind() {
         System.out.println("find");
-        Long id = null;
-        JobApplicationService instance = new JobApplicationService();
-        JobApplication expResult = null;
-        JobApplication result = instance.find(id);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
@@ -87,12 +120,6 @@ public class JobApplicationServiceTest {
     @Test
     public void testFindAll_0args() {
         System.out.println("findAll");
-        JobApplicationService instance = new JobApplicationService();
-        List<JobApplication> expResult = null;
-        List<JobApplication> result = instance.findAll();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
@@ -101,13 +128,6 @@ public class JobApplicationServiceTest {
     @Test
     public void testFindAll_Pageable() {
         System.out.println("findAll");
-        Pageable page = null;
-        JobApplicationService instance = new JobApplicationService();
-        Page<JobApplication> expResult = null;
-        Page<JobApplication> result = instance.findAll(page);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
@@ -116,11 +136,6 @@ public class JobApplicationServiceTest {
     @Test
     public void testDelete() {
         System.out.println("delete");
-        Long id = null;
-        JobApplicationService instance = new JobApplicationService();
-        instance.delete(id);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
@@ -129,14 +144,6 @@ public class JobApplicationServiceTest {
     @Test
     public void testFindByJob() {
         System.out.println("findByJob");
-        Job job = null;
-        Pageable page = null;
-        JobApplicationService instance = new JobApplicationService();
-        Page<JobApplication> expResult = null;
-        Page<JobApplication> result = instance.findByJob(job, page);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
@@ -145,14 +152,7 @@ public class JobApplicationServiceTest {
     @Test
     public void testFindByIdAndJob() {
         System.out.println("findByIdAndJob");
-        Long id = null;
-        Job job = null;
-        JobApplicationService instance = new JobApplicationService();
-        JobApplication expResult = null;
-        JobApplication result = instance.findByIdAndJob(id, job);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+
     }
     
 }

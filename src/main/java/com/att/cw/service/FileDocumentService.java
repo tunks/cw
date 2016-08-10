@@ -58,9 +58,9 @@ public class FileDocumentService implements CrudService<FileDocument,Long>{
      * @param page
      * @return 
      **/
-    public Page<FileDocument> findAllByOwner(Long resourceId ,ResourceType type, Pageable page){
-           return  fileDocumentRepository.findByResourceIdAndResourceType(resourceId, type, page);
-    }
+//    public Page<FileDocument> findAllByOwner(Long resourceId ,ResourceType type, Pageable page){
+//           return  fileDocumentRepository.findByResourceIdAndResourceType(resourceId, type, page);
+//    }
 
     /**
      * Find and return all file documents
