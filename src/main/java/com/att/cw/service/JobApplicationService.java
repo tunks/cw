@@ -86,4 +86,8 @@ public class JobApplicationService implements CrudService<JobApplication,Long>{
     public JobApplication findByIdAndJob(Long id, Job job){
        return jobApplicationRepository.findByIdAndJob(id,job);
     }
+
+    List<JobApplication> findByJob(Job job) {
+      return jobApplicationRepository.findByJob(job);
+    }
 }

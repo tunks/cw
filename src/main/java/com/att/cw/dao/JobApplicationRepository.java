@@ -7,6 +7,7 @@ package com.att.cw.dao;
 
 import com.att.cw.model.Job;
 import com.att.cw.model.JobApplication;
+import java.util.List;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.repository.PagingAndSortingRepository;
@@ -30,4 +31,10 @@ public interface JobApplicationRepository extends PagingAndSortingRepository<Job
        * @return 
        */
       public JobApplication findByIdAndJob(Long id, Job job);
+      /**
+       * Find by job
+       * @param job
+       * @return ,return list of jobs
+       */
+      public List<JobApplication> findByJob(Job job);
 }

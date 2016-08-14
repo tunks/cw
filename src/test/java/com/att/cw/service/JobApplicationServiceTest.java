@@ -16,7 +16,9 @@ import com.att.cw.support.ResourceType;
 import java.io.IOException;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import javax.annotation.Resource;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -24,7 +26,9 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import org.junit.FixMethodOrder;
 import org.junit.runner.RunWith;
+import org.junit.runners.MethodSorters;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -51,17 +55,17 @@ public class JobApplicationServiceTest {
     
     @Autowired
     private FileDocumentService documentService;
-    
+        
+    private Job job;
     private JobApplication application;
-    
-    Job jobResult;
+    private Resume resume;
      
     public JobApplicationServiceTest() {
     }
     
     @BeforeClass
     public static void setUpClass() {
-    }
+    } 
     
     @AfterClass
     public static void tearDownClass() {
@@ -71,26 +75,33 @@ public class JobApplicationServiceTest {
     public void setUp() throws IOException {
         Calendar cal = Calendar.getInstance();
         Date startDate = cal.getTime();
-        cal.set(Calendar.MONTH, 2);
+        cal.add(Calendar.MONTH, -2);
         Date closeDate = cal.getTime();
         JobVacancy vacancy = new JobVacancy();
         vacancy.setOpenDate(startDate);
         vacancy.setCloseDate(closeDate);
-        Job job = new Job("Java developer II","Experience in java technologies");
+        
+        job = new Job("Java developer II","Experience in java technologies");
         job.setVacancy(vacancy);
         //save job
-        jobResult = jobService.save(job);
+        jobService.save(job);
         FileDocument document = FileDocumentRepositoryTest.createMockDocument();
         document.setResourceType(ResourceType.JOB_APPLICATION);
         //save document
         documentService.save(document);
-        //job resume
-        Resume resume = new Resume();
+        //job resumex
+        resume = new Resume();
         resume.setDocument(document);
         resumeService.save(resume);
-//        //job application
-//        application = new JobApplication();
-//        application.setResume(resume);
+        application = createJobApplication(job,resume);
+    }
+
+    private JobApplication createJobApplication(Job job, Resume resume) {
+        //job application
+        JobApplication appl = new JobApplication();
+        appl.setResume(resume);
+        appl.setJob(job);
+        return appl;
     }
     
     @After
@@ -102,8 +113,8 @@ public class JobApplicationServiceTest {
      */
     @Test
     public void testSave() {
-        //JobApplication result = jobApplicationService.save(application);
-        //assertNotNull(result);
+        JobApplication result = jobApplicationService.save(application);
+        assertNotNull(result);
     }
 
     /**
@@ -120,6 +131,13 @@ public class JobApplicationServiceTest {
     @Test
     public void testFindAll_0args() {
         System.out.println("findAll");
+        //create and save job application
+        JobApplication appl = createJobApplication(job,resume);
+        jobApplicationService.save(appl);
+        //find applications by job
+        List<JobApplication> applications = jobApplicationService.findByJob(job);
+        assertTrue(applications.size()>0);
+        
     }
 
     /**

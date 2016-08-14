@@ -9,6 +9,7 @@ import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
+import javax.persistence.Embedded;
 import javax.persistence.Temporal;
 
 /**
@@ -29,8 +30,9 @@ public class JobVacancy implements Serializable{
     @Column(name="close_date", nullable=false)
     @Temporal(javax.persistence.TemporalType.TIMESTAMP)
     private Date closeDate;
-    
-    private boolean open=false;
+   
+    @Embedded
+    private JobStatus status;
 
     public JobVacancy() {
     }

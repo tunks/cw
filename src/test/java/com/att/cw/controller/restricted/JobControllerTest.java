@@ -67,7 +67,7 @@ public class JobControllerTest {
     public void setUp() throws JsonProcessingException {
         Calendar cal = Calendar.getInstance();
         Date startDate = cal.getTime();
-        cal.set(Calendar.MONTH,2);
+        cal.add(Calendar.MONTH,2);
         Date endDate = cal.getTime();
         endPointUrl = "/jobs";
         mockMvc = webAppContextSetup(context).build();

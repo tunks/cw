@@ -50,7 +50,7 @@ public class JobRepositoryTest {
         Calendar cal = Calendar.getInstance();
         Date openDate = cal.getTime();
         //set close date
-        cal.set(Calendar.MONTH, 2);
+        cal.add(Calendar.MONTH, 2);
         Date closeDate = cal.getTime();
         JobVacancy vacancy = new JobVacancy(openDate, closeDate);
         job = new Job("Project Manager", "This is the software engineer job description!");

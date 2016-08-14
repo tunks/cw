@@ -3,6 +3,7 @@ package com.att.cw.service;
 
 import com.att.cw.dao.JobRepository;
 import com.att.cw.model.Job;
+import com.att.cw.model.JobApplication;
 import java.util.List;
 import javax.annotation.Resource;
 import org.springframework.data.domain.Page;
@@ -77,4 +78,5 @@ public class JobService implements CrudService<Job,Long>{
     public List<Job> findAll() {
          return (List<Job>) jobRepository.findAll();
     }
+    
 }

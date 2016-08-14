@@ -1,14 +1,21 @@
 package com.att.cw.model;
 
+import com.att.cw.listener.JobApplicationEntityListener;
 import java.sql.Date;
+import javax.persistence.Basic;
 import javax.persistence.Entity;
+import javax.persistence.EntityListeners;
+import static javax.persistence.FetchType.LAZY;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
+@EntityListeners(JobApplicationEntityListener.class)
 @Table(name = "JOB_APPLICATION")
 public class JobApplication  extends Audit<Long> {
     private static final long serialVersionUID = 1L;
@@ -22,18 +29,25 @@ public class JobApplication  extends Audit<Long> {
      * JobApplication candidate
      */
     @OneToOne
+    @JoinColumn(name="candidate_id")
     private JobCandidate candidate;
     /**
      * JobApplication work flow process
      */
     @OneToOne
+    @JoinColumn(name="workflow_id")
     private JobWorkFlow workflow;
-    
-    @OneToOne
+  
+    @ManyToOne
+    @JoinColumn(name="job_id")
+    @Basic(fetch=LAZY)
     private Job job;
     /**
      * Job resume 
      */
+    
+    @ManyToOne
+    @JoinColumn(name="resume_id")
     private Resume resume;
 
     public JobApplication() {

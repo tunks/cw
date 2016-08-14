@@ -11,7 +11,7 @@ import javax.validation.constraints.NotNull;
  * Job Activity
  */
 @Entity
-@Table(name = "JOB_ACTIVITYZ")
+@Table(name = "JOB_ACTIVITY")
 public class JobActivity extends Audit<Long> {
      private static final long serialVersionUID = 1L;
     /**
