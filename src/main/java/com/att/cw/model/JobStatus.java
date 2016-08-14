@@ -5,13 +5,10 @@
  */
 package com.att.cw.model;
 
-import javax.persistence.Embeddable;
-
 /**
  * Job entity status
  * @author ebrimatunkara
  */
-@Embeddable
 public enum JobStatus {
     OPEN,CLOSE;
 }

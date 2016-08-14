@@ -75,7 +75,7 @@ public class JobApplicationServiceTest {
     public void setUp() throws IOException {
         Calendar cal = Calendar.getInstance();
         Date startDate = cal.getTime();
-        cal.add(Calendar.MONTH, -2);
+        cal.add(Calendar.MONTH, 2);
         Date closeDate = cal.getTime();
         JobVacancy vacancy = new JobVacancy();
         vacancy.setOpenDate(startDate);

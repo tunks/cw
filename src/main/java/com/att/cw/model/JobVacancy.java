@@ -9,7 +9,8 @@ import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
-import javax.persistence.Embedded;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.Temporal;
 
 /**
@@ -30,8 +31,10 @@ public class JobVacancy implements Serializable{
     @Column(name="close_date", nullable=false)
     @Temporal(javax.persistence.TemporalType.TIMESTAMP)
     private Date closeDate;
-   
-    @Embedded
+    /**
+     * Job status enumerated value
+     */
+    @Enumerated(EnumType.STRING)   
     private JobStatus status;
 
     public JobVacancy() {
@@ -57,4 +60,12 @@ public class JobVacancy implements Serializable{
     public void setCloseDate(Date closeDate) {
         this.closeDate = closeDate;
     }   
+
+    public JobStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(JobStatus status) {
+        this.status = status;
+    }
 }
