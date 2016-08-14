@@ -3,6 +3,7 @@ package com.att.cw.service;
 
 import com.att.cw.dao.JobRepository;
 import com.att.cw.model.Job;
+import com.att.cw.model.JobApplication;
 import java.util.List;
 import javax.annotation.Resource;
 import org.springframework.data.domain.Page;
@@ -64,10 +65,10 @@ public class JobService implements CrudService<Job,Long>{
      * @param ownerId
      * @param page
      * @return 
-     **/
-    public Page<Job> findAllByOwner(Long ownerId ,Pageable page){
-           return jobRepository.findByOwnerId(ownerId, page);
-    }
+     */
+//    public Page<Job> findAllByOwner(Long ownerId ,Pageable page){
+//           return jobRepository.findByOwnerId(ownerId, page);
+//    }
 
      /**
      * Find and return all jobs
@@ -75,6 +76,7 @@ public class JobService implements CrudService<Job,Long>{
      **/
     @Override
     public List<Job> findAll() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+         return (List<Job>) jobRepository.findAll();
     }
+    
 }

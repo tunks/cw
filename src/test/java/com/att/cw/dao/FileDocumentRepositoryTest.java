@@ -3,6 +3,7 @@ package com.att.cw.dao;
 import com.att.cw.model.FileDocument;
 import com.att.cw.support.ResourceType;
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import javax.annotation.Resource;
 import org.junit.After;
 import org.junit.Assert;
@@ -22,27 +23,31 @@ import org.springframework.util.FileCopyUtils;
  * FileDocumentRepository test implementation
  **/
 @ActiveProfiles({"test","dev"})
-@ContextConfiguration(locations = "classpath:spring-jpa-config.xml")
-@RunWith(SpringJUnit4ClassRunner.class)
+@RunWith(SpringJUnit4ClassRunner.class) 
+@ContextConfiguration(locations = {"classpath:springmvc-servlet.xml"})
 public class FileDocumentRepositoryTest {
     @Resource
-    FileDocumentRepository documentRepository;
+    private FileDocumentRepository documentRepository;
     private FileDocument document;
     private FileDocument result;
-    private  byte [] content;
+    
     @Before
     public void setUp() throws Exception {
-         document   = new FileDocument();
-         document.setResourceType(ResourceType.USER);
-         document.setContentType(MediaType.IMAGE_JPEG_VALUE);
-         //store file data as bytes 
-         ByteArrayOutputStream output = new ByteArrayOutputStream(1024);
-         //load xml file as test file
-         InputStreamSource resource = new ClassPathResource("spring-jpa-config.xml");
-         FileCopyUtils.copy(resource.getInputStream(), output);
-         content =  output.toByteArray();
-         document.setContent(output.toByteArray());
-         document.setContentType(MediaType.APPLICATION_XML_VALUE);
+         document = FileDocumentRepositoryTest.createMockDocument();
+    }
+
+    public static FileDocument createMockDocument() throws IOException {
+        FileDocument doc   = new FileDocument();
+        doc.setResourceType(ResourceType.USER);
+        doc.setContentType(MediaType.IMAGE_JPEG_VALUE);
+        //store file data as bytes
+        ByteArrayOutputStream output = new ByteArrayOutputStream(1024);
+        //load xml file as test file
+        InputStreamSource resource = new ClassPathResource("spring-jpa-config.xml");
+        FileCopyUtils.copy(resource.getInputStream(), output);
+        doc.setContent(output.toByteArray());
+        doc.setContentType(MediaType.APPLICATION_XML_VALUE);
+        return doc;
     }
 
     @After
@@ -56,7 +61,6 @@ public class FileDocumentRepositoryTest {
     public void test() {    
          result = documentRepository.save(document);
          assertNotNull(result);
-         Assert.assertArrayEquals(content,result.getContent());
     }
 
 }

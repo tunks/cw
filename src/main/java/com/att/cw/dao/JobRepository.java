@@ -15,6 +15,6 @@ public interface JobRepository extends PagingAndSortingRepository<Job, Long>{
         * @param ownerId
         * @param page
         * @return 
-        */
-       Page<Job> findByOwnerId(Long ownerId,Pageable page);
+//        */
+//       Page<Job> findByOwnerId(Long ownerId,Pageable page);
 }

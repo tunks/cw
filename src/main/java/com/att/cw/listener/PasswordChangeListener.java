@@ -5,8 +5,6 @@
  */
 package com.att.cw.listener;
 
-import com.att.cw.model.Audit;
-import com.att.cw.model.User;
 import com.att.cw.model.UserAudit;
 import java.util.Date;
 import javax.persistence.PrePersist;
@@ -19,14 +17,13 @@ public class PasswordChangeListener {
 	@PrePersist
 	void onCreate(UserAudit user) {
              Date date = new Date();
-             user.setCreatedDate(date);
-             user.setLastModifiedDate(date);
+             user.setLastPasswordResetDate(date);
 	}
 	
 	@PreUpdate
 	void onPersist(Object entity) {
             if(entity instanceof UserAudit){
-              
+              //entity.setLastPasswordResetDate(date);
             }	
 	}
 }

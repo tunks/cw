@@ -34,11 +34,11 @@ public class RegistrationController {
    @RequestMapping(value="/new", method = RequestMethod.POST) 
    public ResponseEntity registerUser(@RequestBody final User user){
         if(!userService.existsByEmail(user.getEmail())){
-            User registeredUser = userService.save(user);
+            userService.save(user);
             /**
              * TODO send email asynchronously for confirmation using AOP
             **/
-            return new ResponseEntity("User is successfully registered, check your email to activate your account!",HttpStatus.CREATED);
+             return new ResponseEntity("User is successfully registered, check your email to activate your account!",HttpStatus.CREATED);
         }
         else{
              return new ResponseEntity("Sorry, user account already registered!",HttpStatus.NOT_ACCEPTABLE);
