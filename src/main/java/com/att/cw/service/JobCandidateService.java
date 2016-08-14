@@ -12,11 +12,13 @@ import java.util.List;
 import javax.annotation.Resource;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Service;
 
 /**
  * Job Candidate service
  * @author ebrimatunkara
  */
+@Service("jobCandidateService")
 public class JobCandidateService implements CrudService<JobCandidate,Long>{
     @Resource
     private  JobCandidateRepository candidateRepository;
