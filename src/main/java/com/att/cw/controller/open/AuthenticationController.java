@@ -6,12 +6,18 @@
 package com.att.cw.controller.open;
 
 import com.att.cw.model.User;
+import com.att.cw.security.UserLogin;
+import com.att.cw.service.SessionService;
 import com.att.cw.service.UserService;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import java.io.Serializable;
 import java.util.Date;
 import javax.servlet.ServletException;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -27,12 +33,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 @RequestMapping("/authenticate")
 public class AuthenticationController {
-    /**
-     * TODO logger using AOP
-     */
-    //private static final Logger logger = LoggerFactory.getLogger(UserController.class);
+    
+	private static final Logger logger = LoggerFactory.getLogger(AuthenticationController.class);
     @Autowired
-    private UserService userService;
+    private SessionService sessionService;
+   // private UserService userService;
     /**
      * Authenticated user login
      * TODO -- controller exception https://spring.io/blog/2013/11/01/exception-handling-in-spring-mvc
@@ -41,12 +46,23 @@ public class AuthenticationController {
      * @throws javax.servlet.ServletException
      */
     @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public ResponseEntity<LoginResponse> login(@RequestBody final UserLogin login) throws ServletException {
-        User user = userService.findByEmailAndPassword(login.getEmail(),login.getPassword());
-        if (user != null) {
-            //TODO --refactor
+    public ResponseEntity login(@RequestBody final UserLogin login) throws ServletException
+    {
+    	
+    	String token =  sessionService.login(login);
+    	if(token == null)
+    		return new ResponseEntity("Authentication Failed",HttpStatus.UNAUTHORIZED );
+    	else
+    		return new ResponseEntity(token,HttpStatus.OK);
+    	
+      //  User user = userService.findByEmailAndPassword(login.getEmail(),login.getPassword());
+    /*    if (user != null) {
+           
+        	
+        	
+        	//TODO --refactor
            // logger.info("User logged in successfully : " + user.getName() + ":" + user.getEnabled());
-           LoginResponse response = new LoginResponse(Jwts.builder()
+         /  LoginResponse response = new LoginResponse(Jwts.builder()
                                                           .setSubject(login.getEmail())
                                                           .claim("roles", user.getEmail())
                                                           .setIssuedAt(new Date())
@@ -55,42 +71,8 @@ public class AuthenticationController {
             return new ResponseEntity(response, HttpStatus.ACCEPTED);
         }
         //logger.info("login failed....");
-        return new ResponseEntity("Invalid crendentials!!", HttpStatus.FORBIDDEN);
-    }
-    
-    public static class LoginResponse implements Serializable{
-        public String token;
-        public LoginResponse(final String token) {
-            this.token = token;
-        }
-
-        public String getToken() {
-            return token;
-        }
-
-        public void setToken(String token) {
-            this.token = token;
-        }
+        return new ResponseEntity("Invalid crendentials!!", HttpStatus.FORBIDDEN);*/
     }
 
-    public static class UserLogin implements Serializable{
-        public String email;
-        public String password;
-
-        public String getEmail() {
-            return email;
-        }
-
-        public void setEmail(String email) {
-            this.email = email;
-        }
-
-        public String getPassword() {
-            return password;
-        }
-
-        public void setPassword(String password) {
-            this.password = password;
-        }
-    }
+  
 }
