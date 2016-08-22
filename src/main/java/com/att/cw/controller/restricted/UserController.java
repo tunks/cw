@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @RestController
-@RequestMapping("/users")
+@RequestMapping("/restricted/users")
 public class UserController implements BaseController<User, Long> {
     /**
      * TODO logger using AOP
