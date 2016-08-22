@@ -23,10 +23,13 @@
 	<!-- Enables the Spring MVC @Controller programming model -->
         <mvc:annotation-driven /> 
         <context:annotation-config/>
+		 
+		   
          <!-- scan service components-->
         <context:component-scan base-package="com.att.cw.service" />     
         <!-- scan controller components -->    
         <context:component-scan base-package="com.att.cw.controller" />
         <!-- scan message components -->
         <context:component-scan base-package="com.att.cw.support.message" />
+         
 </beans>
