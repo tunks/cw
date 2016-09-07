@@ -18,8 +18,8 @@ import io.jsonwebtoken.SignatureAlgorithm;
 @Component
 public class JwtUtil {
 
-    //@Value("${jwt.secret}")
-    private String secret="secretkey";
+    @Value("${jwt.secret}")
+    private String secret;
     
     private static final Logger logger = LoggerFactory.getLogger(JwtUtil.class);
 
@@ -74,5 +74,33 @@ public class JwtUtil {
                 .setClaims(claims)
                 .signWith(SignatureAlgorithm.HS512, secret)
                 .compact();
+    }
+    
+    public String generateRegistrationToken(User u)
+    {
+    	logger.info("Encryption Key is : "+secret);
+    	 Claims claims = Jwts.claims().setSubject(u.getEmail());
+         return Jwts.builder()
+                 .setClaims(claims)
+                 .signWith(SignatureAlgorithm.HS512, secret)
+                 .compact();
+    }
+    public String parseRegistrationToken(String token)
+    {
+    	try {
+            Claims body = Jwts.parser()
+                    .setSigningKey(secret)
+                    .parseClaimsJws(token)
+                    .getBody();
+
+          
+         return  body.getSubject();
+            
+         
+
+        } catch (JwtException | ClassCastException e) {
+        	logger.info(e.getMessage());
+            return null;
+        }
     }
 }

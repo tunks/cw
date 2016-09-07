@@ -3,6 +3,8 @@ package com.att.cw.model;
 import java.io.Serializable;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+
+import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -37,16 +39,17 @@ public class User extends Audit {
     private Long id;
 
     @Column(name = "EMAIL", length = 200, unique = true,nullable=false )
-    @NotNull
+    @NotNull(message="Email cannot be null")
     @Size(min = 2, max = 200)
     private String email;
 
     @Column(name = "PASSWORD", length = 100)
-    @NotNull
+    @NotNull(message="Password cannot be null")
     @Size(min = 5, max = 100)
     private String password;
 
     @Column(name = "NAME", length = 100)
+    @NotNull(message="Name cannot be null")
     @Size(min = 4, max = 100)
     private String name;
     
@@ -54,7 +57,7 @@ public class User extends Audit {
      * User account will be disabled by default until it is activated
      */
     @Column(name = "ENABLED", columnDefinition = "bit default 0")
-    @NotNull
+    @NotNull(message="Enabled cannot be null")
     private Boolean enabled= false;
 
     /* @Column(name = "LASTPASSWORDRESETDATE")
@@ -65,13 +68,12 @@ public class User extends Audit {
     @JoinTable(
             name = "USER_AUTHORITY",
             joinColumns = {
-                @JoinColumn(name = "USER_ID", referencedColumnName = "ID")},
+                @JoinColumn(name = "USER_ID", nullable = false, referencedColumnName = "ID")},
             inverseJoinColumns = {
-                @JoinColumn(name = "AUTHORITY_ID", referencedColumnName = "ID")})
-    private Set<Authority> authorities;
+                @JoinColumn(name = "AUTHORITY_ID", nullable = false, referencedColumnName = "ID")})
+    private Set<Authority> authorities = new HashSet<Authority>(0);
 
     @OneToOne(mappedBy = "user")
-    @NotNull
     private UserProfile profile;
 
     @Override

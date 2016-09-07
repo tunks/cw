@@ -2,7 +2,10 @@ package com.att.cw.model;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "AUTHORITY")
@@ -20,8 +23,12 @@ public class Authority {
     private AuthorityName name;
 
     @ManyToMany(mappedBy = "authorities", fetch = FetchType.LAZY)
-    private List<User> users;
+    private Set<User> users =new HashSet<User>(0);
     
+    public Authority()
+    {
+    	
+    }
     public Authority(Long id, AuthorityName name)
     {
     	this.id=id;
@@ -44,11 +51,11 @@ public class Authority {
         this.name = name;
     }
 
-    public List<User> getUsers() {
+    public Set<User> getUsers() {
         return users;
     }
 
-    public void setUsers(List<User> users) {
+    public void setUsers(Set<User> users) {
         this.users = users;
     }
 }

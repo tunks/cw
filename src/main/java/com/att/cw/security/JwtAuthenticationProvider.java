@@ -49,7 +49,7 @@ public class JwtAuthenticationProvider extends AbstractUserDetailsAuthentication
         
         JwtUserDto parsedUser = jwtUtil.parseToken(token);
         if (parsedUser == null) {
-            throw new JwtTokenMalformedException("JWT token is not valid");
+            throw new JwtTokenMalformedException("Invalid Token");
         }
         
         UserSession session = sessionService.find(parsedUser.getUsername());

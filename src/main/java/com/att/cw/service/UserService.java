@@ -29,9 +29,7 @@ public class UserService implements CrudService<User, Long> {
      */
     @Override
     public User save(User object) {
-    	//Set<Authority> autho = new HashSet<Authority>();
-    	//autho.add(new Authority(new Long(1),AuthorityName.ROLE_USER));
-    	//object.setAuthorities(autho);
+    	
         return userRepository.save(object);
     }
 
