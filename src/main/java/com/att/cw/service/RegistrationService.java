@@ -1,5 +1,6 @@
 package com.att.cw.service;
 
+import java.io.IOException;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Map;
@@ -39,7 +40,7 @@ public class RegistrationService
 	
 	 private static final Logger logger = LoggerFactory.getLogger(RegistrationService.class);
 	 
-	 public User registerUser(UserRegistrationDto  userRegistrationDto) throws Exception
+	 public User registerUser(UserRegistrationDto  userRegistrationDto)
 	 {
 		 if(!userService.existsByEmail(userRegistrationDto.getEmail()))
 		 {
@@ -61,11 +62,11 @@ public class RegistrationService
 		 }
 	 }
 
-	public void activateUser(String token) throws Exception 
+	public void activateUser(String token) 
 	{
 		String parsedEmail = jwtUtil.parseRegistrationToken(token);
 		if (parsedEmail == null) {
-            throw new JwtTokenMalformedException("Invalid Token");
+            throw new JwtTokenMalformedException("Invalid Activation Key. Please try copy pasting the URL on to a browser");
         }
 		else
 		{

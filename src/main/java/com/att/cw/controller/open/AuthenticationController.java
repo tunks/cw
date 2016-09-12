@@ -28,7 +28,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 /**
  * Authentication controller -- Responsible for user login authentication 
- * @author ebrimatunkara
+ * @author Dileep K Mundakkapatta
  */
 @Controller
 @RequestMapping("/open/authenticate")
@@ -46,32 +46,15 @@ public class AuthenticationController {
      * @throws javax.servlet.ServletException
      */
     @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public ResponseEntity login(@RequestBody final UserLogin login) throws ServletException
+    public ResponseEntity<String> login(@RequestBody final UserLogin login) throws ServletException
     {
     	
     	String token =  sessionService.login(login);
     	if(token == null)
-    		return new ResponseEntity("Authentication Failed",HttpStatus.UNAUTHORIZED );
+    		return new ResponseEntity<String>("Authentication Failed",HttpStatus.UNAUTHORIZED );
     	else
-    		return new ResponseEntity(token,HttpStatus.OK);
+    		return new ResponseEntity<String>(token,HttpStatus.OK);
     	
-      //  User user = userService.findByEmailAndPassword(login.getEmail(),login.getPassword());
-    /*    if (user != null) {
-           
-        	
-        	
-        	//TODO --refactor
-           // logger.info("User logged in successfully : " + user.getName() + ":" + user.getEnabled());
-         /  LoginResponse response = new LoginResponse(Jwts.builder()
-                                                          .setSubject(login.getEmail())
-                                                          .claim("roles", user.getEmail())
-                                                          .setIssuedAt(new Date())
-                                                          .signWith(SignatureAlgorithm.HS256, "secretkey")
-                                                          .compact());
-            return new ResponseEntity(response, HttpStatus.ACCEPTED);
-        }
-        //logger.info("login failed....");
-        return new ResponseEntity("Invalid crendentials!!", HttpStatus.FORBIDDEN);*/
     }
 
   
