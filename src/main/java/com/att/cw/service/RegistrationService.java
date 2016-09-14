@@ -58,7 +58,9 @@ public class RegistrationService
 		 }
 		 else
 		 {
-			 throw new UserAlreadyExistingException("This email ID is already registered");
+			 UserAlreadyExistingException ex = new UserAlreadyExistingException("Email ID Already Registered");
+			 ex.setErrorMessage("This email ID is alredy used for registration. Please reset your password if you do not remember your password");
+			 throw ex;
 		 }
 	 }
 
@@ -66,7 +68,7 @@ public class RegistrationService
 	{
 		String parsedEmail = jwtUtil.parseRegistrationToken(token);
 		if (parsedEmail == null) {
-            throw new JwtTokenMalformedException("Invalid Activation Key. Please try copy pasting the URL on to a browser");
+            throw new JwtTokenMalformedException("Malformed Token", "The activation Key you are trying to use is invalid");
         }
 		else
 		{

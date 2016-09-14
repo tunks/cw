@@ -66,18 +66,14 @@ public class RegistrationController {
    @ExceptionHandler({JwtTokenMalformedException.class})
    public ResponseEntity<ErrorResponse> exceptionHandler(JwtTokenMalformedException ex) 
    {
-       ErrorResponse error = new ErrorResponse();
-       error.setErrorCode(HttpStatus.BAD_REQUEST.value());
-       error.setMessage(ex.getErrorMessage());
+       ErrorResponse error = new ErrorResponse(HttpStatus.BAD_REQUEST.value(),ex.getErrorTitle(),ex.getErrorMessage());
        return new ResponseEntity<ErrorResponse>(error, HttpStatus.BAD_REQUEST);
    }
    
    @ExceptionHandler({UserAlreadyExistingException.class})
    public ResponseEntity<ErrorResponse> exceptionHandler(UserAlreadyExistingException ex) 
    {
-       ErrorResponse error = new ErrorResponse();
-       error.setErrorCode(HttpStatus.UNAUTHORIZED.value());
-       error.setMessage(ex.getErrorMessage());
+	   ErrorResponse error = new ErrorResponse(HttpStatus.BAD_REQUEST.value(),ex.getErrorTitle(),ex.getErrorMessage());
        return new ResponseEntity<ErrorResponse>(error, HttpStatus.UNAUTHORIZED);
    }
 
