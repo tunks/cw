@@ -49,6 +49,7 @@ public class RegistrationController {
    public ResponseEntity<String> registerUser(@RequestBody @Valid final UserRegistrationDto user)
    {
 	   
+	   		logger.info("DOB is  :" +user.getDateOfBirth().toString());
         	regService.registerUser(user);
             return new ResponseEntity<String>("User successfully registered. Please check your email to activate your account!",HttpStatus.CREATED);
         

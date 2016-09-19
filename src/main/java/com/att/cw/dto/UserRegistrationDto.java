@@ -1,11 +1,12 @@
 package com.att.cw.dto;
 
 import java.io.Serializable;
-
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
-
 import org.hibernate.validator.constraints.NotEmpty;
+import org.joda.time.LocalDate;
+import com.att.cw.model.Gender;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 
 public class UserRegistrationDto  implements Serializable
@@ -28,6 +29,14 @@ public class UserRegistrationDto  implements Serializable
 	
 	@NotEmpty(message = "Name cannot be blank!")
 	private String Name;
+	
+	@NotNull(message = "Date Of Birth Cannot be empty")
+	@JsonFormat(shape=JsonFormat.Shape.STRING,pattern="yyyy-MM-dd")
+	private LocalDate dateOfBirth;
+	
+	@NotNull(message = "Gender Cannot be empty")
+	private Gender gender;
+	
 
 	public String getPassword() {
 		return password;
@@ -46,6 +55,18 @@ public class UserRegistrationDto  implements Serializable
 	}
 	public void setEmail(String email) {
 		this.email = email;
+	}
+	public LocalDate getDateOfBirth() {
+		return dateOfBirth;
+	}
+	public void setDateOfBirth(LocalDate dateOfBirth) {
+		this.dateOfBirth = dateOfBirth;
+	}
+	public Gender getGender() {
+		return gender;
+	}
+	public void setGender(Gender gender) {
+		this.gender = gender;
 	}
 
 }

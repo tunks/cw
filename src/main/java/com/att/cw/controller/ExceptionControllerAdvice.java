@@ -9,16 +9,21 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import com.att.cw.controller.open.RegistrationController;
 import com.att.cw.dto.ErrorResponse;
+import javax.validation.ValidationException;
+import org.springframework.core.annotation.Order;
+import org.springframework.core.Ordered;
 
 @ControllerAdvice
+@Order(Ordered.LOWEST_PRECEDENCE)
 public class ExceptionControllerAdvice 
 {
-	private static final Logger logger = LoggerFactory.getLogger(RegistrationController.class);
+	private static final Logger logger = LoggerFactory.getLogger(ExceptionControllerAdvice.class);
+	
 	
 	@ExceptionHandler(Exception.class)
-	public ResponseEntity<ErrorResponse> exceptionHandler(Exception ex) 
+	public ResponseEntity<ErrorResponse> ExceptionHandler(Exception ex) 
 	{
-		logger.info("Exception is :"+ex.getMessage());
+		ex.printStackTrace();
         ErrorResponse error = new ErrorResponse();
         error.setErrorCode(HttpStatus.INTERNAL_SERVER_ERROR.value());
         error.setErrorTitle("Internal Server Error");
