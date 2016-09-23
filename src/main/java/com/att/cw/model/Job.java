@@ -53,6 +53,12 @@ public class Job extends Audit<Long>{
 //    @OneToOne
 //    private Group ownerGroup;
     
+    /**
+     * Job questions 
+     */
+    @OneToMany
+    private Set<JobQuestion> questions = new HashSet();
+            
     public Job() {}
 
     public Job(String title, String description) {
@@ -92,6 +98,8 @@ public class Job extends Audit<Long>{
     public void setVacancy(JobVacancy vacancy) {
         this.vacancy = vacancy;
     }
+    
+    
 
 //    public JobWorkFlow getWorkflow() {
 //        return workflow;
@@ -109,4 +117,16 @@ public class Job extends Audit<Long>{
 //    public void setOwnerGroup(Group ownerGroup) {
 //        this.ownerGroup = ownerGroup;
 //    }
+
+    public Set<JobQuestion> getQuestions() {
+        return questions;
+    }
+
+    public void setQuestions(Set<JobQuestion> questions) {
+        this.questions = questions;
+    }
+    
+    public void addQuestion(JobQuestion question){
+        this.questions.add(question);
+    }
 }

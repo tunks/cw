@@ -36,6 +36,16 @@ public class JobVacancy implements Serializable{
      */
     @Enumerated(EnumType.STRING)   
     private JobStatus status;
+    
+    /**
+     * Job level
+     * [ENTRY LEVEL, TEAM LEAD,MANAGER]
+     */
+    
+    /**
+     * employment status
+     * [FULLTIME, CONTRACT, TEMPORAL]
+     */
 
     public JobVacancy() {
     }

@@ -64,5 +64,10 @@ public class GroupService implements CrudService<Group,Long>{
     public void delete(Long id) {
       groupRepository.delete(id);
     }
+
+    @Override
+    public void deleteAll() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
 }

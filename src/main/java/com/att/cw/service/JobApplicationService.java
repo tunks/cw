@@ -90,4 +90,9 @@ public class JobApplicationService implements CrudService<JobApplication,Long>{
     List<JobApplication> findByJob(Job job) {
       return jobApplicationRepository.findByJob(job);
     }
+
+    @Override
+    public void deleteAll() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

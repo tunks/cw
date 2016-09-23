@@ -68,7 +68,7 @@ public class EmailAdvice {
             message.setSubject("Activate user registration");
             message.setContent(activateMailContent);
             SimpleMailMessage mailMessage = mailMessageBuilder.createMessage(message);
-            mailMessageProcessor.process(mailMessage);
+            //mailMessageProcessor.process(mailMessage);
             //save in the message
     }
 }

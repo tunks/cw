@@ -108,4 +108,9 @@ public class UserService implements CrudService<User, Long> {
          return (user != null);
      }
 
+    @Override
+    public void deleteAll() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
 }

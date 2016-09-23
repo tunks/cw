@@ -78,5 +78,10 @@ public class JobService implements CrudService<Job,Long>{
     public List<Job> findAll() {
          return (List<Job>) jobRepository.findAll();
     }
+
+    @Override
+    public void deleteAll() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
 }
