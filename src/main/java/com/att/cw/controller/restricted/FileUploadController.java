@@ -23,6 +23,7 @@ import org.springframework.web.multipart.MultipartFile;
  * @author ebrimatunkara
  */
 @Controller
+@RequestMapping("/restricted")
 public class FileUploadController {
     /**
      * TODO --upload file

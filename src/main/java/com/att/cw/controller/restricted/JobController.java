@@ -22,8 +22,8 @@ import org.springframework.web.bind.annotation.RestController;
  * @author ebrimatunkara
  */
 @RestController
-@RequestMapping("/jobs")
-public class JobController implements BaseController<Job, Long> {
+@RequestMapping("/restricted/jobs")
+public class JobController implements BaseController<Job,Long>{
     /**
      * Job service instance
      *
