@@ -7,6 +7,7 @@ package com.att.cw.listener;
 
 import com.att.cw.model.JobQuestion;
 import com.att.cw.model.QuestionOptionType;
+import com.att.cw.support.JobException;
 import java.util.UUID;
 import javax.persistence.PrePersist;
 
@@ -26,6 +27,10 @@ public class JobComponentListener {
            //set question type is null
            if(entity.getQuestionType() ==null){
               entity.setQuestionType(QuestionOptionType.NOTE);
+           }
+           //check if question category is 
+           if(entity.getCategory() == null){
+             //throw new JobException("Job question category must be set!!");
            }
       
     }

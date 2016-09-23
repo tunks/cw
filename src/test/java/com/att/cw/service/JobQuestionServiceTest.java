@@ -26,6 +26,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.web.WebAppConfiguration;
 
 /**
  * JobQuestion Service test unit
@@ -34,6 +35,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 @ActiveProfiles({"test","dev"})
 @RunWith(SpringJUnit4ClassRunner.class) 
 @ContextConfiguration(locations = {"classpath:springmvc-servlet.xml"})
+@WebAppConfiguration
 public class JobQuestionServiceTest {
     private final String[] questions = {"First name","Country of Birth","Years of Experience", "Do you now or will in the future require visa sponsorship?"};
     

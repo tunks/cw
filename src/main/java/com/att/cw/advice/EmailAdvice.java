@@ -41,7 +41,8 @@ public class EmailAdvice {
     /**
      * Message processor
      */
-	private static final Logger logger = LoggerFactory.getLogger(EmailAdvice.class);
+    private static final Logger logger = LoggerFactory.getLogger(EmailAdvice.class);
+    
     @Autowired
     private MessageProcessor mailMessageProcessor;
     /**
@@ -99,7 +100,7 @@ public class EmailAdvice {
             message.setSubject("Activate cw user registration");
             message.setContent(activateMailContent);
             SimpleMailMessage mailMessage = mailMessageBuilder.createMessage(message);
-            //mailMessageProcessor.process(mailMessage);
-            //save in the message
+            mailMessageProcessor.process(mailMessage);
+            //TODO save in the message
     }
 }

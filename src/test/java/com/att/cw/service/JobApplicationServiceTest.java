@@ -42,6 +42,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.web.WebAppConfiguration;
 
 /**
  * Job application service test class
@@ -51,6 +52,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 @ActiveProfiles({"test", "dev"})
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath:springmvc-servlet.xml"})
+@WebAppConfiguration
 public class JobApplicationServiceTest {
     private final List<MockQuestion> questions = new ArrayList();
 
@@ -159,8 +161,7 @@ public class JobApplicationServiceTest {
         questions.add(new MockQuestion("Years of Experience",Category.PROFESSION_HISTORY));
         questions.add(new MockQuestion("Attach your recent resume?",Category.RESUME,QuestionOptionType.FILE_ATTACHMENT));
         questions.add(new MockQuestion("Do you now or will in the future require visa sponsorship?",Category.QUESTION,QuestionOptionType.MULTI_CHOICE));
-        //clear question categories
-        clearQuestionCategories();
+  
         //create job categories
         createJobCategories();
         //intial job application
@@ -176,7 +177,9 @@ public class JobApplicationServiceTest {
          
         categories.stream()
                 .forEach(c -> {
-                  questionCategoryService.save(c);
+                    if(questionCategoryService.findByCategory(c.getCategory()) == null){
+                       questionCategoryService.save(c);
+                    }
                 });
     }
 

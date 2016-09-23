@@ -17,6 +17,7 @@ import org.springframework.http.MediaType;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.util.FileCopyUtils;
 
 /**
@@ -25,6 +26,7 @@ import org.springframework.util.FileCopyUtils;
 @ActiveProfiles({"test","dev"})
 @RunWith(SpringJUnit4ClassRunner.class) 
 @ContextConfiguration(locations = {"classpath:springmvc-servlet.xml"})
+@WebAppConfiguration
 public class FileDocumentRepositoryTest {
     @Resource
     private FileDocumentRepository documentRepository;

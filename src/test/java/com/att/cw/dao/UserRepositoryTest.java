@@ -6,8 +6,11 @@
 package com.att.cw.dao;
 
 import com.att.cw.model.User;
+import java.util.Calendar;
+import java.util.Date;
 import javax.annotation.Resource;
 import org.apache.commons.lang3.RandomStringUtils;
+import org.joda.time.LocalDate;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -18,6 +21,7 @@ import org.junit.runner.RunWith;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.web.WebAppConfiguration;
 
 /**
  *
@@ -26,11 +30,13 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 @ActiveProfiles({"test","dev"})
 @RunWith(SpringJUnit4ClassRunner.class) 
 @ContextConfiguration(locations = {"classpath:springmvc-servlet.xml"})
+@WebAppConfiguration
 public class UserRepositoryTest {
     @Resource
     private UserRepository userRepository;
     private String email;
     private String password;
+    private Calendar calendar;
     public UserRepositoryTest() {
     }
     
@@ -46,6 +52,7 @@ public class UserRepositoryTest {
     public void setUp() {
         email= RandomStringUtils.randomAlphanumeric(6).concat("@att.com");
         password = RandomStringUtils.randomAlphabetic(16);  
+        calendar = Calendar.getInstance();
     }
     
     @After
@@ -63,6 +70,7 @@ public class UserRepositoryTest {
         User user = new User();
         user.setEmail(email);
         user.setPassword(password);
+        user.setDateOfBirth(new  LocalDate());
         User result = userRepository.save(user);
         assertEquals(user, result);
     }

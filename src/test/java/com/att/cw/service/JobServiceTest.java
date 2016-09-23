@@ -24,6 +24,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.web.WebAppConfiguration;
 
 /**
  * Job service class test unit
@@ -32,6 +33,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 @ActiveProfiles({"test","dev"})
 @RunWith(SpringJUnit4ClassRunner.class) 
 @ContextConfiguration(locations = {"classpath:springmvc-servlet.xml"})
+@WebAppConfiguration
 public class JobServiceTest {
     @Autowired
     private JobService jobService;
@@ -54,7 +56,7 @@ public class JobServiceTest {
      Calendar cal = Calendar.getInstance();
      Date openDate = cal.getTime();
      //set close date
-     cal.set(Calendar.MONTH, 2);
+     cal.add(Calendar.MONTH, 2);
      Date closeDate =cal.getTime();
      JobVacancy vacancy = new JobVacancy(openDate,closeDate);
      job = new Job("Software engineer","This is the software engineer job description!");  
