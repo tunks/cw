@@ -12,6 +12,7 @@ import com.att.cw.service.UserService;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import java.io.Serializable;
+import java.util.Collections;
 import java.util.Date;
 import javax.servlet.ServletException;
 
@@ -27,35 +28,35 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 /**
- * Authentication controller -- Responsible for user login authentication 
+ * Authentication controller -- Responsible for user login authentication
+ *
  * @author Dileep K Mundakkapatta
  */
 @Controller
 @RequestMapping("/open/authenticate")
 public class AuthenticationController {
-    
-	private static final Logger logger = LoggerFactory.getLogger(AuthenticationController.class);
+    private static final Logger logger = LoggerFactory.getLogger(AuthenticationController.class);
     @Autowired
     private SessionService sessionService;
-   // private UserService userService;
+    // private UserService userService;
+
     /**
-     * Authenticated user login
-     * TODO -- controller exception https://spring.io/blog/2013/11/01/exception-handling-in-spring-mvc
+     * Authenticated user login TODO -- controller exception
+     * https://spring.io/blog/2013/11/01/exception-handling-in-spring-mvc
+     *
      * @param login, user credentials
      * @return response
      * @throws javax.servlet.ServletException
      */
     @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public ResponseEntity<String> login(@RequestBody final UserLogin login) throws ServletException
-    {
-    	
-    	String token =  sessionService.login(login);
-    	if(token == null)
-    		return new ResponseEntity<String>("Authentication Failed",HttpStatus.UNAUTHORIZED );
-    	else
-    		return new ResponseEntity<String>(token,HttpStatus.OK);
-    	
+    public ResponseEntity login(@RequestBody final UserLogin login) throws ServletException {
+        String token = sessionService.login(login);
+        if (token == null) {
+            return new ResponseEntity(Collections.singletonMap("message", "Invalid Authentication"), HttpStatus.UNAUTHORIZED);
+        } else {
+            return new ResponseEntity(Collections.singletonMap("token", token), HttpStatus.OK);
+        }
+
     }
 
-  
 }

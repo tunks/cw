@@ -83,7 +83,7 @@ public class EmailAdvice {
             returning = "retVal")
     public void userRegistered(JoinPoint joinPoint, Object retVal) 
     {
-    	 	User  user = (User)retVal;
+    	    User  user = (User)retVal;
             logger.info("Sending Email to user...:"+ user.getEmail());
             String url = "http://"+serverName+":"+serverPort+context.getContextPath()+"/open/register/confirm/";
             activateMailContent=activateMailContent.replace("${title}","Confirm your registration");
