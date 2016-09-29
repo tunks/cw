@@ -8,8 +8,7 @@ import com.att.cw.model.AuthorityName;
 
 public interface AuthorityRepository extends PagingAndSortingRepository<Authority, Long>
 {
-	
-	/**
+      /**
      * Find Authority by AuthorityName
      *
      * @param email

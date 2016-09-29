@@ -10,7 +10,6 @@ import java.util.Set;
 @Entity
 @Table(name = "AUTHORITY")
 public class Authority {
-
     @Id
     @Column(name = "ID")
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "authority_seq")
