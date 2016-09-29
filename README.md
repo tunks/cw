@@ -28,3 +28,10 @@ Test end points
     
     Content-Type --> application/json
 
+For UI development
+   1. Required development dependencies are: nodejs, gulp, bower
+   2. a. First install nodejs , 
+      b. Run "npm install" in the project directory to install the dev packages 
+      c. Run "gulp build" to automatically build ui source codes( src/main/ng-app) to the webapp directory 
+      d. Run "gulp" to start continuous live-reload server (port 8888), 
+         which will automatically  build and refresh the browser during development  
