@@ -24,12 +24,24 @@
     </listener>
     <!-- Enable Spring Security filterchain -->
     <filter>
-		<filter-name>springSecurityFilterChain</filter-name>
-		<filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
-	</filter>
-	<filter-mapping>
-		<filter-name>springSecurityFilterChain</filter-name>
-		<url-pattern>/*</url-pattern>
-	</filter-mapping>
+        <filter-name>springSecurityFilterChain</filter-name>
+        <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+    </filter>
+          
+    <filter>
+        <!--   CORS filter  -->
+        <filter-name>simpleCORSFilter</filter-name>
+        <filter-class>com.att.cw.security.SimpleCORSFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>springSecurityFilterChain</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+    
+    <!-- CORS mapping -->
+    <filter-mapping>
+        <filter-name>simpleCORSFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
 	
 </web-app>
