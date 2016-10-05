@@ -5,47 +5,42 @@
  */
 package com.att.cw.model;
 
-import java.util.Set;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 /**
- *
+ * User candidate resume
  * @author ebrimatunkara
  */
 @Entity
-@Table(name = "MESSAGE_HEADER")
-public class MessageHeader extends Audit<Long> {
+@Table(name="RESUME")
+public class Resume extends Audit<Long>{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-
-    @OneToMany
-    private Set<Participant> recipients;
-    private String sender;
-
+    
+    //private
+    //private Note note;
+    
+    @OneToOne
+    @JoinColumn(name="document_id")
+    private FileDocument document;
+    
     @Override
     public Long getId() {
-      return id;
+       return id;
     }
 
-    public Set<Participant> getRecipients() {
-        return recipients;
+    public FileDocument getDocument() {
+        return document;
     }
 
-    public void setRecipients(Set<Participant> recipients) {
-        this.recipients = recipients;
-    }
-
-    public String getSender() {
-        return sender;
-    }
-
-    public void setSender(String sender) {
-        this.sender = sender;
+    public void setDocument(FileDocument document) {
+        this.document = document;
     }
 }

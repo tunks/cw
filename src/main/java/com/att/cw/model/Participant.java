@@ -12,7 +12,7 @@ import javax.persistence.Table;
  * @author ebrimatunkara
  */
 @Entity
-@Table(name = "message_recipients")
+@Table(name = "PARTICIPANT")
 public class Participant implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

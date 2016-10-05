@@ -1,15 +1,22 @@
 package com.att.cw.model;
 
+import com.att.cw.listener.JobApplicationEntityListener;
 import java.sql.Date;
+import javax.persistence.Basic;
 import javax.persistence.Entity;
+import javax.persistence.EntityListeners;
+import static javax.persistence.FetchType.LAZY;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "job_applications")
+@EntityListeners(JobApplicationEntityListener.class)
+@Table(name = "JOB_APPLICATION")
 public class JobApplication  extends Audit<Long> {
     private static final long serialVersionUID = 1L;
     
@@ -20,21 +27,34 @@ public class JobApplication  extends Audit<Long> {
     private Date dateModified;
     /**
      * JobApplication candidate
-         *
      */
     @OneToOne
+    @JoinColumn(name="candidate_id")
     private JobCandidate candidate;
     /**
      * JobApplication work flow process
-         *
      */
     @OneToOne
+    @JoinColumn(name="workflow_id")
     private JobWorkFlow workflow;
+  
+    @ManyToOne
+    @JoinColumn(name="job_id")
+    @Basic(fetch=LAZY)
+    private Job job;
+    /**
+     * Job resume 
+     */
+    
+    @ManyToOne
+    @JoinColumn(name="resume_id")
+    private Resume resume;
 
     public JobApplication() {
 
     }
 
+    @Override
     public Long getId() {
         return id;
     }
@@ -75,4 +95,19 @@ public class JobApplication  extends Audit<Long> {
         this.workflow = workflow;
     }
 
+    public Job getJob() {
+        return job;
+    }
+
+    public void setJob(Job job) {
+        this.job = job;
+    } 
+
+    public Resume getResume() {
+        return resume;
+    }
+
+    public void setResume(Resume resume) {
+        this.resume = resume;
+    }
 }

@@ -33,19 +33,17 @@ import javax.persistence.UniqueConstraint;
 /***
  * User Entity model
  **/
-@Entity
+    @Entity
 @Table(name = "USER",
        indexes = {
             @Index(columnList = "EMAIL", name = "user_email_index")},
        uniqueConstraints={@UniqueConstraint(columnNames={"EMAIL"})}
      )
-public class User extends Audit {
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = -599348241963726283L;
 
-	@Id
+public class User extends UserAudit {
+		
+	private static final long serialVersionUID = -599348241963726283L;
+    @Id
     @Column(name = "ID")
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "user_seq")
     @SequenceGenerator(name = "user_seq", sequenceName = "user_seq", allocationSize = 1)

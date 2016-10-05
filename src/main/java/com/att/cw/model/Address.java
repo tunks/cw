@@ -18,7 +18,7 @@ import javax.persistence.Table;
  * @author ebrimatunkara
  */
 @Entity
-@Table(name = "user_addresses")
+@Table(name = "ADDRESS")
 public class Address extends Audit<Long> {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

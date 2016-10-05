@@ -100,5 +100,6 @@ public class EmailAdvice {
             message.setContent(activateMailContent);
             SimpleMailMessage mailMessage = mailMessageBuilder.createMessage(message);
             mailMessageProcessor.process(mailMessage);
+            //save in the message
     }
 }
