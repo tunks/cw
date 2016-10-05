@@ -41,7 +41,6 @@ import javax.persistence.UniqueConstraint;
      )
 
 public class User extends UserAudit {
-		
 	private static final long serialVersionUID = -599348241963726283L;
     @Id
     @Column(name = "ID")
