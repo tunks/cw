@@ -2,6 +2,12 @@
 package com.att.cw.controller.restricted;
 
 import com.att.cw.model.Job;
+import com.att.cw.model.JobVacancy;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.junit.After;
@@ -45,7 +51,7 @@ public class JobControllerTest {
     
     private String endPointUrl;
     private String content;
-    
+    private final String pattern = "yyyy-MM-dd HH:mm:ss";
     public JobControllerTest() {
     }
     
@@ -58,12 +64,19 @@ public class JobControllerTest {
     }
     
     @Before
-    public void setUp() {
+    public void setUp() throws JsonProcessingException {
+        Calendar cal = Calendar.getInstance();
+        Date startDate = cal.getTime();
+        cal.add(Calendar.MONTH,2);
+        Date endDate = cal.getTime();
         endPointUrl = "/jobs";
         mockMvc = webAppContextSetup(context).build();
-        job = new Job("Job3", "Job2 description");
-        content = "{\"title\": \""+job.getTitle()+"\",\"description\": \""+job.getDescription()+"\"}";
-
+        JobVacancy vacancy = new JobVacancy();
+        vacancy.setOpenDate(startDate);
+        vacancy.setCloseDate(endDate);
+        job = new Job("Technical Architect", "Technical Architect description 10001");
+        job.setVacancy(vacancy);
+        content = objectToJson(job);
     }
     
     @After
@@ -119,11 +132,10 @@ public class JobControllerTest {
     @Test
     public void testCreate()  {
         try {
+            System.out.println("content ==> "+content);
             mockMvc.perform(post(endPointUrl)
                     .contentType(MediaType.APPLICATION_JSON)
-                    .param("title", job.getTitle())
-                    .param("description", job.getDescription()))
-                    //.content(content.getBytes()))
+                    .content(content))
                     .andExpect(status().isOk())
                     .andExpect(jsonPath("title").value(job.getTitle()))
                     .andExpect(jsonPath("description").value(job.getDescription()));
@@ -139,6 +151,11 @@ public class JobControllerTest {
     public void testUpdate() {
         System.out.println("update"); 
         
+    }
+    
+    private String objectToJson(Job job) throws JsonProcessingException{
+      ObjectMapper mapper = new ObjectMapper();
+      return mapper.writeValueAsString(job);
     }
     
 }

@@ -6,6 +6,9 @@
 package com.att.cw.dao;
 
 import com.att.cw.model.Job;
+import com.att.cw.model.JobVacancy;
+import java.util.Calendar;
+import java.util.Date;
 import javax.annotation.Resource;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -17,34 +20,43 @@ import org.junit.runner.RunWith;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+
 /**
  *
  * @author ebrimatunkara
  */
-@ActiveProfiles({"test","dev"})
-@RunWith(SpringJUnit4ClassRunner.class) 
+@ActiveProfiles({"test", "dev"})
+@RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath:springmvc-servlet.xml"})
 public class JobRepositoryTest {
+
     @Resource
     private JobRepository jobRepository;
-    private Job  job, result;
-    
+    private Job job, result;
+
     public JobRepositoryTest() {
     }
-    
+
     @BeforeClass
     public static void setUpClass() {
     }
-    
+
     @AfterClass
     public static void tearDownClass() {
     }
-    
+
     @Before
     public void setUp() {
-       job = new Job("Job1", "Job1 description");
+        Calendar cal = Calendar.getInstance();
+        Date openDate = cal.getTime();
+        //set close date
+        cal.add(Calendar.MONTH, 2);
+        Date closeDate = cal.getTime();
+        JobVacancy vacancy = new JobVacancy(openDate, closeDate);
+        job = new Job("Project Manager", "This is the software engineer job description!");
+        job.setVacancy(vacancy);
     }
-    
+
     @After
     public void tearDown() {
         jobRepository.delete(job);
@@ -57,6 +69,6 @@ public class JobRepositoryTest {
     public void testFindByOwnerId() {
         result = jobRepository.save(job);
         assertEquals(job.getTitle(), result.getTitle());
-    }   
-    
+    }
+
 }
