@@ -61,5 +61,7 @@
     <bean id="redisTemplate" class="org.springframework.data.redis.core.RedisTemplate" p:connection-factory-ref="jedisConnectionFactory" />
     <!-- Redis Repository configurations -->
     <bean id="sessionRepository" class="com.att.cw.dao.SessionRepository"></bean>
-   
+    
+    <!-- bean country repository -->
+    <bean id="countryRepository" class="com.att.cw.dao.CountryRepository"></bean>
 </beans>
