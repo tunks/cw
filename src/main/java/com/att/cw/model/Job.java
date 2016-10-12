@@ -37,6 +37,11 @@ public class Job extends Audit<Long>{
      */
     @NotNull
     private String description;
+    
+    /**
+     * Job category
+     */
+    private String category;
     /**
      * job work flow
      */
@@ -52,7 +57,11 @@ public class Job extends Audit<Long>{
      */
 //    @OneToOne
 //    private Group ownerGroup;
-    
+    /**
+     * Job location
+     */
+    @Embedded
+    private JobLocation location;
     /**
      * Job questions 
      */
@@ -128,5 +137,21 @@ public class Job extends Audit<Long>{
     
     public void addQuestion(JobQuestion question){
         this.questions.add(question);
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
+    public JobLocation getLocation() {
+        return location;
+    }
+
+    public void setLocation(JobLocation location) {
+        this.location = location;
     }
 }

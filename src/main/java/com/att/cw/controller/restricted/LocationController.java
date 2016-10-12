@@ -6,9 +6,11 @@
 package com.att.cw.controller.restricted;
 
 import com.att.cw.model.Location;
+import com.att.cw.projection.LocationProjection;
 import com.att.cw.service.LocationService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -19,7 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @author ebrimatunkara
  */
 @RestController
-@RequestMapping("/restricted/countries")
+@RequestMapping("/restricted/locations")
 public class LocationController {
     @Autowired
     private LocationService locationService;
@@ -29,7 +31,7 @@ public class LocationController {
      * @return 
      */
     @RequestMapping(method = RequestMethod.GET)
-    public List<Location> findCountry(){
+    public List<LocationProjection> findCountry(){
          return locationService.findCountries();
     }
     
@@ -38,8 +40,8 @@ public class LocationController {
      * @param id
      * @return 
      */
-    @RequestMapping( value="{id}/states", method = RequestMethod.GET)
-    public List<Location> findCountryStates(@PathVariable Long id){
+    @RequestMapping( value="/{id}/states", method = RequestMethod.GET)
+    public List<LocationProjection> findCountryStates(@PathVariable Long id){
          return locationService.findCountryStates(id);
     }
     
@@ -48,8 +50,8 @@ public class LocationController {
      * @param id
      * @return 
      */
-    @RequestMapping( value="{id}/cities", method = RequestMethod.GET)
-    public List<Location> findStateCities(@PathVariable Long id){
+    @RequestMapping( value="/{id}/cities", method = RequestMethod.GET)
+    public List<LocationProjection> findStateCities(@PathVariable Long id){
          return locationService.findCountryStates(id);
     }
 }

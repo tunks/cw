@@ -5,6 +5,9 @@
  */
 package com.att.cw.controller.open;
 
+import com.att.cw.dto.ErrorResponse;
+import com.att.cw.exception.JwtTokenMalformedException;
+import com.att.cw.exception.UserAlreadyExistingException;
 import com.att.cw.model.User;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -87,6 +90,51 @@ public class RegistrationControllerTest {
         } catch (Exception ex) {
             Logger.getLogger(RegistrationControllerTest.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+
+    /**
+     * Test of confirmUser method, of class RegistrationController.
+     */
+    @Test
+    public void testConfirmUser() {
+        System.out.println("confirmUser");
+        String token = "";
+        RegistrationController instance = new RegistrationController();
+        ResponseEntity<String> expResult = null;
+        ResponseEntity<String> result = instance.confirmUser(token);
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of exceptionHandler method, of class RegistrationController.
+     */
+    @Test
+    public void testExceptionHandler_JwtTokenMalformedException() {
+        System.out.println("exceptionHandler");
+        JwtTokenMalformedException ex = null;
+        RegistrationController instance = new RegistrationController();
+        ResponseEntity<ErrorResponse> expResult = null;
+        ResponseEntity<ErrorResponse> result = instance.exceptionHandler(ex);
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of exceptionHandler method, of class RegistrationController.
+     */
+    @Test
+    public void testExceptionHandler_UserAlreadyExistingException() {
+        System.out.println("exceptionHandler");
+        UserAlreadyExistingException ex = null;
+        RegistrationController instance = new RegistrationController();
+        ResponseEntity<ErrorResponse> expResult = null;
+        ResponseEntity<ErrorResponse> result = instance.exceptionHandler(ex);
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
     }
 
 }

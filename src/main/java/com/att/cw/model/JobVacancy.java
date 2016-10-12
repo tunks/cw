@@ -43,9 +43,12 @@ public class JobVacancy implements Serializable{
      */
     
     /**
-     * employment status
-     * [FULLTIME, CONTRACT, TEMPORAL]
+     * employment type
+     * [FULLTIME, PART_TIME,CONTRACT, INTERNSHIP]
      */
+    @Enumerated(EnumType.STRING)   
+    private JobType jobType;
+    
 
     public JobVacancy() {
     }
@@ -77,5 +80,13 @@ public class JobVacancy implements Serializable{
 
     public void setStatus(JobStatus status) {
         this.status = status;
+    }
+
+    public JobType getJobType() {
+        return jobType;
+    }
+
+    public void setJobType(JobType jobType) {
+        this.jobType = jobType;
     }
 }

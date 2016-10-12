@@ -7,6 +7,7 @@ package com.att.cw.service;
 
 import com.att.cw.dao.LocationRepository;
 import com.att.cw.model.Location;
+import com.att.cw.projection.LocationProjection;
 import com.att.cw.support.LocationType;
 import java.util.List;
 import javax.annotation.Resource;
@@ -25,7 +26,7 @@ public class LocationService {
      * Find countries
      * @return
      */
-    public List<Location> findCountries() {
+    public List<LocationProjection> findCountries() {
         return locationRepository.findByLocationType(LocationType.COUNTRY.getIndex());
     }
 
@@ -34,7 +35,7 @@ public class LocationService {
      * @param parentId
      * @return
      */
-    public List<Location> findCountryStates(Long parentId) {
+    public List<LocationProjection> findCountryStates(Long parentId) {
         return locationRepository.findByLocationTypeAndParentId(LocationType.STATE.getIndex(), parentId);
     }
     
@@ -43,7 +44,7 @@ public class LocationService {
      * @param parentId
      * @return
      */
-    public List<Location> findStateCities(Long parentId) {
+    public List<LocationProjection> findStateCities(Long parentId) {
         return locationRepository.findByLocationTypeAndParentId(LocationType.CITY.getIndex(), parentId);
     }
 }

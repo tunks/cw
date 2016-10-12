@@ -9,7 +9,7 @@
     <http pattern="/api/signup" security="none"/>
     <http pattern="/restricted/**" entry-point-ref="restAuthenticationEntryPoint" create-session="stateless">
 	     <csrf disabled="true"/>
-	     <custom-filter before="FORM_LOGIN_FILTER" ref="jwtAuthenticationFilter"/>
+	     <custom-filter before="FORM_LOGIN_FILTER" ref="jwtAuthenticationFilter" />
      </http>
       <beans:bean id="jwtAuthenticationFilter" class="com.att.cw.security.JwtAuthenticationFilter">
 	      <beans:property name="authenticationManager" ref="authenticationManager" />
@@ -17,8 +17,7 @@
       </beans:bean>
       <beans:bean id="jwtAuthenticationProvider" class="com.att.cw.security.JwtAuthenticationProvider" />
       <beans:bean id="jwtAuthenticationSuccessHandler" class="com.att.cw.security.JwtAuthenticationSuccessHandler" />
-      <beans:bean id="restAuthenticationEntryPoint" class="com.att.cw.security.RestAuthenticationEntryPoint" />
-      
+      <beans:bean id="restAuthenticationEntryPoint" class="com.att.cw.security.RestAuthenticationEntryPoint" />      
       
       <authentication-manager alias="authenticationManager">
         <authentication-provider ref="jwtAuthenticationProvider" />

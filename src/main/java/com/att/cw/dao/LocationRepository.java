@@ -6,7 +6,11 @@
 package com.att.cw.dao;
 
 import com.att.cw.model.Location;
+import com.att.cw.projection.LocationProjection;
 import java.util.List;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Repository;
 
@@ -21,7 +25,17 @@ public interface LocationRepository extends PagingAndSortingRepository<Location,
      * @param type
      * @return
      */
-    public List<Location> findByLocationType(int type);
+    @Query("select l.id, l.name, l.locationType from Location l where l.locationType = ?1 order by l.name asc")
+    public List<LocationProjection> findByLocationType(int type);
+    
+     /**
+     * Find by locationType using pagination
+     * @param type
+     * @param page
+     * @return
+     */
+    @Query("select l.id, l.name, l.locationType from Location l where l.locationType = ?1")
+    public Page<LocationProjection> findByLocationType(int type, Pageable page);
 
     /**
      * Find by locationType and parentId
@@ -29,5 +43,16 @@ public interface LocationRepository extends PagingAndSortingRepository<Location,
      * @param parentId
      * @return
      */
-    public List<Location> findByLocationTypeAndParentId(int type, Long parentId);
+    @Query("select l.id, l.name, l.locationType from Location l where l.locationType = ?1 and l.parentId = ?2 order by l.name asc")
+    public List<LocationProjection> findByLocationTypeAndParentId(int type, Long parentId);
+   
+     /**
+     * Find by locationType and parentId using pagination
+     * @param type
+     * @param parentId
+     * @param page
+     * @return
+     */
+    @Query("select l.id, l.name, l.locationType from Location l where l.locationType = ?1 and l.parentId = ?2 order by l.name")
+    public Page<LocationProjection> findByLocationTypeAndParentId(int type, Long parentId, Pageable page);
 }

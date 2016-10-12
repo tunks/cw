@@ -18,21 +18,20 @@ import org.springframework.security.web.authentication.AbstractAuthenticationPro
 
 import com.att.cw.exception.JwtTokenMissingException;
 import com.att.cw.service.SessionService;
+import java.util.Enumeration;
+import org.springframework.http.HttpHeaders;
 
+public class JwtAuthenticationFilter extends AbstractAuthenticationProcessingFilter implements ApplicationContextAware {
+    private SessionService sessionService;
 
-
-public class JwtAuthenticationFilter extends AbstractAuthenticationProcessingFilter implements ApplicationContextAware{
-	
-	
-    
-	private SessionService sessionService;
     @Override
     public void setApplicationContext(ApplicationContext applicationContext)
             throws BeansException {
-    	sessionService = applicationContext.getBean(SessionService.class);
+        sessionService = applicationContext.getBean(SessionService.class);
     }
 
-	private static final Logger logger = LoggerFactory.getLogger(JwtAuthenticationFilter.class);
+    private static final Logger logger = LoggerFactory.getLogger(JwtAuthenticationFilter.class);
+
     public JwtAuthenticationFilter() {
         super("/**");
     }
@@ -44,23 +43,21 @@ public class JwtAuthenticationFilter extends AbstractAuthenticationProcessingFil
 
     @Override
     public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException {
-    	
-    	logger.info("Filter is called my buddy...");
-    	
-    	if(this.sessionService == null)
-        	logger.info("Service is null");
-        else
-        	logger.info("Service is not null");
+        logger.info("Filter is called my buddy...");
 
-        String header = request.getHeader("Authorization");
+        if (this.sessionService == null) {
+            logger.info("Service is null");
+        } else {
+            logger.info("Service is not null");
+        }
+        
+        String header = request.getHeader(HttpHeaders.AUTHORIZATION);
 
-        if (header == null || !header.startsWith("Bearer ")) {
+        if (header == null || !header.startsWith("Bearer")) {
             throw new JwtTokenMissingException("No JWT token found in request headers");
         }
 
         String authToken = header.substring(7);
-        
-        
 
         JwtAuthenticationToken authRequest = new JwtAuthenticationToken(authToken);
 

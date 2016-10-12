@@ -20,22 +20,22 @@
 		http://www.springframework.org/schema/data/jpa/spring-jpa.xsd 
                 http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd" >
 		
-		<!-- TODO setup properties profile -->
-        <context:property-placeholder location="classpath:application.properties,
+    <!-- TODO setup properties profile -->
+    <context:property-placeholder location="classpath:application.properties,
                                                 classpath:application-dev.properties,
                                                 classpath:mail.properties"
-                                  ignore-resource-not-found="true" />
+                                      ignore-resource-not-found="true" />
 		
-		<import resource="classpath*:spring-jpa-config.xml" />
-        <import resource="classpath*:spring-mail-config.xml" />
+    <import resource="classpath*:spring-jpa-config.xml" />
+    <import resource="classpath*:spring-mail-config.xml" />
 		
-		<!-- scan service components-->
-        <context:component-scan base-package="com.att.cw.service" /> 
-        <!-- scan message components -->
-        <context:component-scan base-package="com.att.cw.support.message" />
-         <!-- scan security components-->
-        <context:component-scan base-package="com.att.cw.security" />
-        <mvc:cors>
-            	<mvc:mapping path="/**" />
-        </mvc:cors>
+    <!-- scan service components-->
+    <context:component-scan base-package="com.att.cw.service" /> 
+    <!-- scan message components -->
+    <context:component-scan base-package="com.att.cw.support.message" />
+    <!-- scan security components-->
+    <context:component-scan base-package="com.att.cw.security" />
+    <mvc:cors>
+        <mvc:mapping path="/**" />
+    </mvc:cors>
 </beans>
