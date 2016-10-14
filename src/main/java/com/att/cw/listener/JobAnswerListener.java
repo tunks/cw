@@ -7,7 +7,7 @@ package com.att.cw.listener;
 
 import com.att.cw.model.JobQuestionAnswer;
 import com.att.cw.model.JobQuestion;
-import com.att.cw.support.JobApplicationException;
+import com.att.cw.exception.JobApplicationException;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 

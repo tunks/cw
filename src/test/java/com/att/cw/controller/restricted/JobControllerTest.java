@@ -69,7 +69,7 @@ public class JobControllerTest {
         Date startDate = cal.getTime();
         cal.add(Calendar.MONTH,2);
         Date endDate = cal.getTime();
-        endPointUrl = "/jobs";
+        endPointUrl = "/restricted/jobs";
         mockMvc = webAppContextSetup(context).build();
         JobVacancy vacancy = new JobVacancy();
         vacancy.setOpenDate(startDate);

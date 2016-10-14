@@ -11,13 +11,17 @@
 		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd 
                 http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
        
-        <aop:aspectj-autoproxy proxy-target-class="true"/>
+    <aop:aspectj-autoproxy proxy-target-class="true"/>
         
-	<!-- Enables the Spring MVC @Controller programming model -->
-        <mvc:annotation-driven /> 
-        <context:annotation-config/>
+    <!-- Enables the Spring MVC @Controller programming model -->
+    <mvc:annotation-driven>
+        <mvc:argument-resolvers>
+            <bean class="org.springframework.data.web.PageableHandlerMethodArgumentResolver" />
+        </mvc:argument-resolvers>
+    </mvc:annotation-driven>
+    <context:annotation-config/>
              
-        <!-- scan controller components -->    
-        <context:component-scan base-package="com.att.cw.controller" />
+    <!-- scan controller components -->    
+    <context:component-scan base-package="com.att.cw.controller" />
         
 </beans>

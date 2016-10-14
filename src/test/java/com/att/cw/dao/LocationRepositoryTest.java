@@ -6,7 +6,6 @@
 package com.att.cw.dao;
 
 import com.att.cw.model.Location;
-import com.att.cw.projection.LocationProjection;
 import java.util.List;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -20,6 +19,7 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
+import com.att.cw.dto.LocationDto;
 
 /**
  * LocationRepository unit test
@@ -57,7 +57,7 @@ public class LocationRepositoryTest {
     public void testFindByLocationType() {
         System.out.println("findByLocationType");
         int type = 0;
-        List<LocationProjection> result = locationRepository.findByLocationType(type);
+        List<LocationDto> result = locationRepository.findByLocationType(type);
         assertTrue(result.size() > 0);
       }
 
@@ -69,7 +69,7 @@ public class LocationRepositoryTest {
         System.out.println("findByLocationTypeAndParentId");
         int type = 0;
         Long parentId = null;
-        List<LocationProjection> result = locationRepository.findByLocationType(type);
+        List<LocationDto> result = locationRepository.findByLocationType(type);
         type = 1; //state 
         parentId = result.get(0).getId();
         result = locationRepository.findByLocationTypeAndParentId(type, parentId);

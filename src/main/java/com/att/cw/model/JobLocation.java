@@ -6,8 +6,8 @@
 package com.att.cw.model;
 
 import java.io.Serializable;
-import javax.persistence.Column;
 import javax.persistence.Embeddable;
+import javax.validation.constraints.NotNull;
 
 /**
  * Job JobLocation
@@ -15,9 +15,9 @@ import javax.persistence.Embeddable;
  */
 @Embeddable
 public class JobLocation implements Serializable {
-    @Column(nullable = false)
+    @NotNull
     private String city;
-    @Column(nullable = false)
+    @NotNull
     private String country;
     private String locationState;
     private String zipCode;

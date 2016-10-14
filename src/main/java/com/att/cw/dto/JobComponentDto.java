@@ -3,30 +3,33 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.att.cw.model;
+package com.att.cw.dto;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import java.io.Serializable;
 
 /**
- * Job Type
+ * Base DTO
+ *
  * @author ebrimatunkara
  */
-@Entity
-@Table(name="job_type")
-public class JobType{
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+public class JobComponentDto implements Serializable {
     private Long id;
-    @Column(nullable = false)
     private String name;
-    
+
+    public JobComponentDto() {
+    }
+
+    public JobComponentDto(Long id, String name) {
+        this.id = id;
+        this.name = name;
+    }
+
     public Long getId() {
-         return id;
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getName() {

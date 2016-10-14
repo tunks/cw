@@ -9,7 +9,7 @@ CREATE TABLE IF NOT EXISTS `location` (
   `parent_id` int(11) NOT NULL COMMENT 'parent location_id',
   `is_visible` tinyint(1) NOT NULL COMMENT '0:visible,1:invisible',
   PRIMARY KEY (`location_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=6178 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8  ;
 
 --
 -- Dumping data for table `location`
@@ -4722,7 +4722,7 @@ INSERT INTO `location` (`location_id`, `name`, `location_type`, `parent_id`, `is
 (4704, 'Kingston', 2, 1080, 0),
 (4705, 'Adamstown', 2, 1080, 0),
 (4706, 'Singapore', 2, 1080, 0),
-(4707, 'NoumÃ©a', 2, 1080, 0),
+(4707, 'NoumÃa', 2, 1080, 0),
 (4708, 'CittÃ  del Vaticano', 2, 1080, 0),
 (4709, 'Emmen', 2, 1081, 0),
 (4710, 'Almere', 2, 1082, 0),
@@ -6002,7 +6002,7 @@ INSERT INTO `location` (`location_id`, `name`, `location_type`, `parent_id`, `is
 (5983, 'Andijon', 2, 1566, 0),
 (5984, 'Buhoro', 2, 1567, 0),
 (5985, 'Cizah', 2, 1568, 0),
-(5986, 'KÃ¼kon', 2, 1569, 0),
+(5986, 'KÃ kon', 2, 1569, 0),
 (5987, 'Fargona', 2, 1569, 0),
 (5988, 'Margilon', 2, 1569, 0),
 (5989, 'Nukus', 2, 1570, 0),
@@ -6032,7 +6032,7 @@ INSERT INTO `location` (`location_id`, `name`, `location_type`, `parent_id`, `is
 (6013, 'Kingston', 2, 1579, 0),
 (6014, 'Adamstown', 2, 1579, 0),
 (6015, 'Singapore', 2, 1579, 0),
-(6016, 'NoumÃ©a', 2, 1579, 0),
+(6016, 'NoumÃa', 2, 1579, 0),
 (6017, 'CittÃ  del Vaticano', 2, 1579, 0),
 (6018, 'Roseau', 2, 1580, 0),
 (6019, 'Saint GeorgeÂ´s', 2, 1580, 0),
@@ -6058,7 +6058,7 @@ INSERT INTO `location` (`location_id`, `name`, `location_type`, `parent_id`, `is
 (6039, 'Guacara', 2, 1587, 0),
 (6040, 'Buenos Aires', 2, 1588, 0),
 (6041, 'BrasÃ­lia', 2, 1588, 0),
-(6042, 'Ciudad de MÃ©xico', 2, 1588, 0),
+(6042, 'Ciudad de MÃxico', 2, 1588, 0),
 (6043, 'Caracas', 2, 1588, 0),
 (6044, 'Catia La Mar', 2, 1588, 0),
 (6045, 'Santa Ana de Coro', 2, 1589, 0),
@@ -6066,7 +6066,7 @@ INSERT INTO `location` (`location_id`, `name`, `location_type`, `parent_id`, `is
 (6047, 'Calabozo', 2, 1590, 0),
 (6048, 'Valle de la Pascua', 2, 1590, 0),
 (6049, 'Barquisimeto', 2, 1591, 0),
-(6050, 'MÃ©rida', 2, 1592, 0),
+(6050, 'MÃrida', 2, 1592, 0),
 (6051, 'Petare', 2, 1593, 0),
 (6052, 'Baruta', 2, 1593, 0),
 (6053, 'Los Teques', 2, 1593, 0),
@@ -6095,7 +6095,7 @@ INSERT INTO `location` (`location_id`, `name`, `location_type`, `parent_id`, `is
 (6076, 'Phan ThiÃªt', 2, 1607, 0),
 (6077, 'Can Tho', 2, 1608, 0),
 (6078, 'Buon Ma Thuot', 2, 1609, 0),
-(6079, 'BiÃªn Hoa', 2, 1610, 0),
+(6079, 'BiÃn Hoa', 2, 1610, 0),
 (6080, 'Haiphong', 2, 1611, 0),
 (6081, 'Hanoi', 2, 1612, 0),
 (6082, 'Ho Chi Minh City', 2, 1613, 0),
@@ -6177,7 +6177,7 @@ INSERT INTO `location` (`location_id`, `name`, `location_type`, `parent_id`, `is
 (6158, 'Lalitapur', 2, 1645, 0),
 (6159, 'Birgunj', 2, 1645, 0),
 (6160, 'San Lorenzo', 2, 1645, 0),
-(6161, 'LambarÃ©', 2, 1645, 0),
+(6161, 'LambarÃ', 2, 1645, 0),
 (6162, 'Fernando de la Mora', 2, 1645, 0),
 (6163, 'Kabwe', 2, 1645, 0),
 (6164, 'Kandy', 2, 1645, 0),

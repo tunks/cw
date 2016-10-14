@@ -11,7 +11,7 @@ import com.att.cw.model.JobQuestion;
 import com.att.cw.model.JobQuestionAnswer;
 import com.att.cw.model.JobVacancy;
 import com.att.cw.support.EntityHelper;
-import com.att.cw.support.JobApplicationException;
+import com.att.cw.exception.JobApplicationException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;

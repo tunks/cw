@@ -3,17 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.att.cw.projection;
+package com.att.cw.dto;
 
 import com.att.cw.model.Location;
-import org.springframework.data.rest.core.config.Projection;
 
 /**
- * LocationProjection
+ * LocationDto
  * @author ebrimatunkara
  */
-@Projection(name = "location" , types = Location.class)
-public interface LocationProjection {
+public interface LocationDto {
     Long getId();
     String getName();
     int getLocationType();

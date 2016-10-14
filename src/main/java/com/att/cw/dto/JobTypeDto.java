@@ -3,12 +3,17 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.att.cw.projection;
+package com.att.cw.dto;
 
 /**
  *
  * @author ebrimatunkara
  */
-public interface JobApplicationProjection {
-    
+public class JobTypeDto  extends JobComponentDto{
+    public JobTypeDto() {
+    }
+
+    public JobTypeDto(Long id, String name) {
+        super(id, name);
+    }
 }
