@@ -3,7 +3,7 @@ package com.att.cw.controller.restricted.job;
 import com.att.cw.controller.BaseController;
 import com.att.cw.dto.ErrorResponse;
 import com.att.cw.dto.JobDto;
-import com.att.cw.dto.JobDtoMapper;
+import com.att.cw.dto.mappers.JobDtoMapper;
 import com.att.cw.model.Job;
 import com.att.cw.model.JobApplication;
 import com.att.cw.model.JobCategory;

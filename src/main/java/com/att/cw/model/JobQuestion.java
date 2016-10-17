@@ -8,11 +8,13 @@ package com.att.cw.model;
 import com.att.cw.listener.JobComponentListener;
 import java.util.HashSet;
 import java.util.Set;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
@@ -37,7 +39,7 @@ public class JobQuestion extends Component {
      * Question category 
      */
     @ManyToOne
-    @JoinColumn(nullable = false)
+    //@JoinColumn(nullable = false)
     private QuestionCategory category;
      
     @Column(name="question_type" ,nullable = false)
@@ -47,7 +49,7 @@ public class JobQuestion extends Component {
     /**
      * Question option
      */
-    @OneToMany
+    @OneToMany(fetch = FetchType.LAZY)
     private Set<QuestionOption> options = new HashSet();
     
     
@@ -60,6 +62,9 @@ public class JobQuestion extends Component {
      * Variable to determine if question answer is required or not
      */
     private Boolean required = Boolean.FALSE;
+    
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL )
+    private Questionaire questionaire;
     
 
     public JobQuestion() {
@@ -148,5 +153,13 @@ public class JobQuestion extends Component {
 
     public void setCategory(QuestionCategory category) {
         this.category = category;
+    }
+
+    public Questionaire getQuestionaire() {
+        return questionaire;
+    }
+
+    public void setQuestionaire(Questionaire questionaire) {
+        this.questionaire = questionaire;
     }
 }

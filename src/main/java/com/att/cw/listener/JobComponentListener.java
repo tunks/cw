@@ -26,7 +26,7 @@ public class JobComponentListener {
            setReferenceNumber(entity);
            //set question type is null
            if(entity.getQuestionType() ==null){
-              entity.setQuestionType(QuestionOptionType.NOTE);
+              entity.setQuestionType(QuestionOptionType.TEXT);
            }
            //check if question category is 
            if(entity.getCategory() == null){

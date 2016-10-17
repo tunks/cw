@@ -13,5 +13,5 @@ public enum QuestionOptionType {
     MULTI_CHOICE,
     SINGLE_CHOICE,
     FILE_ATTACHMENT,
-    NOTE
+    TEXT
 }

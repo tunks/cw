@@ -3,8 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.att.cw.dto;
+package com.att.cw.dto.mappers;
 
+import com.att.cw.dto.JobComponentDto;
+import com.att.cw.dto.JobDto;
 import com.att.cw.model.Job;
 import com.att.cw.model.JobType;
 import java.util.List;

@@ -140,7 +140,7 @@ public class JobApplicationServiceTest {
         //create and save question option
         results.stream()
                 .filter(q -> {
-                    return !q.getQuestionType().equals(QuestionOptionType.NOTE);
+                    return !q.getQuestionType().equals(QuestionOptionType.TEXT);
                 })
                 .forEach(q -> {
                     int num = atomicInteger.getAndIncrement();
@@ -236,7 +236,7 @@ public class JobApplicationServiceTest {
 
                                             //TODO -- refactor to COR
                                             Set<JobAnswerOption> answerOps = new HashSet();
-                                                 if(!opType.equals(QuestionOptionType.NOTE)){
+                                                 if(!opType.equals(QuestionOptionType.TEXT)){
                                                      answerOps = ops.stream()
                                                                     .map(op -> {
                                                                         JobAnswerOption ansOp = new JobAnswerOption(op);
@@ -361,7 +361,7 @@ public class JobApplicationServiceTest {
        public MockQuestion(String question, Category category) {
             this.question = question;
             this.category = category;
-            this.optionType = QuestionOptionType.NOTE;
+            this.optionType = QuestionOptionType.TEXT;
             this.required = Boolean.FALSE;
             
         }
@@ -443,7 +443,7 @@ public class JobApplicationServiceTest {
 
         @Override
         public void process(JobAnswerOption ansOp, QuestionOptionType opType) {
-            if (opType.equals(QuestionOptionType.NOTE)) {
+            if (opType.equals(QuestionOptionType.TEXT)) {
                 ansOp.setNote("Answer note text >> "+counter.getAndIncrement());
             } else if (this.getNext() != null) {
                 this.getNext().process(ansOp, opType);

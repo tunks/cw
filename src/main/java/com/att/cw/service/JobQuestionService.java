@@ -12,6 +12,12 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import com.att.cw.dao.JobQuestionRepository;
+import com.att.cw.dto.QuestionDto;
+import com.att.cw.model.Questionaire;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Set;
+import static java.util.stream.Collectors.toSet;
 
 /**
  * JobQuestion Service -- manages job components
@@ -51,5 +57,28 @@ public class JobQuestionService implements CrudService<JobQuestion,Long>{
     public void deleteAll() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
+
+    public Set<JobQuestion> saveDto( Questionaire questionaire, Set<QuestionDto> questions) {   
+       Set<JobQuestion> collection = questions.stream().map(q ->{
+          JobQuestion question = (q.getId() != null)? jobComponentRepository.findOne(q.getId()): new JobQuestion();
+          if(question == null){
+             question = new JobQuestion();
+             question.setQuestionaire(questionaire);
+          }
+          question.setQuestionType(q.getType());
+          question.setQuestion(q.getQuestion());
+          question.setRequired(q.isRequired());
+         return question;
+        }).collect(toSet());
+       //TODO -- refactor
+       Set result =  new HashSet();
+       Iterator<JobQuestion> itr = jobComponentRepository.save(collection)
+                                                         .iterator();
+       while(itr.hasNext()){
+          result.add(itr.next());
+       }
+       
+      return result;
+    }
+
 }

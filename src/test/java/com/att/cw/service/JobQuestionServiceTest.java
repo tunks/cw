@@ -73,7 +73,7 @@ public class JobQuestionServiceTest {
         for(int i =0; i<questions.length; i++) {
             if(i%2 == 0) {
                 required = true;
-                qtype = QuestionOptionType.NOTE;
+                qtype = QuestionOptionType.TEXT;
             }
             else{
                 qtype = QuestionOptionType.MULTI_CHOICE;

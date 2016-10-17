@@ -8,6 +8,7 @@ package com.att.cw.model;
 import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -28,7 +29,7 @@ public class QuestionOption extends Audit<Long> {
     @Column(name="question_note")
     private String note;
   
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private  JobQuestion question;
 
     public QuestionOption() {
