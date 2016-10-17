@@ -36,7 +36,7 @@ public class JobVacancy implements Serializable{
      */
     @Enumerated(EnumType.STRING)   
     private JobStatus status;
-
+    
     public JobVacancy() {
     }
 

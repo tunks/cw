@@ -12,26 +12,16 @@
                 http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
        
     <aop:aspectj-autoproxy proxy-target-class="true"/>
-    <!-- TODO setup properties profile -->
-    <context:property-placeholder location="classpath:application.properties,
-                                                classpath:application-dev.properties,
-                                                classpath:mail.properties"
-                                      ignore-resource-not-found="true" />
-
-    <import resource="classpath*:spring-jpa-config.xml" />
-    <import resource="classpath*:spring-mail-config.xml" />
+        
     <!-- Enables the Spring MVC @Controller programming model -->
     <mvc:annotation-driven>
         <mvc:argument-resolvers>
             <bean class="org.springframework.data.web.PageableHandlerMethodArgumentResolver" />
         </mvc:argument-resolvers>
     </mvc:annotation-driven>
-    
     <context:annotation-config/>
-    <!-- scan service components-->
-    <context:component-scan base-package="com.att.cw.service" />     
+             
     <!-- scan controller components -->    
     <context:component-scan base-package="com.att.cw.controller" />
-    <!-- scan message components -->
-    <context:component-scan base-package="com.att.cw.support.message" />
+        
 </beans>

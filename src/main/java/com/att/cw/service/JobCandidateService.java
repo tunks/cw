@@ -67,13 +67,18 @@ public class JobCandidateService implements CrudService<JobCandidate,Long>{
     public void delete(Long id) {
         candidateRepository.delete(id);
     }
-    /**
-     * Find all job candidates by job and paging
-     * @param job
-     * @param page
-     * @return 
-     */
-    public Page<JobCandidate> findAll(Job job, Pageable page) {
-       return candidateRepository.findByJob(job, page);
-    }   
+//    /**
+//     * Find all job candidates by job and paging
+//     * @param job
+//     * @param page
+//     * @return 
+//     */
+//    public Page<JobCandidate> findAll(Job job, Pageable page) {
+//       return candidateRepository.findByJob(job, page);
+//    }   
+
+    @Override
+    public void deleteAll() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

@@ -5,6 +5,7 @@
        xmlns:tx="http://www.springframework.org/schema/tx"
        xmlns:jdbc="http://www.springframework.org/schema/jdbc"
        xmlns:jpa="http://www.springframework.org/schema/data/jpa"
+       xmlns:p="http://www.springframework.org/schema/p"
        xsi:schemaLocation="
 		http://www.springframework.org/schema/beans 
 		http://www.springframework.org/schema/beans/spring-beans.xsd
@@ -28,7 +29,7 @@
     </bean>
 	
     <bean id="entityManagerFactory"
-          class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+          class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean" depends-on="flyway">
         <property name="dataSource" ref="dataSource" />
         <property name="jpaVendorAdapter">
             <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
@@ -49,4 +50,18 @@
         <property name="validationQuery" value="SELECT 1"/>
         <property name="testOnBorrow" value="true"/>
     </bean>
+    <!-- Flyway configuration -->
+    <!--    <bean id="flyway" class="org.flywaydb.core.Flyway" init-method="migrate">-->
+    <bean id="flyway" class="com.att.cw.support.FlywayMigration" init-method="migrate">
+        <property name="baselineOnMigrate" value="true" />
+        <property name="locations" value="classpath:db/migrations/" />
+        <property name="dataSource" ref="dataSource" />
+    </bean>
+    
+    <!-- Redis Connection Factory -->
+    <bean id="jedisConnectionFactory" class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory" p:host-name="${redis.server}" p:port="${redis.port}" />
+    <bean id="redisTemplate" class="org.springframework.data.redis.core.RedisTemplate" p:connection-factory-ref="jedisConnectionFactory" />
+   
+    <!-- Redis Repository configurations - TODO in redis config xml file -->
+    <bean id="sessionRepository" class="com.att.cw.dao.SessionRepository"></bean>
 </beans>

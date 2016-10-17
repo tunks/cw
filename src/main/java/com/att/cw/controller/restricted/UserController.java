@@ -1,7 +1,6 @@
 package com.att.cw.controller.restricted;
 
 
-
 import com.att.cw.controller.BaseController;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,7 +18,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @RestController
-@RequestMapping("/users")
+@RequestMapping("/restricted/users")
 public class UserController implements BaseController<User, Long> {
     /**
      * TODO logger using AOP

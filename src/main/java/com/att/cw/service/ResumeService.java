@@ -66,5 +66,10 @@ public class ResumeService implements CrudService<Resume,Long>{
     public void delete(Long id) {
        resumeRepository.delete(id);
     }
+
+    @Override
+    public void deleteAll() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
 }

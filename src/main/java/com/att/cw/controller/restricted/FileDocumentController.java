@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
  * @author ebrimatunkara
  */
 @Controller
-@RequestMapping("/documents")
+@RequestMapping("/restricted/documents")
 public class FileDocumentController implements BaseController<FileDocument,Long>{
    public static final String NOT_SUPPORTED_YET = "Not supported yet.";
     /**

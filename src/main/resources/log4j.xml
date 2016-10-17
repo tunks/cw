@@ -11,7 +11,7 @@
 	</appender>
 
         <appender name="default.log.file" class="org.apache.log4j.FileAppender">
-           <param name="file" value="logs/agile360service.log" />
+           <param name="file" value="logs/cwservice.log" />
         <param name="append" value="false" />
         <param name="threshold" value="info" />
         <layout class="org.apache.log4j.PatternLayout">

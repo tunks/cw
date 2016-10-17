@@ -5,15 +5,27 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
  * JobWorkFlow entity class
+ * Open job  
+ *     -> submissions/close job
+ *          -> review (automatic select/manual selection)
+ *                 -> rejection (send message to candidates automatically about reject) 
+ *                 -> interview(selected candidates with employees)
+ *                    -> phone
+ *                    -> onsite
+ *                        -> review
+ *                    -> 
  *
  */
 @Entity
 @Table(name = "JOB_WORKFLOW")
+@Inheritance(strategy=InheritanceType.SINGLE_TABLE)
 public class JobWorkFlow extends Audit<Long> {
      private static final long serialVersionUID = 1L;
     /**
@@ -25,9 +37,14 @@ public class JobWorkFlow extends Audit<Long> {
     /**
      * work flow activities
      */
-    @OneToMany
+   
+    @OneToMany // with a join table
+//    @JoinTable(
+//        uniqueConstraints=@UniqueConstraint(columnNames={"Work_ID","users_ID"})
+//    )
     private Set<JobActivity> activities;
 
+     @Override
     public Long getId() {
         return id;
     }

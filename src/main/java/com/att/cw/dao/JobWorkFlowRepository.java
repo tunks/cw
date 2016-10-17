@@ -3,12 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.att.cw.projection;
+package com.att.cw.dao;
+
+import com.att.cw.model.JobWorkFlow;
+import org.springframework.data.repository.PagingAndSortingRepository;
 
 /**
  *
  * @author ebrimatunkara
  */
-public interface JobApplicationProjection {
+public interface JobWorkFlowRepository extends PagingAndSortingRepository<JobWorkFlow, Long>{
     
 }

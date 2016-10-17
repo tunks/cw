@@ -5,6 +5,7 @@
  */
 package com.att.cw.support;
 
+import com.att.cw.exception.JobException;
 import com.att.cw.model.JobVacancy;
 import java.util.Calendar;
 import java.util.Date;

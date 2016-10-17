@@ -79,4 +79,9 @@ public class FileDocumentService implements CrudService<FileDocument,Long>{
     public Page<FileDocument> findAll(Pageable page) {
         return fileDocumentRepository.findAll(page);
     }
+
+    @Override
+    public void deleteAll() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

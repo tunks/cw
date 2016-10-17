@@ -27,4 +27,3 @@ Test end points
     Request body --> {"email": "ebrima1@att.com", "password" :"QgIaffOLtyKGDMad"}
     
     Content-Type --> application/json
-

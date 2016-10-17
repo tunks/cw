@@ -1,0 +1,12 @@
+
+CREATE TABLE IF NOT EXISTS `job_type` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(100) NOT NULL UNIQUE,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 ; 
+
+INSERT INTO `job_type` (`id`, `name`) VALUES
+(1, 'FULL TIME'),
+(2, 'PART TIME'),
+(3, 'CONTRACTOR'),
+(4, 'INTERNSHIP');

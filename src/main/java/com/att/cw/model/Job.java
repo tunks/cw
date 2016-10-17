@@ -2,24 +2,33 @@ package com.att.cw.model;
 
 import com.att.cw.listener.JobEntityListener;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
+import javax.persistence.CascadeType;
+import static javax.persistence.CascadeType.MERGE;
+import static javax.persistence.CascadeType.PERSIST;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
+
 /**
  * Job entity class
  */
 @Entity
 @EntityListeners(JobEntityListener.class)
 @Table(name = "JOB")
-public class Job extends Audit<Long>{
+public class Job extends Audit<Long> {
     private static final long serialVersionUID = 1L;
     /**
      * job id
@@ -37,6 +46,22 @@ public class Job extends Audit<Long>{
      */
     @NotNull
     private String description;
+
+    /**
+     * Job category
+     */
+    
+    @ManyToMany(cascade = { PERSIST, MERGE } , fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "JOB_CATEGORY_ITEMS",
+            joinColumns = { @JoinColumn(name = "job_id", nullable = true, referencedColumnName="id")},
+            inverseJoinColumns = {@JoinColumn(name = "category_id", nullable = true, referencedColumnName="id")})
+    private Set<JobCategory> categories = new HashSet();
+    /**
+     * employment type [FULLTIME, PART_TIME,CONTRACT, INTERNSHIP]
+     */
+    @ManyToOne
+    private JobType jobType;
     /**
      * job work flow
      */
@@ -52,8 +77,19 @@ public class Job extends Audit<Long>{
      */
 //    @OneToOne
 //    private Group ownerGroup;
-    
-    public Job() {}
+    /**
+     * Job location
+     */
+    @Embedded
+    private JobLocation location;
+    /**
+     * Job questions
+     */
+    @OneToMany
+    private Set<JobQuestion> questions = new HashSet();
+
+    public Job() {
+    }
 
     public Job(String title, String description) {
         this.title = title;
@@ -93,6 +129,42 @@ public class Job extends Audit<Long>{
         this.vacancy = vacancy;
     }
 
+    public Set<JobQuestion> getQuestions() {
+        return questions;
+    }
+
+    public void setQuestions(Set<JobQuestion> questions) {
+        this.questions = questions;
+    }
+
+    public void addQuestion(JobQuestion question) {
+        this.questions.add(question);
+    }
+
+    public Set<JobCategory> getCategories() {
+        return categories;
+    }
+
+    public void setCategories(Set<JobCategory> categories) {
+        this.categories = categories;
+    }
+
+    public JobLocation getLocation() {
+        return location;
+    }
+
+    public void setLocation(JobLocation location) {
+        this.location = location;
+    }
+
+    public JobType getJobType() {
+        return jobType;
+    }
+
+    public void setJobType(JobType jobType) {
+        this.jobType = jobType;
+    }
+
 //    public JobWorkFlow getWorkflow() {
 //        return workflow;
 //    }
@@ -100,8 +172,6 @@ public class Job extends Audit<Long>{
 //    public void setWorkflow(JobWorkFlow workflow) {
 //        this.workflow = workflow;
 //    }
-
-    
 //    public Group getOwnerGroup() {
 //        return ownerGroup;
 //    }
@@ -109,4 +179,31 @@ public class Job extends Audit<Long>{
 //    public void setOwnerGroup(Group ownerGroup) {
 //        this.ownerGroup = ownerGroup;
 //    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 53 * hash + Objects.hashCode(this.id);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Job other = (Job) obj;
+        if (!Objects.equals(this.id, other.id)) {
+            return false;
+        }
+        return true;
+    }
+    
+    
 }
