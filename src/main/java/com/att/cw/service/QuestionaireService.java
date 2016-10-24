@@ -64,5 +64,14 @@ public class QuestionaireService implements CrudService<Questionaire, Long>{
        entity.setName(object.getName());
        return questionaireRepository.save(entity);
     }
+
+    public void delete(Questionaire questionaire) {
+         questionaireRepository.delete(questionaire);
+    }
+
+    @Override
+    public boolean exists(Long id) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
 }

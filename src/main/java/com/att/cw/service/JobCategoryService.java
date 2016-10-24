@@ -51,4 +51,9 @@ public class JobCategoryService implements CrudService<JobCategory,Long>{
     public void deleteAll() {
        categoryRepository.deleteAll();
     }    
+
+    @Override
+    public boolean exists(Long id) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

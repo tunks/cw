@@ -54,5 +54,10 @@ public class QuestionCategoryService implements CrudService<QuestionCategory,Lon
     public void deleteAll() {
         questionCategoryRespository.deleteAll();
     }
+
+    @Override
+    public boolean exists(Long id) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
 }

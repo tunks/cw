@@ -12,12 +12,14 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import com.att.cw.dao.JobQuestionRepository;
-import com.att.cw.dto.QuestionDto;
+import com.att.cw.dto.JobQuestionDto;
+import com.att.cw.model.QuestionType;
 import com.att.cw.model.Questionaire;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 import static java.util.stream.Collectors.toSet;
+import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  * JobQuestion Service -- manages job components
@@ -27,6 +29,9 @@ import static java.util.stream.Collectors.toSet;
 public class JobQuestionService implements CrudService<JobQuestion,Long>{
     @Resource
     private JobQuestionRepository jobComponentRepository;
+    
+    @Autowired
+    private QuestionTypeService questionTypeService;
     
     @Override
     public JobQuestion save(JobQuestion object) {
@@ -58,17 +63,13 @@ public class JobQuestionService implements CrudService<JobQuestion,Long>{
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    public Set<JobQuestion> saveDto( Questionaire questionaire, Set<QuestionDto> questions) {   
+    public void delete(JobQuestion entity) {
+       jobComponentRepository.delete(entity);
+    }
+    
+    public Set<JobQuestion> saveDto( Questionaire questionaire, Set<JobQuestionDto> questions) {   
        Set<JobQuestion> collection = questions.stream().map(q ->{
-          JobQuestion question = (q.getId() != null)? jobComponentRepository.findOne(q.getId()): new JobQuestion();
-          if(question == null){
-             question = new JobQuestion();
-             question.setQuestionaire(questionaire);
-          }
-          question.setQuestionType(q.getType());
-          question.setQuestion(q.getQuestion());
-          question.setRequired(q.isRequired());
-         return question;
+            return mapEntity(questionaire,q);
         }).collect(toSet());
        //TODO -- refactor
        Set result =  new HashSet();
@@ -79,6 +80,35 @@ public class JobQuestionService implements CrudService<JobQuestion,Long>{
        }
        
       return result;
+    }
+
+    private JobQuestion mapEntity(Questionaire questionaire, JobQuestionDto questionDto) {
+        JobQuestion question = (questionDto.getId() != null)? jobComponentRepository.findOne(questionDto.getId()): new JobQuestion();
+        if(question == null){
+            question = new JobQuestion();
+            question.setQuestionaire(questionaire);
+         }
+        //set question type if null or different
+        if(question.getQuestionType()  == null || 
+          (question.getQuestionType().getId().equals(questionDto.getId())))
+          {
+            QuestionType questionType = questionTypeService.find(questionDto.getQuestionType().getId());
+            question.setQuestionType(questionType);
+          }
+       
+        question.setQuestion(questionDto.getQuestion());
+        question.setRequired(questionDto.isRequired());
+        return question;
+    }
+
+    public JobQuestion saveDto(Questionaire questionaire, JobQuestionDto question) {
+          JobQuestion entity = mapEntity(questionaire,question);
+          return jobComponentRepository.save(entity);
+    }
+
+    @Override
+    public boolean exists(Long id) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }

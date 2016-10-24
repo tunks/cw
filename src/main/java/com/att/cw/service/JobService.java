@@ -145,4 +145,9 @@ public class JobService implements CrudService<Job, Long> {
         return save(entity);
     }
 
+    @Override
+    public boolean exists(Long id) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
 }
