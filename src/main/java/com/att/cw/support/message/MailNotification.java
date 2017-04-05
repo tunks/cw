@@ -15,18 +15,22 @@ import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 
 /**
- * MailNotification Service --- Sends mail messages through STMP protocols 
+ * MailNotification Service --- Sends mail messages through STMP protocols
+ *
  * @author ebrimatunkara
  */
 @Service("mailNotificaton")
 public class MailNotification implements Notification<SimpleMailMessage> {
+
     @Autowired
     private JavaMailSender mailSender;
 
     /**
      * Send mail messages
+     *
      * @param message
-     **/
+     *
+     */
     @Override
     public void send(SimpleMailMessage message) {
         try {
@@ -35,6 +39,7 @@ public class MailNotification implements Notification<SimpleMailMessage> {
             Logger.getLogger(MailNotification.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+
     /* create mime message */
     private MimeMessage createMimeMessage(SimpleMailMessage message) throws MessagingException {
         MimeMessage mimeMessage = mailSender.createMimeMessage();
@@ -42,7 +47,7 @@ public class MailNotification implements Notification<SimpleMailMessage> {
         helper.setFrom(message.getFrom());
         helper.setTo(message.getTo());
         helper.setSubject(message.getSubject());
-        helper.setText(message.getText(),true);
+        helper.setText(message.getText(), true);
         return mimeMessage;
     }
 }

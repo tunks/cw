@@ -54,8 +54,8 @@ public class WiserAssertions {
 
     public WiserAssertions withContent(String content) {
         findFirstOrElseThrow(m -> {
-            ThrowingSupplier<String> contentAsString = 
-                () -> ((String) getMimeMessage(m).getContent()).trim();
+            ThrowingSupplier<String> contentAsString
+                    = () -> ((String) getMimeMessage(m).getContent()).trim();
             return content.equals(unchecked(contentAsString));
         }, assertionError("No message with content [{0}] found!", content));
         return this;
@@ -69,7 +69,7 @@ public class WiserAssertions {
     private MimeMessage getMimeMessage(WiserMessage wiserMessage) {
         return unchecked(wiserMessage::getMimeMessage);
     }
-    
+
     private static Supplier<AssertionError> assertionError(String errorMessage, String... args) {
         return () -> new AssertionError(MessageFormat.format(errorMessage, args));
     }
@@ -83,6 +83,7 @@ public class WiserAssertions {
     }
 
     interface ThrowingSupplier<T> {
+
         T get() throws Throwable;
     }
 }

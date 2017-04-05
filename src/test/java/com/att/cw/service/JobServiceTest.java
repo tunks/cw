@@ -7,6 +7,8 @@ package com.att.cw.service;
 
 import com.att.cw.model.Job;
 import com.att.cw.model.JobVacancy;
+import com.att.cw.support.DataTypeHelper;
+import java.nio.charset.StandardCharsets;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -28,41 +30,44 @@ import org.springframework.test.context.web.WebAppConfiguration;
 
 /**
  * Job service class test unit
+ *
  * @author ebrimatunkara
  */
-@ActiveProfiles({"test","dev"})
-@RunWith(SpringJUnit4ClassRunner.class) 
+@ActiveProfiles({"test", "dev"})
+@RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath:springmvc-servlet.xml"})
 @WebAppConfiguration
 public class JobServiceTest {
+
     @Autowired
     private JobService jobService;
 
     private Job job;
-    
+
     public JobServiceTest() {
     }
-    
+
     @BeforeClass
     public static void setUpClass() {
     }
-    
+
     @AfterClass
     public static void tearDownClass() {
     }
-    
+
     @Before
     public void setUp() {
-     Calendar cal = Calendar.getInstance();
-     Date openDate = cal.getTime();
-     //set close date
-     cal.add(Calendar.MONTH, 2);
-     Date closeDate =cal.getTime();
-     JobVacancy vacancy = new JobVacancy(openDate,closeDate);
-     job = new Job("Software engineer","This is the software engineer job description!");  
-     job.setVacancy(vacancy);
+        Calendar cal = Calendar.getInstance();
+        Date openDate = cal.getTime();
+        //set close date
+        cal.add(Calendar.MONTH, 2);
+        Date closeDate = cal.getTime();
+        byte[] description = DataTypeHelper.stringToByte("This is the software engineer job description!");
+        JobVacancy vacancy = new JobVacancy(openDate, closeDate);
+        job = new Job("Software engineer", description);
+        job.setVacancy(vacancy);
     }
-    
+
     @After
     public void tearDown() {
     }
@@ -80,18 +85,13 @@ public class JobServiceTest {
     /**
      * Test of find method, of class JobService.
      */
-    @Test
-    public void testFind() {
-        System.out.println("find");
-        Long id = null;
-//        JobService instance = new JobService();
-//        Job expResult = null;
-//        Job result = instance.find(id);
-//        assertEquals(expResult, result);
-//        // TODO review the generated test code and remove the default call to fail.
-//         fail("The test case is a prototype.");
-    }
-
+//    @Test
+//    public void testFind() {
+//        System.out.println("find");
+//        Long id = new Long(3);
+//        Job result = jobService.find(id);
+//        assertNotNull(result);
+//    }
     /**
      * Test of delete method, of class JobService.
      */
@@ -111,8 +111,9 @@ public class JobServiceTest {
     @Test
     public void testFindAll_Pageable() {
         System.out.println("findAll");
-        
+
     }
+
     /**
      * Test of findAll method, of class JobService.
      */
@@ -120,7 +121,7 @@ public class JobServiceTest {
     public void testFindAll_0args() {
         System.out.println("findAll");
         List<Job> result = jobService.findAll();
-        assertTrue(result.size()>0);
+        assertTrue(result.size() > 0);
     }
-    
+
 }

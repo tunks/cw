@@ -19,36 +19,38 @@ import org.springframework.web.bind.annotation.RestController;
 
 /**
  * JobTypeController
+ *
  * @author ebrimatunkara
  */
 @RestController
-@RequestMapping("/restricted/jobs/types")
-public class JobTypeController implements BaseController<JobType,Long>{
+@RequestMapping("/restricted/jobtypes")
+public class JobTypeController implements BaseController<JobType, Long> {
+
     @Autowired
     private JobTypeService jobtypeService;
-  
+
     @RequestMapping(method = RequestMethod.GET)
     public List<JobTypeDto> findAll() {
-       return jobtypeService.findAll()
-               .stream()
-               .map(jt -> {
-                  return new JobTypeDto(jt.getId(),jt.getName());
-               }).collect(Collectors.toList());
+        return jobtypeService.findAll()
+                .stream()
+                .map(jt -> {
+                    return new JobTypeDto(jt.getId(), jt.getName());
+                }).collect(Collectors.toList());
     }
-    
-    @RequestMapping(value="/{id}",method = RequestMethod.GET)
+
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     @Override
     public JobType find(@PathVariable Long id) {
-       return jobtypeService.find(id);
+        return jobtypeService.find(id);
     }
 
     @RequestMapping(method = RequestMethod.DELETE)
     @Override
     public void deleteAll() {
-       jobtypeService.deleteAll();
+        jobtypeService.deleteAll();
     }
 
-    @RequestMapping(value="/{id}",method = RequestMethod.DELETE)
+    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     @Override
     public void delete(@PathVariable Long id) {
         jobtypeService.delete(id);
@@ -63,7 +65,7 @@ public class JobTypeController implements BaseController<JobType,Long>{
     @RequestMapping(method = RequestMethod.PUT)
     @Override
     public JobType update(JobType object) {
-       return jobtypeService.save(object);
+        return jobtypeService.save(object);
     }
-    
+
 }

@@ -12,17 +12,18 @@ import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 
 /**
- * 
+ *
  * @author ebrimatunkara
  */
 @MappedSuperclass
-public abstract class Profile extends Audit<Long>{
-    @Id  
+public abstract class Profile extends Audit<Long> {
+
+    @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     @Override
     public Long getId() {
-           return id;
-    } 
+        return id;
+    }
 }

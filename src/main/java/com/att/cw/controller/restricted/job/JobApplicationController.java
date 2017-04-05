@@ -25,27 +25,29 @@ import org.springframework.web.bind.annotation.RestController;
  * @author ebrimatunkara
  */
 @RestController
-public class JobApplicationController implements  BaseController<JobApplication,Long>{
-     /**
+public class JobApplicationController implements BaseController<JobApplication, Long> {
+
+    /**
      * Job service instance
      */
     @Autowired
     private JobService jobService;
-        /**
+    /**
      * Job application service
      */
     @Autowired
     private JobApplicationService jobApplicationService;
-    
-        /**
+
+    /**
      * Post job applications
+     *
      * @param id
      * @param application
      * @return
      */
     @RequestMapping(value = "/restricted/jobs/{id}/applications", method = RequestMethod.POST)
     public JobApplication saveApplication(@PathVariable Long id, @RequestBody JobApplication application) {
-         Job job = jobService.find(id);
+        Job job = jobService.find(id);
         //throw exception if job is not found
         if (job == null) {
             throw new NotFoundException(id);
@@ -54,14 +56,15 @@ public class JobApplicationController implements  BaseController<JobApplication,
         application.setJob(job);
         return create(application);
     }
-    
+
     /**
      * Find job applications by page
+     *
      * @param id
      * @param page
-     * @return 
+     * @return
      */
-     @RequestMapping(value = "/restricted/jobs/{id}/applications", method = RequestMethod.GET)
+    @RequestMapping(value = "/restricted/jobs/{id}/applications", method = RequestMethod.GET)
     public Page<JobApplication> findApplications(@PathVariable Long id, Pageable page) {
         Job job = jobService.find(id);
         //throw exception if job is not found
@@ -71,13 +74,15 @@ public class JobApplicationController implements  BaseController<JobApplication,
         //find job applications
         return jobApplicationService.findByJob(job, page);
     }
+
     /**
      * Find job application
+     *
      * @param jobId
      * @param id
-     * @return 
+     * @return
      */
-     @RequestMapping(value = "/restricted/jobs/{jobId}/applications/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/restricted/jobs/{jobId}/applications/{id}", method = RequestMethod.GET)
     public JobApplication findApplication(@PathVariable Long jobId, @PathVariable Long id) {
         Job job = jobService.find(jobId);
         //throw exception if job is not found
@@ -87,20 +92,21 @@ public class JobApplicationController implements  BaseController<JobApplication,
         //find job application
         return jobApplicationService.findByIdAndJob(id, job);
     }
-    
-     /**
+
+    /**
      * Find job application
+     *
      * @param jobId
-     * @param id 
+     * @param id
      */
-     @RequestMapping(value = "/{jobId}/applications/{id}", method = RequestMethod.DELETE)
+    @RequestMapping(value = "/{jobId}/applications/{id}", method = RequestMethod.DELETE)
     public void deleteApplication(@PathVariable Long jobId, @PathVariable Long id) {
         Job job = jobService.find(jobId);
         //throw exception if job is not found
         if (job == null) {
             throw new NotFoundException(jobId);
         }
-       //delete job application
+        //delete job application
         delete(id);
     }
 
@@ -116,7 +122,7 @@ public class JobApplicationController implements  BaseController<JobApplication,
 
     @Override
     public void delete(Long id) {
-           jobApplicationService.delete(id);
+        jobApplicationService.delete(id);
     }
 
     @Override
@@ -127,6 +133,6 @@ public class JobApplicationController implements  BaseController<JobApplication,
 
     @Override
     public JobApplication update(JobApplication object) {
-         return jobApplicationService.save(object);
+        return jobApplicationService.save(object);
     }
 }

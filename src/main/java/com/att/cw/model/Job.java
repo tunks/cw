@@ -4,9 +4,11 @@ import com.att.cw.listener.JobEntityListener;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
+import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import static javax.persistence.CascadeType.MERGE;
 import static javax.persistence.CascadeType.PERSIST;
+import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
@@ -16,6 +18,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
+import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
@@ -44,18 +47,29 @@ public class Job extends Audit<Long> {
     /**
      * job description
      */
-    @NotNull
-    private String description;
+    @Lob
+    @Basic(fetch = FetchType.LAZY)
+    @Column(length = 16777215)
+    private byte[] description;
+
+    /**
+     * job skills
+     */
+    @Lob
+    @Basic(fetch = FetchType.LAZY)
+    @Column(length = 16777215)
+    private byte[] skills;
 
     /**
      * Job category
      */
-    
-    @ManyToMany(cascade = { PERSIST, MERGE } , fetch = FetchType.EAGER)
+    @ManyToMany(cascade = {PERSIST, MERGE}, fetch = FetchType.EAGER)
     @JoinTable(
             name = "JOB_CATEGORY_ITEMS",
-            joinColumns = { @JoinColumn(name = "job_id", nullable = true, referencedColumnName="id")},
-            inverseJoinColumns = {@JoinColumn(name = "category_id", nullable = true, referencedColumnName="id")})
+            joinColumns = {
+                @JoinColumn(name = "job_id", nullable = true, referencedColumnName = "id")},
+            inverseJoinColumns = {
+                @JoinColumn(name = "category_id", nullable = true, referencedColumnName = "id")})
     private Set<JobCategory> categories = new HashSet();
     /**
      * employment type [FULLTIME, PART_TIME,CONTRACT, INTERNSHIP]
@@ -85,13 +99,13 @@ public class Job extends Audit<Long> {
     /**
      * Job questions
      */
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Set<JobQuestion> questions = new HashSet();
 
     public Job() {
     }
 
-    public Job(String title, String description) {
+    public Job(String title, byte[] description) {
         this.title = title;
         this.description = description;
     }
@@ -113,11 +127,11 @@ public class Job extends Audit<Long> {
         this.title = title;
     }
 
-    public String getDescription() {
+    public byte[] getDescription() {
         return description;
     }
 
-    public void setDescription(String description) {
+    public void setDescription(byte[] description) {
         this.description = description;
     }
 
@@ -165,6 +179,14 @@ public class Job extends Audit<Long> {
         this.jobType = jobType;
     }
 
+    public byte[] getSkills() {
+        return skills;
+    }
+
+    public void setSkills(byte[] skills) {
+        this.skills = skills;
+    }
+
 //    public JobWorkFlow getWorkflow() {
 //        return workflow;
 //    }
@@ -179,7 +201,6 @@ public class Job extends Audit<Long> {
 //    public void setOwnerGroup(Group ownerGroup) {
 //        this.ownerGroup = ownerGroup;
 //    }
-
     @Override
     public int hashCode() {
         int hash = 7;
@@ -204,6 +225,12 @@ public class Job extends Audit<Long> {
         }
         return true;
     }
-    
-    
+
+    @Override
+    public String toString() {
+        return "Job{" + "id=" + id + ", title=" + title
+                + " categories=" + categories + ", jobType="
+                + jobType + ", vacancy=" + vacancy + ", location=" + location + "}";
+    }
+
 }

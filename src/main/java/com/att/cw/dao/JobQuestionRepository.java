@@ -9,9 +9,10 @@ import com.att.cw.model.JobQuestion;
 import org.springframework.data.repository.PagingAndSortingRepository;
 
 /**
- * JobQuestion Repository 
+ * JobQuestion Repository
+ *
  * @author ebrimatunkara
  */
-public interface JobQuestionRepository extends PagingAndSortingRepository<JobQuestion, Long>{
-    
+public interface JobQuestionRepository extends PagingAndSortingRepository<JobQuestion, Long> {
+
 }

@@ -3,16 +3,16 @@ package com.att.cw.service;
 import com.att.cw.dao.JobRepository;
 import com.att.cw.dto.JobDto;
 import com.att.cw.model.Job;
-import com.att.cw.model.JobApplication;
-import com.att.cw.model.JobCategory;
+import com.att.cw.model.JobQuestion;
+import com.att.cw.support.DataTypeHelper;
 import java.util.List;
+import java.util.Set;
 import static java.util.stream.Collectors.toSet;
 import javax.annotation.Resource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 /**
  * JobService concrete implementation
@@ -35,6 +35,9 @@ public class JobService implements CrudService<Job, Long> {
     @Autowired
     private JobTypeService jobtypeService;
 
+    @Autowired
+    private JobQuestionService jobQuestionService;
+
     /**
      * Save Job entity object
      *
@@ -44,17 +47,7 @@ public class JobService implements CrudService<Job, Long> {
      */
     @Override
     public Job save(Job object) {
-        // mapReferenceObjects(object);
-
         return jobRepository.save(object);
-    }
-
-    private void mapReferenceObjects(Job object) {
-//        JobCategory category = object.getCategory();
-//        if(category != null){
-//            //object.setCategory(jobCategoryService.find(category.getId()));
-//            
-//        }
     }
 
     /**
@@ -113,20 +106,26 @@ public class JobService implements CrudService<Job, Long> {
         return (List<Job>) jobRepository.findAll();
     }
 
+    public Job findByQuestionId(Long id) {
+        return jobRepository.findByQuestionId(id);
+    }
+
     @Override
     public void deleteAll() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        jobRepository.deleteAll();
     }
 
     public Job save(JobDto dto) {
         //find and load the job entity
-        Job entity = (dto.getId() != null) ? find(dto.getId()) : new Job();
-        if (entity == null) {
-            entity = new Job();
-        }
-        //set 
+        Long id = dto.getId();
+        Job entity = (id != null) ? find(id) : new Job();
+        //set  job entity
+        byte[] description = (dto.getDescription() != null) ? DataTypeHelper.stringToByte(dto.getDescription()) : null;
+        byte[] skills = (dto.getDescription() != null) ? DataTypeHelper.stringToByte(dto.getSkills()) : null;
+
         entity.setTitle(dto.getTitle());
-        entity.setDescription(dto.getDescription());
+        entity.setDescription(description);
+        entity.setSkills(skills);
         entity.setVacancy(dto.getVacancy());
         entity.setLocation(dto.getLocation());
         //save new entity object
@@ -142,12 +141,18 @@ public class JobService implements CrudService<Job, Long> {
         if (dto.getJobType() != null) {
             entity.setJobType(jobtypeService.find(dto.getJobType().getId()));
         }
+
+        //save job questions, questionaire is null
+        Set<JobQuestion> questions = jobQuestionService.saveDto(dto.getQuestions());
+        //set job questions
+        entity.getQuestions().addAll(questions);
+
         return save(entity);
     }
 
     @Override
     public boolean exists(Long id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return jobRepository.exists(id);
     }
 
 }

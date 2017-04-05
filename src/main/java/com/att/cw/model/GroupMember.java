@@ -17,17 +17,18 @@ import javax.persistence.Table;
  * @author ebrimatunkara
  */
 @Entity
-@Table(name="GROUP_MEMBER")
-public class GroupMember extends Audit<Long>{
+@Table(name = "GROUP_MEMBER")
+public class GroupMember extends Audit<Long> {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    
-    private boolean active = false;    
-    
+
+    private boolean active = false;
+
     @OneToOne
     private User user;
-   
+
     @Override
     public Long getId() {
         return id;

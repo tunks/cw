@@ -24,7 +24,7 @@
     <context:property-placeholder location="classpath:application.properties,
                                                 classpath:application-dev.properties,
                                                 classpath:mail.properties"
-                                      ignore-resource-not-found="true" />
+                                  ignore-resource-not-found="true" />
 		
     <import resource="classpath*:spring-jpa-config.xml" />
     <import resource="classpath*:spring-mail-config.xml" />

@@ -5,10 +5,10 @@
  */
 package com.att.cw.model;
 
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -20,27 +20,28 @@ import javax.persistence.Table;
 
 /**
  * JobCategory
+ *
  * @author ebrimatunkara
  */
 @Entity
-@Table(name="JOB_CATEGORY")
-public class JobCategory {
+@Table(name = "job_category")
+public class JobCategory implements Serializable {
     /**
      * category id
      */
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-   
+
     @Column(nullable = false)
     private String name;
-    
-   @ManyToMany(mappedBy = "categories", fetch = FetchType.LAZY)
-    private Set<Job> jobs =new HashSet();
-    
-   // @Override
+
+    @ManyToMany(mappedBy = "categories", fetch = FetchType.LAZY)
+    private Set<Job> jobs = new HashSet();
+
+    // @Override
     public Long getId() {
-       return id;
+        return id;
     }
 
     public String getName() {
@@ -51,7 +52,6 @@ public class JobCategory {
         this.name = name;
     }
 
-   
     public Set<Job> getJobs() {
         return jobs;
     }
@@ -88,5 +88,5 @@ public class JobCategory {
         }
         return true;
     }
-    
+
 }

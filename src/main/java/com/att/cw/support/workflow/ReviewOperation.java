@@ -11,10 +11,11 @@ import com.att.cw.model.JobActivity;
  *
  * @author ebrimatunkara
  */
-public class ReviewOperation implements StateOperation<JobActivity>{
+public class ReviewOperation implements StateOperation<JobActivity> {
+
     @Override
     public void action(JobActivity object) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
+
 }

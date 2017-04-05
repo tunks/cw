@@ -23,7 +23,7 @@
         <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
     </listener>
     
-     <!--   CORS filter  -->     
+    <!--   CORS filter  -->     
     <filter>
         <filter-name>restCORSFilter</filter-name>
         <filter-class>com.att.cw.security.RestCorsFilter</filter-class>
@@ -35,7 +35,7 @@
         <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
     </filter>
           
-      <!-- CORS mapping -->
+    <!-- CORS mapping -->
     <filter-mapping>
         <filter-name>restCORSFilter</filter-name>
         <url-pattern>/*</url-pattern>

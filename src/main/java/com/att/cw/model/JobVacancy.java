@@ -15,28 +15,30 @@ import javax.persistence.Temporal;
 
 /**
  * Job Vacancies
+ *
  * @author ebrimatunkara
  */
 @Embeddable
-public class JobVacancy implements Serializable{
+public class JobVacancy implements Serializable {
+
     /**
      * job opening start date
      */
-    @Column(name="open_date", nullable=false)
+    @Column(name = "open_date", nullable = false)
     @Temporal(javax.persistence.TemporalType.TIMESTAMP)
     private Date openDate;
     /**
      * job deadline closing date
      */
-    @Column(name="close_date", nullable=false)
+    @Column(name = "close_date", nullable = false)
     @Temporal(javax.persistence.TemporalType.TIMESTAMP)
     private Date closeDate;
     /**
      * Job status enumerated value
      */
-    @Enumerated(EnumType.STRING)   
+    @Enumerated(EnumType.STRING)
     private JobStatus status;
-    
+
     public JobVacancy() {
     }
 
@@ -44,7 +46,7 @@ public class JobVacancy implements Serializable{
         this.openDate = openDate;
         this.closeDate = closeDate;
     }
-    
+
     public Date getOpenDate() {
         return openDate;
     }
@@ -59,7 +61,7 @@ public class JobVacancy implements Serializable{
 
     public void setCloseDate(Date closeDate) {
         this.closeDate = closeDate;
-    }   
+    }
 
     public JobStatus getStatus() {
         return status;

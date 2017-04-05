@@ -16,62 +16,64 @@ import org.springframework.stereotype.Service;
 
 /**
  * QuestionaireService
+ *
  * @author ebrimatunkara
  */
 @Service("questionaireService")
-public class QuestionaireService implements CrudService<Questionaire, Long>{
+public class QuestionaireService implements CrudService<Questionaire, Long> {
+
     @Resource
     private QuestionaireRepository questionaireRepository;
-    
+
     @Override
     public Questionaire save(Questionaire object) {
-      return questionaireRepository.save(object);
+        return questionaireRepository.save(object);
     }
 
     @Override
     public Questionaire find(Long id) {
-       return questionaireRepository.findOne(id);
+        return questionaireRepository.findOne(id);
     }
 
     @Override
     public List<Questionaire> findAll() {
-       return (List<Questionaire>) questionaireRepository.findAll();
+        return (List<Questionaire>) questionaireRepository.findAll();
     }
 
     @Override
     public Page<Questionaire> findAll(Pageable page) {
-      return questionaireRepository.findAll(page);
+        return questionaireRepository.findAll(page);
     }
 
     @Override
     public void delete(Long id) {
-         questionaireRepository.delete(id);
+        questionaireRepository.delete(id);
     }
 
     @Override
     public void deleteAll() {
-      questionaireRepository.deleteAll();
+        questionaireRepository.deleteAll();
     }
 
     public Questionaire save(QuestionaireDto object) {
-       Questionaire entity;
-       if(object.getId() != null)
-          entity = questionaireRepository.findOne(object.getId());
-       else{
-          entity = new Questionaire(); 
-       }
-       //map the entity 
-       entity.setName(object.getName());
-       return questionaireRepository.save(entity);
+        Questionaire entity;
+        if (object.getId() != null) {
+            entity = questionaireRepository.findOne(object.getId());
+        } else {
+            entity = new Questionaire();
+        }
+        //map the entity 
+        entity.setName(object.getName());
+        return questionaireRepository.save(entity);
     }
 
     public void delete(Questionaire questionaire) {
-         questionaireRepository.delete(questionaire);
+        questionaireRepository.delete(questionaire);
     }
 
     @Override
     public boolean exists(Long id) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
+
 }

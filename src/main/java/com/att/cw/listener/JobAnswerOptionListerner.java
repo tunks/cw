@@ -11,9 +11,11 @@ import javax.persistence.PreUpdate;
 
 /**
  * JobAwsnerOption listener
+ *
  * @author ebrimatunkara
  */
 public class JobAnswerOptionListerner {
+
     @PrePersist
     void onCreate(JobAnswerOption entity) {
         //get job question
@@ -34,5 +36,4 @@ public class JobAnswerOptionListerner {
 //            throw new JobApplicationException("Question must be answer!!");
 //        }
 //    }
-
 }

@@ -10,8 +10,9 @@ import org.springframework.data.repository.PagingAndSortingRepository;
 
 /**
  * QuestionaireRepository
+ *
  * @author ebrimatunkara
  */
-public interface QuestionaireRepository extends PagingAndSortingRepository<Questionaire, Long>{
-    
+public interface QuestionaireRepository extends PagingAndSortingRepository<Questionaire, Long> {
+
 }

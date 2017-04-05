@@ -9,88 +9,92 @@ import com.att.cw.listener.JobComponentListener;
 import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.CascadeType;
+import static javax.persistence.CascadeType.MERGE;
+import static javax.persistence.CascadeType.PERSIST;
+import static javax.persistence.CascadeType.REMOVE;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 /**
- * JobQuestion Entity model
- * This model stores the question of the job application 
+ * JobQuestion Entity model This model stores the question of the job
+ * application
+ *
  * @author ebrimatunkara
  */
 @Entity
-@Table(name="JOB_QUESTION")
+@Table(name = "JOB_QUESTION")
 @EntityListeners(JobComponentListener.class)
-public class JobQuestion extends Component {  
-    @Column(nullable=false)
+public class JobQuestion extends Component {
+
+    @Column(nullable = false)
     private String question;
-    
+
     @Enumerated(EnumType.STRING)
     private Relevance relevance = Relevance.MEDIUM;
-    
+
     /**
-     * Question category 
+     * Question category
      */
     @ManyToOne
-    //@JoinColumn(nullable = false)
     private QuestionCategory category;
-     
-    @Column(name="question_type" ,nullable = false)
-    @Enumerated(EnumType.STRING)
-    private QuestionOptionType questionType;
-    
+
+    @NotNull
+    @ManyToOne
+    private QuestionType questionType;
+
     /**
      * Question option
      */
-    @OneToMany(fetch = FetchType.LAZY)
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<QuestionOption> options = new HashSet();
-    
-    
+
     /**
      * Question reference number
      */
-    @Column(name="reference_number", nullable=false)
+    @Column(name = "reference_number", nullable = false)
     private String referenceNumber;
     /**
      * Variable to determine if question answer is required or not
      */
     private Boolean required = Boolean.FALSE;
-    
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL )
+
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Questionaire questionaire;
     
-
+    /**
+     * Job question category
+     */
     public JobQuestion() {
     }
-    
+
     public JobQuestion(String question) {
         this.question = question;
     }
 
-    public JobQuestion(String question, QuestionOptionType questionType) {
+    public JobQuestion(String question, QuestionType questionType) {
         this.question = question;
         this.questionType = questionType;
     }
 
-    public JobQuestion(String question, QuestionCategory category, QuestionOptionType questionType) {
+    public JobQuestion(String question, QuestionCategory category, QuestionType questionType) {
         this.question = question;
         this.category = category;
         this.questionType = questionType;
     }
 
-    
     public JobQuestion(String question, Set<QuestionOption> options) {
         this.question = question;
         this.options = options;
     }
-    
+
     public String getQuestion() {
         return question;
     }
@@ -114,8 +118,8 @@ public class JobQuestion extends Component {
     public void setOptions(Set<QuestionOption> options) {
         this.options = options;
     }
-    
-    public void addOptions(QuestionOption option){
+
+    public void addOptions(QuestionOption option) {
         this.options.add(option);
     }
 
@@ -126,18 +130,18 @@ public class JobQuestion extends Component {
     public void setRequired(Boolean required) {
         this.required = required;
     }
-    
-    public Boolean isRequired(){
-       return required;
-    } 
 
-    public QuestionOptionType getQuestionType() {
+    public Boolean isRequired() {
+        return required;
+    }
+
+    public QuestionType getQuestionType() {
         return questionType;
     }
 
-    public void setQuestionType(QuestionOptionType questionType) {
+    public void setQuestionType(QuestionType questionType) {
         this.questionType = questionType;
-    }  
+    }
 
     public String getReferenceNumber() {
         return referenceNumber;

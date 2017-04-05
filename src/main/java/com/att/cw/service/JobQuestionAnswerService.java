@@ -15,13 +15,15 @@ import org.springframework.stereotype.Service;
 
 /**
  * JobQuestionAnswerService class
+ *
  * @author ebrimatunkara
  */
 @Service("jobQuestionAnswerService")
-public class JobQuestionAnswerService implements CrudService<JobQuestionAnswer,Long>{
+public class JobQuestionAnswerService implements CrudService<JobQuestionAnswer, Long> {
+
     @Resource
     private JobQuestionAnswerRepository jobQuestionAnswerRepository;
-    
+
     @Override
     public JobQuestionAnswer save(JobQuestionAnswer object) {
         return jobQuestionAnswerRepository.save(object);
@@ -34,12 +36,12 @@ public class JobQuestionAnswerService implements CrudService<JobQuestionAnswer,L
 
     @Override
     public List<JobQuestionAnswer> findAll() {
-       return (List<JobQuestionAnswer>) jobQuestionAnswerRepository.findAll();
+        return (List<JobQuestionAnswer>) jobQuestionAnswerRepository.findAll();
     }
 
     @Override
     public Page<JobQuestionAnswer> findAll(Pageable page) {
-       return jobQuestionAnswerRepository.findAll(page);
+        return jobQuestionAnswerRepository.findAll(page);
     }
 
     @Override
@@ -56,5 +58,5 @@ public class JobQuestionAnswerService implements CrudService<JobQuestionAnswer,L
     public boolean exists(Long id) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
+
 }

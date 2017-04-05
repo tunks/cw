@@ -12,6 +12,6 @@ import org.springframework.data.repository.PagingAndSortingRepository;
  *
  * @author ebrimatunkara
  */
-public interface JobQuestionOptionRepository extends PagingAndSortingRepository<QuestionOption, Long>{
-    
+public interface JobQuestionOptionRepository extends PagingAndSortingRepository<QuestionOption, Long> {
+
 }

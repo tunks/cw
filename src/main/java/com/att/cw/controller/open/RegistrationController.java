@@ -31,6 +31,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 @RequestMapping("/open/register")
 public class RegistrationController {
+
     private static final Logger logger = LoggerFactory.getLogger(RegistrationController.class);
     @Autowired
     private RegistrationService regService;

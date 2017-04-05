@@ -18,6 +18,8 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import com.att.cw.controller.open.RegistrationController;
 import com.att.cw.dto.ErrorResponse;
+import com.att.cw.exception.NotFoundException;
+import com.att.cw.exception.PersistentException;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.exc.InvalidFormatException;
@@ -28,6 +30,7 @@ import java.util.List;
 import java.util.Map;
 import javax.validation.ConstraintViolation;
 import javax.validation.ConstraintViolationException;
+import org.hibernate.PersistentObjectException;
 import org.springframework.dao.DataIntegrityViolationException;
 
 /**
@@ -53,11 +56,11 @@ public class ValidationExceptionControllerAdvice {
     @ExceptionHandler(ConstraintViolationException.class)
     public ResponseEntity<ErrorResponse> ConstraintViolationExceptionHandler(ConstraintViolationException ex) throws JsonProcessingException {
         //ex.printStackTrace();
-         Map<String,String> errorMessages = Collections.synchronizedMap(new HashMap());
-         for(final ConstraintViolation<?> v : ex.getConstraintViolations()){
-             
-             errorMessages.put(v.getPropertyPath().toString(),v.getMessage());
-         }
+        Map<String, String> errorMessages = Collections.synchronizedMap(new HashMap());
+        for (final ConstraintViolation<?> v : ex.getConstraintViolations()) {
+
+            errorMessages.put(v.getPropertyPath().toString(), v.getMessage());
+        }
         String errorJson = new ObjectMapper().writeValueAsString(errorMessages);
         ErrorResponse error = new ErrorResponse();
         error.setErrorCode(HttpStatus.BAD_REQUEST.value());
@@ -65,8 +68,8 @@ public class ValidationExceptionControllerAdvice {
         error.setErrorMessage(errorJson);
         return new ResponseEntity<ErrorResponse>(error, HttpStatus.BAD_REQUEST);
     }
-    
-        @ExceptionHandler(DataIntegrityViolationException.class)
+
+    @ExceptionHandler(DataIntegrityViolationException.class)
     public ResponseEntity<ErrorResponse> DataIntegrityViolationExceptionHandler(DataIntegrityViolationException ex) throws JsonProcessingException {
         ex.printStackTrace();
         ErrorResponse error = new ErrorResponse();
@@ -76,6 +79,7 @@ public class ValidationExceptionControllerAdvice {
         return new ResponseEntity<ErrorResponse>(error, HttpStatus.BAD_REQUEST);
     }
 //
+
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<ErrorResponse> MethodArgumentNotValidHandler(MethodArgumentNotValidException ex) {
         ex.printStackTrace();
@@ -104,6 +108,38 @@ public class ValidationExceptionControllerAdvice {
         error.setErrorTitle("Bad request Format");
         error.setErrorMessage(ex.getMessage());
         return new ResponseEntity<ErrorResponse>(error, HttpStatus.BAD_REQUEST);
+    }
+
+    /**
+     * Entity not found exception
+     *
+     * @param ex
+     * @return
+     */
+    @ExceptionHandler(NotFoundException.class)
+    public ResponseEntity<ErrorResponse> NotFoundExceptionHandler(NotFoundException ex) {
+        ex.printStackTrace();
+        ErrorResponse error = new ErrorResponse();
+        error.setErrorCode(HttpStatus.BAD_REQUEST.value());
+        error.setErrorTitle("Bad request Format");
+        error.setErrorMessage(ex.getMessage());
+        return new ResponseEntity(error, HttpStatus.BAD_REQUEST);
+    }
+
+    /**
+     * Data persistence exception
+     *
+     * @param ex
+     * @return
+     */
+    @ExceptionHandler(PersistentException.class)
+    public ResponseEntity<ErrorResponse> PersistentObjecctExceptionHandler(PersistentException ex) {
+        ex.printStackTrace();
+        ErrorResponse error = new ErrorResponse();
+        error.setErrorCode(HttpStatus.INTERNAL_SERVER_ERROR.value());
+        error.setErrorTitle("Sql persistence error");
+        error.setErrorMessage(ex.getMessage());
+        return new ResponseEntity(error, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
 }

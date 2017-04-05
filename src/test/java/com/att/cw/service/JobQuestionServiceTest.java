@@ -7,7 +7,7 @@ package com.att.cw.service;
 
 import com.att.cw.model.JobQuestion;
 import com.att.cw.model.QuestionOption;
-import com.att.cw.model.QuestionOptionType;
+import com.att.cw.model.QuestionType;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -30,67 +30,71 @@ import org.springframework.test.context.web.WebAppConfiguration;
 
 /**
  * JobQuestion Service test unit
+ *
  * @author ebrimatunkara
  */
-@ActiveProfiles({"test","dev"})
-@RunWith(SpringJUnit4ClassRunner.class) 
+@ActiveProfiles({"test", "dev"})
+@RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath:springmvc-servlet.xml"})
 @WebAppConfiguration
 public class JobQuestionServiceTest {
-    private final String[] questions = {"First name","Country of Birth","Years of Experience", "Do you now or will in the future require visa sponsorship?"};
-    
+
+    private final String[] questions = {"First name", "Country of Birth", "Years of Experience", "Do you now or will in the future require visa sponsorship?"};
+
     @Autowired
     private JobQuestionService jobQuestionService;
-    
+
     @Autowired
     private JobQuestionOptionService jobQuestionOptionService;
-    
+
+    @Autowired
+    private QuestionTypeService questionTypeService;
+
     private final AtomicInteger atomicInteger = new AtomicInteger(0);
-    
+
     List<JobQuestion> components;
-    
+
     public JobQuestionServiceTest() {
     }
-    
+
     @BeforeClass
     public static void setUpClass() {
     }
-    
+
     @AfterClass
     public static void tearDownClass() {
     }
-    
+
     @Before
     public void setUp() {
-        createJobQuestions();
+        List<QuestionType> questionTypes = questionTypeService.findAll();
+        createJobQuestions(questionTypes);
     }
 
-    private void createJobQuestions() {
+    private void createJobQuestions(List<QuestionType> questionTypes) {
         components = new ArrayList();
         //create questions
         Boolean required = false;
-        QuestionOptionType qtype;
-        for(int i =0; i<questions.length; i++) {
-            if(i%2 == 0) {
+        QuestionType qtype;
+        for (int i = 0; i < questions.length; i++) {
+            if (i % 2 == 0) {
                 required = true;
-                qtype = QuestionOptionType.TEXT;
+                qtype = questionTypes.get(0);
+            } else {
+                qtype = questionTypes.get(1);
             }
-            else{
-                qtype = QuestionOptionType.MULTI_CHOICE;
-            }
-            components.add(createComponent(questions[i],required,qtype));    
+            components.add(createComponent(questions[i], required, qtype));
         }
     }
-    
-   
+
     @After
     public void tearDown() {
     }
-    
-    private JobQuestion createComponent(String question , Boolean required, QuestionOptionType type){
-         JobQuestion component  = new JobQuestion(question, type);     
-         component.setRequired(required);
-         return component;
+
+    private JobQuestion createComponent(String question, Boolean required, QuestionType type) {
+        JobQuestion component = new JobQuestion(question, type);
+        component.setRequired(required);
+        return component;
     }
 
     /**
@@ -98,29 +102,31 @@ public class JobQuestionServiceTest {
      */
     @Test
     public void testSave() {
-      System.out.println("save");
-      int expectedCount = questions.length;
-       int resultCount = saveJobQuestion();
-       
-      assertEquals(expectedCount, resultCount);
-      
+        System.out.println("save");
+        int expectedCount = questions.length;
+        int resultCount = saveJobQuestion();
+
+        assertEquals(expectedCount, resultCount);
+
     }
 
     private int saveJobQuestion() {
         Set<JobQuestion> results = components.stream()
-                .map(component ->{
+                .map(component -> {
                     return jobQuestionService.save(component);
                 })
-                .filter(x->{ return x !=null;})
+                .filter(x -> {
+                    return x != null;
+                })
                 .collect(Collectors.toSet());
         //save options
         results.parallelStream()
                 .filter(q -> {
-                    return q.getQuestionType().equals(QuestionOptionType.MULTI_CHOICE);
+                    return q.getQuestionType().getName().equals("MULTIPLE CHOICE");
                 })
-                .forEach(q ->{
+                .forEach(q -> {
                     int num = atomicInteger.getAndIncrement();
-                    QuestionOption option  = new QuestionOption("Option "+num, q);
+                    QuestionOption option = new QuestionOption("Option " + num, q);
                     jobQuestionOptionService.save(option);
                     q.addOptions(option);
                     jobQuestionService.save(q);
@@ -133,18 +139,12 @@ public class JobQuestionServiceTest {
     /**
      * Test of find method, of class JobQuestionService.
      */
-    @Test
-    public void testFind() {
-//        System.out.println("find");
-//        Long id = null;
-//        JobQuestionService instance = new JobQuestionService();
-//        JobQuestion expResult = null;
-//        JobQuestion result = instance.find(id);
-//        assertEquals(expResult, result);
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
-    }
-
+//    @Test
+//    public void testFind() {
+//      Long id = new Long(3);
+//      JobQuestion  result = jobQuestionService.find(id);
+//      assertNotNull(result);
+//    }
     /**
      * Test of findAll method, of class JobQuestionService.
      */
@@ -155,8 +155,6 @@ public class JobQuestionServiceTest {
         assertTrue(result.size() > 0);
 
     }
-
-   
 
     /**
      * Test of delete method, of class JobQuestionService.
@@ -170,5 +168,5 @@ public class JobQuestionServiceTest {
 //        // TODO review the generated test code and remove the default call to fail.
 //        fail("The test case is a prototype.");
     }
-    
+
 }

@@ -19,24 +19,27 @@ import com.att.cw.model.AuthorityName;
  */
 @Service("userService")
 public class UserService implements CrudService<User, Long> {
+
     @Resource
     private UserRepository userRepository;
 
     /**
      * Save and persist user object
+     *
      * @param object
-     * @return 
+     * @return
      */
     @Override
     public User save(User object) {
-    	
+
         return userRepository.save(object);
     }
 
     /**
      * Find and return user by id
+     *
      * @param id
-     * @return 
+     * @return
      */
     @Override
     public User find(Long id) {
@@ -45,75 +48,93 @@ public class UserService implements CrudService<User, Long> {
 
     /**
      * Delete user by id
-     * @param id 
+     *
+     * @param id
      */
     @Override
     public void delete(Long id) {
         userRepository.delete(id);
     }
 
-     /**
+    /**
      * Find and return all users by page
+     *
      * @param page
-     * @return 
-     **/
+     * @return
+     *
+     */
     @Override
     public Page<User> findAll(Pageable page) {
         return userRepository.findAll(page);
     }
 
-     /**
-     * Find  and return user by email
+    /**
+     * Find and return user by email
+     *
      * @param email
-     * @return 
-     **/
+     * @return
+     *
+     */
     public User findByEmail(String email) {
         return userRepository.findByEmail(email);
     }
-/**
+
+    /**
      * Find by email/name and return user
+     *
      * @param emailOrName
-     * @return 
-     **/
+     * @return
+     *
+     */
     public User findByEmailOrName(String emailOrName) {
-        return userRepository.findByEmailOrName(emailOrName,emailOrName);
+        return userRepository.findByEmailOrName(emailOrName, emailOrName);
     }
-     /**
+
+    /**
      * Find by email/name and return user
+     *
      * @param email
      * @param name
-     * @return 
-     **/
+     * @return
+     *
+     */
     public User findByEmailOrName(String email, String name) {
-        return userRepository.findByEmailOrName(email,name);
+        return userRepository.findByEmailOrName(email, name);
     }
-      /**
-     * Find  and return user by email and password
+
+    /**
+     * Find and return user by email and password
+     *
      * @param email
      * @param password
-     * @return 
-     **/
-    public User findByEmailAndPassword(String email,String password) {
+     * @return
+     *
+     */
+    public User findByEmailAndPassword(String email, String password) {
         return userRepository.findByEmailAndPassword(email, password);
     }
+
     /**
-     * Find  and return all users
-     * @return 
-     **/
+     * Find and return all users
+     *
+     * @return
+     *
+     */
     @Override
     public List<User> findAll() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
+
     /**
      * Determine if user exists
+     *
      * @param email
-     * @return 
+     * @return
      */
-     public boolean existsByEmail(String email){
-         User user = userRepository.findByEmail(email);
-         return (user != null);
-     }
+    public boolean existsByEmail(String email) {
+        User user = userRepository.findByEmail(email);
+        return (user != null);
+    }
 
     @Override
     public void deleteAll() {

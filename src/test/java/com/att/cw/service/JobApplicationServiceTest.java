@@ -17,10 +17,12 @@ import com.att.cw.model.JobQuestionAnswer;
 import com.att.cw.model.JobVacancy;
 import com.att.cw.model.QuestionCategory;
 import com.att.cw.model.QuestionOption;
-import com.att.cw.model.QuestionOptionType;
+import com.att.cw.model.QuestionType;
 import com.att.cw.model.Resume;
+import com.att.cw.support.DataTypeHelper;
 import com.att.cw.support.ResourceType;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -54,6 +56,7 @@ import org.springframework.test.context.web.WebAppConfiguration;
 @ContextConfiguration(locations = {"classpath:springmvc-servlet.xml"})
 @WebAppConfiguration
 public class JobApplicationServiceTest {
+
     private final List<MockQuestion> questions = new ArrayList();
 
     private AnswerOptionTestFactory answerOptionFactory;
@@ -83,9 +86,12 @@ public class JobApplicationServiceTest {
 
     @Autowired
     private JobAnswerOptionService jobAnswerOptionService;
-    
+
     @Autowired
     private QuestionCategoryService questionCategoryService;
+
+    @Autowired
+    private QuestionTypeService questionTypeService;
 
     private List<QuestionCategory> categories;
 
@@ -97,9 +103,10 @@ public class JobApplicationServiceTest {
     private JobApplication application;
     private Resume resume;
     private JobCandidate candidate;
+    private QuestionType questionType;
 
     private Set<JobQuestion> jobQuestions;
-        
+
     public JobApplicationServiceTest() {
     }
 
@@ -112,12 +119,12 @@ public class JobApplicationServiceTest {
     }
 
     private void createJobQuestions() {
-       //create job question
-        components =  questions.stream()
-                                .map(q->{
-                                  return createComponent(q);
-                                })
-                         .collect(Collectors.toList());
+        //create job question
+        components = questions.stream()
+                .map(q -> {
+                    return createComponent(q);
+                })
+                .collect(Collectors.toList());
     }
 
     private JobQuestion createComponent(MockQuestion question) {
@@ -140,7 +147,7 @@ public class JobApplicationServiceTest {
         //create and save question option
         results.stream()
                 .filter(q -> {
-                    return !q.getQuestionType().equals(QuestionOptionType.TEXT);
+                    return !q.getQuestionType().getName().equals("TEXT");
                 })
                 .forEach(q -> {
                     int num = atomicInteger.getAndIncrement();
@@ -153,32 +160,34 @@ public class JobApplicationServiceTest {
     }
 
     @Before
-    public void setUp() throws IOException {   
-        questions.add(new MockQuestion("First name",Category.PROFILE,Boolean.TRUE));
-        questions.add(new MockQuestion("Middle Name",Category.PROFILE));
-        questions.add(new MockQuestion("Last Name",Category.PROFILE,Boolean.TRUE));
-        questions.add(new MockQuestion("Country of Birth",Category.PROFILE));
-        questions.add(new MockQuestion("Years of Experience",Category.PROFESSION_HISTORY));
-        questions.add(new MockQuestion("Attach your recent resume?",Category.RESUME,QuestionOptionType.FILE_ATTACHMENT));
-        questions.add(new MockQuestion("Do you now or will in the future require visa sponsorship?",Category.QUESTION,QuestionOptionType.MULTI_CHOICE));
-  
+    public void setUp() throws IOException {
+        List<QuestionType> questionTypes = questionTypeService.findAll();
+        questions.add(new MockQuestion("First name", Category.PROFILE, questionTypes.get(0), Boolean.TRUE));
+        questions.add(new MockQuestion("Middle Name", Category.PROFILE, questionTypes.get(0), Boolean.FALSE));
+        questions.add(new MockQuestion("Last Name", Category.PROFILE, questionTypes.get(0), Boolean.TRUE));
+        questions.add(new MockQuestion("Country of Birth", Category.PROFILE, questionTypes.get(0), Boolean.FALSE));
+        questions.add(new MockQuestion("Years of Experience", Category.EDUCATION_BACKGROUND, questionTypes.get(0), Boolean.FALSE));
+        questions.add(new MockQuestion("Attach your recent resume?", Category.RESUME, questionTypes.get(0), Boolean.FALSE));
+        questions.add(new MockQuestion("Do you now or will in the future require visa sponsorship?", Category.OTHER, questionTypes.get(0), Boolean.TRUE));
+
         //create job categories
         createJobCategories();
         //intial job application
         initJobApplication();
     }
-     //create job categories
+    //create job categories
+
     private void createJobCategories() {
         //create job categories
-         categories = new ArrayList();
-         for(Category c :Category.values()){
-            categories.add( new QuestionCategory(c.name()));
-          }
-         
+        categories = new ArrayList();
+        for (Category c : Category.values()) {
+            categories.add(new QuestionCategory(c.name()));
+        }
+
         categories.stream()
                 .forEach(c -> {
-                    if(questionCategoryService.findByCategory(c.getCategory()) == null){
-                       questionCategoryService.save(c);
+                    if (questionCategoryService.findByCategory(c.getCategory()) == null) {
+                        questionCategoryService.save(c);
                     }
                 });
     }
@@ -191,15 +200,15 @@ public class JobApplicationServiceTest {
         JobVacancy vacancy = new JobVacancy();
         vacancy.setOpenDate(startDate);
         vacancy.setCloseDate(closeDate);
-
-        job = new Job("Technical Architect", "Experience in java technologies");
+        byte[] description = DataTypeHelper.stringToByte("Experience in java technologies");
+        job = new Job("Technical Architect", description);
         job.setVacancy(vacancy);
         /*FileDocument document = createFileDocument();
         //job resume
         resume = new Resume();
         resume.setDocument(document);
         resumeService.save(resume);
-        */
+         */
         //create job questions
         createJobQuestions();
         //save and return job questions
@@ -211,12 +220,12 @@ public class JobApplicationServiceTest {
         //job application
         //create and save job candidate
         candidate = jobCandidateService.save(createJobCandidate());
-        application = createJobApplication(job,candidate);
+        application = createJobApplication(job, candidate);
         //jobanswer factory
         answerOptionFactory = new AnswerOptionTestFactory();
         //create and save job question answers
         Set<JobQuestionAnswer> answers = saveJobAnswer();
-        
+
         //set job application answers
         application.setQuestionAnswers(answers);
     }
@@ -225,36 +234,35 @@ public class JobApplicationServiceTest {
         //save job question answer
         AnswerOptionTask answerOptionTask = answerOptionFactory.createOptionTask();
         Set<JobQuestionAnswer> answers = jobQuestions.stream()
-                                        //.filter(q->{ return !q.isRequired();})
-                                        .map(q -> {
-                                            //get question type 
-                                            QuestionOptionType opType = q.getQuestionType();
-                                            //get question options
-                                            Set<QuestionOption> ops = q.getOptions();
-                                            //set question answer
-                                            JobQuestionAnswer ans = new JobQuestionAnswer(q);
+                //.filter(q->{ return !q.isRequired();})
+                .map(q -> {
+                    //get question type 
+                    QuestionType opType = q.getQuestionType();
+                    //get question options
+                    Set<QuestionOption> ops = q.getOptions();
+                    //set question answer
+                    JobQuestionAnswer ans = new JobQuestionAnswer(q);
 
-                                            //TODO -- refactor to COR
-                                            Set<JobAnswerOption> answerOps = new HashSet();
-                                                 if(!opType.equals(QuestionOptionType.TEXT)){
-                                                     answerOps = ops.stream()
-                                                                    .map(op -> {
-                                                                        JobAnswerOption ansOp = new JobAnswerOption(op);
-                                                                        answerOptionTask.process(ansOp, opType);
-                                                                        return jobAnswerOptionService.save(ansOp);
-                                                                    })
-                                                                   .collect(Collectors.toSet());
-                                                 }
-                                                 else{
-                                                    int num = atomicInteger.getAndIncrement();
-                                                    JobAnswerOption ansOp = new JobAnswerOption("Note Text "+num);
-                                                    jobAnswerOptionService.save(ansOp);
-                                                    answerOps.add(ansOp);
-                                                 }
-                                            //set question answer options
-                                            ans.setAnswerOptions(answerOps);
-                                            //save and return question answer
-                                            return jobQuestionAnswerService.save(ans);
+                    //TODO -- refactor to COR
+                    Set<JobAnswerOption> answerOps = new HashSet();
+                    if (!opType.getName().equals("TEXT")) {
+                        answerOps = ops.stream()
+                                .map(op -> {
+                                    JobAnswerOption ansOp = new JobAnswerOption(op);
+                                    answerOptionTask.process(ansOp, opType);
+                                    return jobAnswerOptionService.save(ansOp);
+                                })
+                                .collect(Collectors.toSet());
+                    } else {
+                        int num = atomicInteger.getAndIncrement();
+                        JobAnswerOption ansOp = new JobAnswerOption("Note Text " + num);
+                        jobAnswerOptionService.save(ansOp);
+                        answerOps.add(ansOp);
+                    }
+                    //set question answer options
+                    ans.setAnswerOptions(answerOps);
+                    //save and return question answer
+                    return jobQuestionAnswerService.save(ans);
                 }).collect(Collectors.toSet());
         return answers;
     }
@@ -283,9 +291,9 @@ public class JobApplicationServiceTest {
     public void tearDown() {
         //questionCategoryService.deleteAll();
     }
-    
-    private void clearQuestionCategories(){
-      questionCategoryService.deleteAll();
+
+    private void clearQuestionCategories() {
+        questionCategoryService.deleteAll();
     }
 
     /**
@@ -352,38 +360,20 @@ public class JobApplicationServiceTest {
 //        System.out.println("findByIdAndJob");
 //    }
 
-    private class MockQuestion{
-       private String question;
-       private QuestionOptionType optionType;
-       private boolean required;
-       private Category category;
-       
-       public MockQuestion(String question, Category category) {
+    private class MockQuestion {
+
+        private String question;
+        private QuestionType optionType;
+        private boolean required;
+        private Category category;
+
+        public MockQuestion(String question, Category category, QuestionType optionType, boolean required) {
             this.question = question;
             this.category = category;
-            this.optionType = QuestionOptionType.TEXT;
-            this.required = Boolean.FALSE;
-            
-        }
-       
-       
-       
-       public MockQuestion(String question,Category category, QuestionOptionType optionType) {
-            this(question,category);
             this.optionType = optionType;
-        }
-       
-       public MockQuestion(String question, Category category, boolean required) {
-         this(question,category);
-         this.required = required;
-       }
-              
-       public MockQuestion(String question,  Category category, QuestionOptionType optionType, boolean required) {
-            this(question,category,optionType);
             this.required = required;
         }
 
-       
         public String getQuestion() {
             return question;
         }
@@ -392,11 +382,11 @@ public class JobApplicationServiceTest {
             this.question = question;
         }
 
-        public QuestionOptionType getOptionType() {
+        public QuestionType getOptionType() {
             return optionType;
         }
 
-        public void setOptionType(QuestionOptionType optionType) {
+        public void setOptionType(QuestionType optionType) {
             this.optionType = optionType;
         }
 
@@ -408,7 +398,7 @@ public class JobApplicationServiceTest {
             this.required = required;
         }
     }
-    
+
     private abstract class AnswerOptionTask {
 
         private AnswerOptionTask next;
@@ -428,10 +418,11 @@ public class JobApplicationServiceTest {
             this.next = next;
         }
 
-        public abstract void process(JobAnswerOption ansOp, QuestionOptionType opType);
+        public abstract void process(JobAnswerOption ansOp, QuestionType opType);
     }
 
     private class NoteAnswerOptionTask extends AnswerOptionTask {
+
         private final AtomicInteger counter = new AtomicInteger(0);
 
         public NoteAnswerOptionTask() {
@@ -442,9 +433,9 @@ public class JobApplicationServiceTest {
         }
 
         @Override
-        public void process(JobAnswerOption ansOp, QuestionOptionType opType) {
-            if (opType.equals(QuestionOptionType.TEXT)) {
-                ansOp.setNote("Answer note text >> "+counter.getAndIncrement());
+        public void process(JobAnswerOption ansOp, QuestionType opType) {
+            if (opType.getName().equals("TEXT")) {
+                ansOp.setNote("Answer note text >> " + counter.getAndIncrement());
             } else if (this.getNext() != null) {
                 this.getNext().process(ansOp, opType);
             }
@@ -461,14 +452,14 @@ public class JobApplicationServiceTest {
         }
 
         @Override
-        public void process(JobAnswerOption ansOp, QuestionOptionType opType) {
-             if (opType.equals(QuestionOptionType.FILE_ATTACHMENT)) {
-                 try {
-                     FileDocument document = createFileDocument();
-                     ansOp.setDocument(document);
-                 } catch (IOException ex) {
-                     Logger.getLogger(JobApplicationServiceTest.class.getName()).log(Level.SEVERE, null, ex);
-                 }
+        public void process(JobAnswerOption ansOp, QuestionType opType) {
+            if (opType.getName().equals("FILE ATTACHMENT")) {
+                try {
+                    FileDocument document = createFileDocument();
+                    ansOp.setDocument(document);
+                } catch (IOException ex) {
+                    Logger.getLogger(JobApplicationServiceTest.class.getName()).log(Level.SEVERE, null, ex);
+                }
             } else if (this.getNext() != null) {
                 this.getNext().process(ansOp, opType);
             }
@@ -485,9 +476,9 @@ public class JobApplicationServiceTest {
         }
 
         @Override
-        public void process(JobAnswerOption ansOp, QuestionOptionType opType) {
-            if (opType.equals(QuestionOptionType.MULTI_CHOICE)) {
-                 //set checked true
+        public void process(JobAnswerOption ansOp, QuestionType opType) {
+            if (opType.getName().equals("MULTIPLE CHOICE")) {
+                //set checked true
                 ansOp.setChecked(Boolean.TRUE);
             } else if (this.getNext() != null) {
                 this.getNext().process(ansOp, opType);
@@ -505,9 +496,9 @@ public class JobApplicationServiceTest {
         }
 
         @Override
-        public void process(JobAnswerOption ansOp, QuestionOptionType opType) {
-            if (opType.equals(QuestionOptionType.SINGLE_CHOICE)) {
-                 //set checked true
+        public void process(JobAnswerOption ansOp, QuestionType opType) {
+            if (opType.getName().equals("SINGLE CHOICE")) {
+                //set checked true
                 ansOp.setChecked(Boolean.TRUE);
             } else if (this.getNext() != null) {
                 this.getNext().process(ansOp, opType);

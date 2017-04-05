@@ -9,7 +9,8 @@ package com.att.cw.dto;
  *
  * @author ebrimatunkara
  */
-public class JobTypeDto  extends JobComponentDto{
+public class JobTypeDto extends JobComponentDto {
+
     public JobTypeDto() {
     }
 

@@ -18,10 +18,10 @@ import org.springframework.security.web.authentication.AbstractAuthenticationPro
 
 import com.att.cw.exception.JwtTokenMissingException;
 import com.att.cw.service.SessionService;
-import java.util.Enumeration;
 import org.springframework.http.HttpHeaders;
 
 public class JwtAuthenticationFilter extends AbstractAuthenticationProcessingFilter implements ApplicationContextAware {
+
     private SessionService sessionService;
 
     @Override
@@ -50,7 +50,7 @@ public class JwtAuthenticationFilter extends AbstractAuthenticationProcessingFil
         } else {
             logger.info("Service is not null");
         }
-        
+
         String header = request.getHeader(HttpHeaders.AUTHORIZATION);
 
         if (header == null || !header.startsWith("Bearer")) {

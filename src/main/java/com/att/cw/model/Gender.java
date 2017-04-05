@@ -1,4 +1,3 @@
-
 package com.att.cw.model;
 
 /**

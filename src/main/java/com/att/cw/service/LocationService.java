@@ -19,11 +19,13 @@ import com.att.cw.dto.LocationDto;
  */
 @Service("locationService")
 public class LocationService {
+
     @Resource
     private LocationRepository locationRepository;
 
     /**
      * Find countries
+     *
      * @return
      */
     public List<LocationDto> findCountries() {
@@ -32,19 +34,43 @@ public class LocationService {
 
     /**
      * Find country states
+     *
      * @param parentId
      * @return
      */
     public List<LocationDto> findCountryStates(Long parentId) {
         return locationRepository.findByLocationTypeAndParentId(LocationType.STATE.getIndex(), parentId);
     }
-    
+
+    /**
+     * Find country states by country name
+     *
+     * @param name
+     * @return
+     */
+    public List<LocationDto> findCountryStatesByName(String name) {
+        return locationRepository.findByLocationTypeAndParentName(LocationType.STATE.getIndex(), name);
+    }
+
+    /**
+     * Find country state cities by name
+     *
+     * @param state
+     * @return
+     */
+    public List<LocationDto> findCountryStateCitiesByName(String state) {
+        System.out.println("state --------------------" + state);
+        return locationRepository.findByLocationTypeAndParentName(LocationType.CITY.getIndex(), state);
+    }
+
     /**
      * Find states cities
+     *
      * @param parentId
      * @return
      */
     public List<LocationDto> findStateCities(Long parentId) {
         return locationRepository.findByLocationTypeAndParentId(LocationType.CITY.getIndex(), parentId);
     }
+
 }

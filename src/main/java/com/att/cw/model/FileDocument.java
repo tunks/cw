@@ -17,7 +17,8 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "FILE_DOCUMENT")
-public class FileDocument extends Audit<Long>{
+public class FileDocument extends Audit<Long> {
+
     /**
      * document id
      */
@@ -29,21 +30,21 @@ public class FileDocument extends Audit<Long>{
      */
     private String description;
     /**
-     * resource type 
-    *
+     * resource type
+     *
      */
-    @Column(name="resource_type")
+    @Column(name = "resource_type")
     private ResourceType resourceType;
 
     /**
      * File content in bytes
      */
-    @Lob 
+    @Lob
     @Basic(fetch = FetchType.LAZY)
-    @Column(length=16777215)
+    @Column(length = 16777215)
     private byte[] content;
 
-    @Column(name="content_type")
+    @Column(name = "content_type")
     private String contentType;
     /*
      * File size

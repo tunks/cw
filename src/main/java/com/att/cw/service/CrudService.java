@@ -7,16 +7,24 @@ import org.springframework.data.domain.Pageable;
 
 /**
  * CRUD Service interface
+ *
  * @author ebrimatunkara
  * @param <T>
  * @param <ID>
  */
 public interface CrudService<T, ID extends Serializable> {
+
     public T save(T object);
+
     public T find(ID id);
+
     public List<T> findAll();
+
     public Page<T> findAll(Pageable page);
+
     public void delete(ID id);
+
     public void deleteAll();
+
     public boolean exists(ID id);
 }

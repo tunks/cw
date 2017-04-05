@@ -14,17 +14,19 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 /**
- * QuestionTypeService 
- * @author ebrimatunkara 
+ * QuestionTypeService
+ *
+ * @author ebrimatunkara
  */
 @Service("questionTypeService")
-public class QuestionTypeService implements CrudService<QuestionType,Long>{
+public class QuestionTypeService implements CrudService<QuestionType, Long> {
+
     @Resource
-    private QuestionTypeRepository  questionTypeRepository;
+    private QuestionTypeRepository questionTypeRepository;
 
     @Override
     public QuestionType save(QuestionType object) {
-       return questionTypeRepository.save(object);
+        return questionTypeRepository.save(object);
     }
 
     @Override
@@ -34,17 +36,17 @@ public class QuestionTypeService implements CrudService<QuestionType,Long>{
 
     @Override
     public List<QuestionType> findAll() {
-      return (List<QuestionType>) questionTypeRepository.findAll();
+        return (List<QuestionType>) questionTypeRepository.findAll();
     }
 
     @Override
     public Page<QuestionType> findAll(Pageable page) {
-       return  questionTypeRepository.findAll(page);
+        return questionTypeRepository.findAll(page);
     }
 
     @Override
     public void delete(Long id) {
-       questionTypeRepository.delete(id);
+        questionTypeRepository.delete(id);
     }
 
     @Override
@@ -53,7 +55,7 @@ public class QuestionTypeService implements CrudService<QuestionType,Long>{
     }
 
     public QuestionType findByName(String name) {
-      return  questionTypeRepository.findByName(name);
+        return questionTypeRepository.findByName(name);
     }
 
     @Override

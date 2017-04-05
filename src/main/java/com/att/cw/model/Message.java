@@ -20,6 +20,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "MESSAGE")
 public class Message extends Audit<Long> {
+
     /**
      * id
      */
@@ -28,12 +29,12 @@ public class Message extends Audit<Long> {
     private Long id;
 
     private String subject;
-    
+
     private String content;
-    
+
     @OneToOne
     private MessageHeader header;
-    
+
     @Override
     public Long getId() {
         return id;

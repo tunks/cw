@@ -23,6 +23,7 @@ import com.att.cw.dto.LocationDto;
 
 /**
  * LocationRepository unit test
+ *
  * @author ebrimatunkara
  */
 @ActiveProfiles({"test", "dev"})
@@ -30,22 +31,22 @@ import com.att.cw.dto.LocationDto;
 @ContextConfiguration(locations = {"classpath:springmvc-servlet.xml"})
 @WebAppConfiguration
 public class LocationRepositoryTest {
+
     @Autowired
     private LocationRepository locationRepository;
-   
-    
+
     @BeforeClass
     public static void setUpClass() {
     }
-    
+
     @AfterClass
     public static void tearDownClass() {
     }
-    
+
     @Before
     public void setUp() {
     }
-    
+
     @After
     public void tearDown() {
     }
@@ -59,10 +60,11 @@ public class LocationRepositoryTest {
         int type = 0;
         List<LocationDto> result = locationRepository.findByLocationType(type);
         assertTrue(result.size() > 0);
-      }
+    }
 
     /**
-     * Test of findByLocationTypeAndParentId method, of class LocationRepository.
+     * Test of findByLocationTypeAndParentId method, of class
+     * LocationRepository.
      */
     @Test
     public void testFindByLocationTypeAndParentId() {
@@ -76,5 +78,4 @@ public class LocationRepositoryTest {
         assertTrue(result.size() > 0);
     }
 
-    
 }

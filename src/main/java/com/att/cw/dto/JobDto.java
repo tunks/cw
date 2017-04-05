@@ -12,9 +12,11 @@ import java.util.Set;
 
 /**
  * JobDto
+ *
  * @author ebrimatunkara
  */
 public class JobDto {
+
     private Long id;
     /**
      * job title
@@ -24,6 +26,11 @@ public class JobDto {
      * job description
      */
     private String description;
+
+    /**
+     * job skills
+     */
+    private String skills;
 
     /**
      * Job category
@@ -37,6 +44,8 @@ public class JobDto {
     private JobVacancy vacancy;
 
     private JobLocation location;
+
+    private Set<JobQuestionDto> questions = new HashSet();
 
     public Long getId() {
         return id;
@@ -93,4 +102,21 @@ public class JobDto {
     public void setLocation(JobLocation location) {
         this.location = location;
     }
+
+    public Set<JobQuestionDto> getQuestions() {
+        return questions;
+    }
+
+    public void setQuestions(Set<JobQuestionDto> questions) {
+        this.questions = questions;
+    }
+
+    public String getSkills() {
+        return skills;
+    }
+
+    public void setSkills(String skills) {
+        this.skills = skills;
+    }
+
 }

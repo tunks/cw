@@ -30,36 +30,38 @@ import org.springframework.test.context.web.WebAppConfiguration;
  *
  * @author ebrimatunkara
  */
-@ActiveProfiles({"test","dev"})
-@RunWith(SpringJUnit4ClassRunner.class) 
+@ActiveProfiles({"test", "dev"})
+@RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath:springmvc-servlet.xml"})
 @WebAppConfiguration
 public class QuestionCategoryServiceTest {
+
     @Autowired
     private QuestionCategoryService questionCategoryService;
     private List<QuestionCategory> categories;
+
     public QuestionCategoryServiceTest() {
     }
-    
+
     @BeforeClass
     public static void setUpClass() {
     }
-    
+
     @AfterClass
     public static void tearDownClass() {
     }
-    
+
     @Before
     public void setUp() {
-          categories = new ArrayList();
-          for(Category c :Category.values()){
-            categories.add( new QuestionCategory(c.name()));
-          }
+        categories = new ArrayList();
+        for (Category c : Category.values()) {
+            categories.add(new QuestionCategory(c.name()));
+        }
     }
-    
+
     @After
     public void tearDown() {
-       // questionCategoryService.deleteAll();
+        // questionCategoryService.deleteAll();
     }
 
     /**
@@ -67,14 +69,16 @@ public class QuestionCategoryServiceTest {
      */
     @Test
     public void testSave() {
-      List<QuestionCategory> results  = categories.stream()
-             .map(c -> {
-                   return questionCategoryService.save(c);
-             })
-              .filter(c-> {return (c != null);})
-              .collect(Collectors.toList());
-       assertNotNull(results);
-       assertTrue(results.size() > 0);
+        List<QuestionCategory> results = categories.stream()
+                .map(c -> {
+                    return questionCategoryService.save(c);
+                })
+                .filter(c -> {
+                    return (c != null);
+                })
+                .collect(Collectors.toList());
+        assertNotNull(results);
+        assertTrue(results.size() > 0);
     }
 
     /**
@@ -133,5 +137,4 @@ public class QuestionCategoryServiceTest {
 //        // TODO review the generated test code and remove the default call to fail.
 //        fail("The test case is a prototype.");
 //    }
-    
 }

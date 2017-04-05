@@ -9,8 +9,9 @@ import com.att.cw.model.User;
 
 /**
  * User service interface
+ *
  * @author ebrimatunkara
  */
-public interface IUserService extends CrudService<User, Long>{
-    
+public interface IUserService extends CrudService<User, Long> {
+
 }

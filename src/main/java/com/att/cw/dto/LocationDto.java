@@ -9,10 +9,14 @@ import com.att.cw.model.Location;
 
 /**
  * LocationDto
+ *
  * @author ebrimatunkara
  */
 public interface LocationDto {
+
     Long getId();
+
     String getName();
+
     int getLocationType();
 }

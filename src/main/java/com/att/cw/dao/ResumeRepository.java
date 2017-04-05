@@ -9,9 +9,10 @@ import com.att.cw.model.Resume;
 import org.springframework.data.repository.PagingAndSortingRepository;
 
 /**
- * Resume repository 
+ * Resume repository
+ *
  * @author ebrimatunkara
  */
-public interface ResumeRepository  extends PagingAndSortingRepository<Resume, Long>{
-    
+public interface ResumeRepository extends PagingAndSortingRepository<Resume, Long> {
+
 }

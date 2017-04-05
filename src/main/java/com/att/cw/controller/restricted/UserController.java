@@ -1,7 +1,9 @@
 package com.att.cw.controller.restricted;
 
-
 import com.att.cw.controller.BaseController;
+import com.att.cw.dto.UserDto;
+import com.att.cw.dto.mappers.UserDtoMapper;
+import com.att.cw.exception.NotFoundException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,24 +22,32 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @RestController
 @RequestMapping("/restricted/users")
 public class UserController implements BaseController<User, Long> {
+
     /**
      * TODO logger using AOP
-     **/
+     *
+     */
     private static final Logger logger = LoggerFactory.getLogger(UserController.class);
-    
+
     @Autowired
     @Qualifier(value = "userService")
     private UserService userService;
-    
+
     /**
      * Find and return user by user id
      *
+     * @param id
+     * @return
      */
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    @Override
-    public User find(@PathVariable Long id) {
-        return userService.find(id);
+    public UserDto findUser(@PathVariable Long id) {
+        User user = userService.find(id);
+        if (user != null) {
+            return UserDtoMapper.mapEntityIntoDto(user);
+        }
+        throw new NotFoundException(id);
     }
+
     /**
      * Delete user by id
      *
@@ -60,7 +70,7 @@ public class UserController implements BaseController<User, Long> {
     }
 
     /**
-     * Update existing user 
+     * Update existing user
      *
      */
     @RequestMapping(method = RequestMethod.PUT)
@@ -84,6 +94,11 @@ public class UserController implements BaseController<User, Long> {
      */
     @Override
     public void deleteAll() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public User find(Long id) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

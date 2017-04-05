@@ -15,34 +15,41 @@ import org.springframework.stereotype.Service;
 
 /**
  * Resume service
+ *
  * @author ebrimatunkara
  */
 @Service("resumeService")
-public class ResumeService implements CrudService<Resume,Long>{
-    @Resource 
+public class ResumeService implements CrudService<Resume, Long> {
+
+    @Resource
     private ResumeRepository resumeRepository;
+
     /**
      * Save resume object
+     *
      * @param object
-     * @return 
+     * @return
      */
     @Override
     public Resume save(Resume object) {
-      return resumeRepository.save(object);
+        return resumeRepository.save(object);
     }
+
     /**
      * Find resume object
+     *
      * @param id
-     * @return 
+     * @return
      */
     @Override
     public Resume find(Long id) {
-      return resumeRepository.findOne(id);
+        return resumeRepository.findOne(id);
     }
-    
+
     /**
-     *  List of all resumes
-     * @return 
+     * List of all resumes
+     *
+     * @return
      */
     @Override
     public List<Resume> findAll() {
@@ -51,20 +58,23 @@ public class ResumeService implements CrudService<Resume,Long>{
 
     /**
      * List of resumes by page and sorting(default size 2)
+     *
      * @param page
-     * @return 
+     * @return
      */
     @Override
     public Page<Resume> findAll(Pageable page) {
-       return resumeRepository.findAll(page);
+        return resumeRepository.findAll(page);
     }
+
     /**
      * Delete resume object by id
+     *
      * @param id
      */
     @Override
     public void delete(Long id) {
-       resumeRepository.delete(id);
+        resumeRepository.delete(id);
     }
 
     @Override
@@ -76,5 +86,5 @@ public class ResumeService implements CrudService<Resume,Long>{
     public boolean exists(Long id) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
+
 }

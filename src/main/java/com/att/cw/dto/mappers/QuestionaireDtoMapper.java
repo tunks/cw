@@ -5,8 +5,11 @@
  */
 package com.att.cw.dto.mappers;
 
-import com.att.cw.dto.QuestionDto;
+import com.att.cw.dto.JobQuestionDto;
+import com.att.cw.dto.QuestionOptionDto;
+import com.att.cw.dto.QuestionTypeDto;
 import com.att.cw.dto.QuestionaireDto;
+import com.att.cw.model.QuestionType;
 import com.att.cw.model.Questionaire;
 import java.util.List;
 import static java.util.stream.Collectors.toList;
@@ -16,10 +19,12 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 
 /**
+ * QuestionaireDtoMapper
  *
  * @author ebrimatunkara
  */
 public final class QuestionaireDtoMapper {
+
     public static List<QuestionaireDto> mapEntitiesIntoDTOs(List<Questionaire> entities) {
         return entities.stream()
                 .map(QuestionaireDtoMapper::mapEntityIntoDTO)
@@ -31,12 +36,24 @@ public final class QuestionaireDtoMapper {
         dto.setId(entity.getId());
         dto.setName(entity.getName());
         dto.setQuestions(entity.getQuestions()
-                               .stream().map(q->{
-                                  return new QuestionDto(q.getId(),
-                                                         q.getQuestion(),
-                                                         q.isRequired(),
-                                                         q.getQuestionType());
-                               }).collect(toSet()));
+                .stream().map(q -> {
+                    QuestionType qt = q.getQuestionType();
+                    //set questiontype dto
+                    QuestionTypeDto qtDto = (qt != null) ? new QuestionTypeDto(qt.getId(),
+                            qt.getName(),
+                            qt.getDescription(),
+                            qt.getShowOptions(),
+                            qt.getStyle()) : null;
+                    return new JobQuestionDto(q.getId(),
+                            q.getQuestion(),
+                            q.isRequired(),
+                            qtDto,
+                            q.getOptions().stream()
+                            .map(op -> {
+                                return new QuestionOptionDto(op.getId(), op.getValue());
+                            }).collect(toSet())
+                    );
+                }).collect(toSet()));
         return dto;
     }
 

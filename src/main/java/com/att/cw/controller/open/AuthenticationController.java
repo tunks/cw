@@ -14,6 +14,7 @@ import io.jsonwebtoken.SignatureAlgorithm;
 import java.io.Serializable;
 import java.util.Collections;
 import java.util.Date;
+import java.util.Map;
 import javax.servlet.ServletException;
 
 import org.slf4j.Logger;
@@ -38,7 +39,6 @@ public class AuthenticationController {
     private static final Logger logger = LoggerFactory.getLogger(AuthenticationController.class);
     @Autowired
     private SessionService sessionService;
-    // private UserService userService;
 
     /**
      * Authenticated user login TODO -- controller exception
@@ -50,11 +50,11 @@ public class AuthenticationController {
      */
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public ResponseEntity login(@RequestBody final UserLogin login) throws ServletException {
-        String token = sessionService.login(login);
-        if (token == null) {
+        Map response = sessionService.login(login);
+        if (response == null) {
             return new ResponseEntity(Collections.singletonMap("message", "Invalid Authentication"), HttpStatus.UNAUTHORIZED);
         } else {
-            return new ResponseEntity(Collections.singletonMap("token", token), HttpStatus.OK);
+            return new ResponseEntity(response, HttpStatus.OK);
         }
 
     }

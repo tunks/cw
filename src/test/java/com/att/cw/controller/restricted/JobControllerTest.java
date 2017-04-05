@@ -1,10 +1,11 @@
-
 package com.att.cw.controller.restricted;
 
 import com.att.cw.model.Job;
 import com.att.cw.model.JobVacancy;
+import com.att.cw.support.DataTypeHelper;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import java.nio.charset.StandardCharsets;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -34,54 +35,58 @@ import org.springframework.web.context.WebApplicationContext;
 
 /**
  * JobControllerTest
+ *
  * @author ebrimatunkara
  */
-@ActiveProfiles({"test","dev"})
-@RunWith(SpringJUnit4ClassRunner.class) 
+@ActiveProfiles({"test", "dev"})
+@RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath:springmvc-servlet.xml"})
-@WebAppConfiguration 
+@WebAppConfiguration
 public class JobControllerTest {
+
     @Autowired
     private WebApplicationContext context;
-   
+
     @Mock
     private MockMvc mockMvc;
-    
-    private  Job job;
-    
+
+    private Job job;
+
     private String endPointUrl;
     private String content;
     private final String pattern = "yyyy-MM-dd HH:mm:ss";
+
     public JobControllerTest() {
     }
-    
+
     @BeforeClass
     public static void setUpClass() {
     }
-    
+
     @AfterClass
     public static void tearDownClass() {
     }
-    
+
     @Before
     public void setUp() throws JsonProcessingException {
         Calendar cal = Calendar.getInstance();
         Date startDate = cal.getTime();
-        cal.add(Calendar.MONTH,2);
+        cal.add(Calendar.MONTH, 2);
         Date endDate = cal.getTime();
         endPointUrl = "/restricted/jobs";
         mockMvc = webAppContextSetup(context).build();
         JobVacancy vacancy = new JobVacancy();
         vacancy.setOpenDate(startDate);
         vacancy.setCloseDate(endDate);
-        job = new Job("Technical Architect", "Technical Architect description 10001");
+        byte[] description = DataTypeHelper.stringToByte("Technical Architect description 10001");
+        job = new Job("Technical Architect", description);
         job.setVacancy(vacancy);
         content = objectToJson(job);
     }
-    
+
     @After
     public void tearDown() {
-        
+
     }
 
     /**
@@ -109,9 +114,9 @@ public class JobControllerTest {
      * Test of deleteAll method, of class JobController.
      */
     @Test
-    public void testDeleteAll()  {
+    public void testDeleteAll() {
         try {
-            mockMvc.perform(delete(endPointUrl)) 
+            mockMvc.perform(delete(endPointUrl))
                     .andExpect(status().isMethodNotAllowed());
         } catch (Exception ex) {
             Logger.getLogger(JobControllerTest.class.getName()).log(Level.SEVERE, null, ex);
@@ -130,9 +135,9 @@ public class JobControllerTest {
      * Test of create method, of class JobController.
      */
     @Test
-    public void testCreate()  {
+    public void testCreate() {
         try {
-            System.out.println("content ==> "+content);
+            System.out.println("content ==> " + content);
             mockMvc.perform(post(endPointUrl)
                     .contentType(MediaType.APPLICATION_JSON)
                     .content(content))
@@ -149,13 +154,13 @@ public class JobControllerTest {
      */
     @Test
     public void testUpdate() {
-        System.out.println("update"); 
-        
+        System.out.println("update");
+
     }
-    
-    private String objectToJson(Job job) throws JsonProcessingException{
-      ObjectMapper mapper = new ObjectMapper();
-      return mapper.writeValueAsString(job);
+
+    private String objectToJson(Job job) throws JsonProcessingException {
+        ObjectMapper mapper = new ObjectMapper();
+        return mapper.writeValueAsString(job);
     }
-    
+
 }

@@ -15,21 +15,23 @@ import org.springframework.stereotype.Service;
 
 /**
  * JobActivityService
+ *
  * @author ebrimatunkara
  */
 @Service("jobActivityService")
-public class JobActivityService implements CrudService<JobActivity,Long>{
+public class JobActivityService implements CrudService<JobActivity, Long> {
+
     @Resource
     private JobActivityRepository jobActivityRepository;
-    
+
     @Override
     public JobActivity save(JobActivity object) {
-       return jobActivityRepository.save(object);
+        return jobActivityRepository.save(object);
     }
 
     @Override
     public JobActivity find(Long id) {
-       return jobActivityRepository.findOne(id);
+        return jobActivityRepository.findOne(id);
     }
 
     @Override
@@ -39,12 +41,12 @@ public class JobActivityService implements CrudService<JobActivity,Long>{
 
     @Override
     public Page<JobActivity> findAll(Pageable page) {
-           return jobActivityRepository.findAll(page);
+        return jobActivityRepository.findAll(page);
     }
 
     @Override
     public void delete(Long id) {
-          jobActivityRepository.delete(id);
+        jobActivityRepository.delete(id);
     }
 
     @Override
@@ -56,5 +58,5 @@ public class JobActivityService implements CrudService<JobActivity,Long>{
     public boolean exists(Long id) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
+
 }

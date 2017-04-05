@@ -14,32 +14,34 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 /**
- * JobTypeService 
+ * JobTypeService
+ *
  * @author ebrimatunkara
  */
 @Service("jobtypeService")
-public class JobTypeService implements CrudService<JobType,Long>{
+public class JobTypeService implements CrudService<JobType, Long> {
+
     @Resource
     private JobTypeRepository jobtypeRepository;
 
     @Override
     public JobType save(JobType object) {
-       return jobtypeRepository.save(object);
+        return jobtypeRepository.save(object);
     }
 
     @Override
     public JobType find(Long id) {
-       return jobtypeRepository.findOne(id);
+        return jobtypeRepository.findOne(id);
     }
 
     @Override
     public List<JobType> findAll() {
-       return (List<JobType>) jobtypeRepository.findAll();
+        return (List<JobType>) jobtypeRepository.findAll();
     }
 
     @Override
     public Page<JobType> findAll(Pageable page) {
-       return jobtypeRepository.findAll(page);
+        return jobtypeRepository.findAll(page);
     }
 
     @Override
@@ -49,7 +51,7 @@ public class JobTypeService implements CrudService<JobType,Long>{
 
     @Override
     public void deleteAll() {
-       jobtypeRepository.deleteAll();
+        jobtypeRepository.deleteAll();
     }
 
     @Override

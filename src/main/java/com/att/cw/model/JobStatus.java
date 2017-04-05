@@ -7,8 +7,9 @@ package com.att.cw.model;
 
 /**
  * Job entity status
+ *
  * @author ebrimatunkara
  */
 public enum JobStatus {
-    OPEN,CLOSE;
+    OPEN, CLOSE;
 }

@@ -7,6 +7,8 @@ package com.att.cw.dao;
 
 import com.att.cw.model.Job;
 import com.att.cw.model.JobVacancy;
+import com.att.cw.support.DataTypeHelper;
+import java.nio.charset.StandardCharsets;
 import java.util.Calendar;
 import java.util.Date;
 import javax.annotation.Resource;
@@ -34,7 +36,7 @@ public class JobRepositoryTest {
 
     @Resource
     private JobRepository jobRepository;
-    private Job job, result;
+    private Job job;
 
     public JobRepositoryTest() {
     }
@@ -54,8 +56,9 @@ public class JobRepositoryTest {
         //set close date
         cal.add(Calendar.MONTH, 2);
         Date closeDate = cal.getTime();
+        byte[] description = DataTypeHelper.stringToByte("This is the software engineer job description!");
         JobVacancy vacancy = new JobVacancy(openDate, closeDate);
-        job = new Job("Project Manager", "This is the software engineer job description!");
+        job = new Job("Project Manager", description);
         job.setVacancy(vacancy);
     }
 
@@ -69,8 +72,17 @@ public class JobRepositoryTest {
      */
     @Test
     public void testFindByOwnerId() {
-        result = jobRepository.save(job);
+        Job result = jobRepository.save(job);
         assertEquals(job.getTitle(), result.getTitle());
     }
 
+    /**
+     * Test of findByOwnerId method, of class JobRepository.
+     */
+//    @Test
+//    public void testFindByQuestion() {     
+//        Job result = jobRepository.findByQuestionId(new Long(200));
+//        assertNotNull(result);
+//        System.out.println(result);
+//    }
 }

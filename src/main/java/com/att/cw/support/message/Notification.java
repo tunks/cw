@@ -6,9 +6,11 @@ package com.att.cw.support.message;
 
 /**
  * Notification service interface
+ *
  * @author ebrimatunkara
  * @param <T>
  */
-public interface Notification<T>{
+public interface Notification<T> {
+
     public void send(T message);
 }

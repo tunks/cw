@@ -23,14 +23,14 @@ public class JobCandidate extends Audit<Long> {
     private static final long serialVersionUID = 1L;
     /**
      * candidate id
-	 *
+     *
      */
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     /**
      * Job candidate mapped to user
-         *
+     *
      */
 
     @ManyToOne
@@ -41,10 +41,12 @@ public class JobCandidate extends Audit<Long> {
 //     */
 //    @OneToOne(mappedBy = "candidate")
 //    private JobApplication application;
-    @Column(name="candiate_number",columnDefinition = "BINARY(16)")
+    @Column(name = "candiate_number", columnDefinition = "BINARY(16)")
     private UUID candidateNumber;
+
     /**
      * object id
+     *
      * @return
      */
     @Override
@@ -78,5 +80,5 @@ public class JobCandidate extends Audit<Long> {
     public void setCandidateNumber(UUID candidateNumber) {
         this.candidateNumber = candidateNumber;
     }
-    
+
 }

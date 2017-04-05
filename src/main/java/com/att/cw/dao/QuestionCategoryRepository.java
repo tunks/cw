@@ -12,6 +12,7 @@ import org.springframework.data.repository.PagingAndSortingRepository;
  *
  * @author ebrimatunkara
  */
-public interface QuestionCategoryRepository extends PagingAndSortingRepository<QuestionCategory, Long>{
-      public QuestionCategory findByCategory(String category);
+public interface QuestionCategoryRepository extends PagingAndSortingRepository<QuestionCategory, Long> {
+
+    public QuestionCategory findByCategory(String category);
 }

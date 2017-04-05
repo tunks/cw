@@ -14,19 +14,21 @@ import javax.persistence.Table;
 
 /**
  * Job Type
+ *
  * @author ebrimatunkara
  */
 @Entity
-@Table(name="job_type")
-public class JobType{
+@Table(name = "job_type")
+public class JobType {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     @Column(nullable = false)
     private String name;
-    
+
     public Long getId() {
-         return id;
+        return id;
     }
 
     public String getName() {

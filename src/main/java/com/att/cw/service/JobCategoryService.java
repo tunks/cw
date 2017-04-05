@@ -15,16 +15,18 @@ import org.springframework.stereotype.Service;
 
 /**
  * JobCategoryService
+ *
  * @author ebrimatunkara
  */
 @Service("jobCategoryService")
-public class JobCategoryService implements CrudService<JobCategory,Long>{
+public class JobCategoryService implements CrudService<JobCategory, Long> {
+
     @Resource
     private JobCategoryRepository categoryRepository;
-    
+
     @Override
     public JobCategory save(JobCategory object) {
-       return categoryRepository.save(object);
+        return categoryRepository.save(object);
     }
 
     @Override
@@ -49,8 +51,8 @@ public class JobCategoryService implements CrudService<JobCategory,Long>{
 
     @Override
     public void deleteAll() {
-       categoryRepository.deleteAll();
-    }    
+        categoryRepository.deleteAll();
+    }
 
     @Override
     public boolean exists(Long id) {

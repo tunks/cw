@@ -10,28 +10,28 @@ import java.util.Set;
 @Entity
 @Table(name = "AUTHORITY")
 public class Authority {
+
     @Id
     @Column(name = "ID")
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "authority_seq")
     @SequenceGenerator(name = "authority_seq", sequenceName = "authority_seq", allocationSize = 1)
     private Long id;
 
-    @Column(name = "NAME", length = 50, unique=true)
+    @Column(name = "NAME", length = 50, unique = true)
     @NotNull
     @Enumerated(EnumType.STRING)
     private AuthorityName name;
 
     @ManyToMany(mappedBy = "authorities", fetch = FetchType.LAZY)
-    private Set<User> users =new HashSet<User>(0);
-    
-    public Authority()
-    {
-    	
+    private Set<User> users = new HashSet<User>(0);
+
+    public Authority() {
+
     }
-    public Authority(Long id, AuthorityName name)
-    {
-    	this.id=id;
-    	this.name=name;
+
+    public Authority(Long id, AuthorityName name) {
+        this.id = id;
+        this.name = name;
     }
 
     public Long getId() {

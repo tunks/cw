@@ -4,9 +4,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import org.hibernate.annotations.Type;
-import org.hibernate.validator.constraints.NotBlank;
 import org.joda.time.LocalDate;
-import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -30,55 +28,58 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.UniqueConstraint;
 
-/***
+/**
+ * *
  * User Entity model
- **/
-    @Entity
+ *
+ */
+@Entity
 @Table(name = "USER",
-       indexes = {
+        indexes = {
             @Index(columnList = "EMAIL", name = "user_email_index")},
-       uniqueConstraints={@UniqueConstraint(columnNames={"EMAIL"})}
-     )
+        uniqueConstraints = {
+            @UniqueConstraint(columnNames = {"EMAIL"})}
+)
 public class User extends UserAudit {
+
     @Id
     @Column(name = "ID")
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "user_seq")
     @SequenceGenerator(name = "user_seq", sequenceName = "user_seq", allocationSize = 1)
     private Long id;
 
-    @Column(name = "EMAIL", length = 200, unique = true,nullable=false )
-    @NotNull(message="Email cannot be null")
+    @Column(name = "EMAIL", length = 200, unique = true, nullable = false)
+    @NotNull(message = "Email cannot be null")
     @Size(min = 2, max = 200)
     private String email;
 
     @Column(name = "PASSWORD", length = 100)
-    @NotNull(message="Password cannot be null")
+    @NotNull(message = "Password cannot be null")
     @Size(min = 5, max = 100)
     private String password;
 
     @Column(name = "NAME", length = 100)
-    @NotNull(message="Name cannot be null")
+    @NotNull(message = "Name cannot be null")
     @Size(min = 4, max = 100)
     private String name;
-    
-    
+
     @Column(name = "DOB")
-    @NotNull(message="dateOfBirth cannot be null")
+    @NotNull(message = "dateOfBirth cannot be null")
     @Temporal(TemporalType.DATE)
     @Type(type = "org.jadira.usertype.dateandtime.joda.PersistentLocalDate")
     private LocalDate dateOfBirth;
-    
+
     @Enumerated(EnumType.STRING)
     @Column(name = "GENDER")
-    @NotNull(message="dateOfBirth cannot be null")
+    @NotNull(message = "dateOfBirth cannot be null")
     private Gender gender;
-   
+
     /**
      * User account will be disabled by default until it is activated
      */
     @Column(name = "ENABLED", columnDefinition = "bit default 0")
-    @NotNull(message="Enabled cannot be null")
-    private Boolean enabled= false;
+    @NotNull(message = "Enabled cannot be null")
+    private Boolean enabled = false;
 
     /* @Column(name = "LASTPASSWORDRESETDATE")
     @Temporal(TemporalType.TIMESTAMP)
@@ -153,19 +154,19 @@ public class User extends UserAudit {
         this.profile = profile;
     }
 
-	public LocalDate getDateOfBirth() {
-		return dateOfBirth;
-	}
+    public LocalDate getDateOfBirth() {
+        return dateOfBirth;
+    }
 
-	public void setDateOfBirth(LocalDate dateOfBirth) {
-		this.dateOfBirth = dateOfBirth;
-	}
+    public void setDateOfBirth(LocalDate dateOfBirth) {
+        this.dateOfBirth = dateOfBirth;
+    }
 
-	public Gender getGender() {
-		return gender;
-	}
+    public Gender getGender() {
+        return gender;
+    }
 
-	public void setGender(Gender gender) {
-		this.gender = gender;
-	}
+    public void setGender(Gender gender) {
+        this.gender = gender;
+    }
 }

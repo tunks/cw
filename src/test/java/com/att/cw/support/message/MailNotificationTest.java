@@ -19,43 +19,46 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.subethamail.wiser.Wiser;
+
 /**
- * EmailNotificationService test 
+ * EmailNotificationService test
+ *
  * @author ebrimatunkara
  */
-@ActiveProfiles({"test","dev"})
-@RunWith(SpringJUnit4ClassRunner.class) 
+@ActiveProfiles({"test", "dev"})
+@RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath:springmvc-servlet.xml"})
 @WebAppConfiguration
 public class MailNotificationTest {
+
     @Autowired
     private Notification mailNotificaton;
 
     @Value("${mail.port}")
     String mailport;
-    
+
     private Wiser wiser;
     private SimpleMailMessage message;
     private final String mailFrom = "some1@localhost";
     private final String mailTo = "some2@localhost";
     private final String subject = "Hello world";
     private final String text = "Hello world, testing send mail!";
-    
+
     public MailNotificationTest() {
     }
-    
+
     @BeforeClass
     public static void setUpClass() {
     }
-    
+
     @AfterClass
     public static void tearDownClass() {
     }
-    
+
     @Before
     public void setUp() {
         //mock wiser mail test server
-        wiser = new Wiser();  
+        wiser = new Wiser();
         wiser.setPort(Integer.parseInt(mailport));
         wiser.start();
         //create the mail message
@@ -67,10 +70,10 @@ public class MailNotificationTest {
         //send mail message
         mailNotificaton.send(message);
     }
-    
+
     @After
     public void tearDown() {
-       wiser.stop();
+        wiser.stop();
     }
 
     /**
@@ -79,9 +82,9 @@ public class MailNotificationTest {
     @Test
     public void testSend() {
         assertReceivedMessage(wiser)
-        .from(mailFrom)
-        .to(mailTo)
-        .withSubject(subject);
+                .from(mailFrom)
+                .to(mailTo)
+                .withSubject(subject);
     }
-    
+
 }

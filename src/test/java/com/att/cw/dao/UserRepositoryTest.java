@@ -27,40 +27,41 @@ import org.springframework.test.context.web.WebAppConfiguration;
  *
  * @author ebrimatunkara
  */
-@ActiveProfiles({"test","dev"})
-@RunWith(SpringJUnit4ClassRunner.class) 
+@ActiveProfiles({"test", "dev"})
+@RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath:springmvc-servlet.xml"})
 @WebAppConfiguration
 public class UserRepositoryTest {
+
     @Resource
     private UserRepository userRepository;
     private String email;
     private String password;
     private Calendar calendar;
+
     public UserRepositoryTest() {
     }
-    
+
     @BeforeClass
     public static void setUpClass() {
     }
-    
+
     @AfterClass
     public static void tearDownClass() {
     }
-    
+
     @Before
     public void setUp() {
-        email= RandomStringUtils.randomAlphanumeric(6).concat("@att.com");
-        password = RandomStringUtils.randomAlphabetic(16);  
+        email = RandomStringUtils.randomAlphanumeric(6).concat("@att.com");
+        password = RandomStringUtils.randomAlphabetic(16);
         calendar = Calendar.getInstance();
     }
-    
+
     @After
     public void tearDown() {
-        
-        
+
     }
-    
+
     /**
      * Test of Save method, of class UserRepository.
      */
@@ -70,11 +71,11 @@ public class UserRepositoryTest {
         User user = new User();
         user.setEmail(email);
         user.setPassword(password);
-        user.setDateOfBirth(new  LocalDate());
+        user.setDateOfBirth(new LocalDate());
         User result = userRepository.save(user);
         assertEquals(user, result);
     }
-   
+
 //    /**
 //     * Test of findByEmailId method, of class UserRepository.
 //     */

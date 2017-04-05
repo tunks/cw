@@ -20,9 +20,10 @@ import javax.persistence.Table;
 @Entity
 @EntityListeners(JobApplicationEntityListener.class)
 @Table(name = "JOB_APPLICATION")
-public class JobApplication  extends Audit<Long> {
+public class JobApplication extends Audit<Long> {
+
     private static final long serialVersionUID = 1L;
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -30,18 +31,18 @@ public class JobApplication  extends Audit<Long> {
      * JobApplication candidate
      */
     @OneToOne
-    @JoinColumn(name="candidate_id", nullable=false)
+    @JoinColumn(name = "candidate_id", nullable = false)
     private JobCandidate candidate;
     /**
      * JobApplication work flow process
      */
     @OneToOne
-    @JoinColumn(name="workflow_id")
+    @JoinColumn(name = "workflow_id")
     private JobWorkFlow workflow;
-  
+
     @ManyToOne
-    @JoinColumn(name="job_id" , nullable=false)
-    @Basic(fetch=LAZY)
+    @JoinColumn(name = "job_id", nullable = false)
+    @Basic(fetch = LAZY)
     private Job job;
     /**
      * Job question answers
@@ -52,8 +53,9 @@ public class JobApplication  extends Audit<Long> {
      * Determine if application is submitted or not
      */
     private Boolean submitted = Boolean.FALSE;
+
     public JobApplication() {
-      
+
     }
 
     @Override
@@ -87,7 +89,7 @@ public class JobApplication  extends Audit<Long> {
 
     public void setJob(Job job) {
         this.job = job;
-    } 
+    }
 
     public Set<JobQuestionAnswer> getQuestionAnswers() {
         return questionAnswers;
@@ -100,11 +102,11 @@ public class JobApplication  extends Audit<Long> {
     public Boolean getSubmitted() {
         return submitted;
     }
-    
+
     public void setSubmitted(Boolean submitted) {
         this.submitted = submitted;
     }
-    
+
     public Boolean isSubmitted() {
         return submitted;
     }

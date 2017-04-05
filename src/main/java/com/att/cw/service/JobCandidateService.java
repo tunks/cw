@@ -16,52 +16,62 @@ import org.springframework.stereotype.Service;
 
 /**
  * Job Candidate service
+ *
  * @author ebrimatunkara
  */
 @Service("jobCandidateService")
-public class JobCandidateService implements CrudService<JobCandidate,Long>{
+public class JobCandidateService implements CrudService<JobCandidate, Long> {
+
     @Resource
-    private  JobCandidateRepository candidateRepository;
+    private JobCandidateRepository candidateRepository;
+
     /**
      * Save job candidate
+     *
      * @param object
-     * @return 
+     * @return
      */
     @Override
     public JobCandidate save(JobCandidate object) {
-       return candidateRepository.save(object);
+        return candidateRepository.save(object);
     }
 
-     /**
+    /**
      * Find job candidate
+     *
      * @param id
-     * @return 
+     * @return
      */
     @Override
     public JobCandidate find(Long id) {
-      return candidateRepository.findOne(id);
+        return candidateRepository.findOne(id);
     }
 
     /**
      * Find all job candidates
-     * @return 
+     *
+     * @return
      */
     @Override
     public List<JobCandidate> findAll() {
-      return (List<JobCandidate>) candidateRepository.findAll();
+        return (List<JobCandidate>) candidateRepository.findAll();
     }
+
     /**
      * Find all job candidates by paging
+     *
      * @param page
-     * @return 
+     * @return
      */
     @Override
     public Page<JobCandidate> findAll(Pageable page) {
-       return candidateRepository.findAll(page);
+        return candidateRepository.findAll(page);
     }
+
     /**
      * Delete candidate by id
-     * @param id 
+     *
+     * @param id
      */
     @Override
     public void delete(Long id) {

@@ -12,8 +12,10 @@ import org.springframework.data.repository.PagingAndSortingRepository;
 
 /**
  * Group repository
+ *
  * @author ebrimatunkara
  */
-public interface GroupRepository  extends PagingAndSortingRepository<Group, Long>{
-     public Page<Group> findByName(String name, Pageable page);
+public interface GroupRepository extends PagingAndSortingRepository<Group, Long> {
+
+    public Page<Group> findByName(String name, Pageable page);
 }

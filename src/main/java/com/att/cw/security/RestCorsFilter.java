@@ -12,6 +12,7 @@ import org.springframework.web.filter.CorsFilter;
 
 /**
  * CORS Filter
+ *
  * @author ebrimatunkara
  */
 public class RestCorsFilter extends CorsFilter {
@@ -24,7 +25,7 @@ public class RestCorsFilter extends CorsFilter {
         super(configSource);
     }
 
-     static public CorsConfigurationSource corsConfig() {
+    static public CorsConfigurationSource corsConfig() {
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         CorsConfiguration config = new CorsConfiguration();
         config.setAllowCredentials(true);
@@ -36,8 +37,8 @@ public class RestCorsFilter extends CorsFilter {
         config.addAllowedMethod("PUT");
         config.addAllowedMethod("POST");
         config.addAllowedMethod("DELETE");
-       
+
         source.registerCorsConfiguration("/**", config);
         return source;
-     }
+    }
 }

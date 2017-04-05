@@ -9,11 +9,13 @@ import javax.persistence.Table;
 
 /**
  * Message Participant
+ *
  * @author ebrimatunkara
  */
 @Entity
-@Table(name = "PARTICIPANT")
+@Table(name = "participant")
 public class Participant implements Serializable {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;

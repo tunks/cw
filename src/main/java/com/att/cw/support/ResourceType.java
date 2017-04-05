@@ -1,7 +1,8 @@
 package com.att.cw.support;
 
-/** 
+/**
  * Resource type
+ *
  * @author ebrimatunkara
  */
 public enum ResourceType {

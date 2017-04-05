@@ -22,24 +22,26 @@ import org.springframework.util.FileCopyUtils;
 
 /**
  * FileDocumentRepository test implementation
- **/
-@ActiveProfiles({"test","dev"})
-@RunWith(SpringJUnit4ClassRunner.class) 
+ *
+ */
+@ActiveProfiles({"test", "dev"})
+@RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath:springmvc-servlet.xml"})
 @WebAppConfiguration
 public class FileDocumentRepositoryTest {
+
     @Resource
     private FileDocumentRepository documentRepository;
     private FileDocument document;
     private FileDocument result;
-    
+
     @Before
     public void setUp() throws Exception {
-         document = FileDocumentRepositoryTest.createMockDocument();
+        document = FileDocumentRepositoryTest.createMockDocument();
     }
 
     public static FileDocument createMockDocument() throws IOException {
-        FileDocument doc   = new FileDocument();
+        FileDocument doc = new FileDocument();
         doc.setResourceType(ResourceType.USER);
         doc.setContentType(MediaType.IMAGE_JPEG_VALUE);
         //store file data as bytes
@@ -54,15 +56,15 @@ public class FileDocumentRepositoryTest {
 
     @After
     public void tearDown() throws Exception {
-        if(result != null){
-           documentRepository.delete(result);
+        if (result != null) {
+            documentRepository.delete(result);
         }
     }
 
     @Test
-    public void test() {    
-         result = documentRepository.save(document);
-         assertNotNull(result);
+    public void test() {
+        result = documentRepository.save(document);
+        assertNotNull(result);
     }
 
 }

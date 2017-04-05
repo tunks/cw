@@ -13,14 +13,15 @@ import org.springframework.mail.SimpleMailMessage;
 import org.springframework.stereotype.Component;
 
 /**
- * CWMessageBuilder - implementation of IMessageBuilder interface This
- * class prepares Report mail message subject, content,send address, recipient
+ * CWMessageBuilder - implementation of IMessageBuilder interface This class
+ * prepares Report mail message subject, content,send address, recipient
  * addresses
  *
  * @author ebrimatunkara
  */
 @Component("mailMessageBuilder")
 public class MailMessageBuilder implements IMessageBuilder<Message, SimpleMailMessage> {
+
     @Override
     public SimpleMailMessage createMessage(Message object) {
         return createMailMessage(object);
@@ -29,7 +30,7 @@ public class MailMessageBuilder implements IMessageBuilder<Message, SimpleMailMe
     //Embed and create mime email message
     private SimpleMailMessage createMailMessage(Message object) {
         MessageHeader header = object.getHeader();
-            String[] recipients = header.getRecipients()
+        String[] recipients = header.getRecipients()
                 .stream()
                 .map(new RecipientMapper())
                 .collect(Collectors.toList())
@@ -41,9 +42,11 @@ public class MailMessageBuilder implements IMessageBuilder<Message, SimpleMailMe
         message.setText(object.getContent());
         return message;
     }
-     /**
-     * Participant mapper to String 
-     **/
+
+    /**
+     * Participant mapper to String
+     *
+     */
     private class RecipientMapper implements Function<Participant, String> {
 
         @Override

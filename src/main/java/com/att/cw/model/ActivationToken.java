@@ -21,12 +21,14 @@ import javax.persistence.Temporal;
 
 /**
  * User Account activation token
+ *
  * @author ebrimatunkara
  */
 @Entity
 @Table(name = "ACTIVATION_TOKEN")
 @EntityListeners(ActivationTokenEntityListener.class)
 public class ActivationToken extends Audit<Long> {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -39,9 +41,9 @@ public class ActivationToken extends Audit<Long> {
     private User user;
 
     @Temporal(javax.persistence.TemporalType.DATE)
-    @Column(name="expiry_date", nullable=false)
+    @Column(name = "expiry_date", nullable = false)
     private Date expiryDate;
-    
+
     @Column(nullable = false)
     private boolean verified;
 
@@ -91,5 +93,5 @@ public class ActivationToken extends Audit<Long> {
 
     public void setVerified(boolean verified) {
         this.verified = verified;
-    }   
+    }
 }

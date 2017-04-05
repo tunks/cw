@@ -13,42 +13,71 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import com.att.cw.dto.LocationDto;
+import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  * LocationController
+ *
  * @author ebrimatunkara
  */
 @RestController
 @RequestMapping("/restricted/locations")
 public class LocationController {
+
     @Autowired
-    private LocationService locationService;    
+    private LocationService locationService;
+
     /**
      * List of countries
-     * @return 
+     *
+     * @return
      */
     @RequestMapping(method = RequestMethod.GET)
-    public List<LocationDto> findCountry(){
-         return locationService.findCountries();
+    public List<LocationDto> findCountry() {
+        return locationService.findCountries();
     }
-    
-     /**
-     * List of country states
-     * @param id
-     * @return 
-     */
-    @RequestMapping( value="/{id}/states", method = RequestMethod.GET)
-    public List<LocationDto> findCountryStates(@PathVariable Long id){
-         return locationService.findCountryStates(id);
-    }
-    
+
     /**
-     * List of state  cities
+     * List of country states
+     *
      * @param id
-     * @return 
+     * @return
      */
-    @RequestMapping( value="/{id}/cities", method = RequestMethod.GET)
-    public List<LocationDto> findStateCities(@PathVariable Long id){
-         return locationService.findStateCities(id);
+    @RequestMapping(value = "/{id}/states", method = RequestMethod.GET)
+    public List<LocationDto> findCountryStatesById(@PathVariable Long id) {
+        return locationService.findCountryStates(id);
+    }
+
+    /**
+     * List of country states
+     *
+     * @param countryName
+     * @return
+     */
+    @RequestMapping(value = "/states", method = RequestMethod.GET)
+    public List<LocationDto> findCountryStatesByName(@RequestParam("country") String countryName) {
+        return locationService.findCountryStatesByName(countryName);
+    }
+
+    /**
+     * List of state cities
+     *
+     * @param id
+     * @return
+     */
+    @RequestMapping(value = "/{id}/cities", method = RequestMethod.GET)
+    public List<LocationDto> findStateCities(@PathVariable Long id) {
+        return locationService.findStateCities(id);
+    }
+
+    /**
+     * List of country state cities
+     *
+     * @param state
+     * @return
+     */
+    @RequestMapping(value = "/cities", method = RequestMethod.GET)
+    public List<LocationDto> findStateCitiesByName(@RequestParam("state") String state) {
+        return locationService.findCountryStateCitiesByName(state);
     }
 }

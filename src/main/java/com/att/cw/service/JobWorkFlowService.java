@@ -15,13 +15,15 @@ import org.springframework.stereotype.Service;
 
 /**
  * JobWorkFlow service
+ *
  * @author ebrimatunkara
  */
 @Service("jobWorkflowService")
-public class JobWorkFlowService implements CrudService<JobWorkFlow,Long>{
+public class JobWorkFlowService implements CrudService<JobWorkFlow, Long> {
+
     @Resource
     private JobWorkFlowRepository workflowRepository;
-    
+
     @Override
     public JobWorkFlow save(JobWorkFlow object) {
         return workflowRepository.save(object);
@@ -56,5 +58,5 @@ public class JobWorkFlowService implements CrudService<JobWorkFlow,Long>{
     public boolean exists(Long id) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
+
 }

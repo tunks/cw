@@ -11,11 +11,13 @@ import javax.persistence.Table;
 
 /**
  * Standard Job workflow model
+ *
  * @author ebrimatunkara
  */
 @Table(name = "STANDARD_JOB_WORKFLOW")
 @Entity
 public class StandardJobWorkFlow extends JobWorkFlow {
+
     @Column(name = "workflow_name", nullable = false, unique = true)
     private String name;
 

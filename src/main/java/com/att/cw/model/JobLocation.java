@@ -11,10 +11,12 @@ import javax.validation.constraints.NotNull;
 
 /**
  * Job JobLocation
+ *
  * @author ebrimatunkara
  */
 @Embeddable
 public class JobLocation implements Serializable {
+
     @NotNull
     private String city;
     @NotNull

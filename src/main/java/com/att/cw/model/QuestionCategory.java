@@ -6,18 +6,17 @@
 package com.att.cw.model;
 
 import java.util.Objects;
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
 /**
  * QuestionCategory entity model
+ *
  * @author ebrimatunkara
  */
 @Entity
-@Table(name="QUESTION_CATEGORY")
-public class QuestionCategory extends Component{
-    //@Column(nullable=false)
+@Table(name = "question_category")
+public class QuestionCategory extends Component {
     private String category;
 
     public QuestionCategory() {
@@ -34,7 +33,7 @@ public class QuestionCategory extends Component{
     public void setCategory(String category) {
         this.category = category;
     }
-   
+
     @Override
     public int hashCode() {
         int hash = 5;
@@ -53,12 +52,6 @@ public class QuestionCategory extends Component{
             return false;
         }
         final QuestionCategory other = (QuestionCategory) obj;
-        if (!Objects.equals(this.category, other.category)) {
-            return false;
-        }
-        
-        return true;
+        return Objects.equals(this.category, other.category);
     }
-    
-    
 }
