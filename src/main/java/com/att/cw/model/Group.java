@@ -20,30 +20,29 @@ import javax.persistence.Table;
  * @author ebrimatunkara
  */
 @Entity
-@Table(name="GROUP")
-public class Group extends Audit<Long>{
+@Table(name = "GROUP")
+public class Group extends Audit<Long> {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    
+
     private String name;
-    
+
     //@OneToOne
-  //  @Embedded
+    //  @Embedded
     //private GroupProfile profile;
-    
     //@OneToMany(mappedBy = "ownerGroup")
     //private Set<Job> groupJobs;
 //    
 //    @OneToMany
 //    private Set<GroupMember> members;
-    
     @Override
     public Long getId() {
-      return id;
+        return id;
     }
-    
-   public String getName() {
+
+    public String getName() {
         return name;
     }
 
@@ -58,7 +57,6 @@ public class Group extends Audit<Long>{
 //    public void setProfile(GroupProfile profile) {
 //        this.profile = profile;
 //    }
-
 //    public Set<Job> getGroupJobs() {
 //        return groupJobs;
 //    }
@@ -66,7 +64,6 @@ public class Group extends Audit<Long>{
 //    public void setGroupJobs(Set<Job> groupJobs) {
 //        this.groupJobs = groupJobs;
 //    }   
-
 //    public Set<GroupMember> getMembers() {
 //        return members;
 //    }

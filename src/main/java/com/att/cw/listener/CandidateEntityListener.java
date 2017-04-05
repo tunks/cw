@@ -17,8 +17,9 @@ import javax.persistence.PreUpdate;
  * @author ebrimatunkara
  */
 public class CandidateEntityListener {
+
     @PrePersist
-	void onCreate(JobCandidate entity) {
-           entity.setCandidateNumber(UUID.randomUUID());
-	}
+    void onCreate(JobCandidate entity) {
+        entity.setCandidateNumber(UUID.randomUUID());
+    }
 }

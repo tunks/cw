@@ -15,6 +15,7 @@ import com.att.cw.security.JwtUtil;
 
 @Service
 public class RegistrationService {
+
     @Resource
     private UserService userService;
     @Resource

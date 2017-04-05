@@ -15,12 +15,15 @@ import org.springframework.stereotype.Service;
 
 /**
  * QuestionCategoryService
+ *
  * @author ebrimatunkara
  */
 @Service("questionCategoryService")
-public class QuestionCategoryService implements CrudService<QuestionCategory,Long>{
+public class QuestionCategoryService implements CrudService<QuestionCategory, Long> {
+
     @Resource
     private QuestionCategoryRepository questionCategoryRespository;
+
     @Override
     public QuestionCategory save(QuestionCategory object) {
         return questionCategoryRespository.save(object);
@@ -28,31 +31,36 @@ public class QuestionCategoryService implements CrudService<QuestionCategory,Lon
 
     @Override
     public QuestionCategory find(Long id) {
-      return questionCategoryRespository.findOne(id);
+        return questionCategoryRespository.findOne(id);
     }
 
     @Override
     public List<QuestionCategory> findAll() {
-       return (List<QuestionCategory>) questionCategoryRespository.findAll();
+        return (List<QuestionCategory>) questionCategoryRespository.findAll();
     }
 
     @Override
     public Page<QuestionCategory> findAll(Pageable page) {
-         return questionCategoryRespository.findAll(page);
+        return questionCategoryRespository.findAll(page);
     }
-    
-    public QuestionCategory findByCategory(String category){
-       return questionCategoryRespository.findByCategory(category);
+
+    public QuestionCategory findByCategory(String category) {
+        return questionCategoryRespository.findByCategory(category);
     }
 
     @Override
     public void delete(Long id) {
-          questionCategoryRespository.delete(id);
+        questionCategoryRespository.delete(id);
     }
 
     @Override
     public void deleteAll() {
         questionCategoryRespository.deleteAll();
     }
-    
+
+    @Override
+    public boolean exists(Long id) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
 }

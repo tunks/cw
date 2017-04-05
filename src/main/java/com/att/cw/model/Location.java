@@ -15,28 +15,30 @@ import javax.persistence.Table;
 
 /**
  * Location Entity
+ *
  * @author ebrimatunkara
  */
 @Entity
 @Table(name = "LOCATION")
 public class Location implements Serializable {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name="location_id")
-    private Long id;   
-    
-    @Column(nullable=false)
+    @Column(name = "location_id")
+    private Long id;
+
+    @Column(nullable = false)
     private String name;
-    
-   //`location_type` tinyint(1) NOT NULL COMMENT '0:country,1:state,2:city',
-    @Column(name="location_type", nullable=false)
+
+    //`location_type` tinyint(1) NOT NULL COMMENT '0:country,1:state,2:city',
+    @Column(name = "location_type", nullable = false)
     private int locationType;
-    
+
     //`parent_id` int(11) NOT NULL COMMENT 'parent location_id',
-    @Column(name="parent_id", nullable=false)
+    @Column(name = "parent_id", nullable = false)
     private Long parentId;
     //  `is_visible` tinyint(1) NOT NULL COMMENT '0:visible,1:invisible',
-    @Column(name="is_visible", nullable=false)
+    @Column(name = "is_visible", nullable = false)
     private boolean isVisible;
 
     public Long getId() {

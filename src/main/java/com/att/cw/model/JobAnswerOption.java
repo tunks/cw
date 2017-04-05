@@ -17,31 +17,33 @@ import javax.persistence.Table;
 
 /**
  * JobAnswerOption entity model
+ *
  * @author ebrimatunkara
  */
 @Entity
-@Table(name="ANSWER_OPTION")
+@Table(name = "ANSWER_OPTION")
 public class JobAnswerOption extends Audit<Long> {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-        
+
     @ManyToOne
     private QuestionOption questionOption;
-  
+
     /**
      * For note or text answers
      */
-    @Column(name="answer_note")
+    @Column(name = "answer_note")
     private String note;
-  
+
     /**
      * For file attachments
      */
     @OneToOne
-    @JoinColumn(name="document_id")
+    @JoinColumn(name = "document_id")
     private FileDocument document;
-    
+
     /**
      * For multiple or select choice answer
      */
@@ -57,12 +59,11 @@ public class JobAnswerOption extends Audit<Long> {
     public JobAnswerOption(QuestionOption questionOption) {
         this.questionOption = questionOption;
     }
-    
+
     public JobAnswerOption(QuestionOption questionOption, String note) {
         this.questionOption = questionOption;
         this.note = note;
     }
-    
 
     @Override
     public Long getId() {
@@ -100,7 +101,7 @@ public class JobAnswerOption extends Audit<Long> {
     public void setChecked(Boolean checked) {
         this.checked = checked;
     }
-    
+
     public Boolean isChecked() {
         return checked;
     }

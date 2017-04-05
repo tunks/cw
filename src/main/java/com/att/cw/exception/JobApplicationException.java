@@ -7,9 +7,10 @@ package com.att.cw.exception;
 
 /**
  * JobApplication run time exception
+ *
  * @author ebrimatunkara
  */
-public class JobApplicationException extends RuntimeException{
+public class JobApplicationException extends RuntimeException {
 
     public JobApplicationException() {
     }
@@ -25,5 +26,5 @@ public class JobApplicationException extends RuntimeException{
     public JobApplicationException(Throwable cause) {
         super(cause);
     }
-    
+
 }

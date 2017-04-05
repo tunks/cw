@@ -13,9 +13,11 @@ import javax.persistence.PreUpdate;
 
 /**
  * Job answer Listener
+ *
  * @author ebrimatunkara
  */
 public class JobAnswerListener {
+
     @PrePersist
     void onCreate(JobQuestionAnswer entity) {
         //get job question
@@ -33,10 +35,10 @@ public class JobAnswerListener {
     //validate the entity
     private void validate(JobQuestionAnswer entity, JobQuestion question) throws JobApplicationException {
         //raise exception if question is required and no answers
-        if(question == null){
-           throw new JobApplicationException("Question not available!!");
+        if (question == null) {
+            throw new JobApplicationException("Question not available!!");
         }
-        
+
         //if(question.)
         if (entity.getAnswerOptions().isEmpty() && question.isRequired()) {
             throw new JobApplicationException("Question must be answer!!");

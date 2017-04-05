@@ -23,16 +23,18 @@ import org.springframework.stereotype.Service;
 
 /**
  * JobWorkFlow service
+ *
  * @author ebrimatunkara
  */
 @Service("standardJobWorkflowService")
-public class StandardJobWorkFlowService implements CrudService<StandardJobWorkFlow,Long>,InitializingBean{
+public class StandardJobWorkFlowService implements CrudService<StandardJobWorkFlow, Long>, InitializingBean {
+
     @Resource
     private StandardJobWorkFlowRepository workflowRepository;
-    
+
     @Autowired
     private JobActivityService jobActivityService;
-    
+
     @Override
     public StandardJobWorkFlow save(StandardJobWorkFlow object) {
         return workflowRepository.save(object);
@@ -55,16 +57,17 @@ public class StandardJobWorkFlowService implements CrudService<StandardJobWorkFl
 
     @Override
     public void delete(Long id) {
-      //  workflowRepository.delete(id);
+        //  workflowRepository.delete(id);
     }
 
     /**
      * Initialize default standard workflow
+     *
      * @throws java.lang.Exception
      */
     @Override
     public void afterPropertiesSet() throws Exception {
-      /*  System.out.println("After start  standard workflow---");
+        /*  System.out.println("After start  standard workflow---");
         String name = "Internal Applicantion";
         StandardJobWorkFlow workflow = workflowRepository.findByName(name);//
         if(workflow == null){
@@ -79,12 +82,17 @@ public class StandardJobWorkFlowService implements CrudService<StandardJobWorkFl
         activities.add(a1);
         workflow.setActivities(activities);
         workflowRepository.save(workflow);
-       */ 
+         */
     }
 
     @Override
     public void deleteAll() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
+
+    @Override
+    public boolean exists(Long id) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
 }

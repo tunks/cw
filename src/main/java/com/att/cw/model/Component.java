@@ -24,18 +24,18 @@ import javax.persistence.Table;
  * @author ebrimatunkara
  */
 @Entity
-@Table(name="COMPONENT")
-@Inheritance(strategy=InheritanceType.JOINED)
-public abstract class Component  extends Audit<Long>{
+@Table(name = "COMPONENT")
+@Inheritance(strategy = InheritanceType.JOINED)
+public abstract class Component extends Audit<Long> {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     @Override
     public Long getId() {
-       return id;
+        return id;
     }
-
 
     @Override
     public int hashCode() {
@@ -61,6 +61,5 @@ public abstract class Component  extends Audit<Long>{
         }
         return true;
     }
-    
-    
+
 }

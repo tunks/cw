@@ -7,11 +7,11 @@ package com.att.cw.dao;
 import com.att.cw.model.Message;
 import org.springframework.data.repository.PagingAndSortingRepository;
 
-
 /**
  * Message Repository interface
+ *
  * @author ebrimatunkara
  */
-public interface MessageRepository extends PagingAndSortingRepository<Message,Long>{
-    
+public interface MessageRepository extends PagingAndSortingRepository<Message, Long> {
+
 }

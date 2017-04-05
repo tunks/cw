@@ -13,9 +13,11 @@ import javax.persistence.PrePersist;
 
 /**
  * ActivationTokenEntity listener
+ *
  * @author ebrimatunkara
  */
 public class ActivationTokenEntityListener {
+
     private static final int EXPIRATION = 60 * 24;
 
     @PrePersist

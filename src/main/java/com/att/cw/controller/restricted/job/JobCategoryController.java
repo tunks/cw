@@ -19,40 +19,45 @@ import org.springframework.web.bind.annotation.RestController;
 
 /**
  * JobCategory controller
+ *
  * @author ebrimatunkara
  */
 @RestController
-@RequestMapping("/restricted/jobs/categories")
-public class JobCategoryController implements BaseController<JobCategory,Long>{
+@RequestMapping("/restricted/jobcategories")
+public class JobCategoryController implements BaseController<JobCategory, Long> {
+
     /**
      * JobCategoryService
      */
     @Autowired
     private JobCategoryService jobCategoryService;
-    
+
     /**
      * Find all job categories
+     *
      * @return , list of all job categories
      */
-    @RequestMapping( method = RequestMethod.GET)
+    @RequestMapping(method = RequestMethod.GET)
     public List<JobCategoryDto> findAll() {
-      return jobCategoryService.findAll()
-                        .stream()
-                        .map(c->{
-                           return new JobCategoryDto(c.getId(),c.getName());
-                        }).collect(Collectors.toList());
+        return jobCategoryService.findAll()
+                .stream()
+                .map(c -> {
+                    return new JobCategoryDto(c.getId(), c.getName());
+                }).collect(Collectors.toList());
     }
+
     /**
      * Find job category by id
      */
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     @Override
     public JobCategory find(@PathVariable Long id) {
-      return jobCategoryService.find(id);
+        return jobCategoryService.find(id);
     }
+
     /**
      * Delete all job categories
-     */ 
+     */
     @RequestMapping(method = RequestMethod.DELETE)
     @Override
     public void deleteAll() {
@@ -65,7 +70,7 @@ public class JobCategoryController implements BaseController<JobCategory,Long>{
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     @Override
     public void delete(Long id) {
-       jobCategoryService.delete(id);
+        jobCategoryService.delete(id);
     }
 
     /**
@@ -74,9 +79,9 @@ public class JobCategoryController implements BaseController<JobCategory,Long>{
     @RequestMapping(method = RequestMethod.POST)
     @Override
     public JobCategory create(JobCategory object) {
-       return jobCategoryService.save(object);
+        return jobCategoryService.save(object);
     }
-    
+
     /**
      * Update job category
      */
@@ -85,5 +90,5 @@ public class JobCategoryController implements BaseController<JobCategory,Long>{
     public JobCategory update(JobCategory object) {
         return jobCategoryService.save(object);
     }
-    
+
 }

@@ -4,7 +4,6 @@
  */
 package com.att.cw.service;
 
-
 import com.att.cw.model.Mail;
 import java.util.List;
 import javax.annotation.Resource;
@@ -16,13 +15,16 @@ import com.att.cw.model.Message;
 
 /**
  * Mail CRUD service implementation
+ *
  * @author ebrimatunkara
  */
 @Service("messageService")
-public class MessageService implements CrudService<Message,Long> {
+public class MessageService implements CrudService<Message, Long> {
+
     /**
      * Message repository
-     **/
+     *
+     */
     @Resource
     private MessageRepository messageRepository;
 
@@ -56,5 +58,9 @@ public class MessageService implements CrudService<Message,Long> {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    
+    @Override
+    public boolean exists(Long id) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
 }

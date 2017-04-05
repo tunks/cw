@@ -31,6 +31,7 @@ import static org.springframework.test.web.servlet.setup.MockMvcBuilders.webAppC
 import org.springframework.web.context.WebApplicationContext;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
+
 /**
  *
  * @author ebrimatunkara
@@ -51,6 +52,7 @@ public class AuthenticationControllerTest {
     private String email;
     private String password;
     private String content;
+
     public AuthenticationControllerTest() {
     }
 
@@ -68,16 +70,16 @@ public class AuthenticationControllerTest {
             loginUrl = "/open/authenticate/login";
             registerUrl = "/register/new";
             mockMvc = webAppContextSetup(context).build();
-            
+
             //mock user email and password
             email = "ebrima@localhost.local";//RandomStringUtils.randomAlphanumeric(6).concat("@localhost");
             password = "cw12345";//RandomStringUtils.randomAlphanumeric(12);
             //register new user
-             content = "{\"name\": \""+email+"\",\"password\":\""+password+"\"}";
+            content = "{\"name\": \"" + email + "\",\"password\":\"" + password + "\"}";
 
             mockMvc.perform(post(registerUrl)
                     .contentType(MediaType.APPLICATION_JSON)
-                   .content(content));
+                    .content(content));
         } catch (Exception ex) {
             Logger.getLogger(AuthenticationControllerTest.class.getName()).log(Level.SEVERE, null, ex);
         }

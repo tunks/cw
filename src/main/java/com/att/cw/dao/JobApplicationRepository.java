@@ -14,27 +14,34 @@ import org.springframework.data.repository.PagingAndSortingRepository;
 
 /**
  * JobApplication Repository
+ *
  * @author ebrimatunkara
  */
-public interface JobApplicationRepository extends PagingAndSortingRepository<JobApplication, Long>{
-      /**
-       * Find job applications by application
-       * @param job
-       * @param page
-       * @return 
-       */
-      public Page<JobApplication> findByJob(Job job, Pageable page);
-      /**
-       * Find job application by id and job
-       * @param id
-       * @param job
-       * @return 
-       */
-      public JobApplication findByIdAndJob(Long id, Job job);
-      /**
-       * Find by job
-       * @param job
-       * @return ,return list of jobs
-       */
-      public List<JobApplication> findByJob(Job job);
+public interface JobApplicationRepository extends PagingAndSortingRepository<JobApplication, Long> {
+
+    /**
+     * Find job applications by application
+     *
+     * @param job
+     * @param page
+     * @return
+     */
+    public Page<JobApplication> findByJob(Job job, Pageable page);
+
+    /**
+     * Find job application by id and job
+     *
+     * @param id
+     * @param job
+     * @return
+     */
+    public JobApplication findByIdAndJob(Long id, Job job);
+
+    /**
+     * Find by job
+     *
+     * @param job
+     * @return ,return list of jobs
+     */
+    public List<JobApplication> findByJob(Job job);
 }

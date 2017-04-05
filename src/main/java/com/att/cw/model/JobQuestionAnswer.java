@@ -16,29 +16,28 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
- * JobQuestionAnswer entity model
- * This model stores the answers of the job application question
+ * JobQuestionAnswer entity model This model stores the answers of the job
+ * application question
+ *
  * @author ebrimatunkara
  */
-
 @Entity
-@Table(name="JOB_ANSWER")
+@Table(name = "JOB_ANSWER")
 @EntityListeners(JobAnswerListener.class)
-public class JobQuestionAnswer extends Component{
+public class JobQuestionAnswer extends Component {
+
     @OneToMany
     private Set<JobAnswerOption> answerOptions = new HashSet();
-    
+
     @ManyToOne
     private JobQuestion question;
 
     public JobQuestionAnswer() {
     }
 
-    
     public JobQuestionAnswer(JobQuestion question) {
         this.question = question;
     }
-    
 
     public JobQuestion getQuestion() {
         return question;
@@ -46,7 +45,7 @@ public class JobQuestionAnswer extends Component{
 
     public void setQuestion(JobQuestion question) {
         this.question = question;
-    }  
+    }
 
     public Set<JobAnswerOption> getAnswerOptions() {
         return answerOptions;
@@ -55,8 +54,8 @@ public class JobQuestionAnswer extends Component{
     public void setAnswerOptions(Set<JobAnswerOption> answerOptions) {
         this.answerOptions = answerOptions;
     }
-    
-    public void addAnswerOption(JobAnswerOption answerOption){
-       this.answerOptions.add(answerOption);
+
+    public void addAnswerOption(JobAnswerOption answerOption) {
+        this.answerOptions.add(answerOption);
     }
 }

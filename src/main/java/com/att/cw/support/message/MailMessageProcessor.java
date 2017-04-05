@@ -4,7 +4,6 @@
  */
 package com.att.cw.support.message;
 
-
 import com.att.cw.model.Message;
 import java.util.Map;
 import java.util.concurrent.ExecutorService;
@@ -14,25 +13,29 @@ import org.springframework.mail.SimpleMailMessage;
 import org.springframework.stereotype.Component;
 
 /**
- * Kafka Message consumer -- asynchronously receives messages 
+ * Kafka Message consumer -- asynchronously receives messages
+ *
  * @author ebrimatunkara
  */
 @Component("mailMessageProcessor")
-public class MailMessageProcessor implements MessageProcessor<SimpleMailMessage>{
+public class MailMessageProcessor implements MessageProcessor<SimpleMailMessage> {
+
     /**
      * EmailNotification service
      */
     @Autowired
     private Notification mailNotificaton;
-    
+
     private final ExecutorService executor = Executors.newFixedThreadPool(50);
+
     /**
      * TODO -- asynchronous thread
+     *
      * @param payload
      */
     @Override
-    public  void process(SimpleMailMessage payload){
-          mailNotificaton.send(payload);
+    public void process(SimpleMailMessage payload) {
+        mailNotificaton.send(payload);
     }
 
 }

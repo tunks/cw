@@ -14,13 +14,12 @@ import org.springframework.jdbc.core.JdbcTemplate;
  *
  * @author ebrimatunkara
  */
-public class FlywayMigration extends Flyway{
+public class FlywayMigration extends Flyway {
 
     @Override
     public int migrate() throws FlywayException {
-       // this.repair();
+        this.repair();
         return super.migrate(); //To change body of generated methods, choose Tools | Templates.
     }
 
-    
 }

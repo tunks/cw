@@ -9,6 +9,6 @@ package com.att.cw.support.workflow;
  *
  * @author ebrimatunkara
  */
-public class AutoReviewOperation extends ReviewOperation{
-    
+public class AutoReviewOperation extends ReviewOperation {
+
 }

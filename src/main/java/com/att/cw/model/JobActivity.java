@@ -14,15 +14,16 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotNull;
+
 /**
  * Job Activity
  */
 @Entity
-@Table(name = "JOB_ACTIVITY",uniqueConstraints={
-   @UniqueConstraint(columnNames={"workflow_id", "status"}),
-})
+@Table(name = "JOB_ACTIVITY", uniqueConstraints = {
+    @UniqueConstraint(columnNames = {"workflow_id", "status"}),})
 public class JobActivity extends Audit<Long> {
-     private static final long serialVersionUID = 1L;
+
+    private static final long serialVersionUID = 1L;
     /**
      * job activity id
      */
@@ -35,7 +36,7 @@ public class JobActivity extends Audit<Long> {
     @NotNull
     private String name;
     /**
-     *  Activity description
+     * Activity description
      */
     private String description;
     /**
@@ -45,11 +46,11 @@ public class JobActivity extends Audit<Long> {
     private JobWorkFlow workflow;
     /**
      * previous activity
-     */ 
+     */
     @OneToOne
-    @JoinColumn(name="previous_activity_id",referencedColumnName="id")
+    @JoinColumn(name = "previous_activity_id", referencedColumnName = "id")
     private JobActivity previousActivity;
-    
+
     /**
      * Job activity status
      */
@@ -62,12 +63,12 @@ public class JobActivity extends Audit<Long> {
     public JobActivity(ActivityStatus status) {
         this.status = status;
     }
-    
+
     public JobActivity(JobWorkFlow workflow, ActivityStatus status) {
         this.workflow = workflow;
         this.status = status;
     }
-    
+
     public JobActivity(String name, ActivityStatus status) {
         this.name = name;
         this.status = status;
@@ -78,7 +79,6 @@ public class JobActivity extends Audit<Long> {
         this.workflow = workflow;
         this.status = status;
     }
-    
 
     @Override
     public Long getId() {
@@ -121,16 +121,14 @@ public class JobActivity extends Audit<Long> {
         this.previousActivity = previousActivity;
     }
 
-    
     public ActivityStatus getStatus() {
         return status;
     }
 
     public void setStatus(ActivityStatus status) {
-        if(status != null && this.status != status){
-           this.status = status;
-         }
+        if (status != null && this.status != status) {
+            this.status = status;
+        }
     }
-    
-    
+
 }

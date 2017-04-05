@@ -10,10 +10,13 @@ import java.util.Set;
 
 /**
  * QuestionaireDTO
+ *
  * @author ebrimatunkara
  */
-public class QuestionaireDto extends JobComponentDto{
-    private Set<QuestionDto> questions = new HashSet();
+public class QuestionaireDto extends JobComponentDto {
+
+    private Set<JobQuestionDto> questions = new HashSet();
+
     public QuestionaireDto() {
     }
 
@@ -21,11 +24,11 @@ public class QuestionaireDto extends JobComponentDto{
         super(id, name);
     }
 
-    public Set<QuestionDto> getQuestions() {
+    public Set<JobQuestionDto> getQuestions() {
         return questions;
     }
 
-    public void setQuestions(Set<QuestionDto> questions) {
+    public void setQuestions(Set<JobQuestionDto> questions) {
         this.questions = questions;
     }
 }

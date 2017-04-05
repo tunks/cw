@@ -12,14 +12,17 @@ import org.springframework.web.bind.annotation.ResponseStatus;
  *
  * @author ebrimatunkara
  */
- @ResponseStatus(value=HttpStatus.NOT_FOUND, reason="Not found")
-public class NotFoundException extends RuntimeException{
+@ResponseStatus(value = HttpStatus.NOT_FOUND, reason = "Not found")
+public class NotFoundException extends RuntimeException {
 
     public NotFoundException() {
     }
 
     public NotFoundException(Long id) {
-       super("Object not found "+id);
+        super("Object not found " + id);
     }
-    
+
+    public NotFoundException(String message) {
+        super(message);
+    }
 }

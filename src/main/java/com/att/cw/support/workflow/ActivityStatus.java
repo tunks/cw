@@ -9,9 +9,10 @@ import com.att.cw.model.JobActivity;
 
 /**
  * State events
+ *
  * @author ebrimatunkara
  */
-public enum ActivityStatus implements StateOperation<JobActivity>{
+public enum ActivityStatus implements StateOperation<JobActivity> {
     SEND_MAIL(new SendMailOperation()),
     /**
      * Job application automatic review status
@@ -29,15 +30,15 @@ public enum ActivityStatus implements StateOperation<JobActivity>{
      * Job application reject status
      */
     REJECT(new RejectOperation());
-    
+
     private final StateOperation operation;
-    
-    ActivityStatus(StateOperation operation){
+
+    ActivityStatus(StateOperation operation) {
         this.operation = operation;
     }
 
     @Override
     public void action(JobActivity object) {
-          operation.action(object);
-    }  
+        operation.action(object);
+    }
 }

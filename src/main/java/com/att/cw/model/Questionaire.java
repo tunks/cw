@@ -19,15 +19,17 @@ import javax.persistence.Table;
 
 /**
  * Questionaire Entity - contains a set of questions
+ *
  * @author ebrimatunkara
  */
 @Entity
-@Table(name="QUESTIONAIRE")
-public class Questionaire extends Component{
-    @Column(nullable=false)
+@Table(name = "QUESTIONAIRE")
+public class Questionaire extends Component {
+
+    @Column(nullable = false)
     private String name;
-    
-    @OneToMany( fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<JobQuestion> questions = new HashSet();
 
     public Set<JobQuestion> getQuestions() {

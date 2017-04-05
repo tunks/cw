@@ -7,13 +7,16 @@ package com.att.cw.support.workflow;
 
 /**
  * State Action interface
+ *
  * @author ebrimatunkara
  * @param <T>
  */
 public interface StateOperation<T> {
-      /**
-       * StateEvent action
+
+    /**
+     * StateEvent action
+     *
      * @param object
-       */
-      void action(T object);
+     */
+    void action(T object);
 }

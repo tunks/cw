@@ -17,10 +17,11 @@ import javax.persistence.Temporal;
  */
 @MappedSuperclass
 @EntityListeners(PasswordChangeListener.class)
-public abstract class UserAudit extends Audit{
+public abstract class UserAudit extends Audit {
+
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date lastPasswordResetDate;
-    
+
     public Date getLastPasswordResetDate() {
         return lastPasswordResetDate;
     }

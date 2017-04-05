@@ -14,9 +14,10 @@ import org.springframework.data.repository.PagingAndSortingRepository;
 
 /**
  * Job Candidate repository
+ *
  * @author ebrimatunkara
  */
-public interface JobCandidateRepository extends PagingAndSortingRepository<JobCandidate, Long>{
+public interface JobCandidateRepository extends PagingAndSortingRepository<JobCandidate, Long> {
 //    /**
 //     * Find job candidates by job in pages
 //     * @param job

@@ -20,6 +20,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "ADDRESS")
 public class Address extends Audit<Long> {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;

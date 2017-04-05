@@ -7,13 +7,15 @@ package com.att.cw.dto;
 
 /**
  * JobCategoryDTO
+ *
  * @author ebrimatunkara
  */
-public  class JobCategoryDto extends JobComponentDto{
+public class JobCategoryDto extends JobComponentDto {
+
     public JobCategoryDto() {
     }
 
     public JobCategoryDto(Long id, String name) {
         super(id, name);
-    } 
+    }
 }

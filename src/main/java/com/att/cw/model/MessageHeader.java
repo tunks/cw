@@ -20,6 +20,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "MESSAGE_HEADER")
 public class MessageHeader extends Audit<Long> {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -30,7 +31,7 @@ public class MessageHeader extends Audit<Long> {
 
     @Override
     public Long getId() {
-      return id;
+        return id;
     }
 
     public Set<Participant> getRecipients() {

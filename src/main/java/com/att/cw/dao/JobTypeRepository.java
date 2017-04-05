@@ -10,8 +10,10 @@ import org.springframework.data.repository.PagingAndSortingRepository;
 
 /**
  * JobTypeRepository
+ *
  * @author ebrimatunkara
  */
-public interface JobTypeRepository extends PagingAndSortingRepository<JobType, Long>{
-     public JobType findByName(String name);
+public interface JobTypeRepository extends PagingAndSortingRepository<JobType, Long> {
+
+    public JobType findByName(String name);
 }

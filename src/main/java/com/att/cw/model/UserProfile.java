@@ -21,23 +21,24 @@ import javax.validation.constraints.NotNull;
 @Entity
 @Table(name = "USER_PROFILE")
 public class UserProfile extends Profile {
-    @Column(name="first_name")
+
+    @Column(name = "first_name")
     @NotNull
     private String firstName;
-    
-    @Column(name="middle_name")
+
+    @Column(name = "middle_name")
     private String middleName;
-    
-    @Column(name="last_name")
+
+    @Column(name = "last_name")
     @NotNull
     private String lastName;
-    
-    @Column(name="date_of_birth")
+
+    @Column(name = "date_of_birth")
     @NotNull
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date dateOfBirth;
-    
-    @Column(name="phone_number")
+
+    @Column(name = "phone_number")
     private String phoneNumber;
 
     @OneToOne

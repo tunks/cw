@@ -3,16 +3,14 @@ package com.att.cw.controller.restricted.job;
 import com.att.cw.controller.BaseController;
 import com.att.cw.dto.ErrorResponse;
 import com.att.cw.dto.JobDto;
+import com.att.cw.dto.JobQuestionDto;
 import com.att.cw.dto.mappers.JobDtoMapper;
-import com.att.cw.model.Job;
-import com.att.cw.model.JobApplication;
-import com.att.cw.model.JobCategory;
-import com.att.cw.service.JobApplicationService;
-import com.att.cw.service.JobCategoryService;
+import com.att.cw.dto.mappers.JobQuestionDtoMapper;
 import com.att.cw.service.JobService;
 import com.att.cw.exception.JobException;
-import com.att.cw.exception.NotFoundException;
+import com.att.cw.model.Job;
 import java.util.List;
+import static java.util.stream.Collectors.toList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -29,11 +27,13 @@ import org.springframework.web.bind.annotation.RestController;
 
 /**
  * JobController rest controller implementation of BaseController
+ *
  * @author ebrimatunkara
  */
 @RestController
 @RequestMapping("/restricted/jobs")
-public class JobController implements BaseController<JobDto,Long>{
+public class JobController implements BaseController<JobDto, Long> {
+
     /**
      * Job service instance
      */
@@ -42,9 +42,10 @@ public class JobController implements BaseController<JobDto,Long>{
 
     /**
      * Find all
+     *
      * @param ownerId
      * @param page
-     * @return 
+     * @return
      *
      */
     @RequestMapping(method = RequestMethod.GET)
@@ -82,15 +83,16 @@ public class JobController implements BaseController<JobDto,Long>{
 
     /**
      * Create and return new job entity
+     *
      * @param object
-     * @return 
+     * @return
      */
     @RequestMapping(method = RequestMethod.POST)
     @Override
-    public JobDto create(@RequestBody JobDto object) {     
-        return JobDtoMapper.mapEntityIntoDTO(jobService.save(object));
+    public JobDto create(@RequestBody JobDto object) {
+        return JobDtoMapper.mapFullEntityIntoDto(jobService.save(object));
     }
-
+   
     /**
      * Update and return existing job entity
      */
@@ -99,10 +101,22 @@ public class JobController implements BaseController<JobDto,Long>{
     public JobDto update(@RequestBody JobDto object) {
         return JobDtoMapper.mapEntityIntoDTO(jobService.save(object));
     }
-    
+
+    /**
+     * Get job questions
+     *
+     * @param id
+     * @return
+     */
+    @RequestMapping(value = "/{id}/questions", method = RequestMethod.GET)
+    public List<JobQuestionDto> saveQuestions(@PathVariable Long id) {
+        Job job = jobService.find(id);
+        return JobQuestionDtoMapper.mapEntitiesIntoDTOs(job.getQuestions().stream().collect(toList()));
+    }
+
     @ExceptionHandler({JobException.class})
     public ResponseEntity<ErrorResponse> exceptionHandler(JobException ex) {
         ErrorResponse error = new ErrorResponse(HttpStatus.BAD_REQUEST.value(), "Job action", ex.getMessage());
-        return new ResponseEntity<ErrorResponse>(error, HttpStatus.BAD_REQUEST);
+        return new ResponseEntity(error, HttpStatus.BAD_REQUEST);
     }
 }

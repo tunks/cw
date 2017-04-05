@@ -12,8 +12,8 @@ package com.att.cw.model;
 public enum Category {
     RESUME,
     PROFILE,
-    EDUCATION_HISORY,
-    PROFESSION_HISTORY,
-    RESEARCH_HISTORY,
-    QUESTION  
+    EDUCATION_BACKGROUND,
+    PROFESSIONAL_BACKGROUND,
+    RESEARCH_BACKGROUND,
+    OTHER
 }

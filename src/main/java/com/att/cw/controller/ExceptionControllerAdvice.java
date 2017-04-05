@@ -15,19 +15,17 @@ import org.springframework.core.Ordered;
 
 @ControllerAdvice
 @Order(Ordered.LOWEST_PRECEDENCE)
-public class ExceptionControllerAdvice 
-{
-	private static final Logger logger = LoggerFactory.getLogger(ExceptionControllerAdvice.class);
-	
-	
-	@ExceptionHandler(Exception.class)
-	public ResponseEntity<ErrorResponse> ExceptionHandler(Exception ex) 
-	{
-		ex.printStackTrace();
+public class ExceptionControllerAdvice {
+
+    private static final Logger logger = LoggerFactory.getLogger(ExceptionControllerAdvice.class);
+
+    @ExceptionHandler(Exception.class)
+    public ResponseEntity<ErrorResponse> ExceptionHandler(Exception ex) {
+        ex.printStackTrace();
         ErrorResponse error = new ErrorResponse();
         error.setErrorCode(HttpStatus.INTERNAL_SERVER_ERROR.value());
         error.setErrorTitle("Internal Server Error");
         error.setErrorMessage("Please contact your administrator");
         return new ResponseEntity<ErrorResponse>(error, HttpStatus.INTERNAL_SERVER_ERROR);
-	 }
+    }
 }

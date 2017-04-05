@@ -12,6 +12,6 @@ import org.springframework.data.repository.PagingAndSortingRepository;
  *
  * @author ebrimatunkara
  */
-public interface JobActivityRepository extends PagingAndSortingRepository<JobActivity,Long>{
-    
+public interface JobActivityRepository extends PagingAndSortingRepository<JobActivity, Long> {
+
 }

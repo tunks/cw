@@ -6,8 +6,10 @@ package com.att.cw.support.message;
 
 /**
  * Message Processor interface
+ *
  * @author ebrimatunkara
  */
 public interface MessageProcessor<T> {
-     public void process(T payload);
+
+    public void process(T payload);
 }

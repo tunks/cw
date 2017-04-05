@@ -6,6 +6,7 @@
 package com.att.cw.model;
 
 import java.util.Objects;
+import static javax.persistence.CascadeType.ALL;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -13,49 +14,61 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 /**
  * JobQuestionOption
+ *
  * @author ebrimatunkara
  */
 @Entity
-@Table(name="QUESTION_OPTION")
-public class QuestionOption extends Audit<Long> {
+@Table(name = "QUESTION_OPTION")
+public class QuestionOption {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-  
-    @Column(name="question_note")
-    private String note;
-  
-    @ManyToOne(fetch = FetchType.LAZY)
-    private  JobQuestion question;
+
+    @Column(name = "question_value")
+    private String value;
+
+    @ManyToOne(fetch = FetchType.LAZY, cascade = ALL)
+    private JobQuestion question;
+
+    /**
+     * Date pair for date range values
+     */
+    @OneToOne
+    private QuestionOption pair;
 
     public QuestionOption() {
     }
 
-    public QuestionOption(String note) {
-        this.note = note;
+    public QuestionOption(String value) {
+        this.value = value;
     }
 
-    public QuestionOption(String note, JobQuestion question) {
-        this.note = note;
+    public QuestionOption(Long id, String value) {
+        this.id = id;
+        this.value = value;
+    }
+
+    public QuestionOption(String value, JobQuestion question) {
+        this(value);
         this.question = question;
     }
 
-    
-    @Override
     public Long getId() {
         return id;
     }
 
-    public String getNote() {
-        return note;
+    public String getValue() {
+        return value;
     }
 
-    public void setNote(String note) {
-        this.note = note;
+    public void setValue(String value) {
+        this.value = value;
     }
 
     public JobQuestion getQuestion() {
@@ -66,11 +79,19 @@ public class QuestionOption extends Audit<Long> {
         this.question = question;
     }
 
+    public QuestionOption getPair() {
+        return pair;
+    }
+
+    public void setPair(QuestionOption pair) {
+        this.pair = pair;
+    }
+
     @Override
     public int hashCode() {
         int hash = 7;
         hash = 31 * hash + Objects.hashCode(this.id);
-        hash = 31 * hash + Objects.hashCode(this.note);
+        hash = 31 * hash + Objects.hashCode(this.value);
         hash = 31 * hash + Objects.hashCode(this.question);
         return hash;
     }
@@ -87,7 +108,7 @@ public class QuestionOption extends Audit<Long> {
             return false;
         }
         final QuestionOption other = (QuestionOption) obj;
-        if (!Objects.equals(this.note, other.note)) {
+        if (!Objects.equals(this.value, other.value)) {
             return false;
         }
         if (!Objects.equals(this.id, other.id)) {
@@ -98,6 +119,4 @@ public class QuestionOption extends Audit<Long> {
         }
         return true;
     }
-    
-    
 }

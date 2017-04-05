@@ -9,6 +9,7 @@ import java.util.Date;
 
 /**
  * Holds the info for a authenticated user (Principal)
+ *
  * @author Dileep Mundakkapatta
  */
 public class AuthenticatedUser implements UserDetails {

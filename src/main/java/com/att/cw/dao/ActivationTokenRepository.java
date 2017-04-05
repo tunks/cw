@@ -11,19 +11,24 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 /**
  * ActivationToken repository
+ *
  * @author ebrimatunkara
  */
-public interface ActivationTokenRepository extends JpaRepository<ActivationToken, Long>{
+public interface ActivationTokenRepository extends JpaRepository<ActivationToken, Long> {
+
     /**
-     *  Find activation token by token 
+     * Find activation token by token
+     *
      * @param token
-     * @return 
+     * @return
      */
     public ActivationToken findByToken(String token);
+
     /**
      * Find activation token by user
+     *
      * @param user
-     * @return 
+     * @return
      */
     public ActivationToken findByUser(User user);
 }

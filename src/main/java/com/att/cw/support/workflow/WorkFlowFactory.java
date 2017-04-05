@@ -13,7 +13,8 @@ import com.att.cw.model.StandardJobWorkFlow;
  * @author ebrimatunkara
  */
 public class WorkFlowFactory {
-      public JobWorkFlow createDefaultJobWorkFlow(){   
-         return new StandardJobWorkFlow();
-      }
+
+    public JobWorkFlow createDefaultJobWorkFlow() {
+        return new StandardJobWorkFlow();
+    }
 }

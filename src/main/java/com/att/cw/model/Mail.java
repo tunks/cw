@@ -17,19 +17,20 @@ import javax.persistence.Table;
  * @author ebrimatunkara
  */
 @Entity
-@Table(name="MAIL")
-public class Mail extends Audit{
-    @Id  
+@Table(name = "MAIL")
+public class Mail extends Audit {
+
+    @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private String id;
-    
+
     @OneToOne
     private Message message;
 
     @Override
     public Serializable getId() {
-      return id;
-    }    
+        return id;
+    }
 
     public Message getMessage() {
         return message;

@@ -12,6 +12,6 @@ import org.springframework.data.repository.PagingAndSortingRepository;
  *
  * @author ebrimatunkara
  */
-public interface JobWorkFlowRepository extends PagingAndSortingRepository<JobWorkFlow, Long>{
-    
+public interface JobWorkFlowRepository extends PagingAndSortingRepository<JobWorkFlow, Long> {
+
 }

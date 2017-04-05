@@ -11,23 +11,18 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
- * JobWorkFlow entity class
- * Open job  
- *     -> submissions/close job
- *          -> review (automatic select/manual selection)
- *                 -> rejection (send message to candidates automatically about reject) 
- *                 -> interview(selected candidates with employees)
- *                    -> phone
- *                    -> onsite
- *                        -> review
- *                    -> 
+ * JobWorkFlow entity class Open job -> submissions/close job -> review
+ * (automatic select/manual selection) -> rejection (send message to candidates
+ * automatically about reject) -> interview(selected candidates with employees)
+ * -> phone -> onsite -> review ->
  *
  */
 @Entity
 @Table(name = "JOB_WORKFLOW")
-@Inheritance(strategy=InheritanceType.SINGLE_TABLE)
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 public class JobWorkFlow extends Audit<Long> {
-     private static final long serialVersionUID = 1L;
+
+    private static final long serialVersionUID = 1L;
     /**
      * work flow id
      */
@@ -37,14 +32,14 @@ public class JobWorkFlow extends Audit<Long> {
     /**
      * work flow activities
      */
-   
+
     @OneToMany // with a join table
 //    @JoinTable(
 //        uniqueConstraints=@UniqueConstraint(columnNames={"Work_ID","users_ID"})
 //    )
     private Set<JobActivity> activities;
 
-     @Override
+    @Override
     public Long getId() {
         return id;
     }

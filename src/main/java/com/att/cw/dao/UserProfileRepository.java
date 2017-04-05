@@ -10,9 +10,10 @@ import org.springframework.data.repository.PagingAndSortingRepository;
 
 /**
  * UserProfile Repository
- * @author ebrimatunkara
- * Spring data - http://docs.spring.io/spring-data/jpa/docs/1.9.4.RELEASE/reference/html/
+ *
+ * @author ebrimatunkara Spring data -
+ * http://docs.spring.io/spring-data/jpa/docs/1.9.4.RELEASE/reference/html/
  */
-public interface UserProfileRepository  extends PagingAndSortingRepository<UserProfile, Long>{
-    
+public interface UserProfileRepository extends PagingAndSortingRepository<UserProfile, Long> {
+
 }

@@ -9,21 +9,24 @@ import com.att.cw.model.UserAudit;
 import java.util.Date;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
+
 /**
- * Audit Listener 
+ * Audit Listener
+ *
  * @author ebrimatunkara
  */
 public class PasswordChangeListener {
-	@PrePersist
-	void onCreate(UserAudit user) {
-             Date date = new Date();
-             user.setLastPasswordResetDate(date);
-	}
-	
-	@PreUpdate
-	void onPersist(Object entity) {
-            if(entity instanceof UserAudit){
-              //entity.setLastPasswordResetDate(date);
-            }	
-	}
+
+    @PrePersist
+    void onCreate(UserAudit user) {
+        Date date = new Date();
+        user.setLastPasswordResetDate(date);
+    }
+
+    @PreUpdate
+    void onPersist(Object entity) {
+        if (entity instanceof UserAudit) {
+            //entity.setLastPasswordResetDate(date);
+        }
+    }
 }

@@ -15,25 +15,26 @@ import javax.persistence.Table;
 
 /**
  * User candidate resume
+ *
  * @author ebrimatunkara
  */
 @Entity
-@Table(name="RESUME")
-public class Resume extends Audit<Long>{
+@Table(name = "RESUME")
+public class Resume extends Audit<Long> {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    
+
     //private
     //private Note note;
-    
     @OneToOne
-    @JoinColumn(name="document_id")
+    @JoinColumn(name = "document_id")
     private FileDocument document;
-    
+
     @Override
     public Long getId() {
-       return id;
+        return id;
     }
 
     public FileDocument getDocument() {

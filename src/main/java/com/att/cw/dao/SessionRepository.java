@@ -11,6 +11,7 @@ import com.att.cw.security.UserSession;
  */
 @Repository
 public class SessionRepository {
+
     @Autowired
     private RedisTemplate<String, UserSession> redisTemplate;
 
