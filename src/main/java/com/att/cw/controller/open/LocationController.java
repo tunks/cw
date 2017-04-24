@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.att.cw.controller.restricted;
+package com.att.cw.controller.open;
 
 import com.att.cw.service.LocationService;
 import java.util.List;
@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.RequestParam;
  * @author ebrimatunkara
  */
 @RestController
-@RequestMapping("/restricted/locations")
+@RequestMapping("/open/locations")
 public class LocationController {
 
     @Autowired
@@ -50,7 +50,7 @@ public class LocationController {
 
     /**
      * List of country states
-     *
+     *  /restricted/locations/states?country=country
      * @param countryName
      * @return
      */
