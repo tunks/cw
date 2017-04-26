@@ -1,6 +1,7 @@
 --
 -- Table structure for table `AUTHORITY`
 --
+DROP TABLE IF EXISTS `USER_AUTHORITY`;
 DROP TABLE IF EXISTS `AUTHORITY`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;

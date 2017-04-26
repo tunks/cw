@@ -64,6 +64,12 @@ public class EmailAdvice {
 
     @Value("${reg.server.port}")
     private String serverPort;
+    
+    @Value("${gui.server.name}")
+    private String guiServerName;
+
+    @Value("${gui.server.port}")
+    private String guiServerPort;
 
     @Autowired
     private ServletContext context;
@@ -80,7 +86,7 @@ public class EmailAdvice {
     public void userRegistered(JoinPoint joinPoint, Object retVal) {
         User user = (User) retVal;
         logger.info("Sending Email to user...:" + user.getEmail());
-        String url = "http://" + serverName + ":" + serverPort + context.getContextPath() + "/open/register/confirm/";
+        String url = "http://" + guiServerName + ":" + guiServerPort + "/#!" + "/successact?token=";
         activateMailContent = activateMailContent.replace("${title}", "Confirm your registration");
         activateMailContent = activateMailContent.replace("${message}", "Click on the below URL or copy paste it to a browser in order to activate your account");
         activateMailContent = activateMailContent.replace("${link}", url + jwtUtil.generateRegistrationToken(user));

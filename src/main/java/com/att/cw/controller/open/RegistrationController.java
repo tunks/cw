@@ -51,8 +51,10 @@ public class RegistrationController {
 
     }
 
-    @RequestMapping(value = "/confirm/{token:.+}", method = RequestMethod.GET)
-    public ResponseEntity<String> confirmUser(@PathVariable final String token) {
+    //@RequestMapping(value = "/confirm/{token:.+}", method = RequestMethod.GET)
+    @RequestMapping(value = "/confirm", method = RequestMethod.POST)
+    public ResponseEntity<String> confirmUser(@RequestBody final String token) {
+    	System.out.println("token is: "+token);
         logger.info("Toen is : " + token);
         regService.activateUser(token);
         return new ResponseEntity<String>("User successfully Activated", HttpStatus.OK);
