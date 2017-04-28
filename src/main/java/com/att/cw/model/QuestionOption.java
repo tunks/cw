@@ -7,6 +7,8 @@ package com.att.cw.model;
 
 import java.util.Objects;
 import static javax.persistence.CascadeType.ALL;
+import static javax.persistence.CascadeType.MERGE;
+import static javax.persistence.CascadeType.REMOVE;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -33,7 +35,7 @@ public class QuestionOption {
     @Column(name = "question_value")
     private String value;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = ALL)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = {MERGE, REMOVE})
     private JobQuestion question;
 
     /**

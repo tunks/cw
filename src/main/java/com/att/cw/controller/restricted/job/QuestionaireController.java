@@ -13,14 +13,10 @@ import com.att.cw.dto.mappers.JobQuestionDtoMapper;
 import com.att.cw.dto.mappers.QuestionaireDtoMapper;
 import com.att.cw.exception.NotFoundException;
 import com.att.cw.model.JobQuestion;
-import com.att.cw.model.QuestionType;
 import com.att.cw.model.Questionaire;
 import com.att.cw.service.JobQuestionOptionService;
 import com.att.cw.service.JobQuestionService;
-import com.att.cw.service.QuestionTypeService;
 import com.att.cw.service.QuestionaireService;
-import java.util.List;
-import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -122,7 +118,7 @@ public class QuestionaireController implements BaseController<QuestionaireDto, L
      * Questionaire question urls
      */
     /**
-     * Create and save questionaire question
+     * Create and save questionaire question questions
      *
      * @param id
      * @param question
@@ -136,7 +132,8 @@ public class QuestionaireController implements BaseController<QuestionaireDto, L
     private JobQuestionDto saveQuestionaireQuestion(Long id, JobQuestionDto question, boolean isNew) throws NotFoundException {
         Questionaire questionaire = questionaireService.find(id);
         if (questionaire != null) {
-            JobQuestion item = jobQuestionService.saveDto(question);
+
+            JobQuestion item = jobQuestionService.saveDto(question, isNew ? questionaire : null);
             //add and save questionaire if question is new question
             if (isNew) {
                 questionaire.getQuestions().add(item);

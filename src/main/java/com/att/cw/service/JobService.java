@@ -86,16 +86,6 @@ public class JobService implements CrudService<Job, Long> {
     }
 
     /**
-     * find and return jobs by owner id and pageable
-     *
-     * @param ownerId
-     * @param page
-     * @return
-     */
-//    public Page<Job> findAllByOwner(Long ownerId ,Pageable page){
-//           return jobRepository.findByOwnerId(ownerId, page);
-//    }
-    /**
      * Find and return all jobs
      *
      * @return
@@ -121,10 +111,12 @@ public class JobService implements CrudService<Job, Long> {
         Job entity = (id != null) ? find(id) : new Job();
         //set  job entity
         byte[] description = (dto.getDescription() != null) ? DataTypeHelper.stringToByte(dto.getDescription()) : null;
+        byte[] responsibilities = (dto.getResponsibilities() != null) ? DataTypeHelper.stringToByte(dto.getResponsibilities()) : null;
         byte[] skills = (dto.getDescription() != null) ? DataTypeHelper.stringToByte(dto.getSkills()) : null;
 
         entity.setTitle(dto.getTitle());
         entity.setDescription(description);
+        entity.setResponsibilities(responsibilities);
         entity.setSkills(skills);
         entity.setVacancy(dto.getVacancy());
         entity.setLocation(dto.getLocation());

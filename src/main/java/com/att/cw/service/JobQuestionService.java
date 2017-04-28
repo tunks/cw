@@ -14,11 +14,13 @@ import org.springframework.stereotype.Service;
 import com.att.cw.dao.JobQuestionRepository;
 import com.att.cw.dto.JobCategoryDto;
 import com.att.cw.dto.JobQuestionDto;
+import com.att.cw.dto.QuestionCategoryDto;
 import com.att.cw.dto.QuestionOptionDto;
 import com.att.cw.model.JobCategory;
 import com.att.cw.model.QuestionCategory;
 import com.att.cw.model.QuestionOption;
 import com.att.cw.model.QuestionType;
+import com.att.cw.model.Questionaire;
 import java.util.HashSet;
 import java.util.Set;
 import static java.util.stream.Collectors.toSet;
@@ -43,7 +45,7 @@ public class JobQuestionService implements CrudService<JobQuestion, Long> {
 
     @Autowired
     private QuestionCategoryService questionCategoryService;
-        
+
     @Override
     public JobQuestion save(JobQuestion object) {
         return jobQuestionRepository.save(object);
@@ -96,10 +98,10 @@ public class JobQuestionService implements CrudService<JobQuestion, Long> {
         }
         //save question type
         saveQuestionType(questionDto, entity);
-        
+
         //save question category
-        saveJobCategory(questionDto.getCategory(),entity);
-        
+        saveQuestionCategory(questionDto.getCategory(), entity);
+
         //set question type
         entity.setQuestion(questionDto.getQuestion());
         entity.setRequired(questionDto.isRequired());
@@ -114,7 +116,7 @@ public class JobQuestionService implements CrudService<JobQuestion, Long> {
         }
     }
 
-    private void saveJobCategory(JobCategoryDto categoryDto, JobQuestion entity) {
+    private void saveQuestionCategory(QuestionCategoryDto categoryDto, JobQuestion entity) {
         //set question type if null or different
         if (categoryDto != null) {
             QuestionCategory category = questionCategoryService.find(categoryDto.getId());
@@ -140,13 +142,29 @@ public class JobQuestionService implements CrudService<JobQuestion, Long> {
     }
 
     public JobQuestion saveDto(JobQuestionDto questionDto) {
+        JobQuestion entity = updateQuestionDto(questionDto);
+        return jobQuestionRepository.save(entity);
+    }
+
+    public JobQuestion saveDto(JobQuestionDto questionDto, Questionaire questionaire) {
+        JobQuestion entity = updateQuestionDto(questionDto);
+        if (questionaire != null) {
+            entity.setQuestionaire(questionaire);
+        }
+        return jobQuestionRepository.save(entity);
+    }
+
+    private JobQuestion updateQuestionDto(JobQuestionDto questionDto) {
         JobQuestion entity = mapEntity(questionDto);
         //save question options
+        if (entity.getId() == null) {
+            entity = jobQuestionRepository.save(entity);
+        }
         Set<QuestionOption> options = saveQuestionOptions(questionDto.getOptions());
         if (options.size() > 0) {
             entity.getOptions().addAll(options);
         }
-        return jobQuestionRepository.save(entity);
+        return entity;
     }
 
     @Override

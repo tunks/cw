@@ -5,24 +5,21 @@
  */
 package com.att.cw.dto;
 
-import java.io.Serializable;
-
 /**
- * Base DTO
  *
  * @author ebrimatunkara
  */
-public class JobComponentDto implements Serializable {
+public class QuestionCategoryDto {
 
     private Long id;
-    private String name;
+    private String category;
 
-    public JobComponentDto() {
+    public QuestionCategoryDto() {
     }
 
-    public JobComponentDto(Long id, String name) {
+    public QuestionCategoryDto(Long id, String category) {
         this.id = id;
-        this.name = name;
+        this.category = category;
     }
 
     public Long getId() {
@@ -33,11 +30,12 @@ public class JobComponentDto implements Serializable {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getCategory() {
+        return category;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setCategory(String category) {
+        this.category = category;
     }
+
 }

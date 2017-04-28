@@ -10,21 +10,23 @@ CREATE TABLE IF NOT EXISTS `question_category` (
 --
 -- Dumping data for table `question_type`
 --
-INSERT INTO `question_category` (`id`,`category`) 
-VALUES (1,  'Personal information'),
-       (2,  'Education information'),
-       (3,  'Employment information'),
-       (4,  'References'),
-       (5,  'Resume and cover letter'),
-       (6,  'Research information'),
-       (7,  'Volunteer work'),
-       (8,  'Military experience'),
-       (9,  'Work permit/authorization'),
-       (10, 'Criminal history'),
-       (11, 'Extracurricular activities'),
-       (12,  'Hobbies/Interests'),
-       (13, 'Licenses/Certifications'),
-       (14, 'Others');
+INSERT INTO `question_category` (`category`) 
+VALUES ('Profile'),
+       ('Education'),
+       ('Employment'),
+       ('References'),
+       ('Resume'),
+       ('Cover letter'),
+       ('Research'),
+       ('Volunteer work'),
+       ('Military experience'),
+       ('Work permit'),
+       ('Criminal history'),
+       ('Extracurricular activities'),
+       ('Hobbies/Interests'),
+       ('Licenses'),
+       ('Certifications'),
+       ('Others');
        
 
 

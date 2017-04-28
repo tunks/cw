@@ -3,6 +3,7 @@ package com.att.cw.security;
 import java.io.Serializable;
 
 public class UserSession implements Serializable {
+
     private static final long serialVersionUID = -8147900899599444974L;
 
     private String emailID;

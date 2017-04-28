@@ -51,7 +51,7 @@
         <property name="testOnBorrow" value="true"/>
     </bean>
     <!-- Flyway configuration -->
-<!--        <bean id="flyway" class="org.flywaydb.core.Flyway" init-method="migrate">-->
+    <!--        <bean id="flyway" class="org.flywaydb.core.Flyway" init-method="migrate">-->
     <bean id="flyway" class="com.att.cw.support.FlywayMigration" init-method="migrate">
         <property name="baselineOnMigrate" value="true" />
         <property name="locations" value="classpath:db/migrations/" />

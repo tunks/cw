@@ -56,10 +56,7 @@ public abstract class Component extends Audit<Long> {
             return false;
         }
         final Component other = (Component) obj;
-        if (!Objects.equals(this.id, other.id)) {
-            return false;
-        }
-        return true;
+        return Objects.equals(this.id, other.id);
     }
 
 }

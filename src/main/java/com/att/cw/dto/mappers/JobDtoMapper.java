@@ -24,6 +24,7 @@ import org.springframework.data.domain.Pageable;
  * @author ebrimatunkara
  */
 public final class JobDtoMapper {
+
     public static List<JobDto> mapEntitiesIntoDTOs(List<Job> entities) {
         return entities.stream()
                 .map(JobDtoMapper::mapEntityIntoDTO)
@@ -43,6 +44,7 @@ public final class JobDtoMapper {
         dto.setTitle(entity.getTitle());
         dto.setVacancy(entity.getVacancy());
         dto.setDescription(DataTypeHelper.bytesToString(entity.getDescription()));
+        dto.setResponsibilities(DataTypeHelper.bytesToString(entity.getResponsibilities()));
         dto.setSkills(DataTypeHelper.bytesToString(entity.getSkills()));
         return dto;
     }
