@@ -8,8 +8,6 @@ package com.att.cw.dao.solr;
 
 import com.att.cw.model.SearchableDocument;
 import com.att.cw.support.SearchQueryFactory;
-import java.io.Serializable;
-import java.util.List;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.solr.core.SolrOperations;
@@ -19,10 +17,9 @@ import org.springframework.data.solr.repository.support.SimpleSolrRepository;
 import org.springframework.util.MultiValueMap;
 
 /**
- * Solr Custom Repository concrete implementation Document Repository
+ * Solr Custom Repository - concrete implementation Document Repository
  *
  * @author ebrimatunkara
- * @param <T>
  */
 //@Repository
 public class SearchableDocumentRepositoryImpl
@@ -50,12 +47,25 @@ public class SearchableDocumentRepositoryImpl
         this.queryFactory = queryFactory;
     }
 
+    /**
+     * Search for contents with query parameters and pageable conditions
+     *
+     * @param params : MultiValue query values
+     * @param page
+     * @return
+     */
     @Override
     public Page<SearchableDocument> search(MultiValueMap params, Pageable page) {
         Query query = queryFactory.createQuery(params, page);
         return getSolrOperations().query(query, getEntityClass());
     }
-
+  
+     /**
+     * Search for contents with query parameters 
+     *
+     * @param params : MultiValue query values
+     * @return
+     */
     @Override
     public Page<SearchableDocument> search(MultiValueMap params) {
         Query query = queryFactory.createQuery(params);

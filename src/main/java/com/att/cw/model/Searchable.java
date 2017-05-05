@@ -13,7 +13,6 @@ package com.att.cw.model;
  * @author ebrimatunkara
  */
 public interface Searchable {
-
     String ID_FIELD = "id";
     String BOOLEAN_FIELD = "_b";
     String DATE_FIELD = "_dt";
@@ -23,4 +22,6 @@ public interface Searchable {
     String[] EXCLUDED_FIELDS = {"serialVersionUID"};
     int SEARCH_FEILD_LEVEL = 1;
     String FIELD_SEPERATOR = ".";
+    String QUERY_PARAM = "q";
+
 }

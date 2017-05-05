@@ -21,14 +21,16 @@ import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.apache.commons.lang3.ArrayUtils;
+import org.slf4j.LoggerFactory;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.security.util.FieldUtils;
 
 /**
- *
+ * Object to SolrDocument Converter
  * @author ebrimatunkara
  */
 public final class ObjectToSolrDocumentConverter implements Converter<Object, SearchableDocument> {
+    private static final org.slf4j.Logger logger = LoggerFactory.getLogger(SolrSearchQueryFactory.class);
 
     private final String[] DEFAULT_FIELDS = {"serialVersionUID", "version"};
     private final String[] defaultExcludedFields = ArrayUtils.add(DEFAULT_FIELDS, SearchableDocument.ID_FIELD);
@@ -45,7 +47,11 @@ public final class ObjectToSolrDocumentConverter implements Converter<Object, Se
     private void initExcludedFields(String[] fields) {
         this.excludedFields = ArrayUtils.addAll(defaultExcludedFields, fields);
     }
-
+    /**
+     * Convert object to solr document
+     * @param obj
+     * @reeturn SearchableDocument
+     **/
     @Override
     public SearchableDocument convert(Object obj) {
         SearchableDocument doc = new SearchableDocument();
@@ -61,7 +67,12 @@ public final class ObjectToSolrDocumentConverter implements Converter<Object, Se
         }
         return doc;
     }
-
+    /**
+     * Recursive function to map object field values
+     * @param fieldPrefix :String -> root name of object field
+     * @param obj: Object -> object to map
+     * @param fields: Map -> objects fields in has
+     */
     private Map mapObjectFieldValues(String prefixName, Object obj, Map<String, Field> fields) {
         Map<String, Object> contents = new HashMap();
         fields.entrySet().stream().forEach(f -> {
@@ -92,9 +103,7 @@ public final class ObjectToSolrDocumentConverter implements Converter<Object, Se
                                 if (!contents.containsKey(key)) {
                                     contents.put(key, new ArrayList());
                                 }
-
-                                ((List) contents.get(key)).add(x.getValue());
-
+                               ((List) contents.get(key)).add(x.getValue());
                             });
                         });
                     } else {
@@ -103,24 +112,13 @@ public final class ObjectToSolrDocumentConverter implements Converter<Object, Se
                 }
 
             } catch (Exception ex) {
-                ex.printStackTrace();
-                Logger.getLogger(ObjectToSolrDocumentConverter.class.getName()).log(Level.SEVERE, null, ex);
+                logger.error(ex.getMessage());
             }
         });
         return contents;
     }
-
-//    private Map<String, Field> getObjectFields(Object obj, String... excludeFields) {
-//        Map<String, Field> fields = ReflectionUtils.getAllFields(obj.getClass(), Predicates.notNull())
-//                .stream().filter(f -> {
-//                    Set<String> items = new HashSet(Arrays.asList(excludeFields));
-//                    return !items.contains(f.getName());
-//                })
-//                .collect(Collectors.toMap(i -> i.getName(), Function.identity(), (x1, x2) -> x2));
-//        return fields;
-//    }
     private Map<String, Object> mapObjectFieldValue(String prefixName, Object item, String... filterField) {
-        Map<String, Field> _fields = DataUtils.getClassFields(item.getClass(), filterField); //getObjectFields(item, filterField);
+        Map<String, Field> _fields = DataUtils.getClassFields(item.getClass(), filterField);
         return mapObjectFieldValues(prefixName, item, _fields);
     }
 

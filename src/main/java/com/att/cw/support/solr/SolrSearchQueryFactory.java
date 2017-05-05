@@ -11,12 +11,12 @@ import com.att.cw.support.DataUtils;
 import com.att.cw.support.SearchQueryFactory;
 import java.util.List;
 import java.util.Map.Entry;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.solr.core.query.AnyCriteria;
 import org.springframework.data.solr.core.query.Criteria;
 import org.springframework.data.solr.core.query.Query;
 import org.springframework.data.solr.core.query.SimpleQuery;
+import org.springframework.data.solr.core.query.SimpleStringCriteria;
 import org.springframework.util.MultiValueMap;
 
 /**
@@ -25,13 +25,25 @@ import org.springframework.util.MultiValueMap;
  * @author ebrimatunkara
  */
 public class SolrSearchQueryFactory implements SearchQueryFactory<Query, MultiValueMap> {
-    private static final Logger logger = LoggerFactory.getLogger(SolrSearchQueryFactory.class);
 
+    /**
+     * Create query instance 
+     *
+     * @param params -> MultiValueMap
+     * @return Query
+     */
     @Override
     public Query createQuery(MultiValueMap params) {
         return prepareQuery(params);
     }
 
+    /**
+     * Create query instance with Pageable
+     *
+     * @param params -> MultiValueMap
+     * @param page -> Pageable
+     * @return Query
+     */
     @Override
     public Query createQuery(MultiValueMap params, Pageable page) {
         Query query = prepareQuery(params);
@@ -39,26 +51,42 @@ public class SolrSearchQueryFactory implements SearchQueryFactory<Query, MultiVa
         return query;
     }
 
+    /**
+     * Prepare query criteria
+     *
+     * @param params MultiValueMap
+     * @return Query
+     */
     private Query prepareQuery(MultiValueMap params) {
-        Query query = new SimpleQuery();
-        params.entrySet().stream().forEach(e->{
-            Entry entry = (Entry)e;
-            String key = entry.getKey().toString();
-            List value = (List)entry.getValue();
-            boolean added = false;
-            if(key.equals(Searchable.TYPE_FIELD) && value.size() > 0){
-                String klazzName = value.get(0).toString();    
-                if(!DataUtils.classTypeExists(value.get(0).toString())){
-                    String val = DataUtils.mapClassName(Searchable.class, klazzName);
-                    query.addCriteria(new Criteria(key).in(val));
+        SimpleQuery query = new SimpleQuery();
+        if (params.isEmpty()) {
+            query.addCriteria(AnyCriteria.any());
+        } else {
+            params.entrySet().stream().forEach(e -> {
+                Entry entry = (Entry) e;
+                String key = entry.getKey().toString();
+                List value = (List) entry.getValue();
+                boolean added = false;
+                //query key is doc class type
+                if (key.equals(Searchable.TYPE_FIELD) && value.size() > 0) {
+                    String klazzName = value.get(0).toString();
+                    if (!DataUtils.classTypeExists(value.get(0).toString())) {
+                        String val = DataUtils.mapClassName(Searchable.class, klazzName);
+                        query.addCriteria(new Criteria(key).in(val));
+                        added = true;
+                    }
+                }
+                //query key is "query" applies to all fields
+                if (key.toLowerCase().equals("query")) {
+                    query.addCriteria(new SimpleStringCriteria(value.get(0).toString()));
                     added = true;
                 }
-            }
-            if(!added){
-                query.addCriteria(new Criteria(key).in(value));
-             }
-        });
-        logger.info(params.toSingleValueMap().toString());
+                //add other criteria
+                if (!added) {
+                    query.addCriteria(new Criteria(key).in(value));
+                }
+            });
+        }
         return query;
     }
 

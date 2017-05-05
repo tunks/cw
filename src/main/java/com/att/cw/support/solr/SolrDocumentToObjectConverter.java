@@ -10,7 +10,6 @@ import com.att.cw.model.SearchableDocument;
 import com.att.cw.support.DataUtils;
 import java.io.IOException;
 import java.lang.reflect.Field;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
@@ -22,18 +21,26 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
 import org.apache.commons.lang3.ArrayUtils;
+import org.slf4j.LoggerFactory;
 import org.springframework.core.convert.converter.Converter;
 
 /**
- * Solr Document to Object converter - concrete implementation of Converter interface
+ * Solr Document to Object converter - concrete implementation of Converter
+ * interface
+ *
  * @author ebrimatunkara
  */
 public final class SolrDocumentToObjectConverter implements Converter<SearchableDocument, Map> {
+
+    private static final org.slf4j.Logger logger = LoggerFactory.getLogger(SolrSearchQueryFactory.class);
+
     /**
      * Convert SearchableDocument to Map object
-     * @param  source -> SearchableDocument
+     *
+     * @param source -> SearchableDocument
      * @return object -> Map
-     **/
+     *
+     */
     @Override
     public Map convert(SearchableDocument source) {
         try {
@@ -66,7 +73,7 @@ public final class SolrDocumentToObjectConverter implements Converter<Searchable
             try {
                 classType = Class.forName(name);
             } catch (ClassNotFoundException ex) {
-                Logger.getLogger(SolrDocumentToObjectConverter.class.getName()).log(Level.SEVERE, null, ex);
+                logger.error(ex.getMessage());
             }
             return this;
         }
@@ -120,14 +127,11 @@ public final class SolrDocumentToObjectConverter implements Converter<Searchable
                 //TODO refactoring
                 if (field.getType().equals(Set.class)) {
                     values.put(fieldName, value);
+                } else if (value instanceof Collection) {
+                    values.put(fieldName, getFirstItem((Collection) value));
                 } else {
-                    if (value instanceof Collection) {
-                        values.put(fieldName, getFirstItem((Collection) value, field));
-                    } else {
-                        values.put(fieldName, value);
-                    }
+                    values.put(fieldName, value);
                 }
-
             }
             return values;
         }
@@ -139,10 +143,11 @@ public final class SolrDocumentToObjectConverter implements Converter<Searchable
             }).collect(Collectors.toList());
         }
 
-        private Object getFirstItem(Collection value, Field field) {
+        private Object getFirstItem(Collection value) {
             try {
                 return (value.stream().findFirst().get());
             } catch (NoSuchElementException ex) {
+                logger.error(ex.getMessage());
                 return value;
             }
         }

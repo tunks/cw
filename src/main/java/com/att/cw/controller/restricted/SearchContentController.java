@@ -5,7 +5,6 @@
  */
 package com.att.cw.controller.restricted;
 
-import com.att.cw.service.SearchableDocumentService;
 import com.att.cw.support.SearchOperation;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,13 +17,15 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- *
+ * Content search rest controller
  * @author ebrimatunkara
  */
 @RestController
 @RequestMapping("/restricted/contents")
 public class SearchContentController implements SearchOperation<Map> {
-
+    /**
+     * Document search service
+     **/
     @Autowired
     private SearchOperation<Map> searchableDocumentService;
 
