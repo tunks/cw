@@ -6,7 +6,6 @@
 package com.att.cw.listener;
 
 import com.att.cw.model.JobQuestion;
-import com.att.cw.exception.JobException;
 import java.util.UUID;
 import javax.persistence.PrePersist;
 

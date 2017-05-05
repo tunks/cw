@@ -6,20 +6,21 @@
 package com.att.cw.controller.restricted.job;
 
 import com.att.cw.controller.BaseController;
-import com.att.cw.dto.JobQuestionDto;
 import com.att.cw.dto.JobQuestionListDto;
+import com.att.cw.dto.QuestionCategoryDto;
 import com.att.cw.dto.QuestionOptionDto;
-import com.att.cw.dto.mappers.JobQuestionDtoMapper;
+import com.att.cw.dto.mappers.QuestionCategoryDtoMapper;
 import com.att.cw.dto.mappers.QuestionOptionDtoMapper;
 import com.att.cw.exception.NotFoundException;
 import com.att.cw.model.Job;
 import com.att.cw.model.JobQuestion;
+import com.att.cw.model.QuestionCategory;
 import com.att.cw.model.QuestionOption;
 import com.att.cw.service.JobQuestionOptionService;
 import com.att.cw.service.JobQuestionService;
 import com.att.cw.service.JobService;
+import com.att.cw.service.QuestionCategoryService;
 import java.util.List;
-import static java.util.stream.Collectors.toList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -45,6 +46,9 @@ public class JobQuestionController implements BaseController<JobQuestion, Long> 
 
     @Autowired
     private JobService jobService;
+
+    @Autowired
+    private QuestionCategoryService questionCategoryService;
 
     /**
      * Find Job question
@@ -114,6 +118,7 @@ public class JobQuestionController implements BaseController<JobQuestion, Long> 
         JobQuestion question = find(id);
         if (job != null) {
             job.getQuestions().remove(question);
+
             jobService.save(job);
         }
         jobQuestionService.delete(question);
@@ -160,5 +165,15 @@ public class JobQuestionController implements BaseController<JobQuestion, Long> 
         } else {
             throw new NotFoundException("Either question  or option entity not found");
         }
+    }
+
+    /**
+     * Get all questions category
+     *
+     * @return
+     */
+    @RequestMapping(value = "/categories", method = RequestMethod.GET)
+    public List<QuestionCategoryDto> getQuestionCategories() {
+        return QuestionCategoryDtoMapper.mapEntitiesIntoDTOs(questionCategoryService.findAll());
     }
 }

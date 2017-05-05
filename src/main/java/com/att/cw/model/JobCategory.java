@@ -26,6 +26,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "job_category")
 public class JobCategory implements Serializable {
+
     /**
      * category id
      */

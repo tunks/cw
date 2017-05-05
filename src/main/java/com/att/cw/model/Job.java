@@ -5,7 +5,6 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import static javax.persistence.CascadeType.MERGE;
 import static javax.persistence.CascadeType.PERSIST;
 import javax.persistence.Column;
@@ -32,6 +31,7 @@ import javax.validation.constraints.NotNull;
 @EntityListeners(JobEntityListener.class)
 @Table(name = "JOB")
 public class Job extends Audit<Long> {
+
     private static final long serialVersionUID = 1L;
     /**
      * job id
@@ -51,6 +51,13 @@ public class Job extends Audit<Long> {
     @Basic(fetch = FetchType.LAZY)
     @Column(length = 16777215)
     private byte[] description;
+    /**
+     * job responsibilities
+     */
+    @Lob
+    @Basic(fetch = FetchType.LAZY)
+    @Column(length = 16777215)
+    private byte[] responsibilities;
 
     /**
      * job skills
@@ -99,7 +106,7 @@ public class Job extends Audit<Long> {
     /**
      * Job questions
      */
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(cascade = {PERSIST, MERGE}, fetch = FetchType.EAGER, orphanRemoval = true)
     private Set<JobQuestion> questions = new HashSet();
 
     public Job() {
@@ -133,6 +140,14 @@ public class Job extends Audit<Long> {
 
     public void setDescription(byte[] description) {
         this.description = description;
+    }
+
+    public byte[] getResponsibilities() {
+        return responsibilities;
+    }
+
+    public void setResponsibilities(byte[] responsibilities) {
+        this.responsibilities = responsibilities;
     }
 
     public JobVacancy getVacancy() {

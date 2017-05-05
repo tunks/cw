@@ -49,8 +49,8 @@ public class LocationController {
     }
 
     /**
-     * List of country states
-     *  /restricted/locations/states?country=country
+     * List of country states /restricted/locations/states?country=country
+     *
      * @param countryName
      * @return
      */

@@ -92,7 +92,7 @@ public class JobController implements BaseController<JobDto, Long> {
     public JobDto create(@RequestBody JobDto object) {
         return JobDtoMapper.mapFullEntityIntoDto(jobService.save(object));
     }
-   
+
     /**
      * Update and return existing job entity
      */
@@ -109,7 +109,7 @@ public class JobController implements BaseController<JobDto, Long> {
      * @return
      */
     @RequestMapping(value = "/{id}/questions", method = RequestMethod.GET)
-    public List<JobQuestionDto> saveQuestions(@PathVariable Long id) {
+    public List<JobQuestionDto> getQuestions(@PathVariable Long id) {
         Job job = jobService.find(id);
         return JobQuestionDtoMapper.mapEntitiesIntoDTOs(job.getQuestions().stream().collect(toList()));
     }

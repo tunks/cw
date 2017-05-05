@@ -36,6 +36,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 @RequestMapping("/open/authenticate")
 public class AuthenticationController {
+
     private static final Logger logger = LoggerFactory.getLogger(AuthenticationController.class);
     @Autowired
     private SessionService sessionService;

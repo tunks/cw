@@ -6,9 +6,11 @@
 package com.att.cw.dto.mappers;
 
 import com.att.cw.dto.JobQuestionDto;
+import com.att.cw.dto.QuestionCategoryDto;
 import com.att.cw.dto.QuestionOptionDto;
 import com.att.cw.dto.QuestionTypeDto;
 import com.att.cw.dto.QuestionaireDto;
+import com.att.cw.model.QuestionCategory;
 import com.att.cw.model.QuestionType;
 import com.att.cw.model.Questionaire;
 import java.util.List;
@@ -35,16 +37,19 @@ public final class QuestionaireDtoMapper {
         QuestionaireDto dto = new QuestionaireDto();
         dto.setId(entity.getId());
         dto.setName(entity.getName());
+
         dto.setQuestions(entity.getQuestions()
                 .stream().map(q -> {
                     QuestionType qt = q.getQuestionType();
+                    QuestionCategory category = q.getCategory();
                     //set questiontype dto
                     QuestionTypeDto qtDto = (qt != null) ? new QuestionTypeDto(qt.getId(),
                             qt.getName(),
                             qt.getDescription(),
                             qt.getShowOptions(),
                             qt.getStyle()) : null;
-                    return new JobQuestionDto(q.getId(),
+
+                    JobQuestionDto dt = new JobQuestionDto(q.getId(),
                             q.getQuestion(),
                             q.isRequired(),
                             qtDto,
@@ -53,6 +58,11 @@ public final class QuestionaireDtoMapper {
                                 return new QuestionOptionDto(op.getId(), op.getValue());
                             }).collect(toSet())
                     );
+
+                    if (category != null) {
+                        dt.setCategory(new QuestionCategoryDto(category.getId(), category.getCategory()));
+                    }
+                    return dt;
                 }).collect(toSet()));
         return dto;
     }

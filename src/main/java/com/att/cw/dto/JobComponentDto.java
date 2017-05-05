@@ -13,6 +13,7 @@ import java.io.Serializable;
  * @author ebrimatunkara
  */
 public class JobComponentDto implements Serializable {
+
     private Long id;
     private String name;
 

@@ -12,6 +12,7 @@ import com.att.cw.model.User;
  * @author ebrimatunkara
  */
 public class UserDto {
+
     private Long id;
     private String username;
     private String email;

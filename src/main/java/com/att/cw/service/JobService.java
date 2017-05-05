@@ -4,7 +4,7 @@ import com.att.cw.dao.JobRepository;
 import com.att.cw.dto.JobDto;
 import com.att.cw.model.Job;
 import com.att.cw.model.JobQuestion;
-import com.att.cw.support.DataTypeHelper;
+import com.att.cw.support.DataUtils;
 import java.util.List;
 import java.util.Set;
 import static java.util.stream.Collectors.toSet;
@@ -86,16 +86,6 @@ public class JobService implements CrudService<Job, Long> {
     }
 
     /**
-     * find and return jobs by owner id and pageable
-     *
-     * @param ownerId
-     * @param page
-     * @return
-     */
-//    public Page<Job> findAllByOwner(Long ownerId ,Pageable page){
-//           return jobRepository.findByOwnerId(ownerId, page);
-//    }
-    /**
      * Find and return all jobs
      *
      * @return
@@ -120,11 +110,13 @@ public class JobService implements CrudService<Job, Long> {
         Long id = dto.getId();
         Job entity = (id != null) ? find(id) : new Job();
         //set  job entity
-        byte[] description = (dto.getDescription() != null) ? DataTypeHelper.stringToByte(dto.getDescription()) : null;
-        byte[] skills = (dto.getDescription() != null) ? DataTypeHelper.stringToByte(dto.getSkills()) : null;
+        byte[] description = (dto.getDescription() != null) ? DataUtils.stringToByte(dto.getDescription()) : null;
+        byte[] responsibilities = (dto.getResponsibilities() != null) ? DataUtils.stringToByte(dto.getResponsibilities()) : null;
+        byte[] skills = (dto.getDescription() != null) ? DataUtils.stringToByte(dto.getSkills()) : null;
 
         entity.setTitle(dto.getTitle());
         entity.setDescription(description);
+        entity.setResponsibilities(responsibilities);
         entity.setSkills(skills);
         entity.setVacancy(dto.getVacancy());
         entity.setLocation(dto.getLocation());

@@ -9,6 +9,6 @@ package com.att.cw.dto;
  *
  * @author ebrimatunkara
  */
-public interface JobApplicationDto {
+public class JobApplicationDto {
 
 }

@@ -53,7 +53,7 @@ public class JobQuestion extends Component {
     /**
      * Question option
      */
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(fetch = FetchType.EAGER, cascade = {MERGE, REMOVE}, orphanRemoval = true)
     private Set<QuestionOption> options = new HashSet();
 
     /**
@@ -66,9 +66,9 @@ public class JobQuestion extends Component {
      */
     private Boolean required = Boolean.FALSE;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
     private Questionaire questionaire;
-    
+
     /**
      * Job question category
      */

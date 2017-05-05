@@ -36,6 +36,7 @@ public class QuestionCategoryService implements CrudService<QuestionCategory, Lo
 
     @Override
     public List<QuestionCategory> findAll() {
+        System.out.println("count all >>> " + questionCategoryRespository.count());
         return (List<QuestionCategory>) questionCategoryRespository.findAll();
     }
 
