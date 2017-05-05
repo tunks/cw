@@ -28,7 +28,12 @@ public class SearchContentController implements SearchOperation<Map> {
      **/
     @Autowired
     private SearchOperation<Map> searchableDocumentService;
-
+    /**
+     * Search contents with query parameters and pegeable option
+     * @param params : MultiValueMap query params
+     * @param page: Pageable options
+     * @return List - list of search results contents 
+     **/
     @RequestMapping(value = "/search", method = RequestMethod.GET)
     @Override
     public Page<Map> search(@RequestParam MultiValueMap params, Pageable page) {
