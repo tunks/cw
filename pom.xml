@@ -15,14 +15,21 @@
         <org.slf4j-version>1.7.5</org.slf4j-version>
         <hibernate.version>4.3.5.Final</hibernate.version>
         <jdk.version>1.8</jdk.version>
-        <springjpa.version>1.4.3.RELEASE</springjpa.version>
-        <spring-data-redis.version>1.7.2.RELEASE</spring-data-redis.version>
-        <jedis.version>2.4.2</jedis.version>
+        <springjpa.version>1.11.3.RELEASE</springjpa.version>
+        <spring-data-redis.version>1.8.2.RELEASE</spring-data-redis.version>
+        <springsolr.version>2.1.2.RELEASE</springsolr.version>
+        <jedis.version>2.9.0</jedis.version>
         <jackson.version>2.8.8</jackson.version>
         <deployment.name>${project.build.finalName}</deployment.name>
         <flyway.version>4.1.2</flyway.version>
         <solr.version>6.5.0</solr.version>
     </properties>
+    <!--    <repositories>
+        <repository>
+            <id>alfresco-public</id>
+            <url>https://artifacts.alfresco.com/nexus/content/repositories/public</url>
+        </repository>
+    </repositories>-->
     <dependencies>
         <!-- Spring -->
         <dependency>
@@ -86,7 +93,7 @@
         <dependency>
             <groupId>org.springframework.data</groupId>
             <artifactId>spring-data-solr</artifactId>
-            <version>2.1.3.RELEASE</version>
+            <version>${springsolr.version}</version>
         </dependency>
         
 
@@ -267,6 +274,21 @@
             <version>3.4</version>
         </dependency>
         
+        
+        <!-- java reflection library-->
+        <dependency>
+            <groupId>org.reflections</groupId>
+            <artifactId>reflections</artifactId>
+            <version>0.9.11</version>
+        </dependency>
+        
+        <!-- google guava -->
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>21.0</version>
+        </dependency>
+
         <!-- Test -->
         <dependency>
             <groupId>junit</groupId>

@@ -2,7 +2,7 @@ package com.att.cw.controller.restricted;
 
 import com.att.cw.model.Job;
 import com.att.cw.model.JobVacancy;
-import com.att.cw.support.DataTypeHelper;
+import com.att.cw.support.DataUtils;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.nio.charset.StandardCharsets;
@@ -78,7 +78,7 @@ public class JobControllerTest {
         JobVacancy vacancy = new JobVacancy();
         vacancy.setOpenDate(startDate);
         vacancy.setCloseDate(endDate);
-        byte[] description = DataTypeHelper.stringToByte("Technical Architect description 10001");
+        byte[] description = DataUtils.stringToByte("Technical Architect description 10001");
         job = new Job("Technical Architect", description);
         job.setVacancy(vacancy);
         content = objectToJson(job);

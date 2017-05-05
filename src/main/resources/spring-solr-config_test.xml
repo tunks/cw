@@ -8,8 +8,22 @@
 		http://www.springframework.org/schema/data/solr http://www.springframework.org/schema/data/solr/spring-solr.xsd">
 
     <!-- solr server -->
+    <!-- TODO setup properties profile -->
+    <context:property-placeholder location="classpath:application.properties,classpath:application-dev.properties"
+                                  ignore-resource-not-found="true" />
+    
     <!--    <solr:solr-client id="solrClient" url="${solr.server.url}"/>-->
 
+    <!-- solr repositories   -->
+    <!--       <solr:repositories base-package="com.att.cw.dao.solr" 
+    base-class="com.att.cw.dao.solr.SearchableDocumentRepositoryImpl"/>-->
+    <!-- converter -->
+    <!-- solr Http server factory -->
+    <!--    <bean id="solrClientFactory" class="org.springframework.data.solr.server.support.HttpSolrClientFactory">
+        <constructor-arg ref="solrClient" />
+        <constructor-arg value="${solr.core}" />
+    </bean>-->
+    
     <bean id="solrClient" class="com.att.cw.support.solr.CustomHttpSolrClient">
         <constructor-arg value="${solr.server.url}"/>
     </bean>
@@ -22,7 +36,6 @@
     
     <bean id="queryFactory" class="com.att.cw.support.solr.SolrSearchQueryFactory"/>
     
-    <!-- solr repositories   -->
     <bean id="searchRepository" class="com.att.cw.dao.solr.SearchableDocumentRepositoryImpl">
         <constructor-arg ref="queryFactory"/>
         <constructor-arg ref="solrTemplate"/>
@@ -35,4 +48,5 @@
     <!-- converter -->
     <bean id="documentToObjectConverter" class="com.att.cw.support.solr.SolrDocumentToObjectConverter"/>
     <!-- service -->
+    <bean id="searchableDocumentService" class="com.att.cw.service.SearchableDocumentService"/> 
 </beans>

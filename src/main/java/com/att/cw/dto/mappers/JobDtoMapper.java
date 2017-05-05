@@ -10,7 +10,7 @@ import com.att.cw.dto.JobDto;
 import com.att.cw.dto.JobQuestionDto;
 import com.att.cw.model.Job;
 import com.att.cw.model.JobType;
-import com.att.cw.support.DataTypeHelper;
+import com.att.cw.support.DataUtils;
 import java.util.List;
 import static java.util.stream.Collectors.toList;
 import static java.util.stream.Collectors.toSet;
@@ -43,9 +43,9 @@ public final class JobDtoMapper {
         dto.setLocation(entity.getLocation());
         dto.setTitle(entity.getTitle());
         dto.setVacancy(entity.getVacancy());
-        dto.setDescription(DataTypeHelper.bytesToString(entity.getDescription()));
-        dto.setResponsibilities(DataTypeHelper.bytesToString(entity.getResponsibilities()));
-        dto.setSkills(DataTypeHelper.bytesToString(entity.getSkills()));
+        dto.setDescription(DataUtils.bytesToString(entity.getDescription()));
+        dto.setResponsibilities(DataUtils.bytesToString(entity.getResponsibilities()));
+        dto.setSkills(DataUtils.bytesToString(entity.getSkills()));
         return dto;
     }
 
