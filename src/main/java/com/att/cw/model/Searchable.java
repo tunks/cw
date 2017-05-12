@@ -13,6 +13,7 @@ package com.att.cw.model;
  * @author ebrimatunkara
  */
 public interface Searchable {
+
     String ID_FIELD = "id";
     String BOOLEAN_FIELD = "_b";
     String DATE_FIELD = "_dt";

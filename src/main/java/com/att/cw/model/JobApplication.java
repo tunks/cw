@@ -1,12 +1,17 @@
 package com.att.cw.model;
 
 import com.att.cw.listener.JobApplicationEntityListener;
-import java.sql.Date;
 import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
+import static javax.persistence.CascadeType.ALL;
+import static javax.persistence.CascadeType.MERGE;
+import static javax.persistence.CascadeType.REMOVE;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
+import javax.persistence.FetchType;
 import static javax.persistence.FetchType.LAZY;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -16,6 +21,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @EntityListeners(JobApplicationEntityListener.class)
@@ -30,32 +36,33 @@ public class JobApplication extends Audit<Long> {
     /**
      * JobApplication candidate
      */
-    @OneToOne
-    @JoinColumn(name = "candidate_id", nullable = false)
+    //@NotNull
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "candidate_id",referencedColumnName = "id")
     private JobCandidate candidate;
     /**
      * JobApplication work flow process
      */
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "workflow_id")
     private JobWorkFlow workflow;
 
     @ManyToOne
-    @JoinColumn(name = "job_id", nullable = false)
+    @JoinColumn(nullable = false)
     @Basic(fetch = LAZY)
     private Job job;
     /**
      * Job question answers
      */
-    @OneToMany
+    @OneToMany(cascade={MERGE,REMOVE}, orphanRemoval=true,mappedBy="application")
     private Set<JobQuestionAnswer> questionAnswers = new HashSet();
     /**
      * Determine if application is submitted or not
      */
+    @Column(columnDefinition = "bit default 0", nullable = false)
     private Boolean submitted = Boolean.FALSE;
 
     public JobApplication() {
-
     }
 
     @Override
@@ -110,4 +117,10 @@ public class JobApplication extends Audit<Long> {
     public Boolean isSubmitted() {
         return submitted;
     }
+
+    @Override
+    public String toString() {
+        return "JobApplication{" + "id=" + id + ", candidate=" + candidate + ", workflow=" + workflow + ", job=" + job + ", questionAnswers=" + questionAnswers + ", submitted=" + submitted + '}';
+    }
+
 }

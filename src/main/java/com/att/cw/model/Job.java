@@ -7,6 +7,7 @@ import java.util.Set;
 import javax.persistence.Basic;
 import static javax.persistence.CascadeType.MERGE;
 import static javax.persistence.CascadeType.PERSIST;
+import static javax.persistence.CascadeType.REMOVE;
 import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
@@ -70,7 +71,7 @@ public class Job extends Audit<Long> {
     /**
      * Job category
      */
-    @ManyToMany(cascade = {PERSIST, MERGE}, fetch = FetchType.EAGER)
+    @ManyToMany(cascade = {MERGE}, fetch = FetchType.LAZY)
     @JoinTable(
             name = "JOB_CATEGORY_ITEMS",
             joinColumns = {
@@ -106,8 +107,11 @@ public class Job extends Audit<Long> {
     /**
      * Job questions
      */
-    @OneToMany(cascade = {PERSIST, MERGE}, fetch = FetchType.EAGER, orphanRemoval = true)
+    @OneToMany(cascade = {MERGE, REMOVE}, fetch = FetchType.EAGER, orphanRemoval = true)
     private Set<JobQuestion> questions = new HashSet();
+    
+    @OneToMany(cascade = {MERGE, REMOVE}, fetch = FetchType.EAGER, orphanRemoval = true,mappedBy="job")
+    private Set<JobApplication> applications = new HashSet();
 
     public Job() {
     }
@@ -201,6 +205,16 @@ public class Job extends Audit<Long> {
     public void setSkills(byte[] skills) {
         this.skills = skills;
     }
+
+    public Set<JobApplication> getApplications() {
+        return applications;
+    }
+
+    public void setApplications(Set<JobApplication> applications) {
+        this.applications = applications;
+    }
+    
+    
 
 //    public JobWorkFlow getWorkflow() {
 //        return workflow;

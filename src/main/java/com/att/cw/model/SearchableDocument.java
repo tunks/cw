@@ -148,8 +148,7 @@ public class SearchableDocument extends SearchableContent {
                 Object value = e.getValue();
                 if (value instanceof Date || value instanceof Timestamp) {
                     document.addDateValue(e.getKey(), value);
-                }
-                else {
+                } else {
                     document.addTextValue(e.getKey(), value);
                 }
             });

@@ -9,6 +9,8 @@ import org.joda.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.CascadeType;
+import static javax.persistence.CascadeType.MERGE;
+import static javax.persistence.CascadeType.REMOVE;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -85,17 +87,20 @@ public class User extends UserAudit {
     @Temporal(TemporalType.TIMESTAMP)
     @NotNull
     private Date lastPasswordResetDate;*/
-    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToMany(fetch = FetchType.EAGER, cascade = {MERGE})
     @JoinTable(
             name = "USER_AUTHORITY",
             joinColumns = {
-                @JoinColumn(name = "USER_ID", nullable = false, referencedColumnName = "ID")},
+                @JoinColumn(name = "USER_ID", nullable = false,updatable = false, referencedColumnName = "ID")},
             inverseJoinColumns = {
                 @JoinColumn(name = "AUTHORITY_ID", nullable = false, referencedColumnName = "ID")})
     private Set<Authority> authorities = new HashSet<Authority>(0);
 
     @OneToOne(mappedBy = "user")
     private UserProfile profile;
+   
+    @OneToOne(cascade={MERGE,REMOVE}, mappedBy="user", orphanRemoval=true)
+    private JobCandidate candidate;
 
     @Override
     public Long getId() {
@@ -168,5 +173,13 @@ public class User extends UserAudit {
 
     public void setGender(Gender gender) {
         this.gender = gender;
+    }
+
+    public JobCandidate getCandidate() {
+        return candidate;
+    }
+
+    public void setCandidate(JobCandidate candidate) {
+        this.candidate = candidate;
     }
 }

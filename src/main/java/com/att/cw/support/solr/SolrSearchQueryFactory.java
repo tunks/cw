@@ -11,6 +11,7 @@ import com.att.cw.support.DataUtils;
 import com.att.cw.support.SearchQueryFactory;
 import java.util.List;
 import java.util.Map.Entry;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.solr.core.query.AnyCriteria;
 import org.springframework.data.solr.core.query.Criteria;
@@ -27,7 +28,7 @@ import org.springframework.util.MultiValueMap;
 public class SolrSearchQueryFactory implements SearchQueryFactory<Query, MultiValueMap> {
 
     /**
-     * Create query instance 
+     * Create query instance
      *
      * @param params -> MultiValueMap
      * @return Query
@@ -78,7 +79,8 @@ public class SolrSearchQueryFactory implements SearchQueryFactory<Query, MultiVa
                 }
                 //query key is "query" applies to all fields
                 if (key.toLowerCase().equals("query")) {
-                    query.addCriteria(new SimpleStringCriteria(value.get(0).toString()));
+                    String val = value.get(0).toString();
+                    query.addCriteria(new SimpleStringCriteria(val.equals(StringUtils.EMPTY) ? Criteria.WILDCARD : val));
                     added = true;
                 }
                 //add other criteria

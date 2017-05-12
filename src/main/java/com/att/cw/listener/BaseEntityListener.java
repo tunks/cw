@@ -43,29 +43,31 @@ public abstract class BaseEntityListener {
 
     public void postPersist(Object target) {
         logger.info("post persist ");
-        SpringBeanAutowiringSupport.processInjectionBasedOnCurrentContext(this);
-        Event event = new EventBuilder()
-                .setAction(EventAction.ENTITY_CREATED)
-                .setData(target)
-                .setExcludeFields(getExcludedFields())
-                .build();
-        publisher.publishEvent(event);
+        indexObjectToSearchableContent(target, EventAction.ENTITY_CREATED);
     }
 
     public void postUpdate(Object target) {
         logger.info("post update ");
-        SpringBeanAutowiringSupport.processInjectionBasedOnCurrentContext(this);
-        Event event = new EventBuilder()
-                .setAction(EventAction.ENTITY_UPDATED)
-                .setData(target)
-                .setExcludeFields(getExcludedFields())
-                .build();
-        publisher.publishEvent(event);
+        indexObjectToSearchableContent(target, EventAction.ENTITY_UPDATED);
     }
 
     @PostRemove
     public void postDelete(Object target) {
         //publisher.publishEvent(new OnDeletedEvent<>(this, target));
+    }
+
+    private void indexObjectToSearchableContent(Object target, EventAction action) {
+        try {
+            SpringBeanAutowiringSupport.processInjectionBasedOnCurrentContext(this);
+            Event event = new EventBuilder()
+                    .setAction(action)
+                    .setData(target)
+                    .setExcludeFields(getExcludedFields())
+                    .build();
+            publisher.publishEvent(event);
+        } catch (Exception ex) {
+            logger.error(ex.getMessage());
+        }
     }
 
     protected abstract String[] getExcludedFields();

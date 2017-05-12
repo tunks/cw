@@ -5,7 +5,7 @@
  */
 package com.att.cw.listener;
 
-import com.att.cw.model.JobAnswerOption;
+import com.att.cw.model.JobAnswerEntry;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 
@@ -17,14 +17,14 @@ import javax.persistence.PreUpdate;
 public class JobAnswerOptionListerner {
 
     @PrePersist
-    void onCreate(JobAnswerOption entity) {
+    void onCreate(JobAnswerEntry entity) {
         //get job question
         //JobQuestion question = entity.getQuestion();
         //validate(entity, question);
     }
 
     @PreUpdate
-    void onPersist(JobAnswerOption entity) {
+    void onPersist(JobAnswerEntry entity) {
         //get job question
 
     }

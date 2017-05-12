@@ -95,4 +95,9 @@ public class StandardJobWorkFlowService implements CrudService<StandardJobWorkFl
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    @Override
+    public void delete(StandardJobWorkFlow object) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
 }

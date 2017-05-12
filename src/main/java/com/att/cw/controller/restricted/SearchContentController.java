@@ -18,22 +18,28 @@ import org.springframework.web.bind.annotation.RestController;
 
 /**
  * Content search rest controller
+ *
  * @author ebrimatunkara
  */
 @RestController
 @RequestMapping("/restricted/contents")
 public class SearchContentController implements SearchOperation<Map> {
+
     /**
      * Document search service
-     **/
+     *
+     */
     @Autowired
     private SearchOperation<Map> searchableDocumentService;
+
     /**
      * Search contents with query parameters and pegeable option
+     *
      * @param params : MultiValueMap query params
      * @param page: Pageable options
-     * @return List - list of search results contents 
-     **/
+     * @return List - list of search results contents
+     *
+     */
     @RequestMapping(value = "/search", method = RequestMethod.GET)
     @Override
     public Page<Map> search(@RequestParam MultiValueMap params, Pageable page) {

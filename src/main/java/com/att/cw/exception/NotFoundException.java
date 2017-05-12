@@ -5,6 +5,7 @@
  */
 package com.att.cw.exception;
 
+import java.util.Arrays;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
@@ -20,6 +21,9 @@ public class NotFoundException extends RuntimeException {
 
     public NotFoundException(Long id) {
         super("Object not found " + id);
+    }
+    public NotFoundException(Long[] ids) {
+        super("Object(s) not found " + Arrays.toString(ids));
     }
 
     public NotFoundException(String message) {
