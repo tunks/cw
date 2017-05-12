@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import com.att.cw.dto.LocationDto;
+import com.att.cw.model.Location;
 import org.springframework.web.bind.annotation.RequestParam;
 
 /**
@@ -33,7 +34,7 @@ public class LocationController {
      * @return
      */
     @RequestMapping(method = RequestMethod.GET)
-    public List<LocationDto> findCountry() {
+    public List<Location> findCountry() {
         return locationService.findCountries();
     }
 
@@ -44,7 +45,7 @@ public class LocationController {
      * @return
      */
     @RequestMapping(value = "/{id}/states", method = RequestMethod.GET)
-    public List<LocationDto> findCountryStatesById(@PathVariable Long id) {
+    public List<Location> findCountryStatesById(@PathVariable Long id) {
         return locationService.findCountryStates(id);
     }
 
@@ -55,7 +56,7 @@ public class LocationController {
      * @return
      */
     @RequestMapping(value = "/states", method = RequestMethod.GET)
-    public List<LocationDto> findCountryStatesByName(@RequestParam("country") String countryName) {
+    public List<Location> findCountryStatesByName(@RequestParam("country") String countryName) {
         return locationService.findCountryStatesByName(countryName);
     }
 
@@ -66,7 +67,7 @@ public class LocationController {
      * @return
      */
     @RequestMapping(value = "/{id}/cities", method = RequestMethod.GET)
-    public List<LocationDto> findStateCities(@PathVariable Long id) {
+    public List<Location> findStateCities(@PathVariable Long id) {
         return locationService.findStateCities(id);
     }
 
@@ -77,7 +78,7 @@ public class LocationController {
      * @return
      */
     @RequestMapping(value = "/cities", method = RequestMethod.GET)
-    public List<LocationDto> findStateCitiesByName(@RequestParam("state") String state) {
+    public List<Location> findStateCitiesByName(@RequestParam("state") String state) {
         return locationService.findCountryStateCitiesByName(state);
     }
 }

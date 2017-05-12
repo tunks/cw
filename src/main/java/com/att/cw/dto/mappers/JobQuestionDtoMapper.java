@@ -12,7 +12,10 @@ import com.att.cw.dto.QuestionTypeDto;
 import com.att.cw.model.QuestionType;
 import com.att.cw.model.JobQuestion;
 import com.att.cw.model.QuestionCategory;
+import com.att.cw.model.QuestionOption;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import static java.util.stream.Collectors.toList;
 import static java.util.stream.Collectors.toSet;
 import org.springframework.data.domain.Page;
@@ -41,18 +44,25 @@ public final class JobQuestionDtoMapper {
         dto.setRequired(entity.isRequired());
         dto.setReferenceNumber(entity.getReferenceNumber());
         dto.setCategory((category != null) ? new QuestionCategoryDto(category.getId(), category.getCategory()) : null);
-        dto.setQuestionType(new QuestionTypeDto(qt.getId(),
-                qt.getName(),
-                qt.getDescription(),
-                qt.getShowOptions(),
-                qt.getStyle()));
-        dto.setOptions(entity.getOptions()
+        dto.setQuestionType(mapQuestionType(qt));
+        dto.setOptions(mapQuestionOptions(entity.getOptions()));
+        return dto;
+    }
+
+    public static Set<QuestionOptionDto> mapQuestionOptions(Set<QuestionOption> options) {
+        return (options != null) ? options
                 .stream()
                 .map(op -> {
                     return new QuestionOptionDto(op.getId(), op.getValue());
-                }).collect(toSet()));
+                }).collect(toSet()) : new HashSet();
+    }
 
-        return dto;
+    public static QuestionTypeDto mapQuestionType(QuestionType qt) {
+        return (qt != null) ? new QuestionTypeDto(qt.getId(),
+                qt.getName(),
+                qt.getDescription(),
+                qt.getShowOptions(),
+                qt.getStyle()) : null;
     }
 
     public static Page<JobQuestionDto> mapEntityPageIntoDTOPage(Pageable page, Page<JobQuestion> source) {

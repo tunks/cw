@@ -34,7 +34,13 @@ import org.springframework.util.StringUtils;
  * @author ebrimatunkara
  */
 public class DataUtils {
+
     private static final Logger logger = LoggerFactory.getLogger(DataUtils.class);
+    private static final ObjectMapper mapper;
+
+    static {
+        mapper = new ObjectMapper();
+    }
 
     public static byte[] stringToByte(String text) {
         return (text != null) ? text.getBytes(StandardCharsets.UTF_8) : null;
@@ -81,22 +87,26 @@ public class DataUtils {
         })
                 .collect(Collectors.toMap(i -> i.getName(), Function.identity(), (x1, x2) -> x2));
     }
-    
-    public static boolean classTypeExists(String name){
+
+    public static boolean classTypeExists(String name) {
         try {
             Class.forName(name);
             return true;
         } catch (ClassNotFoundException ex) {
-           logger.error(ex.getMessage());
+            logger.error(ex.getMessage());
         }
         return false;
     }
-    
-     public static String mapClassName(Class<?> base, String name){
-         StringBuilder builder = new StringBuilder();
-         builder.append(base.getPackage().getName())
+
+    public static String mapClassName(Class<?> base, String name) {
+        StringBuilder builder = new StringBuilder();
+        builder.append(base.getPackage().getName())
                 .append(Searchable.FIELD_SEPERATOR)
-                .append(StringUtils.capitalize(name.toLowerCase()) );
-         return builder.toString();
+                .append(StringUtils.capitalize(name.toLowerCase()));
+        return builder.toString();
+    }
+
+    public static String objectToJson(Object obj) throws JsonProcessingException {
+        return mapper.writeValueAsString(obj);
     }
 }

@@ -28,13 +28,13 @@ public class JobService implements CrudService<Job, Long> {
      */
     @Resource
     private JobRepository jobRepository;
-
+    
     @Autowired
     private JobCategoryService jobCategoryService;
-
+    
     @Autowired
     private JobTypeService jobtypeService;
-
+    
     @Autowired
     private JobQuestionService jobQuestionService;
 
@@ -95,16 +95,16 @@ public class JobService implements CrudService<Job, Long> {
     public List<Job> findAll() {
         return (List<Job>) jobRepository.findAll();
     }
-
+    
     public Job findByQuestionId(Long id) {
         return jobRepository.findByQuestionId(id);
     }
-
+    
     @Override
     public void deleteAll() {
         jobRepository.deleteAll();
     }
-
+    
     public Job save(JobDto dto) {
         //find and load the job entity
         Long id = dto.getId();
@@ -113,7 +113,7 @@ public class JobService implements CrudService<Job, Long> {
         byte[] description = (dto.getDescription() != null) ? DataUtils.stringToByte(dto.getDescription()) : null;
         byte[] responsibilities = (dto.getResponsibilities() != null) ? DataUtils.stringToByte(dto.getResponsibilities()) : null;
         byte[] skills = (dto.getDescription() != null) ? DataUtils.stringToByte(dto.getSkills()) : null;
-
+        
         entity.setTitle(dto.getTitle());
         entity.setDescription(description);
         entity.setResponsibilities(responsibilities);
@@ -129,7 +129,7 @@ public class JobService implements CrudService<Job, Long> {
                 .stream().map(c -> {
                     return jobCategoryService.find(c.getId());
                 }).collect(toSet()));
-
+        
         if (dto.getJobType() != null) {
             entity.setJobType(jobtypeService.find(dto.getJobType().getId()));
         }
@@ -138,13 +138,18 @@ public class JobService implements CrudService<Job, Long> {
         Set<JobQuestion> questions = jobQuestionService.saveDto(dto.getQuestions());
         //set job questions
         entity.getQuestions().addAll(questions);
-
+        
         return save(entity);
     }
-
+    
     @Override
     public boolean exists(Long id) {
         return jobRepository.exists(id);
     }
-
+    
+    @Override
+    public void delete(Job object) {
+        jobRepository.delete(object);
+    }
+    
 }

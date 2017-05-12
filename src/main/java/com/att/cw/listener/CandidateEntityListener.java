@@ -20,6 +20,6 @@ public class CandidateEntityListener {
 
     @PrePersist
     void onCreate(JobCandidate entity) {
-        entity.setCandidateNumber(UUID.randomUUID());
+        //entity.setCandidateNumber(UUID.randomUUID());
     }
 }

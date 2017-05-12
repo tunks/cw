@@ -58,7 +58,7 @@ public class LocationRepositoryTest {
     public void testFindByLocationType() {
         System.out.println("findByLocationType");
         int type = 0;
-        List<LocationDto> result = locationRepository.findByLocationType(type);
+        List<Location> result = locationRepository.findByLocationType(type);
         assertTrue(result.size() > 0);
     }
 
@@ -71,7 +71,7 @@ public class LocationRepositoryTest {
         System.out.println("findByLocationTypeAndParentId");
         int type = 0;
         Long parentId = null;
-        List<LocationDto> result = locationRepository.findByLocationType(type);
+        List<Location> result = locationRepository.findByLocationType(type);
         type = 1; //state 
         parentId = result.get(0).getId();
         result = locationRepository.findByLocationTypeAndParentId(type, parentId);

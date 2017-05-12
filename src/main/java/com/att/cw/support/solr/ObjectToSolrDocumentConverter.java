@@ -27,9 +27,11 @@ import org.springframework.security.util.FieldUtils;
 
 /**
  * Object to SolrDocument Converter
+ *
  * @author ebrimatunkara
  */
 public final class ObjectToSolrDocumentConverter implements Converter<Object, SearchableDocument> {
+
     private static final org.slf4j.Logger logger = LoggerFactory.getLogger(SolrSearchQueryFactory.class);
 
     private final String[] DEFAULT_FIELDS = {"serialVersionUID", "version"};
@@ -47,11 +49,14 @@ public final class ObjectToSolrDocumentConverter implements Converter<Object, Se
     private void initExcludedFields(String[] fields) {
         this.excludedFields = ArrayUtils.addAll(defaultExcludedFields, fields);
     }
+
     /**
      * Convert object to solr document
+     *
      * @param obj
      * @reeturn SearchableDocument
-     **/
+     *
+     */
     @Override
     public SearchableDocument convert(Object obj) {
         SearchableDocument doc = new SearchableDocument();
@@ -67,8 +72,10 @@ public final class ObjectToSolrDocumentConverter implements Converter<Object, Se
         }
         return doc;
     }
+
     /**
      * Recursive function to map object field values
+     *
      * @param fieldPrefix :String -> root name of object field
      * @param obj: Object -> object to map
      * @param fields: Map -> objects fields in has
@@ -87,12 +94,10 @@ public final class ObjectToSolrDocumentConverter implements Converter<Object, Se
                             || value instanceof Date) {
                         if (value instanceof byte[]) {
                             contents.put(name, new String((byte[]) value, StandardCharsets.UTF_8));
-                        }
-                        else if(value instanceof Enum){
-                           contents.put(name, value.toString());
-                        }
-                        else {
-                           contents.put(name, value);
+                        } else if (value instanceof Enum) {
+                            contents.put(name, value.toString());
+                        } else {
+                            contents.put(name, value);
                         }
                     } else if (value instanceof Collection || value instanceof Object[]) {
                         Collection items = value.getClass().isArray() ? Arrays.asList((Object[]) value) : (Collection) value;
@@ -103,7 +108,7 @@ public final class ObjectToSolrDocumentConverter implements Converter<Object, Se
                                 if (!contents.containsKey(key)) {
                                     contents.put(key, new ArrayList());
                                 }
-                               ((List) contents.get(key)).add(x.getValue());
+                                ((List) contents.get(key)).add(x.getValue());
                             });
                         });
                     } else {
@@ -117,6 +122,7 @@ public final class ObjectToSolrDocumentConverter implements Converter<Object, Se
         });
         return contents;
     }
+
     private Map<String, Object> mapObjectFieldValue(String prefixName, Object item, String... filterField) {
         Map<String, Field> _fields = DataUtils.getClassFields(item.getClass(), filterField);
         return mapObjectFieldValues(prefixName, item, _fields);

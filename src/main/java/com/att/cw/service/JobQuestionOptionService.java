@@ -62,4 +62,9 @@ public class JobQuestionOptionService implements CrudService<QuestionOption, Lon
     public boolean exists(Long id) {
         return jobQuestionOptionRepository.exists(id);
     }
+
+    @Override
+    public void delete(QuestionOption object) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

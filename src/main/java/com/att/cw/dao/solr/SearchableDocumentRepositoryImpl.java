@@ -59,9 +59,9 @@ public class SearchableDocumentRepositoryImpl
         Query query = queryFactory.createQuery(params, page);
         return getSolrOperations().query(query, getEntityClass());
     }
-  
-     /**
-     * Search for contents with query parameters 
+
+    /**
+     * Search for contents with query parameters
      *
      * @param params : MultiValue query values
      * @return

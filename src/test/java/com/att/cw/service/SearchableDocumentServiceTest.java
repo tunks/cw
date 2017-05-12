@@ -103,6 +103,7 @@ public class SearchableDocumentServiceTest {
 
     @After
     public void tearDown() {
+        searchableDocumentService.delete(document.getId());
     }
 
     /**

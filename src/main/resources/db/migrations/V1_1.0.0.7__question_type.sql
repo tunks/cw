@@ -18,5 +18,6 @@ VALUES ('FILE ATTACHMENT','Applicant will attach file document', b'0','file'),
        ('MULTIPLE CHOICE','Applicant will have option to select multiple checkbox options', b'1','checkbox'),
        ('SINGLE CHOICE','Applicant will select only one option', b'1','radio'),
        ('TEXT','Applicant will provide answer in a textbox ', b'0','text'),
+       ('LARGE TEXT','Applicant will provide answer in a large textbox ', b'0','large_text'),
        ('DATE RANGE','Start and end date of two date values ', b'1','date'),
        ('EMAIL','Applicant email ', b'0','email');

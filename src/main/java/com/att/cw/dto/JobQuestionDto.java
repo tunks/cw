@@ -29,6 +29,10 @@ public class JobQuestionDto {
     public JobQuestionDto() {
     }
 
+    public JobQuestionDto(Long id) {
+        this.id = id;
+    }
+
     public JobQuestionDto(Long id,
             String question,
             Boolean required,

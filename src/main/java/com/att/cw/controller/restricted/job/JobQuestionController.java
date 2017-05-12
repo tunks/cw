@@ -14,7 +14,6 @@ import com.att.cw.dto.mappers.QuestionOptionDtoMapper;
 import com.att.cw.exception.NotFoundException;
 import com.att.cw.model.Job;
 import com.att.cw.model.JobQuestion;
-import com.att.cw.model.QuestionCategory;
 import com.att.cw.model.QuestionOption;
 import com.att.cw.service.JobQuestionOptionService;
 import com.att.cw.service.JobQuestionService;
@@ -92,13 +91,14 @@ public class JobQuestionController implements BaseController<JobQuestion, Long> 
     }
 
     /**
-     * Find all jobs by question id
+     * Find all jobs by question id and user id
      *
      * @param id
+     * @param userId
      * @return
      */
     @RequestMapping(method = RequestMethod.GET)
-    public JobQuestionListDto findAll(@RequestParam("jobid") Long id) {
+    public JobQuestionListDto findAll(@RequestParam("jobid") Long id, @RequestParam("userId") Long userId) {
         Job job = jobService.find(id);
         if (job != null) {
             return JobQuestionListDto.build(job);

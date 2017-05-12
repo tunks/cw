@@ -22,14 +22,14 @@ public class JobAnswerListener {
     void onCreate(JobQuestionAnswer entity) {
         //get job question
         JobQuestion question = entity.getQuestion();
-        validate(entity, question);
+        //validate(entity, question);
     }
 
     @PreUpdate
     void onPersist(JobQuestionAnswer entity) {
         //get job question
         JobQuestion question = entity.getQuestion();
-        validate(entity, question);
+        //validate(entity, question);
     }
 
     //validate the entity
@@ -40,7 +40,7 @@ public class JobAnswerListener {
         }
 
         //if(question.)
-        if (entity.getAnswerOptions().isEmpty() && question.isRequired()) {
+        if (entity.getAnswerEntry() == null && question.isRequired()) {
             throw new JobApplicationException("Question must be answer!!");
         }
     }

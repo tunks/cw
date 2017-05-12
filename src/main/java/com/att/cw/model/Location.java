@@ -19,7 +19,7 @@ import javax.persistence.Table;
  * @author ebrimatunkara
  */
 @Entity
-@Table(name = "LOCATION")
+@Table(name = "location")
 public class Location implements Serializable {
 
     @Id

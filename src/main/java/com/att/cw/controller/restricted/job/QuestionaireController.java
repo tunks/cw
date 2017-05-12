@@ -135,10 +135,10 @@ public class QuestionaireController implements BaseController<QuestionaireDto, L
 
             JobQuestion item = jobQuestionService.saveDto(question, isNew ? questionaire : null);
             //add and save questionaire if question is new question
-            if (isNew) {
-                questionaire.getQuestions().add(item);
-                questionaireService.save(questionaire);
-            }
+//            if (isNew) {
+//                questionaire.getQuestions().add(item);
+//                questionaireService.save(questionaire);
+//            }
             return JobQuestionDtoMapper.mapEntityIntoDTO(item);
         } else {
             //throw exception

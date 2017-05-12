@@ -79,7 +79,7 @@ public class SearchableDocumentService implements CrudService<SearchableDocument
         return result.map(documentToObjectConverter);
     }
 
-      /**
+    /**
      * Search for contents with query parameters
      *
      * @param params
@@ -89,6 +89,11 @@ public class SearchableDocumentService implements CrudService<SearchableDocument
     public Page<Map> search(MultiValueMap params) {
         Page<SearchableDocument> result = searchRepository.search(params);
         return result.map(documentToObjectConverter);
+    }
+
+    @Override
+    public void delete(SearchableDocument object) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }

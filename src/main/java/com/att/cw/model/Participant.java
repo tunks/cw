@@ -22,6 +22,9 @@ public class Participant implements Serializable {
     private String email;
     private String fullName;
 
+    public Participant() {
+    }
+
     public Participant(String email) {
         this.email = email;
     }

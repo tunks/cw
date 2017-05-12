@@ -76,6 +76,7 @@ public class JobQuestionService implements CrudService<JobQuestion, Long> {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    @Override
     public void delete(JobQuestion entity) {
         jobQuestionRepository.delete(entity);
     }

@@ -17,6 +17,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 import javax.persistence.PrePersist;
+import javax.persistence.PreRemove;
 import javax.persistence.PreUpdate;
 
 /**
@@ -94,5 +95,4 @@ public class JobApplicationEntityListener {
 
         }
     }
-
 }

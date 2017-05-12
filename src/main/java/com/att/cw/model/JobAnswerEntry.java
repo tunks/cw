@@ -16,13 +16,13 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 /**
- * JobAnswerOption entity model
+ * JobAnswerEntry entity model
  *
  * @author ebrimatunkara
  */
 @Entity
-@Table(name = "ANSWER_OPTION")
-public class JobAnswerOption extends Audit<Long> {
+@Table(name = "JOB_ANSWER_ENTRY")
+public class JobAnswerEntry extends Audit<Long> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -34,8 +34,8 @@ public class JobAnswerOption extends Audit<Long> {
     /**
      * For note or text answers
      */
-    @Column(name = "answer_note")
-    private String note;
+    @Column(name = "entry")
+    private String value;
 
     /**
      * For file attachments
@@ -48,21 +48,24 @@ public class JobAnswerOption extends Audit<Long> {
      * For multiple or select choice answer
      */
     private Boolean checked = Boolean.FALSE;
+    
+    @OneToOne(orphanRemoval=true)
+    private JobQuestionAnswer questionAnswer;
 
-    public JobAnswerOption() {
+    public JobAnswerEntry() {
     }
 
-    public JobAnswerOption(String note) {
-        this.note = note;
+    public JobAnswerEntry(String value) {
+        this.value = value;
     }
 
-    public JobAnswerOption(QuestionOption questionOption) {
+    public JobAnswerEntry(QuestionOption questionOption) {
         this.questionOption = questionOption;
     }
 
-    public JobAnswerOption(QuestionOption questionOption, String note) {
+    public JobAnswerEntry(QuestionOption questionOption, String value) {
         this.questionOption = questionOption;
-        this.note = note;
+        this.value = value;
     }
 
     @Override
@@ -70,12 +73,16 @@ public class JobAnswerOption extends Audit<Long> {
         return id;
     }
 
-    public String getNote() {
-        return note;
+    public void setId(Long id) {
+        this.id = id;
     }
 
-    public void setNote(String note) {
-        this.note = note;
+    public String getValue() {
+        return value;
+    }
+
+    public void setValue(String value) {
+        this.value = value;
     }
 
     public FileDocument getDocument() {
@@ -105,4 +112,13 @@ public class JobAnswerOption extends Audit<Long> {
     public Boolean isChecked() {
         return checked;
     }
+
+    public JobQuestionAnswer getQuestionAnswer() {
+        return questionAnswer;
+    }
+
+    public void setQuestionAnswer(JobQuestionAnswer questionAnswer) {
+        this.questionAnswer = questionAnswer;
+    }
+   
 }

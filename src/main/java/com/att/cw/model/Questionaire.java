@@ -29,7 +29,7 @@ public class Questionaire extends Component {
     @Column(nullable = false)
     private String name;
 
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true,mappedBy="questionaire")
     private Set<JobQuestion> questions = new HashSet();
 
     public Set<JobQuestion> getQuestions() {

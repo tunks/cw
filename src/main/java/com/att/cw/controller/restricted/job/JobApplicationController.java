@@ -6,11 +6,20 @@
 package com.att.cw.controller.restricted.job;
 
 import com.att.cw.controller.BaseController;
+import com.att.cw.dto.JobApplicationDto;
+import com.att.cw.dto.JobApplicationEntryDto;
+import com.att.cw.dto.JobQuestionListDto;
+import com.att.cw.dto.mappers.JobApplicationDtoMapper;
+import com.att.cw.exception.JobApplicationException;
 import com.att.cw.model.Job;
 import com.att.cw.model.JobApplication;
 import com.att.cw.service.JobApplicationService;
 import com.att.cw.service.JobService;
 import com.att.cw.exception.NotFoundException;
+import com.att.cw.model.JobCandidate;
+import com.att.cw.model.User;
+import com.att.cw.service.UserService;
+import javax.annotation.Resource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -18,6 +27,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -25,6 +35,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @author ebrimatunkara
  */
 @RestController
+@RequestMapping("/restricted/applications")
 public class JobApplicationController implements BaseController<JobApplication, Long> {
 
     /**
@@ -38,76 +49,104 @@ public class JobApplicationController implements BaseController<JobApplication, 
     @Autowired
     private JobApplicationService jobApplicationService;
 
+    @Autowired
+    private UserService userService;
     /**
      * Post job applications
      *
-     * @param id
-     * @param application
+     * @param dto
      * @return
      */
-    @RequestMapping(value = "/restricted/jobs/{id}/applications", method = RequestMethod.POST)
-    public JobApplication saveApplication(@PathVariable Long id, @RequestBody JobApplication application) {
-        Job job = jobService.find(id);
-        //throw exception if job is not found
-        if (job == null) {
-            throw new NotFoundException(id);
-        }
-        //map the job object
-        application.setJob(job);
-        return create(application);
+    @RequestMapping(method = RequestMethod.POST)
+    public JobApplicationEntryDto saveApplication(@RequestBody JobApplicationEntryDto dto) {
+        return saveJobApplication(dto);
+    }
+
+   
+    /**
+     * Post job applications
+     *
+     * @param dto
+     * @return
+     */
+    @RequestMapping(method = RequestMethod.PUT)
+    public JobApplicationEntryDto updateApplication(@RequestBody JobApplicationEntryDto dto) {
+       return saveJobApplication(dto);
     }
 
     /**
-     * Find job applications by page
+     * Find job applications by id
      *
-     * @param id
+     * @param jobId
      * @param page
      * @return
      */
-    @RequestMapping(value = "/restricted/jobs/{id}/applications", method = RequestMethod.GET)
-    public Page<JobApplication> findApplications(@PathVariable Long id, Pageable page) {
-        Job job = jobService.find(id);
-        //throw exception if job is not found
-        if (job == null) {
-            throw new NotFoundException(id);
-        }
-        //find job applications
-        return jobApplicationService.findByJob(job, page);
-    }
+//    @RequestMapping(method = RequestMethod.GET)
+//    public Page<JobApplicationDto> findApplications(@RequestParam("jobId") Long jobId, Pageable page) {
+////        Job job = jobService.find(jobId);
+////        //throw exception if job is not found
+////        if (job == null) {
+////            throw new NotFoundException(jobId);
+////        }
+//        //find job applications
+//        //TODO
+//        return null;//jobApplicationService.findByJob(job, page);
+//    }
 
     /**
-     * Find job application
+     * Find job applications by id
      *
      * @param jobId
-     * @param id
+     * @param userId
      * @return
      */
-    @RequestMapping(value = "/restricted/jobs/{jobId}/applications/{id}", method = RequestMethod.GET)
-    public JobApplication findApplication(@PathVariable Long jobId, @PathVariable Long id) {
-        Job job = jobService.find(jobId);
-        //throw exception if job is not found
-        if (job == null) {
-            throw new NotFoundException(jobId);
+    @RequestMapping(method = RequestMethod.GET)
+    public JobApplicationEntryDto find(@RequestParam("jobId") Long jobId, @RequestParam(name="userId") Long userId) {
+         Job job = jobService.find(jobId);
+         User user = userService.find(userId);
+         JobCandidate candidate  = user.getCandidate();
+         JobApplication application = null;
+
+        if(candidate != null){
+          application = jobApplicationService.findByCandidateAndJob(job,candidate);
         }
-        //find job application
-        return jobApplicationService.findByIdAndJob(id, job);
+        //merge job questions and application question-answers
+        //union of question-answers in job questions
+        //TODO
+        //
+        return JobApplicationDtoMapper.mapEntityIntoDTO(application,job);
     }
 
     /**
-     * Find job application
+     * Find all jobs by question id and user id
      *
      * @param jobId
+     * @param userId
+     * @return
+     */
+    @RequestMapping(value = "/entries", method = RequestMethod.GET)
+    public JobQuestionListDto findApplicationEntries(@RequestParam("jobid") Long jobId, @RequestParam(name = "userId", required = false) Long userId) {
+        Job job = jobService.find(jobId);
+        if (job != null) {
+            return JobQuestionListDto.build(job);
+        }
+        throw new NotFoundException(jobId);
+    }
+
+    /**
+     * Delete job application
+     *
      * @param id
      */
-    @RequestMapping(value = "/{jobId}/applications/{id}", method = RequestMethod.DELETE)
-    public void deleteApplication(@PathVariable Long jobId, @PathVariable Long id) {
-        Job job = jobService.find(jobId);
-        //throw exception if job is not found
-        if (job == null) {
-            throw new NotFoundException(jobId);
-        }
-        //delete job application
-        delete(id);
+    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+    public void deleteApplication(@PathVariable Long id) {
+//        Job job = jobService.find(jobId);
+//        //throw exception if job is not found
+//        if (job == null) {
+//            throw new NotFoundException(jobId);
+//        }
+//        //delete job application
+//        delete(id);
     }
 
     @Override
@@ -135,4 +174,32 @@ public class JobApplicationController implements BaseController<JobApplication, 
     public JobApplication update(JobApplication object) {
         return jobApplicationService.save(object);
     }
+    
+    /**
+     * Save job application
+     * @param dto: JobApplicationEntryDto
+     * @param JobApplicationEntryDto
+     **/
+     private JobApplicationEntryDto saveJobApplication(JobApplicationEntryDto dto) throws JobApplicationException, NotFoundException {
+        Long jobId = dto.getJobId();
+        Long userId = dto.getUserId();
+        Job job = jobService.find(jobId);
+        User user = userService.find(userId);
+        //throw exception if job is not found
+        if (job == null) {
+            throw new NotFoundException(jobId);
+        }
+        
+        if (user == null) {
+            throw new NotFoundException(userId);
+        }
+        
+        JobApplication application = jobApplicationService.save(job,user,dto);
+        if(application == null){
+            throw new JobApplicationException("Job application unseccessful");
+        }
+        return JobApplicationDtoMapper.mapEntityIntoDTO(application);
+    }
+
+     
 }
