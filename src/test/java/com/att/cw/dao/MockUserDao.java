@@ -41,7 +41,7 @@ public class MockUserDao {
     private AuthorityService authorityService;
 
     @Resource
-    private UserService userService;
+    protected UserService userService;
 
     @Autowired
     private SessionService sessionService;

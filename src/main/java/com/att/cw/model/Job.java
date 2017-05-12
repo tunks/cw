@@ -71,7 +71,7 @@ public class Job extends Audit<Long> {
     /**
      * Job category
      */
-    @ManyToMany(cascade = {MERGE}, fetch = FetchType.LAZY)
+    @ManyToMany( fetch = FetchType.EAGER)
     @JoinTable(
             name = "JOB_CATEGORY_ITEMS",
             joinColumns = {
@@ -107,10 +107,10 @@ public class Job extends Audit<Long> {
     /**
      * Job questions
      */
-    @OneToMany(cascade = {MERGE, REMOVE}, fetch = FetchType.EAGER, orphanRemoval = true)
+    @OneToMany(fetch = FetchType.EAGER)
     private Set<JobQuestion> questions = new HashSet();
     
-    @OneToMany(cascade = {MERGE, REMOVE}, fetch = FetchType.EAGER, orphanRemoval = true,mappedBy="job")
+    @OneToMany(fetch = FetchType.LAZY,mappedBy="job")
     private Set<JobApplication> applications = new HashSet();
 
     public Job() {

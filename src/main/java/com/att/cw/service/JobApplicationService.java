@@ -194,4 +194,8 @@ public class JobApplicationService implements CrudService<JobApplication, Long> 
     public void delete(JobApplication object) {
         jobApplicationRepository.delete(object);
     }
+
+    public JobApplication findByCandidateAndJob(Job job, JobCandidate candidate) {
+           return jobApplicationRepository.findByCandidateAndJob(job,candidate);
+    }
 }

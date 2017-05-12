@@ -53,7 +53,7 @@ public class JobQuestion extends Component {
     /**
      * Question option
      */
-    @OneToMany(fetch = FetchType.EAGER, cascade = {MERGE, REMOVE}, orphanRemoval = true)
+    @OneToMany(fetch = FetchType.EAGER, orphanRemoval = true)
     private Set<QuestionOption> options = new HashSet();
 
     /**
@@ -68,6 +68,10 @@ public class JobQuestion extends Component {
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
     private Questionaire questionaire;
+    /**
+     * Question Ranking
+     */
+    private int rank;
 
     /**
      * Job question category
@@ -165,5 +169,13 @@ public class JobQuestion extends Component {
 
     public void setQuestionaire(Questionaire questionaire) {
         this.questionaire = questionaire;
+    }
+
+    public int getRank() {
+        return rank;
+    }
+
+    public void setRank(int rank) {
+        this.rank = rank;
     }
 }

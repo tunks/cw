@@ -16,6 +16,7 @@ import com.att.cw.model.JobApplication;
 import com.att.cw.service.JobApplicationService;
 import com.att.cw.service.JobService;
 import com.att.cw.exception.NotFoundException;
+import com.att.cw.model.JobCandidate;
 import com.att.cw.model.User;
 import com.att.cw.service.UserService;
 import javax.annotation.Resource;
@@ -80,34 +81,40 @@ public class JobApplicationController implements BaseController<JobApplication, 
      * @param page
      * @return
      */
-    @RequestMapping(method = RequestMethod.GET)
-    public Page<JobApplicationDto> findApplications(@RequestParam("jobId") Long jobId, Pageable page) {
-//        Job job = jobService.find(jobId);
-//        //throw exception if job is not found
-//        if (job == null) {
-//            throw new NotFoundException(jobId);
-//        }
-        //find job applications
-        //TODO
-        return null;//jobApplicationService.findByJob(job, page);
-    }
+//    @RequestMapping(method = RequestMethod.GET)
+//    public Page<JobApplicationDto> findApplications(@RequestParam("jobId") Long jobId, Pageable page) {
+////        Job job = jobService.find(jobId);
+////        //throw exception if job is not found
+////        if (job == null) {
+////            throw new NotFoundException(jobId);
+////        }
+//        //find job applications
+//        //TODO
+//        return null;//jobApplicationService.findByJob(job, page);
+//    }
 
     /**
      * Find job applications by id
      *
-     * @param id
+     * @param jobId
+     * @param userId
      * @return
      */
-    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public JobApplicationEntryDto findApplication(@PathVariable Long id) {
-//        Job job = jobService.find(jobId);
-//        //throw exception if job is not found
-//        if (job == null) {
-//            throw new NotFoundException(jobId);
-//        }
-        //find job applications
+    @RequestMapping(method = RequestMethod.GET)
+    public JobApplicationEntryDto find(@RequestParam("jobId") Long jobId, @RequestParam(name="userId") Long userId) {
+         Job job = jobService.find(jobId);
+         User user = userService.find(userId);
+         JobCandidate candidate  = user.getCandidate();
+         JobApplication application = null;
+
+        if(candidate != null){
+          application = jobApplicationService.findByCandidateAndJob(job,candidate);
+        }
+        //merge job questions and application question-answers
+        //union of question-answers in job questions
         //TODO
-        return null;//jobApplicationService.findByJob(job, page);
+        //
+        return JobApplicationDtoMapper.mapEntityIntoDTO(application,job);
     }
 
     /**
