@@ -43,41 +43,25 @@ import javax.persistence.UniqueConstraint;
 public class User extends UserAudit {
 
     @Id
-    @Column(name = "ID")
+    @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "user_seq")
     @SequenceGenerator(name = "user_seq", sequenceName = "user_seq", allocationSize = 1)
     private Long id;
 
-    @Column(name = "EMAIL", length = 200, unique = true, nullable = false)
+    @Column(name = "email", length = 200, unique = true, nullable = false)
     @NotNull(message = "Email cannot be null")
     @Size(min = 2, max = 200)
     private String email;
 
-    @Column(name = "PASSWORD", length = 100)
+    @Column(name = "password", length = 100)
     @NotNull(message = "Password cannot be null")
     @Size(min = 5, max = 100)
     private String password;
 
-    @Column(name = "NAME", length = 100)
-    @NotNull(message = "Name cannot be null")
-    @Size(min = 4, max = 100)
-    private String name;
-
-    @Column(name = "DOB")
-    @NotNull(message = "dateOfBirth cannot be null")
-    @Temporal(TemporalType.DATE)
-    @Type(type = "org.jadira.usertype.dateandtime.joda.PersistentLocalDate")
-    private LocalDate dateOfBirth;
-
-    @Enumerated(EnumType.STRING)
-    @Column(name = "GENDER")
-    @NotNull(message = "dateOfBirth cannot be null")
-    private Gender gender;
-
     /**
      * User account will be disabled by default until it is activated
      */
-    @Column(name = "ENABLED", columnDefinition = "bit default 0")
+    @Column(name = "enabled", columnDefinition = "bit default 0")
     @NotNull(message = "Enabled cannot be null")
     private Boolean enabled = false;
 
@@ -89,12 +73,13 @@ public class User extends UserAudit {
     @JoinTable(
             name = "USER_AUTHORITY",
             joinColumns = {
-                @JoinColumn(name = "USER_ID", nullable = false, referencedColumnName = "ID")},
+                @JoinColumn(name = "user_id", nullable = false, referencedColumnName = "id")},
             inverseJoinColumns = {
-                @JoinColumn(name = "AUTHORITY_ID", nullable = false, referencedColumnName = "ID")})
+                @JoinColumn(name = "authority_id", nullable = false, referencedColumnName = "id")})
     private Set<Authority> authorities = new HashSet<Authority>(0);
 
-    @OneToOne(mappedBy = "user")
+    @OneToOne(mappedBy = "user",cascade = CascadeType.ALL)
+    @NotNull(message = "User Profile cannot be null")
     private UserProfile profile;
 
     @Override
@@ -122,13 +107,7 @@ public class User extends UserAudit {
         this.authorities = authorities;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
+    
 
     public String getEmail() {
         return email;
@@ -154,19 +133,7 @@ public class User extends UserAudit {
         this.profile = profile;
     }
 
-    public LocalDate getDateOfBirth() {
-        return dateOfBirth;
-    }
+    
 
-    public void setDateOfBirth(LocalDate dateOfBirth) {
-        this.dateOfBirth = dateOfBirth;
-    }
-
-    public Gender getGender() {
-        return gender;
-    }
-
-    public void setGender(Gender gender) {
-        this.gender = gender;
-    }
+   
 }

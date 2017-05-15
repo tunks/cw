@@ -5,7 +5,13 @@
  */
 package com.att.cw.dto;
 
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Set;
+
+import com.att.cw.model.Authority;
 import com.att.cw.model.User;
+import com.att.cw.model.UserProfile;
 
 /**
  *
@@ -13,8 +19,9 @@ import com.att.cw.model.User;
  */
 public class UserDto {
     private Long id;
-    private String username;
     private String email;
+    private Set<AuthorityDto> authorities;
+    private UserProfile userProfile;
 
     public Long getId() {
         return id;
@@ -22,14 +29,6 @@ public class UserDto {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
     }
 
     public String getEmail() {
@@ -40,7 +39,23 @@ public class UserDto {
         this.email = email;
     }
 
-    public static class UserDtoBuilder {
+    public Set<AuthorityDto> getAuthorities() {
+		return authorities;
+	}
+
+	public void setAuthorities(Set<AuthorityDto> authorities) {
+		this.authorities = authorities;
+	}
+
+	public UserProfile getUserProfile() {
+		return userProfile;
+	}
+
+	public void setUserProfile(UserProfile userProfile) {
+		this.userProfile = userProfile;
+	}
+
+	public static class UserDtoBuilder {
 
         UserDto userDto;
 
@@ -48,7 +63,7 @@ public class UserDto {
             userDto = new UserDto();
         }
 
-        public UserDtoBuilder setUseId(Long userId) {
+        public UserDtoBuilder setUserId(Long userId) {
             userDto.setId(userId);
             return this;
         }
@@ -58,9 +73,21 @@ public class UserDto {
             return this;
         }
 
-        public UserDtoBuilder setUsername(String username) {
-            userDto.setUsername(username);
+        public UserDtoBuilder setUserProfile(UserProfile userProfile) {
+            userDto.setUserProfile(userProfile);
             return this;
+        }
+        public UserDtoBuilder setAuthority(Set<Authority> authorities) {
+        	
+        	Set<AuthorityDto> authorityDtos = new HashSet<AuthorityDto>();
+        	Iterator<Authority> it = authorities.iterator();
+    		while(it.hasNext())
+    		{
+    			Authority auth = it.next();
+    			authorityDtos.add(new AuthorityDto.AuthorityDtoBuilder().setId(auth.getId()).setName(auth.getName()).build());
+    		}
+    		userDto.setAuthorities(authorityDtos);
+    		return this;
         }
 
         public UserDto build() {

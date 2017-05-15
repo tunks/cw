@@ -5,6 +5,7 @@
  */
 package com.att.cw.controller.open;
 
+import com.att.cw.dto.DepartmentRegistrationDto;
 import com.att.cw.dto.ErrorResponse;
 import com.att.cw.dto.UserRegistrationDto;
 import com.att.cw.exception.JwtTokenMalformedException;
@@ -43,10 +44,19 @@ public class RegistrationController {
      * @param user
      * @return
      */
-    @RequestMapping(value = "/new", method = RequestMethod.POST)
+    @RequestMapping(value = "/new/user", method = RequestMethod.POST)
     public ResponseEntity<String> registerUser(@RequestBody @Valid final UserRegistrationDto user) {
+    	System.out.println("Registration called");
         logger.info("DOB is  :" + user.getDateOfBirth().toString());
         regService.registerUser(user);
+        return new ResponseEntity<String>("User successfully registered. Please check your email to activate your account!", HttpStatus.CREATED);
+
+    }
+    
+    @RequestMapping(value = "/new/department", method = RequestMethod.POST)
+    public ResponseEntity<String> registerDepartment(@RequestBody @Valid final DepartmentRegistrationDto department) {
+    	System.out.println("Department Registration called");
+        regService.registerDepartment(department);
         return new ResponseEntity<String>("User successfully registered. Please check your email to activate your account!", HttpStatus.CREATED);
 
     }

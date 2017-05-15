@@ -1,5 +1,6 @@
 package com.att.cw.service;
 
+import org.hibernate.Hibernate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -64,17 +65,23 @@ public class SessionService {
         if (user != null) {
             String token = jwtUtil.generateToken(user);
             save(new UserSession(userLogin.getName(), token));
-            UserDto userDto = new UserDto.UserDtoBuilder()
+           /* UserDto userDto = new UserDto.UserDtoBuilder()
                     .setUseId(user.getId())
                     .setUserEmail(user.getEmail())
-                    .setUsername(user.getName())
+                    .setUsername(user.getProfile.getName())
+                    .build();*/
+            Hibernate.initialize(user.getAuthorities());
+            UserDto userDto = new UserDto.UserDtoBuilder()
+                    .setUserId(user.getId())
+                    .setUserEmail(user.getEmail())
+                    .setAuthority(user.getAuthorities())
                     .build();
             Map result = new HashMap();
             result.put("user", userDto);
             result.put("token", token);
             return result;
         } else {
-            logger.info("User is Null");
+            logger.info("User is not existing");
             return null;
         }
     }

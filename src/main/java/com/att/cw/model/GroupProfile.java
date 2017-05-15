@@ -16,7 +16,7 @@ import javax.validation.constraints.NotNull;
  */
 @Entity
 @Table(name = "GROUP_PROFILE")
-public class GroupProfile extends Profile {
+public class GroupProfile extends UserProfile {
 
     @Column(nullable = false)
     @NotNull

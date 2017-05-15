@@ -3,6 +3,11 @@ package com.att.cw.model;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import com.att.cw.service.SessionService;
+
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -10,14 +15,16 @@ import java.util.Set;
 @Entity
 @Table(name = "AUTHORITY")
 public class Authority {
+	
+	private static final Logger logger = LoggerFactory.getLogger(Authority.class);
 
     @Id
-    @Column(name = "ID")
+    @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "authority_seq")
     @SequenceGenerator(name = "authority_seq", sequenceName = "authority_seq", allocationSize = 1)
     private Long id;
 
-    @Column(name = "NAME", length = 50, unique = true)
+    @Column(name = "name", length = 50, unique = true)
     @NotNull
     @Enumerated(EnumType.STRING)
     private AuthorityName name;
@@ -51,6 +58,7 @@ public class Authority {
     }
 
     public Set<User> getUsers() {
+    	logger.info("Authority get user called");
         return users;
     }
 

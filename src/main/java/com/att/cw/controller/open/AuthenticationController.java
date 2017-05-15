@@ -51,6 +51,7 @@ public class AuthenticationController {
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public ResponseEntity login(@RequestBody final UserLogin login) throws ServletException {
         Map response = sessionService.login(login);
+        logger.info("login called");
         if (response == null) {
             return new ResponseEntity(Collections.singletonMap("message", "Invalid Authentication"), HttpStatus.UNAUTHORIZED);
         } else {

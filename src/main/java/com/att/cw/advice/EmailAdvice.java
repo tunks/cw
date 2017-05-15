@@ -81,7 +81,7 @@ public class EmailAdvice {
      * @param retVal
      */
     @AfterReturning(
-            pointcut = "execution(* com.att.cw.service.RegistrationService.registerUser(..))",
+            pointcut = "execution(* com.att.cw.service.RegistrationService.registerUser(..)) || execution(* com.att.cw.service.RegistrationService.registerDepartment(..))",
             returning = "retVal")
     public void userRegistered(JoinPoint joinPoint, Object retVal) {
         User user = (User) retVal;
