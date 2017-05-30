@@ -14,6 +14,8 @@ public class JobApplicationEntry {
     private Long id;
     private Long jobId;
     private Long userId;
+    private String title;
+    private boolean submitted = Boolean.FALSE;
 
     public Long getId() {
         return id;
@@ -39,6 +41,26 @@ public class JobApplicationEntry {
         this.userId = userId;
     }
 
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public boolean getSubmitted() {
+        return submitted;
+    }
+
+    public void setSubmitted(boolean submitted) {
+        this.submitted = submitted;
+    }
+
+    public boolean isSubmitted() {
+        return submitted;
+    }
+    
     @Override
     public String toString() {
         return "{" + "id=" + id + ", jobId=" + jobId + ", userId=" + userId + '}';

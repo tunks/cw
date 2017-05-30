@@ -13,11 +13,11 @@ import org.springframework.context.event.EventListener;
 import org.springframework.scheduling.annotation.Async;
 
 /**
- * Solr Event handler - concrete implementation
+ * Solr SolrEvent handler - concrete implementation
  *
  * @author ebrimatunkara
  */
-public class SolrEventHandler implements EventHandler {
+public class SolrEventHandler implements EventHandler<SolrEvent> {
 
     @Autowired
     private SearchableDocumentService searchableDocumentService;
@@ -28,10 +28,10 @@ public class SolrEventHandler implements EventHandler {
     @EventListener
     @Async
     @Override
-    public void handle(Event event) {
+    public void handle(SolrEvent event) {
         Object obj = event.getData();
         //TODO factory class
-        ObjectToSolrDocumentConverter converter = new ObjectToSolrDocumentConverter(event.getExcludedFields());
+        ObjectToSolrDocumentConverter converter = new ObjectToSolrDocumentConverter(event.getExcludedFields(),event.getEntityMapper());
         SearchableDocument doc = converter.convert(obj);
         searchableDocumentService.save(doc);
         System.out.println("Handle solr event ");

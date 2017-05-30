@@ -35,4 +35,7 @@
             </bean>     
         </constructor-arg>
     </bean>
+    
+    <bean id="messagePublisher"  class="com.att.cw.event.MessagePublisher"/>
+    <bean id="messageHandler"  class="com.att.cw.event.MailMessageHandler"/>
 </beans>

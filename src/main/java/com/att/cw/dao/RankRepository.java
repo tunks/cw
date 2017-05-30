@@ -5,15 +5,13 @@
  */
 package com.att.cw.dao;
 
-import com.att.cw.model.JobQuestion;
-import java.util.List;
+import com.att.cw.model.Rank;
 import org.springframework.data.repository.PagingAndSortingRepository;
 
 /**
- * JobQuestion Repository
  *
  * @author ebrimatunkara
  */
-public interface JobQuestionRepository extends PagingAndSortingRepository<JobQuestion, Long> {
-       public List<JobQuestion> findByAssociatedId(Long associatedId);
+public interface RankRepository extends PagingAndSortingRepository<Rank, Long>{
+       public Long countByRankType(String rankType);
 }

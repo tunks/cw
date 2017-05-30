@@ -29,12 +29,8 @@ public class FileDocument extends Audit<Long> {
      * document description
      */
     private String description;
-    /**
-     * resource type
-     *
-     */
-    @Column(name = "resource_type")
-    private ResourceType resourceType;
+    
+    private String name;
 
     /**
      * File content in bytes
@@ -49,7 +45,7 @@ public class FileDocument extends Audit<Long> {
     /*
      * File size
      */
-    private Integer size;
+    private Long size;
 
     @Override
     public Long getId() {
@@ -64,12 +60,12 @@ public class FileDocument extends Audit<Long> {
         this.description = description;
     }
 
-    public ResourceType getResourceType() {
-        return resourceType;
+    public String getName() {
+        return name;
     }
 
-    public void setResourceType(ResourceType resourceType) {
-        this.resourceType = resourceType;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public byte[] getContent() {
@@ -88,11 +84,11 @@ public class FileDocument extends Audit<Long> {
         this.contentType = contentType;
     }
 
-    public Integer getSize() {
+    public Long getSize() {
         return size;
     }
 
-    public void setSize(Integer size) {
+    public void setSize(Long size) {
         this.size = size;
     }
 

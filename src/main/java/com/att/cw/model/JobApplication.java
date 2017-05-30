@@ -4,7 +4,6 @@ import com.att.cw.listener.JobApplicationEntityListener;
 import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import static javax.persistence.CascadeType.ALL;
 import static javax.persistence.CascadeType.MERGE;
 import static javax.persistence.CascadeType.REMOVE;
@@ -21,7 +20,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
 
 @Entity
 @EntityListeners(JobApplicationEntityListener.class)
@@ -37,7 +35,7 @@ public class JobApplication extends Audit<Long> {
      * JobApplication candidate
      */
     //@NotNull
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "candidate_id",referencedColumnName = "id")
     private JobCandidate candidate;
     /**
@@ -54,7 +52,7 @@ public class JobApplication extends Audit<Long> {
     /**
      * Job question answers
      */
-    @OneToMany(cascade={MERGE,REMOVE}, orphanRemoval=true,mappedBy="application")
+    @OneToMany(cascade=ALL,fetch = FetchType.EAGER, orphanRemoval=true, mappedBy="application")
     private Set<JobQuestionAnswer> questionAnswers = new HashSet();
     /**
      * Determine if application is submitted or not
@@ -120,7 +118,7 @@ public class JobApplication extends Audit<Long> {
 
     @Override
     public String toString() {
-        return "JobApplication{" + "id=" + id + ", candidate=" + candidate + ", workflow=" + workflow + ", job=" + job + ", questionAnswers=" + questionAnswers + ", submitted=" + submitted + '}';
+        return "JobApplication{}";// + "id=" + id + ", candidate=" + candidate + ", workflow=" + workflow + ", job=" + job + ", questionAnswers=" + questionAnswers + ", submitted=" + submitted + '}';
     }
 
 }

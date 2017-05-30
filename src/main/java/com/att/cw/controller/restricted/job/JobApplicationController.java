@@ -6,7 +6,6 @@
 package com.att.cw.controller.restricted.job;
 
 import com.att.cw.controller.BaseController;
-import com.att.cw.dto.JobApplicationDto;
 import com.att.cw.dto.JobApplicationEntryDto;
 import com.att.cw.dto.JobQuestionListDto;
 import com.att.cw.dto.mappers.JobApplicationDtoMapper;
@@ -19,10 +18,12 @@ import com.att.cw.exception.NotFoundException;
 import com.att.cw.model.JobCandidate;
 import com.att.cw.model.User;
 import com.att.cw.service.UserService;
-import javax.annotation.Resource;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -51,6 +52,7 @@ public class JobApplicationController implements BaseController<JobApplication, 
 
     @Autowired
     private UserService userService;
+
     /**
      * Post job applications
      *
@@ -58,11 +60,14 @@ public class JobApplicationController implements BaseController<JobApplication, 
      * @return
      */
     @RequestMapping(method = RequestMethod.POST)
-    public JobApplicationEntryDto saveApplication(@RequestBody JobApplicationEntryDto dto) {
-        return saveJobApplication(dto);
+    public ResponseEntity<?> saveApplication(@RequestBody JobApplicationEntryDto dto) {
+        JobApplicationEntryDto result = saveJobApplication(dto);
+        Map<String, Object> body = new HashMap();
+        body.put("content", result);
+        body.put("msg", "Job application successfully saved ");
+        return new ResponseEntity(body, HttpStatus.OK);
     }
 
-   
     /**
      * Post job applications
      *
@@ -71,7 +76,7 @@ public class JobApplicationController implements BaseController<JobApplication, 
      */
     @RequestMapping(method = RequestMethod.PUT)
     public JobApplicationEntryDto updateApplication(@RequestBody JobApplicationEntryDto dto) {
-       return saveJobApplication(dto);
+        return saveJobApplication(dto);
     }
 
     /**
@@ -92,7 +97,6 @@ public class JobApplicationController implements BaseController<JobApplication, 
 //        //TODO
 //        return null;//jobApplicationService.findByJob(job, page);
 //    }
-
     /**
      * Find job applications by id
      *
@@ -101,20 +105,16 @@ public class JobApplicationController implements BaseController<JobApplication, 
      * @return
      */
     @RequestMapping(method = RequestMethod.GET)
-    public JobApplicationEntryDto find(@RequestParam("jobId") Long jobId, @RequestParam(name="userId") Long userId) {
-         Job job = jobService.find(jobId);
-         User user = userService.find(userId);
-         JobCandidate candidate  = user.getCandidate();
-         JobApplication application = null;
+    public JobApplicationEntryDto find(@RequestParam("jobId") Long jobId, @RequestParam(name = "userId", required = false) Long userId) {
+        Job job = jobService.find(jobId);
+        User user = (userId != null) ? userService.find(userId) : null;
 
-        if(candidate != null){
-          application = jobApplicationService.findByCandidateAndJob(job,candidate);
+        if (user != null) {
+            JobCandidate candidate = user.getCandidate();
+            JobApplication application = jobApplicationService.findByCandidateAndJob(candidate, job);
+            return JobApplicationDtoMapper.mapEntityIntoDTO(application, job);
         }
-        //merge job questions and application question-answers
-        //union of question-answers in job questions
-        //TODO
-        //
-        return JobApplicationDtoMapper.mapEntityIntoDTO(application,job);
+        return JobApplicationDtoMapper.mapEntityIntoDTO(null, job);
     }
 
     /**
@@ -174,13 +174,15 @@ public class JobApplicationController implements BaseController<JobApplication, 
     public JobApplication update(JobApplication object) {
         return jobApplicationService.save(object);
     }
-    
+
     /**
      * Save job application
+     *
      * @param dto: JobApplicationEntryDto
      * @param JobApplicationEntryDto
-     **/
-     private JobApplicationEntryDto saveJobApplication(JobApplicationEntryDto dto) throws JobApplicationException, NotFoundException {
+     *
+     */
+    private JobApplicationEntryDto saveJobApplication(JobApplicationEntryDto dto) throws JobApplicationException, NotFoundException {
         Long jobId = dto.getJobId();
         Long userId = dto.getUserId();
         Job job = jobService.find(jobId);
@@ -189,17 +191,16 @@ public class JobApplicationController implements BaseController<JobApplication, 
         if (job == null) {
             throw new NotFoundException(jobId);
         }
-        
+
         if (user == null) {
             throw new NotFoundException(userId);
         }
-        
-        JobApplication application = jobApplicationService.save(job,user,dto);
-        if(application == null){
+
+        JobApplication application = jobApplicationService.save(job, user, dto);
+        if (application == null) {
             throw new JobApplicationException("Job application unseccessful");
         }
         return JobApplicationDtoMapper.mapEntityIntoDTO(application);
     }
 
-     
 }

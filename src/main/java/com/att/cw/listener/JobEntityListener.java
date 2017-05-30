@@ -5,6 +5,8 @@
  */
 package com.att.cw.listener;
 
+import com.att.cw.dto.mappers.BaseEntityMapper;
+import com.att.cw.dto.mappers.JobDtoMapper;
 import com.att.cw.model.Job;
 import com.att.cw.model.JobStatus;
 import com.att.cw.model.JobVacancy;
@@ -14,7 +16,7 @@ import javax.persistence.PostRemove;
 import javax.persistence.PostUpdate;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
-
+import javax.persistence.PreRemove;
 /**
  * Job entity listener
  *
@@ -75,6 +77,11 @@ public class JobEntityListener extends BaseEntityListener {
 
     @Override
     protected String[] getExcludedFields() {
-        return new String[]{"questions", "job", "jobs"};
+        return new String[]{};//"id", "title", "description","skills",""};
+    }
+
+    @Override
+    public BaseEntityMapper getEntityMapper() {
+       return new JobDtoMapper();
     }
 }

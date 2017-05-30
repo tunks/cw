@@ -6,10 +6,13 @@
 package com.att.cw.support;
 
 import com.att.cw.dto.JobDto;
+import com.att.cw.model.Job;
 import com.jayway.jsonpath.DocumentContext;
 import com.jayway.jsonpath.JsonPath;
 import java.lang.reflect.Field;
+import java.util.Collections;
 import java.util.Map;
+import org.apache.commons.lang3.ArrayUtils;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -100,17 +103,14 @@ public class DataUtilsTest {
 //    /**
 //     * Test of getClassFields method, of class DataUtils.
 //     */
-//    @Test
-//    public void testGetClassFields_Class_StringArr() {
-//        System.out.println("getClassFields");
-//        Class classType = null;
-//        String[] excludeFields = null;
-//        Map<String, Field> expResult = null;
-//        Map<String, Field> result = DataUtils.getClassFields(classType, excludeFields);
-//        assertEquals(expResult, result);
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
-//    }
+    @Test
+    public void testGetClassFields_Class_StringArr() {
+        System.out.println("getClassFields");
+        Class classType = Job.class;
+        String[] excludeFields = ArrayUtils.EMPTY_STRING_ARRAY;
+        Map<String, Field> result = DataUtils.getClassFields(classType, excludeFields);
+        assertTrue(!result.isEmpty());
+    }
 //
 //    /**
 //     * Test of getClassFields method, of class DataUtils.

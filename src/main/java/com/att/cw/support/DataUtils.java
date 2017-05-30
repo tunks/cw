@@ -5,7 +5,9 @@
  */
 package com.att.cw.support;
 
+import com.att.cw.dto.mappers.BaseEntityMapper;
 import com.att.cw.model.Searchable;
+import com.att.cw.support.solr.SearchField;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.base.Predicates;
@@ -17,15 +19,19 @@ import java.sql.Types;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
+import java.util.Base64;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 import java.util.function.Function;
+import java.util.logging.Level;
 
 import java.util.stream.Collectors;
 import org.reflections.ReflectionUtils;
+import static org.reflections.ReflectionUtils.withAnnotation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.core.annotation.AnnotationUtils;
 import org.springframework.util.StringUtils;
 
 /**
@@ -65,24 +71,26 @@ public class DataUtils {
     }
 
     public static <T> T mapToObject(Map map, Class<T> klazzType) throws JsonProcessingException, IOException {
-        ObjectMapper mapper = new ObjectMapper();
         String json = mapper.writeValueAsString(map);
         return mapper.readValue(json, klazzType);
     }
 
-    public static Map<String, Field> getClassFields(Class<?> classType, String... excludeFields) {
-        return getClassFields(classType, true, excludeFields);
+    public static Map<String, Field> getClassFields(Class<?> classType, String... filterFields) {
+        return getClassFields(classType, true, filterFields);
     }
 
-    public static Map<String, Field> getClassFields(Class<?> classType, boolean all, String... excludeFields) {
+    public static Map<String, Field> getClassFields(Class<?> classType, boolean all, String... filterFields) {
+      // SearchField annotation = AnnotationUtils.findAnnotation(classType, SearchField.class);//classType.getAnnotation(SearchField.class);
+
         Set<Field> fields;
         if (all) {
-            fields = ReflectionUtils.getAllFields(classType, Predicates.notNull());
+              //ReflectionUtils.withAnnotations(annotations)
+            fields = ReflectionUtils.getAllFields(classType, withAnnotation(SearchField.class));//Predicates.notNull());
         } else {
-            fields = ReflectionUtils.getFields(classType, Predicates.notNull());
+            fields = ReflectionUtils.getFields(classType, withAnnotation(SearchField.class));
         }
         return fields.stream().filter(f -> {
-            Set<String> items = new HashSet(Arrays.asList(excludeFields));
+            Set<String> items = new HashSet(Arrays.asList(filterFields));
             return !items.contains(f.getName());
         })
                 .collect(Collectors.toMap(i -> i.getName(), Function.identity(), (x1, x2) -> x2));
@@ -108,5 +116,44 @@ public class DataUtils {
 
     public static String objectToJson(Object obj) throws JsonProcessingException {
         return mapper.writeValueAsString(obj);
+    }
+
+    public static String mapEntity(BaseEntityMapper entityMapper, Object obj) {
+        if(entityMapper != null){
+            try {
+                Object data = entityMapper.map(obj);
+                return objectToJson(data);
+            } catch (JsonProcessingException ex) {
+                java.util.logging.Logger.getLogger(DataUtils.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return null;
+    }
+    
+     public static String encodeEntityJson(BaseEntityMapper entityMapper, Object obj) {
+        if(entityMapper != null){
+            try {
+                Object data = entityMapper.map(obj);
+                String json = objectToJson(data);
+                return Base64.getEncoder().encodeToString(stringToByte(json));
+            } catch (JsonProcessingException ex) {
+                java.util.logging.Logger.getLogger(DataUtils.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return null;
+    }
+     
+    public static String decodeEntityJson(String str) {
+        try{
+                byte[] value= Base64.getDecoder().decode(str);
+                return bytesToString(value);
+            } catch (Exception ex) {
+                java.util.logging.Logger.getLogger(DataUtils.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        return null;
+    }
+
+    public static Map jsonToMap(String json) throws IOException {
+         return mapper.readValue(json,Map.class);
     }
 }

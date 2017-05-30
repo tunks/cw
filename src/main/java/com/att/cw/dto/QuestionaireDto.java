@@ -16,7 +16,8 @@ import java.util.Set;
 public class QuestionaireDto extends JobComponentDto {
 
     private Set<JobQuestionDto> questions = new HashSet();
-
+    private int rank = 0;
+    
     public QuestionaireDto() {
     }
 
@@ -30,5 +31,13 @@ public class QuestionaireDto extends JobComponentDto {
 
     public void setQuestions(Set<JobQuestionDto> questions) {
         this.questions = questions;
+    }
+
+    public int getRank() {
+        return rank;
+    }
+
+    public void setRank(int rank) {
+        this.rank = rank;
     }
 }

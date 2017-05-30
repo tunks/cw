@@ -9,8 +9,10 @@ import com.att.cw.dto.mappers.JobQuestionDtoMapper;
 import com.att.cw.service.JobService;
 import com.att.cw.exception.JobException;
 import com.att.cw.model.Job;
+import java.util.Collections;
 import java.util.List;
 import static java.util.stream.Collectors.toList;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -33,6 +35,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/restricted/jobs")
 public class JobController implements BaseController<JobDto, Long> {
+    private static final org.slf4j.Logger logger = LoggerFactory.getLogger(JobController.class);
 
     /**
      * Job service instance
@@ -65,9 +68,22 @@ public class JobController implements BaseController<JobDto, Long> {
         return JobDtoMapper.mapEntityIntoDTO(jobService.find(id));
     }
 
-    @Override
-    public void deleteAll() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    /**
+     * Delete multiple jobs by list of ids
+     * @param ids
+     * @param forceful
+     * @return 
+     */
+    @RequestMapping( method = RequestMethod.DELETE)
+    public ResponseEntity<?> deleteAll(@RequestParam("ids") List<Long> ids, @RequestParam(value ="forceful", required=false, defaultValue="true") boolean forceful) {
+        try{ 
+            jobService.delete(ids,forceful);       
+            return new ResponseEntity(Collections.singletonMap("msg", "Job(s) successfully deleted"), HttpStatus.OK);
+        }
+        catch(Exception ex){
+            logger.error(ex.getMessage());
+            throw new JobException("Error deleting job ids "+ids);
+        }
     }
 
     /**
@@ -118,5 +134,10 @@ public class JobController implements BaseController<JobDto, Long> {
     public ResponseEntity<ErrorResponse> exceptionHandler(JobException ex) {
         ErrorResponse error = new ErrorResponse(HttpStatus.BAD_REQUEST.value(), "Job action", ex.getMessage());
         return new ResponseEntity(error, HttpStatus.BAD_REQUEST);
+    }
+
+    @Override
+    public void deleteAll() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

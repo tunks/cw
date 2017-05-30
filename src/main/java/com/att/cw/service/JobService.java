@@ -3,10 +3,14 @@ package com.att.cw.service;
 import com.att.cw.dao.JobRepository;
 import com.att.cw.dto.JobDto;
 import com.att.cw.model.Job;
+import com.att.cw.model.JobApplication;
 import com.att.cw.model.JobQuestion;
 import com.att.cw.support.DataUtils;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Set;
+import static java.util.stream.Collectors.toList;
 import static java.util.stream.Collectors.toSet;
 import javax.annotation.Resource;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,6 +42,8 @@ public class JobService implements CrudService<Job, Long> {
     @Autowired
     private JobQuestionService jobQuestionService;
 
+    @Autowired
+    private JobApplicationService jobApplicationService;
     /**
      * Save Job entity object
      *
@@ -96,6 +102,18 @@ public class JobService implements CrudService<Job, Long> {
         return (List<Job>) jobRepository.findAll();
     }
     
+    
+    /**
+     * Find jobs by id
+     *
+     * @param ids
+     * @return
+     *
+     */
+    public List<Job> findAll(List<Long> ids) {
+        return (List<Job>) jobRepository.findAll(ids);
+    }
+    
     public Job findByQuestionId(Long id) {
         return jobRepository.findByQuestionId(id);
     }
@@ -150,6 +168,21 @@ public class JobService implements CrudService<Job, Long> {
     @Override
     public void delete(Job object) {
         jobRepository.delete(object);
+    }
+
+    public void delete(List<Long> ids, boolean forceful) {
+        List<Job> jobs = findAll(ids);
+        //TODO -- some checks before deletings
+        if(forceful){
+            List<JobApplication> apps  = new ArrayList();
+            jobs.stream().forEach((job) -> {
+                apps.addAll(job.getApplications());
+                job.setApplications(Collections.EMPTY_SET);
+            });
+            
+            jobApplicationService.deleteAll(apps);
+         }
+         jobRepository.delete(jobs);       
     }
     
 }

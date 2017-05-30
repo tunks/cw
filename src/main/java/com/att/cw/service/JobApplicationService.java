@@ -9,15 +9,23 @@ import com.att.cw.dao.JobApplicationRepository;
 import com.att.cw.dto.JobApplicationEntryDto;
 import com.att.cw.dto.JobApplicationEntryDto.AnswerDto;
 import com.att.cw.dto.JobApplicationEntryDto.AnswerEntryDto;
+import com.att.cw.dto.JobApplicationEntryDto.FileDto;
+import com.att.cw.dto.JobApplicationEntryDto.QuestionAnswerDto;
+import com.att.cw.listener.JobApplicationEntityListener;
+import com.att.cw.model.FileDocument;
 import com.att.cw.model.Job;
 import com.att.cw.model.JobAnswerEntry;
 import com.att.cw.model.JobApplication;
 import com.att.cw.model.JobCandidate;
 import com.att.cw.model.JobQuestion;
 import com.att.cw.model.JobQuestionAnswer;
+import com.att.cw.model.QuestionOption;
 import com.att.cw.model.User;
-import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+import java.util.function.Function;
+import static java.util.stream.Collectors.toSet;
 import javax.annotation.Resource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -30,7 +38,7 @@ import org.springframework.stereotype.Service;
  * @author ebrimatunkara
  */
 @Service("jobApplicationService")
-public class JobApplicationService implements CrudService<JobApplication, Long> {
+public class JobApplicationService extends JobApplicationEntityListener implements CrudService<JobApplication, Long>  {
     
     @Resource
     private JobApplicationRepository jobApplicationRepository;
@@ -42,11 +50,16 @@ public class JobApplicationService implements CrudService<JobApplication, Long> 
     private JobQuestionAnswerService jobQuestionAnswerService;
     
     @Autowired
-    private JobAnswerOptionService jobAnswerOptionService;
+    private JobAnswerEntryService jobAnswerEntryService;
     
     @Autowired
     private JobCandidateService jobCandidateService;
-
+   
+    @Autowired
+    private JobQuestionOptionService jobQuestionOptionService;
+    
+    @Autowired
+    private FileDocumentService documentService;
     /**
      * Save job object
      *
@@ -144,50 +157,62 @@ public class JobApplicationService implements CrudService<JobApplication, Long> 
     
     public JobApplication save(Job job, User user, JobApplicationEntryDto application) {
         Long id = application.getId();       
-        //TODO -- catch null exception
         JobApplication appObject = (id != null) ? find(id) : new JobApplication();
-        //set job candidate
-         JobCandidate candidate = appObject.getCandidate();
-         candidate = (candidate ==null)?jobCandidateService.findByUser(user): candidate;
-        
-        if(candidate== null){
-            candidate = new JobCandidate(user);
-            jobCandidateService.save(candidate);
+        //set job candidate   
+        if( appObject.isNew()){ 
+            JobCandidate candidate =jobCandidateService.findByUser(user);   
+            appObject.setJob(job);
+            appObject.setCandidate((candidate != null)? candidate: jobCandidateService.save(new JobCandidate(user)));
         }
         
-        List<JobQuestionAnswer> questionAnswers = new ArrayList();
-        application.getQuestionAnswers().stream().forEach(e -> {
+        Set<JobQuestionAnswer> answers = new HashSet();
+        for( QuestionAnswerDto e: application.getQuestionAnswers()){
             Long qId = e.getQuestion().getId();
-            JobQuestion question = jobQuestionService.find(qId);
-            AnswerDto ans = e.getAnswer();
-            if (ans != null) {
-                Long answerId = ans.getId();
-                JobQuestionAnswer answer = (answerId != null) ? jobQuestionAnswerService.find(answerId) : new JobQuestionAnswer();
-                if (answer.isNew()) {
-                    answer.setQuestion(question);
-                }
-                AnswerEntryDto entryDto = ans.getEntry();
-                if (entryDto != null) {
-                    JobAnswerEntry entry = new  JobAnswerEntry();
-                    entry.setId(entryDto.getId());
-                    entry.setValue(entryDto.getValue());
-                    JobAnswerEntry entryObj = jobAnswerOptionService.save(entry);
-                    answer.setAnswerEntry(entryObj);
-                }
-                
-                questionAnswers.add(jobQuestionAnswerService.save(answer));
-            }
-        });
-        
-        appObject.getQuestionAnswers().addAll(questionAnswers);
-        appObject.setJob(job);
-        appObject.setCandidate(candidate);
-        //candidate.getApplications().add(appObject);
-        save(appObject);
-        //set to candidate
-        //candidate.getApplications().add(appObject);
-        //jobCandidateService.save(candidate);
-        return appObject;
+           JobQuestion question = jobQuestionService.find(qId);
+           AnswerDto ans = e.getAnswer();
+           JobQuestionAnswer answer = null;
+           if (ans != null) {
+               Long answerId = ans.getId();
+               answer = (answerId != null) ? jobQuestionAnswerService.find(answerId) : new JobQuestionAnswer();
+               if (answer.isNew()) {
+                   answer.setQuestion(question);
+               }
+               //answer entry
+               AnswerEntryDto entryDto = ans.getEntry();
+               if (entryDto != null) {
+                   Long entryId = entryDto.getId();
+                   JobAnswerEntry entry = (entryId !=null)? jobAnswerEntryService.find(entryId): new  JobAnswerEntry();
+                   entry.setValue(entryDto.getValue());
+                   entry.setQuestionOptions(entryDto.getOptions()
+                           .stream()
+                           .map(x->{
+                               return jobQuestionOptionService.find(x.getId());
+                           })
+                           .collect(toSet()));
+                   
+                   FileDto fileDto = entryDto.getFile();
+                   if(fileDto != null){
+                      FileDocument document = documentService.find(fileDto.getId());
+                      entry.setDocument(document);
+                   }
+                   else{
+                       entry.setDocument(null);
+                   }
+                   answer.setAnswerEntry(entry);//jobAnswerEntryService.save(entry));//
+                   answers.add(answer);//jobQuestionAnswerService.save(answer));
+               }
+           }
+         }
+
+        appObject.setQuestionAnswers(answers);
+        appObject.setSubmitted(application.getSubmitted());
+       
+        JobApplication result = save(appObject);
+        //when application is submitted , send email
+        if(application.getSubmitted()){
+          this.postUpdateMessage(result);
+        }
+        return result;
     }
     
     @Override
@@ -195,7 +220,11 @@ public class JobApplicationService implements CrudService<JobApplication, Long> 
         jobApplicationRepository.delete(object);
     }
 
-    public JobApplication findByCandidateAndJob(Job job, JobCandidate candidate) {
-           return jobApplicationRepository.findByCandidateAndJob(job,candidate);
+    public JobApplication findByCandidateAndJob(JobCandidate candidate, Job job) {
+        return jobApplicationRepository.findByCandidateAndJob(candidate,job);
+    }
+
+    void deleteAll(List<JobApplication> apps) {
+        jobApplicationRepository.delete(apps);
     }
 }

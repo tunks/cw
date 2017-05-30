@@ -36,6 +36,9 @@ public class SearchableDocument extends SearchableContent {
      */
     @Field(TYPE_FIELD)
     private String type;
+    
+    @Field(JSON_FIELD)
+    private String json;
     /**
      * dynamic string|text field contents
      *
@@ -112,6 +115,14 @@ public class SearchableDocument extends SearchableContent {
         dateContent.put(field, object);
     }
 
+    public String getJson() {
+        return json;
+    }
+
+    public void setJson(String json) {
+        this.json = json;
+    }
+
     @Override
     public String toString() {
         return "SearchableDocument{" + "id=" + id + ", type=" + type + ", textContent=" + textContent + ", dateContent=" + dateContent + '}';
@@ -142,6 +153,13 @@ public class SearchableDocument extends SearchableContent {
             }
             return this;
         }
+        
+         public SearchableDocumentBuilder setAsJson(String json) {
+            this.document.setJson(json);
+            return this;
+        }
+        
+        
 
         public SearchableDocument build() {
             content.entrySet().stream().forEach(e -> {

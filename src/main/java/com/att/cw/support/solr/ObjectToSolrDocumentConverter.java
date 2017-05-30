@@ -5,9 +5,12 @@
  */
 package com.att.cw.support.solr;
 
+import com.att.cw.dto.mappers.BaseEntityMapper;
+import com.att.cw.event.SolrEvent;
 import com.att.cw.model.SearchableDocument;
 import com.att.cw.model.SearchableDocument.SearchableDocumentBuilder;
 import com.att.cw.support.DataUtils;
+import java.io.Serializable;
 import java.lang.reflect.Field;
 import java.nio.charset.StandardCharsets;
 import java.sql.Timestamp;
@@ -20,6 +23,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import org.apache.commons.lang.SerializationUtils;
 import org.apache.commons.lang3.ArrayUtils;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.convert.converter.Converter;
@@ -34,20 +38,25 @@ public final class ObjectToSolrDocumentConverter implements Converter<Object, Se
 
     private static final org.slf4j.Logger logger = LoggerFactory.getLogger(SolrSearchQueryFactory.class);
 
-    private final String[] DEFAULT_FIELDS = {"serialVersionUID", "version"};
-    private final String[] defaultExcludedFields = ArrayUtils.add(DEFAULT_FIELDS, SearchableDocument.ID_FIELD);
-    private String[] excludedFields;
+    private final String[] DEFAULT_FIELDS = {SearchableDocument.ID_FIELD};
+    private String[] filterFields;
+    private BaseEntityMapper entityMapper;
 
     public ObjectToSolrDocumentConverter() {
         this(ArrayUtils.EMPTY_STRING_ARRAY);
     }
 
     public ObjectToSolrDocumentConverter(String[] excludedFields) {
-        initExcludedFields(excludedFields);
+        initFilteredFields(excludedFields);
+    }
+    
+     public ObjectToSolrDocumentConverter(String[] excludedFields, BaseEntityMapper entityMapper) {
+        initFilteredFields(excludedFields);
+        this.entityMapper = entityMapper;
     }
 
-    private void initExcludedFields(String[] fields) {
-        this.excludedFields = ArrayUtils.addAll(defaultExcludedFields, fields);
+    private void initFilteredFields(String[] fields) {
+        this.filterFields = ArrayUtils.addAll(DEFAULT_FIELDS, fields);
     }
 
     /**
@@ -65,7 +74,8 @@ public final class ObjectToSolrDocumentConverter implements Converter<Object, Se
             doc = new SearchableDocumentBuilder()
                     .setId(id)
                     .setDocType(obj.getClass().getName())
-                    .setContent(mapObjectFieldValue(null, obj, excludedFields))
+                    .setContent(mapObjectFieldValue(null, obj, filterFields))
+                    .setAsJson(DataUtils.encodeEntityJson(entityMapper, obj))
                     .build();
         } catch (IllegalArgumentException | IllegalAccessException ex) {
             Logger.getLogger(ObjectToSolrDocumentConverter.class.getName()).log(Level.SEVERE, null, ex);
@@ -89,9 +99,9 @@ public final class ObjectToSolrDocumentConverter implements Converter<Object, Se
                 //if null
                 if (value != null) {
                     //insert primitive  data type
-                    if (value instanceof String || value instanceof Enum || value instanceof Timestamp
-                            || value instanceof Long || f.getValue().getType().isPrimitive() || value instanceof byte[]
-                            || value instanceof Date) {
+                    if (value instanceof String  || value instanceof Enum || value instanceof Timestamp || 
+                        value instanceof Boolean || value instanceof Long || f.getValue().getType().isPrimitive() || 
+                        value instanceof byte[]  || value instanceof Date) {
                         if (value instanceof byte[]) {
                             contents.put(name, new String((byte[]) value, StandardCharsets.UTF_8));
                         } else if (value instanceof Enum) {
@@ -102,7 +112,7 @@ public final class ObjectToSolrDocumentConverter implements Converter<Object, Se
                     } else if (value instanceof Collection || value instanceof Object[]) {
                         Collection items = value.getClass().isArray() ? Arrays.asList((Object[]) value) : (Collection) value;
                         items.stream().forEach((item) -> {
-                            Map<String, Object> map = mapObjectFieldValue(name, item, excludedFields);
+                            Map<String, Object> map = mapObjectFieldValue(name, item, filterFields);
                             map.entrySet().forEach(x -> {
                                 String key = x.getKey();
                                 if (!contents.containsKey(key)) {
@@ -112,7 +122,7 @@ public final class ObjectToSolrDocumentConverter implements Converter<Object, Se
                             });
                         });
                     } else {
-                        contents.putAll(mapObjectFieldValue(name, value, excludedFields));
+                        contents.putAll(mapObjectFieldValue(name, value, filterFields));
                     }
                 }
 

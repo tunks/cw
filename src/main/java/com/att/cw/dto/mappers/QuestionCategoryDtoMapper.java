@@ -25,7 +25,7 @@ public final class QuestionCategoryDtoMapper {
     public static QuestionCategoryDto mapEntityIntoDTO(QuestionCategory entity) {
         QuestionCategoryDto dto = new QuestionCategoryDto();
         dto.setId(entity.getId());
-        dto.setCategory(entity.getCategory());
+        dto.setName(entity.getCategory());
         return dto;
     }
 

@@ -16,12 +16,12 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 /**
- * JobAnswerOptionService
+ * JobAnswerEntryService
  *
  * @author ebrimatunkara
  */
-@Service("jobAnswerOptionService")
-public class JobAnswerOptionService implements CrudService<JobAnswerEntry, Long> {
+@Service("jobAnswerEntryService")
+public class JobAnswerEntryService implements CrudService<JobAnswerEntry, Long> {
 
     @Resource
     private JobAnswerOptionRepository jobAnswerOptionRepository;

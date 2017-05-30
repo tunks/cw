@@ -43,13 +43,16 @@ public final class SolrDocumentToObjectConverter implements Converter<Searchable
      */
     @Override
     public Map convert(SearchableDocument source) {
+        System.out.println("bytes " + source.getJson());
         try {
-            return new ObjectContentBuilder().setId(source.getId())
+            return new ObjectContentBuilder()
+                    .setId(source.getId())
                     .setClassName(source.getType())
                     .setContentValues(source.getTextContent())
                     .setContentValues(source.getDateContent())
+                    .setJsonContent(DataUtils.decodeEntityJson(source.getJson()))
                     .build();
-        } catch (IOException ex) {
+        } catch (Exception ex) {
             Logger.getLogger(SolrDocumentToObjectConverter.class.getName()).log(Level.SEVERE, null, ex);
         }
 
@@ -63,6 +66,7 @@ public final class SolrDocumentToObjectConverter implements Converter<Searchable
 
         private final Map<String, Object> content = new HashMap();
         private Class<?> classType;
+        private String json;
 
         public ObjectContentBuilder setId(Long id) {
             content.put(Searchable.ID_FIELD, id);
@@ -83,19 +87,32 @@ public final class SolrDocumentToObjectConverter implements Converter<Searchable
             return this;
         }
 
-        public Map build() throws IOException {
-            if (classType != null) {
-                Map<String, Field> fields = getObjectFields(classType, true);
-                return mapDocumentContent(fields).stream()
-                        .distinct()
-                        .flatMap(map -> map.entrySet().stream())
-                        .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (p1, p2) -> {
-                            if (p1 instanceof Map && p2 instanceof Map) {
-                                ((Map) p1).putAll((Map) p2);
-                            }
-                            return p1;
-                        }));
+        public ObjectContentBuilder setJsonContent(String json) {
+            this.json = json;
+            return this;
+        }
+
+        public Map build() {
+            try {
+                if (json != null) {
+                   return DataUtils.jsonToMap(json);
+                }
+                if (classType != null) {
+                    Map<String, Field> fields = getObjectFields(classType, true);
+                    return mapDocumentContent(fields).stream()
+                            .distinct()
+                            .flatMap(map -> map.entrySet().stream())
+                            .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (p1, p2) -> {
+                                if (p1 instanceof Map && p2 instanceof Map) {
+                                    ((Map) p1).putAll((Map) p2);
+                                }
+                                return p1;
+                            }));
+                }
+            } catch (IOException ex) {
+                logger.error(ex.getMessage());
             }
+
             return Collections.EMPTY_MAP;
         }
 

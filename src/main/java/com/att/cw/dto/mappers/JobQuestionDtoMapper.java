@@ -36,17 +36,27 @@ public final class JobQuestionDtoMapper {
     }
 
     public static JobQuestionDto mapEntityIntoDTO(JobQuestion entity) {
-        QuestionType qt = entity.getQuestionType();
-        QuestionCategory category = entity.getCategory();
-        JobQuestionDto dto = new JobQuestionDto();
-        dto.setId(entity.getId());
-        dto.setQuestion(entity.getQuestion());
-        dto.setRequired(entity.isRequired());
-        dto.setReferenceNumber(entity.getReferenceNumber());
-        dto.setCategory((category != null) ? new QuestionCategoryDto(category.getId(), category.getCategory()) : null);
-        dto.setQuestionType(mapQuestionType(qt));
-        dto.setOptions(mapQuestionOptions(entity.getOptions()));
-        return dto;
+        if(entity != null){
+            QuestionType qt = entity.getQuestionType();
+            QuestionCategory category = entity.getCategory();
+            JobQuestionDto dto = new JobQuestionDto();
+            dto.setId(entity.getId());
+            dto.setQuestion(entity.getQuestion());
+            dto.setAssociatedId(entity.getAssociatedId());
+            dto.setRequired(entity.isRequired());
+            dto.setReferenceNumber(entity.getReferenceNumber());
+            dto.setCategory(mapCategory(category));
+            dto.setQuestionType(mapQuestionType(qt));
+            dto.setOptions(mapQuestionOptions(entity.getOptions()));
+            dto.setRank(entity.getRank());
+            return dto;
+        }
+        return new JobQuestionDto(); 
+    }
+   
+
+    public static QuestionCategoryDto mapCategory(QuestionCategory category) {
+        return (category != null) ? new QuestionCategoryDto(category.getId(), category.getCategory()) : null;
     }
 
     public static Set<QuestionOptionDto> mapQuestionOptions(Set<QuestionOption> options) {

@@ -9,13 +9,14 @@ package com.att.cw.event;
  * * EventHandler- receives incoming messages
  *
  * @author ebrimatunkara
+ * @param <E>
  */
-public interface EventHandler {
+public interface EventHandler<E> {
 
     /**
      * Receive incoming event message
      *
      * @param event
      */
-    public void handle(Event event);
+    public void handle(E event);
 }

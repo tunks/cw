@@ -13,12 +13,17 @@ import com.att.cw.dto.QuestionaireDto;
 import com.att.cw.model.QuestionCategory;
 import com.att.cw.model.QuestionType;
 import com.att.cw.model.Questionaire;
+import java.util.Comparator;
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
 import static java.util.stream.Collectors.toList;
 import static java.util.stream.Collectors.toSet;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
+import org.springframework.util.comparator.CompoundComparator;
 
 /**
  * QuestionaireDtoMapper
@@ -37,6 +42,7 @@ public final class QuestionaireDtoMapper {
         QuestionaireDto dto = new QuestionaireDto();
         dto.setId(entity.getId());
         dto.setName(entity.getName());
+        dto.setRank(entity.getRank());
 
         dto.setQuestions(entity.getQuestions()
                 .stream().map(q -> {
@@ -56,19 +62,32 @@ public final class QuestionaireDtoMapper {
                             q.getOptions().stream()
                             .map(op -> {
                                 return new QuestionOptionDto(op.getId(), op.getValue());
-                            }).collect(toSet())
+                            }).collect(toSet()),
+                            q.getRank()
                     );
 
                     if (category != null) {
                         dt.setCategory(new QuestionCategoryDto(category.getId(), category.getCategory()));
                     }
                     return dt;
-                }).collect(toSet()));
+                })
+                .sorted(new QuestionRankComparator())
+                .collect(Collectors.toCollection(LinkedHashSet::new)));
         return dto;
     }
 
     public static Page<QuestionaireDto> mapEntityPageIntoDTOPage(Pageable page, Page<Questionaire> source) {
         List<QuestionaireDto> dtos = mapEntitiesIntoDTOs(source.getContent());
         return new PageImpl<>(dtos, page, source.getTotalElements());
+    }
+    
+    private static class QuestionRankComparator implements Comparator<JobQuestionDto> {
+        @Override
+        public int compare(JobQuestionDto o1, JobQuestionDto o2) {
+            Integer a = o1.getRank();
+            Integer b = o2.getRank();
+            return a.compareTo(b);
+        }
+
     }
 }

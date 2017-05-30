@@ -10,7 +10,7 @@ import com.att.cw.model.JobAnswerEntry;
 import com.att.cw.model.JobApplication;
 import com.att.cw.model.JobCandidate;
 import com.att.cw.model.JobQuestionAnswer;
-import com.att.cw.service.JobAnswerOptionService;
+import com.att.cw.service.JobAnswerEntryService;
 import com.att.cw.service.JobApplicationService;
 import com.att.cw.service.JobCandidateService;
 import com.att.cw.service.JobQuestionAnswerService;
@@ -34,7 +34,7 @@ public class MockJobApplicationDao extends MockJobQuestionDao {
     protected JobQuestionAnswerService jobQuestionAnswerService;
 
     @Autowired
-    protected JobAnswerOptionService jobAnswerOptionService;
+    protected JobAnswerEntryService jobAnswerOptionService;
 
     protected JobApplication application;
     protected JobCandidate candidate;

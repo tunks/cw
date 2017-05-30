@@ -48,7 +48,7 @@ public class JobCandidate extends Audit<Long> {
     @Column(name = "candiate_number")
     private Long candidateNumber;
     
-    @OneToMany( cascade={MERGE}, fetch = FetchType.LAZY, mappedBy="candidate", orphanRemoval = true)
+    @OneToMany( cascade={MERGE}, fetch = FetchType.EAGER, mappedBy="candidate", orphanRemoval = true)
     private List<JobApplication> applications = new  ArrayList();
 
     public JobCandidate() {

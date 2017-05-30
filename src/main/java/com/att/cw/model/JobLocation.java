@@ -5,6 +5,7 @@
  */
 package com.att.cw.model;
 
+import com.att.cw.support.solr.SearchField;
 import java.io.Serializable;
 import javax.persistence.Embeddable;
 import javax.validation.constraints.NotNull;
@@ -18,10 +19,17 @@ import javax.validation.constraints.NotNull;
 public class JobLocation implements Serializable {
 
     @NotNull
+    @SearchField
     private String city;
+    
     @NotNull
+    @SearchField
     private String country;
+    
+    @SearchField
     private String locationState;
+    
+    @SearchField
     private String zipCode;
 
     public String getCity() {

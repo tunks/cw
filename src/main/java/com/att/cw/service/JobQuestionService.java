@@ -12,11 +12,9 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import com.att.cw.dao.JobQuestionRepository;
-import com.att.cw.dto.JobCategoryDto;
 import com.att.cw.dto.JobQuestionDto;
 import com.att.cw.dto.QuestionCategoryDto;
 import com.att.cw.dto.QuestionOptionDto;
-import com.att.cw.model.JobCategory;
 import com.att.cw.model.QuestionCategory;
 import com.att.cw.model.QuestionOption;
 import com.att.cw.model.QuestionType;
@@ -46,6 +44,9 @@ public class JobQuestionService implements CrudService<JobQuestion, Long> {
     @Autowired
     private QuestionCategoryService questionCategoryService;
 
+    @Autowired
+    private RankService rankService;
+    
     @Override
     public JobQuestion save(JobQuestion object) {
         return jobQuestionRepository.save(object);
@@ -97,15 +98,18 @@ public class JobQuestionService implements CrudService<JobQuestion, Long> {
         if (entity.getReferenceNumber() == null) {
             entity.setReferenceNumber(RandomStringUtils.randomAlphabetic(6));
         }
+        entity.setAssociatedId(questionDto.getAssociatedId());
         //save question type
         saveQuestionType(questionDto, entity);
 
         //save question category
         saveQuestionCategory(questionDto.getCategory(), entity);
-
+         //set rank
+         //rankService.
         //set question type
         entity.setQuestion(questionDto.getQuestion());
         entity.setRequired(questionDto.isRequired());
+        entity.setRank(questionDto.getRank());
         return entity;
     }
 
@@ -171,6 +175,39 @@ public class JobQuestionService implements CrudService<JobQuestion, Long> {
     @Override
     public boolean exists(Long id) {
         return jobQuestionRepository.exists(id);
+    }
+
+    public JobQuestion save(JobQuestionDto dto) {
+           JobQuestion question = find(dto.getId());
+           if(question == null){
+               question  = new JobQuestion();
+            }
+              question.setRequired(dto.isRequired());
+              question.setQuestion(dto.getQuestion());
+              question.setAssociatedId(dto.getAssociatedId());
+              question.setRank(dto.getRank());
+              //set question type
+              QuestionType qType = questionTypeService.find(dto.getQuestionType().getId());
+              question.setQuestionType(qType);
+              //set question category
+              QuestionCategory qCategory = questionCategoryService.find(dto.getCategory().getId());
+              question.setCategory(qCategory);
+              //set question options
+              question.setOptions(dto.getOptions().stream().map(x->{
+                   Long id = x.getId();
+                   QuestionOption option  = jobQuestionOptionService.find(id);
+                   if(option == null){
+                     option = new QuestionOption();
+                    }
+                   option.setValue(x.getValue());
+                 return option;
+              }).collect(toSet()));
+               
+           return save(question);
+    }
+    
+    public List<JobQuestion> findByAssociatedId(Long associatedId){
+         return jobQuestionRepository.findByAssociatedId(associatedId);
     }
 
 }

@@ -5,10 +5,14 @@
  */
 package com.att.cw.listener;
 
-import com.att.cw.event.Event;
-import com.att.cw.event.Event.EventBuilder;
+import com.att.cw.dto.mappers.BaseEntityMapper;
+import com.att.cw.event.SolrEvent;
+import com.att.cw.event.SolrEvent.EventBuilder;
 import com.att.cw.event.EventAction;
+import com.att.cw.event.MessageEvent;
 import com.att.cw.model.Job;
+import com.att.cw.model.Participant;
+import java.util.Set;
 import javax.persistence.PostPersist;
 import javax.persistence.PostRemove;
 import javax.persistence.PostUpdate;
@@ -58,17 +62,45 @@ public abstract class BaseEntityListener {
 
     private void indexObjectToSearchableContent(Object target, EventAction action) {
         try {
-            SpringBeanAutowiringSupport.processInjectionBasedOnCurrentContext(this);
-            Event event = new EventBuilder()
+            setBeanAutowiringSupport();
+            SolrEvent event = new EventBuilder()
                     .setAction(action)
                     .setData(target)
-                    .setExcludeFields(getExcludedFields())
+                    //.setExcludeFields(getExcludedFields())
+                    .setEntityMapper(getEntityMapper())
                     .build();
             publisher.publishEvent(event);
         } catch (Exception ex) {
             logger.error(ex.getMessage());
         }
     }
+
+    protected void setBeanAutowiringSupport() {
+        if (publisher == null) {
+            SpringBeanAutowiringSupport.processInjectionBasedOnCurrentContext(this);
+        }
+    }
+
+    protected ApplicationEventPublisher getEventPublisher() {
+        return publisher;
+    }
+
+    protected void publishEventMessage(String subject, Set<Participant> recipients, String content) {
+        if (getEventPublisher() == null) {
+            this.setBeanAutowiringSupport();
+        }
+        
+        if (publisher != null) {
+            MessageEvent event = new MessageEvent.MessageEventBuilder()
+                    .setSubject(subject)
+                    .setRecipients(recipients)
+                    .setContent(content)
+                    .build();
+            publisher.publishEvent(event);
+        }
+    }
+
+    public abstract BaseEntityMapper getEntityMapper();
 
     protected abstract String[] getExcludedFields();
 }

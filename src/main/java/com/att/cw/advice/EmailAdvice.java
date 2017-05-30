@@ -5,13 +5,13 @@
  */
 package com.att.cw.advice;
 
-import com.att.cw.model.Message;
-import com.att.cw.model.MessageHeader;
+import com.att.cw.event.MessageEvent;
+import com.att.cw.event.MessageEvent.MessageEventBuilder;
+import com.att.cw.event.MessagePublisher;
 import com.att.cw.model.Participant;
 import com.att.cw.model.User;
 import com.att.cw.security.JwtUtil;
-import com.att.cw.support.message.MailMessageBuilder;
-import com.att.cw.support.message.MessageProcessor;
+import com.att.cw.service.EmailNotificationService;
 import java.util.HashSet;
 import java.util.Set;
 import javax.servlet.ServletContext;
@@ -22,7 +22,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.mail.SimpleMailMessage;
 
 /**
  * EmailAdvice- Aspect Oriented class that deligates email messages on pointcut
@@ -37,16 +36,6 @@ public class EmailAdvice {
      * Message processor
      */
     private static final Logger logger = LoggerFactory.getLogger(EmailAdvice.class);
-    
-    @Autowired
-    private MessageProcessor mailMessageProcessor;
-    /**
-     * Mail message builder
-     *
-     */
-    @Autowired
-    private MailMessageBuilder mailMessageBuilder;
-
     /**
      * Token Generation utility
      */
@@ -56,8 +45,8 @@ public class EmailAdvice {
     @Autowired
     private String activateMailContent;
     
-    @Value("${mail.noreply}")
-    private String noreply;
+    @Autowired
+    private MessagePublisher  messagePublisher;
     
     @Value("${reg.server.name}")
     private String serverName;
@@ -85,20 +74,19 @@ public class EmailAdvice {
             activateMailContent = activateMailContent.replace("${title}", "Confirm your registration");
             activateMailContent = activateMailContent.replace("${message}", "Click on the below URL or copy paste it to a browser in order to activate your account");
             activateMailContent = activateMailContent.replace("${link}", url + jwtUtil.generateRegistrationToken(user));
+            String subject = "Activate cw user registration";
             logger.info(activateMailContent);
             Set<Participant> recipients = new HashSet();
             recipients.add(new Participant(user.getEmail()));
-            MessageHeader header = new MessageHeader();
-            header.setSender(noreply);
-            header.setRecipients(recipients);
-            Message message = new Message();
-            message.setHeader(header);
-            message.setSubject("Activate cw user registration");
-            message.setContent(activateMailContent);
-            SimpleMailMessage mailMessage = mailMessageBuilder.createMessage(message);
-            mailMessageProcessor.process(mailMessage);
+            MessageEvent event = new MessageEventBuilder()
+                                        .setSubject(subject)
+                                        .setRecipients(recipients)
+                                        .setContent(activateMailContent)
+                                        .build();
+            messagePublisher.publish(event);
         } catch (Exception ex) {
             logger.error(ex.getMessage());
         }
     }
+
 }

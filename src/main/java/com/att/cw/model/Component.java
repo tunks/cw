@@ -5,13 +5,8 @@
  */
 package com.att.cw.model;
 
-import com.att.cw.listener.JobComponentListener;
-import com.att.cw.listener.JobEntityListener;
 import java.util.Objects;
 import javax.persistence.Entity;
-import javax.persistence.EntityListeners;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -37,6 +32,10 @@ public abstract class Component extends Audit<Long> {
         return id;
     }
 
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     @Override
     public int hashCode() {
         int hash = 3;
@@ -56,7 +55,7 @@ public abstract class Component extends Audit<Long> {
             return false;
         }
         final Component other = (Component) obj;
-        return Objects.equals(this.id, other.id);
+        return (this.id != null)? Objects.equals(this.id, other.id) : false;
     }
 
 }
