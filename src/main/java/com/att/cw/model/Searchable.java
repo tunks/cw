@@ -20,6 +20,7 @@ public interface Searchable {
     String TEXT_FIELD = "_t";
     String NUMERIC_FIELD = "_d";
     String TYPE_FIELD = "doc_type";
+    String JSON_FIELD = "encoded_json_str";
     String[] EXCLUDED_FIELDS = {"serialVersionUID"};
     int SEARCH_FEILD_LEVEL = 1;
     String FIELD_SEPERATOR = ".";

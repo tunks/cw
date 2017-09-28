@@ -77,7 +77,7 @@ public class JobApplicationServiceTest extends MockJobApplicationDao{
 
     public FileDocument createFileDocument() throws IOException {
         FileDocument document = FileDocumentRepositoryTest.createMockDocument();
-        document.setResourceType(ResourceType.JOB_APPLICATION);
+        //document.setResourceType(ResourceType.JOB_APPLICATION);
         //save document
         documentService.save(document);
         return document;

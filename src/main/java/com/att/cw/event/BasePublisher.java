@@ -3,19 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.att.cw.model;
-
-import java.io.Serializable;
+package com.att.cw.event;
 
 /**
  *
  * @author ebrimatunkara
+ * @param <E>
  */
-public enum Category implements Serializable{
-    RESUME,
-    PROFILE,
-    EDUCATION_BACKGROUND,
-    PROFESSIONAL_BACKGROUND,
-    RESEARCH_BACKGROUND,
-    OTHER
+public interface BasePublisher<E> {
+      public void publish(E event);
 }

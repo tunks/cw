@@ -4,18 +4,21 @@
  */
 package com.att.cw.event;
 
+import com.att.cw.dto.mappers.BaseEntityMapper;
+
 /**
- * Event class
+ * SolrEvent class
  *
  * @author Ebrima
  */
-public class Event {
+public class SolrEvent {
 
     private EventAction action;
     private String[] excludedFields;
     private Object data;
+    private BaseEntityMapper entityMapper;
 
-    public Event() {
+    public SolrEvent() {
     }
 
     public EventAction getAction() {
@@ -42,6 +45,14 @@ public class Event {
         this.excludedFields = excludedFields;
     }
 
+    public BaseEntityMapper getEntityMapper() {
+        return entityMapper;
+    }
+
+    public void setEntityMapper(BaseEntityMapper entityMapper) {
+        this.entityMapper = entityMapper;
+    }
+
     @Override
     public String toString() {
         return "Event{" + "action=" + action + ", data=" + data + '}';
@@ -52,10 +63,10 @@ public class Event {
      */
     public static class EventBuilder {
 
-        private final Event event;
+        private final SolrEvent event;
 
         public EventBuilder() {
-            event = new Event();
+            event = new SolrEvent();
         }
 
         public EventBuilder setAction(EventAction action) {
@@ -72,8 +83,13 @@ public class Event {
             this.event.setExcludedFields(fields);
             return this;
         }
+        
+        public EventBuilder setEntityMapper(BaseEntityMapper entityMapper) {
+            this.event.setEntityMapper(entityMapper);
+            return this;
+        }
 
-        public Event build() {
+        public SolrEvent build() {
             return event;
         }
     }

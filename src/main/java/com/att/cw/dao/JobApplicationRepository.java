@@ -51,5 +51,5 @@ public interface JobApplicationRepository extends PagingAndSortingRepository<Job
      * @param candidate
      * @return 
       **/
-    public JobApplication findByCandidateAndJob(Job job, JobCandidate candidate);
+    public JobApplication findByCandidateAndJob(JobCandidate candidate,Job job);
 }

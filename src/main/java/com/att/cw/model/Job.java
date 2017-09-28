@@ -5,9 +5,6 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 import javax.persistence.Basic;
-import static javax.persistence.CascadeType.MERGE;
-import static javax.persistence.CascadeType.PERSIST;
-import static javax.persistence.CascadeType.REMOVE;
 import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
@@ -24,6 +21,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
+import com.att.cw.support.solr.SearchField;
 
 /**
  * Job entity class
@@ -39,11 +37,13 @@ public class Job extends Audit<Long> {
      */
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @SearchField
     private Long id;
     /**
      * job title
      */
     @NotNull
+    @SearchField
     private String title;
     /**
      * job description
@@ -51,6 +51,7 @@ public class Job extends Audit<Long> {
     @Lob
     @Basic(fetch = FetchType.LAZY)
     @Column(length = 16777215)
+    @SearchField
     private byte[] description;
     /**
      * job responsibilities
@@ -58,6 +59,7 @@ public class Job extends Audit<Long> {
     @Lob
     @Basic(fetch = FetchType.LAZY)
     @Column(length = 16777215)
+    @SearchField
     private byte[] responsibilities;
 
     /**
@@ -66,6 +68,7 @@ public class Job extends Audit<Long> {
     @Lob
     @Basic(fetch = FetchType.LAZY)
     @Column(length = 16777215)
+    @SearchField
     private byte[] skills;
 
     /**
@@ -78,11 +81,13 @@ public class Job extends Audit<Long> {
                 @JoinColumn(name = "job_id", nullable = true, referencedColumnName = "id")},
             inverseJoinColumns = {
                 @JoinColumn(name = "category_id", nullable = true, referencedColumnName = "id")})
+    @SearchField
     private Set<JobCategory> categories = new HashSet();
     /**
      * employment type [FULLTIME, PART_TIME,CONTRACT, INTERNSHIP]
      */
     @ManyToOne
+    @SearchField
     private JobType jobType;
     /**
      * job work flow
@@ -93,6 +98,7 @@ public class Job extends Audit<Long> {
      * Job vacancy
      */
     @Embedded
+    @SearchField
     private JobVacancy vacancy;
     /**
      * department or group that owns the job
@@ -103,6 +109,7 @@ public class Job extends Audit<Long> {
      * Job location
      */
     @Embedded
+    @SearchField
     private JobLocation location;
     /**
      * Job questions
@@ -110,7 +117,7 @@ public class Job extends Audit<Long> {
     @OneToMany(fetch = FetchType.EAGER)
     private Set<JobQuestion> questions = new HashSet();
     
-    @OneToMany(fetch = FetchType.LAZY,mappedBy="job")
+    @OneToMany(fetch = FetchType.EAGER,mappedBy="job")
     private Set<JobApplication> applications = new HashSet();
 
     public Job() {

@@ -5,13 +5,20 @@
  */
 package com.att.cw.model;
 
+import java.util.HashSet;
+import java.util.Set;
+import static javax.persistence.CascadeType.MERGE;
+import static javax.persistence.CascadeType.REMOVE;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import static javax.persistence.FetchType.EAGER;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -28,8 +35,14 @@ public class JobAnswerEntry extends Audit<Long> {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @ManyToOne
-    private QuestionOption questionOption;
+    @ManyToMany(fetch=EAGER) //cascade={MERGE})
+    @JoinTable(
+            name = "JOB_QUESTION_ANSWER_ENTRY_OPTION",
+            joinColumns = {
+                @JoinColumn(name = "ANSWER_ENTRY_ID", nullable = false,updatable = false, referencedColumnName = "ID")},
+            inverseJoinColumns = {
+                @JoinColumn(name = "QUESTION_OPTON_ID", nullable = false, referencedColumnName = "ID")})
+    private Set<QuestionOption> questionOptions = new HashSet();
 
     /**
      * For note or text answers
@@ -49,22 +62,17 @@ public class JobAnswerEntry extends Audit<Long> {
      */
     private Boolean checked = Boolean.FALSE;
     
-    @OneToOne(orphanRemoval=true)
+    @OneToOne
     private JobQuestionAnswer questionAnswer;
 
     public JobAnswerEntry() {
     }
 
+    public JobAnswerEntry(JobQuestionAnswer questionAnswer) {
+        this.questionAnswer = questionAnswer;
+    }
+
     public JobAnswerEntry(String value) {
-        this.value = value;
-    }
-
-    public JobAnswerEntry(QuestionOption questionOption) {
-        this.questionOption = questionOption;
-    }
-
-    public JobAnswerEntry(QuestionOption questionOption, String value) {
-        this.questionOption = questionOption;
         this.value = value;
     }
 
@@ -93,14 +101,6 @@ public class JobAnswerEntry extends Audit<Long> {
         this.document = document;
     }
 
-    public QuestionOption getQuestionOption() {
-        return questionOption;
-    }
-
-    public void setQuestionOption(QuestionOption questionOption) {
-        this.questionOption = questionOption;
-    }
-
     public Boolean getChecked() {
         return checked;
     }
@@ -120,5 +120,12 @@ public class JobAnswerEntry extends Audit<Long> {
     public void setQuestionAnswer(JobQuestionAnswer questionAnswer) {
         this.questionAnswer = questionAnswer;
     }
-   
+
+    public Set<QuestionOption> getQuestionOptions() {
+        return questionOptions;
+    }
+
+    public void setQuestionOptions(Set<QuestionOption> questionOptions) {
+        this.questionOptions = questionOptions;
+    }
 }

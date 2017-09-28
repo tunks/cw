@@ -131,14 +131,8 @@ public class QuestionaireController implements BaseController<QuestionaireDto, L
 
     private JobQuestionDto saveQuestionaireQuestion(Long id, JobQuestionDto question, boolean isNew) throws NotFoundException {
         Questionaire questionaire = questionaireService.find(id);
-        if (questionaire != null) {
-
+        if (questionaire != null) { 
             JobQuestion item = jobQuestionService.saveDto(question, isNew ? questionaire : null);
-            //add and save questionaire if question is new question
-//            if (isNew) {
-//                questionaire.getQuestions().add(item);
-//                questionaireService.save(questionaire);
-//            }
             return JobQuestionDtoMapper.mapEntityIntoDTO(item);
         } else {
             //throw exception

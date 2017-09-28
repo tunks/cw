@@ -5,9 +5,7 @@
  */
 package com.att.cw.dto;
 
-import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Map;
 import java.util.Set;
 
 /**
@@ -16,15 +14,15 @@ import java.util.Set;
  * @author ebrimatunkara
  */
 public class JobQuestionDto {
-
     private Long id;
     private String question;
-    private Map<String, Object> entries = new HashMap();
     private Boolean required = false;
     private QuestionTypeDto questionType;
     private String referenceNumber;
     private QuestionCategoryDto category;
     private Set<QuestionOptionDto> options = new HashSet();
+    private Long associatedId;
+    private int rank = 0;
 
     public JobQuestionDto() {
     }
@@ -51,6 +49,13 @@ public class JobQuestionDto {
         this.options = options;
     }
 
+        public JobQuestionDto(Long id, String question,
+            Boolean required,
+            QuestionTypeDto type,
+            Set<QuestionOptionDto> options, int rank) {
+        this(id, question, required, type, options);
+        this.rank = rank;
+    }
     public Long getId() {
         return id;
     }
@@ -111,14 +116,23 @@ public class JobQuestionDto {
         this.category = category;
     }
 
-    public Map<String, Object> getEntries() {
-        return entries;
+    public Long getAssociatedId() {
+        return associatedId;
     }
 
-    public void setEntries(Map<String, Object> entries) {
-        this.entries = entries;
+    public void setAssociatedId(Long associatedId) {
+        this.associatedId = associatedId;
     }
 
+    public int getRank() {
+        return rank;
+    }
+
+    public void setRank(int rank) {
+        this.rank = rank;
+    }
+
+    
     @Override
     public String toString() {
         return "JobQuestionDto{" + "id=" + id + ", question=" + question + ", required=" + required + ", questionType=" + questionType + ", referenceNumber=" + referenceNumber + ", category=" + category + ", options=" + options + '}';
@@ -156,11 +170,12 @@ public class JobQuestionDto {
             this.dto.setOptions(options);
             return this;
         }
-
-        public JobQuestionDtoBuilder setEntries(Map<String, Object> entries) {
-            this.dto.setEntries(entries);
+        
+          public JobQuestionDtoBuilder setRank(int rank) {
+            this.dto.setRank(rank);
             return this;
         }
+
 
         public JobQuestionDto build() {
             return dto;

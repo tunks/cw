@@ -55,7 +55,7 @@ public class JobQuestionListDto {
         items.stream().forEach((item) -> {
             QuestionCategoryDto cat = item.getCategory();// .getCategory()
             if (cat != null) {
-                String key = cat.getCategory();
+                String key = cat.getName();
                 if (!questions.containsKey(key)) {
                     questions.put(key, new HashSet());
                 }

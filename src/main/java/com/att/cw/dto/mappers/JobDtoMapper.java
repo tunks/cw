@@ -23,7 +23,7 @@ import org.springframework.data.domain.Pageable;
  *
  * @author ebrimatunkara
  */
-public final class JobDtoMapper {
+public final class JobDtoMapper implements BaseEntityMapper<JobDto,Job>{
 
     public static List<JobDto> mapEntitiesIntoDTOs(List<Job> entities) {
         return entities.stream()
@@ -59,5 +59,10 @@ public final class JobDtoMapper {
     public static Page<JobDto> mapEntityPageIntoDTOPage(Pageable page, Page<Job> source) {
         List<JobDto> dtos = mapEntitiesIntoDTOs(source.getContent());
         return new PageImpl<>(dtos, page, source.getTotalElements());
+    }
+
+    @Override
+    public JobDto map(Job entity) {
+         return JobDtoMapper.mapEntityIntoDTO(entity);
     }
 }

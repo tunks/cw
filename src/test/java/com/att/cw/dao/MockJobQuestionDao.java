@@ -138,7 +138,7 @@ public class MockJobQuestionDao extends  MockUserDao{
                 })
                 .map(q -> {
                     int num = atomicInteger.getAndIncrement();
-                    QuestionOption option = new QuestionOption("Option " + num, q);
+                    QuestionOption option = new QuestionOption("Option " + num);
                     jobQuestionOptionService.save(option);
                     q.addOptions(option);
                     return jobQuestionService.save(q);

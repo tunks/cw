@@ -8,6 +8,7 @@ package com.att.cw.listener;
 import com.att.cw.model.JobQuestionAnswer;
 import com.att.cw.model.JobQuestion;
 import com.att.cw.exception.JobApplicationException;
+import javax.persistence.PostPersist;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 
@@ -30,6 +31,13 @@ public class JobAnswerListener {
         //get job question
         JobQuestion question = entity.getQuestion();
         //validate(entity, question);
+    }
+     @PostPersist
+    void afterPersist(JobQuestionAnswer entity) {
+        //get job question
+        if (entity.getAnswerEntry() != null){
+            entity.getAnswerEntry().setQuestionAnswer(entity);
+        }
     }
 
     //validate the entity

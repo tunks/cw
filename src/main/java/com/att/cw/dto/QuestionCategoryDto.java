@@ -12,14 +12,14 @@ package com.att.cw.dto;
 public class QuestionCategoryDto {
 
     private Long id;
-    private String category;
+    private String name;
 
     public QuestionCategoryDto() {
     }
 
-    public QuestionCategoryDto(Long id, String category) {
+    public QuestionCategoryDto(Long id, String name) {
         this.id = id;
-        this.category = category;
+        this.name = name;
     }
 
     public Long getId() {
@@ -30,12 +30,12 @@ public class QuestionCategoryDto {
         this.id = id;
     }
 
-    public String getCategory() {
-        return category;
+    public String getName() {
+        return name;
     }
 
-    public void setCategory(String category) {
-        this.category = category;
+    public void setName(String name) {
+        this.name = name;
     }
 
 }

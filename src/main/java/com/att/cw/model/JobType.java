@@ -5,6 +5,8 @@
  */
 package com.att.cw.model;
 
+import com.att.cw.support.solr.SearchField;
+import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -19,12 +21,14 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "job_type")
-public class JobType {
+public class JobType implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    
     @Column(nullable = false)
+    @SearchField
     private String name;
 
     public Long getId() {

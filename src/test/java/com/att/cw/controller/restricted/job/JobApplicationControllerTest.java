@@ -13,7 +13,7 @@ import com.att.cw.dto.JobApplicationEntryDto.QuestionAnswerDto;
 import com.att.cw.dto.JobQuestionDto;
 import com.att.cw.model.User;
 import com.att.cw.security.UserLogin.LoginBuild;
-import com.att.cw.service.JobAnswerOptionService;
+import com.att.cw.service.JobAnswerEntryService;
 import com.att.cw.service.JobQuestionAnswerService;
 import com.att.cw.support.DataUtils;
 import java.util.Map;
@@ -73,7 +73,7 @@ public class JobApplicationControllerTest extends MockJobQuestionDao {
     private JobQuestionAnswerService jobQuestionAnswerService;
 
     @Autowired
-    private JobAnswerOptionService jobAnswerOptionService;
+    private JobAnswerEntryService jobAnswerOptionService;
 
     private final AtomicInteger atomicInteger = new AtomicInteger(0);
 

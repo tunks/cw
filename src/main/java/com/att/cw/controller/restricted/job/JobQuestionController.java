@@ -6,9 +6,11 @@
 package com.att.cw.controller.restricted.job;
 
 import com.att.cw.controller.BaseController;
+import com.att.cw.dto.JobQuestionDto;
 import com.att.cw.dto.JobQuestionListDto;
 import com.att.cw.dto.QuestionCategoryDto;
 import com.att.cw.dto.QuestionOptionDto;
+import com.att.cw.dto.mappers.JobQuestionDtoMapper;
 import com.att.cw.dto.mappers.QuestionCategoryDtoMapper;
 import com.att.cw.dto.mappers.QuestionOptionDtoMapper;
 import com.att.cw.exception.NotFoundException;
@@ -35,7 +37,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequestMapping("/restricted/questions")
-public class JobQuestionController implements BaseController<JobQuestion, Long> {
+public class JobQuestionController implements BaseController<JobQuestionDto, Long> {
 
     @Autowired
     private JobQuestionService jobQuestionService;
@@ -57,8 +59,8 @@ public class JobQuestionController implements BaseController<JobQuestion, Long> 
      */
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     @Override
-    public JobQuestion find(@PathVariable Long id) {
-        return jobQuestionService.find(id);
+    public JobQuestionDto find(@PathVariable Long id) {
+        return JobQuestionDtoMapper.mapEntityIntoDTO(jobQuestionService.find(id));
     }
 
     /**
@@ -69,8 +71,8 @@ public class JobQuestionController implements BaseController<JobQuestion, Long> 
      */
     @RequestMapping(method = RequestMethod.POST)
     @Override
-    public JobQuestion create(JobQuestion object) {
-        return jobQuestionService.save(object);
+    public JobQuestionDto create(JobQuestionDto object) {  
+        return JobQuestionDtoMapper.mapEntityIntoDTO(jobQuestionService.save(object));
     }
 
     /**
@@ -81,8 +83,8 @@ public class JobQuestionController implements BaseController<JobQuestion, Long> 
      */
     @RequestMapping(method = RequestMethod.PUT)
     @Override
-    public JobQuestion update(JobQuestion object) {
-        return jobQuestionService.save(object);
+    public JobQuestionDto update(JobQuestionDto object) {
+        return JobQuestionDtoMapper.mapEntityIntoDTO(jobQuestionService.save(object));
     }
 
     @Override
@@ -115,7 +117,7 @@ public class JobQuestionController implements BaseController<JobQuestion, Long> 
     @Override
     public void delete(@PathVariable Long id) {
         Job job = jobService.findByQuestionId(id);//jobService  (id);
-        JobQuestion question = find(id);
+        JobQuestion question = jobQuestionService.find(id);
         if (job != null) {
             job.getQuestions().remove(question);
 
@@ -137,7 +139,6 @@ public class JobQuestionController implements BaseController<JobQuestion, Long> 
         if (question != null) {
             QuestionOption entity = QuestionOptionDtoMapper.mapDtoIntoEntity(optionDto);
             //set question entity and save option entity
-            entity.setQuestion(question);
             entity = jobQuestionOptionService.save(entity);
             //append question option entity to question
             question.getOptions().add(entity);

@@ -6,16 +6,15 @@
 package com.att.cw.model;
 
 import java.util.Objects;
-import static javax.persistence.CascadeType.ALL;
+import java.util.Set;
 import static javax.persistence.CascadeType.MERGE;
 import static javax.persistence.CascadeType.REMOVE;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -35,14 +34,14 @@ public class QuestionOption {
     @Column(name = "question_value")
     private String value;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = {MERGE, REMOVE})
-    private JobQuestion question;
-
     /**
      * Date pair for date range values
      */
     @OneToOne
     private QuestionOption pair;
+    
+    @ManyToMany(mappedBy="questionOptions")
+    private Set<JobAnswerEntry>  answerEntries;  
 
     public QuestionOption() {
     }
@@ -54,11 +53,6 @@ public class QuestionOption {
     public QuestionOption(Long id, String value) {
         this.id = id;
         this.value = value;
-    }
-
-    public QuestionOption(String value, JobQuestion question) {
-        this(value);
-        this.question = question;
     }
 
     public Long getId() {
@@ -73,14 +67,6 @@ public class QuestionOption {
         this.value = value;
     }
 
-    public JobQuestion getQuestion() {
-        return question;
-    }
-
-    public void setQuestion(JobQuestion question) {
-        this.question = question;
-    }
-
     public QuestionOption getPair() {
         return pair;
     }
@@ -89,12 +75,19 @@ public class QuestionOption {
         this.pair = pair;
     }
 
+    public Set<JobAnswerEntry> getAnswerEntries() {
+        return answerEntries;
+    }
+
+    public void setAnswerEntries(Set<JobAnswerEntry> answerEntries) {
+        this.answerEntries = answerEntries;
+    }
+
     @Override
     public int hashCode() {
         int hash = 7;
         hash = 31 * hash + Objects.hashCode(this.id);
         hash = 31 * hash + Objects.hashCode(this.value);
-        hash = 31 * hash + Objects.hashCode(this.question);
         return hash;
     }
 
@@ -113,12 +106,6 @@ public class QuestionOption {
         if (!Objects.equals(this.value, other.value)) {
             return false;
         }
-        if (!Objects.equals(this.id, other.id)) {
-            return false;
-        }
-        if (!Objects.equals(this.question, other.question)) {
-            return false;
-        }
-        return true;
+        return Objects.equals(this.id, other.id);
     }
 }

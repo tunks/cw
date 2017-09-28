@@ -55,18 +55,20 @@ public class QuestionaireService implements CrudService<Questionaire, Long> {
         questionaireRepository.deleteAll();
     }
 
-    public Questionaire save(QuestionaireDto object) {
+    public Questionaire save(QuestionaireDto dto) {
         Questionaire entity;
-        if (object.getId() != null) {
-            entity = questionaireRepository.findOne(object.getId());
+        if (dto.getId() != null) {
+            entity = questionaireRepository.findOne(dto.getId());
         } else {
             entity = new Questionaire();
         }
         //map the entity 
-        entity.setName(object.getName());
+        entity.setName(dto.getName());
+        entity.setRank(dto.getRank());
         return questionaireRepository.save(entity);
     }
 
+    @Override
     public void delete(Questionaire questionaire) {
         questionaireRepository.delete(questionaire);
     }
