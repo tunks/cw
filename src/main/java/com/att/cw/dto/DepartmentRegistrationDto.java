@@ -8,7 +8,7 @@ import org.joda.time.LocalDate;
 import com.att.cw.model.Gender;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
-public class UserRegistrationDto implements Serializable {
+public class DepartmentRegistrationDto implements Serializable {
 
     /**
      *
@@ -28,12 +28,11 @@ public class UserRegistrationDto implements Serializable {
     @NotEmpty(message = "Name cannot be blank!")
     private String name;
 
-    @NotNull(message = "Date Of Birth Cannot be empty")
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
-    private LocalDate dateOfBirth;
+    @NotEmpty(message = "Country cannot be blank!")
+    private String country;
 
-    @NotNull(message = "Gender Cannot be empty")
-    private Gender gender;
+    @NotNull(message = "phone number cannot be empty")
+    private String phone;
 
     public String getPassword() {
         return password;
@@ -59,20 +58,21 @@ public class UserRegistrationDto implements Serializable {
         this.email = email;
     }
 
-    public LocalDate getDateOfBirth() {
-        return dateOfBirth;
+    public String getCountry() {
+        return country;
     }
 
-    public void setDateOfBirth(LocalDate dateOfBirth) {
-        this.dateOfBirth = dateOfBirth;
+    public void setCountry(String country) {
+        this.country = country;
     }
 
-    public Gender getGender() {
-        return gender;
+    public String getPhone() {
+        return phone;
     }
 
-    public void setGender(Gender gender) {
-        this.gender = gender;
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
+    
 
 }

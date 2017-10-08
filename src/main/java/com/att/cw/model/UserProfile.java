@@ -8,9 +8,16 @@ package com.att.cw.model;
 import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
+import javax.persistence.InheritanceType;
 import javax.validation.constraints.NotNull;
 
 /**
@@ -20,65 +27,39 @@ import javax.validation.constraints.NotNull;
  */
 @Entity
 @Table(name = "USER_PROFILE")
-public class UserProfile extends Profile {
+@Inheritance(strategy=InheritanceType.JOINED)
+public class UserProfile extends Audit<Long> {
 
-    @Column(name = "first_name")
-    @NotNull
-    private String firstName;
 
-    @Column(name = "middle_name")
-    private String middleName;
-
-    @Column(name = "last_name")
-    @NotNull
-    private String lastName;
-
-    @Column(name = "date_of_birth")
-    @NotNull
-    @Temporal(javax.persistence.TemporalType.DATE)
-    private Date dateOfBirth;
-
+	@Id
+    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.AUTO, generator = "profile_seq")
+    @SequenceGenerator(name = "profile_seq", sequenceName = "profile_seq", allocationSize = 1)
+    private Long id;
+	
+	@Column(name = "country")
+    private String country;
+	
+	
     @Column(name = "phone_number")
     private String phoneNumber;
 
     @OneToOne
+    @JoinColumn (name="user")
     private User user;
 
     @OneToOne
     private Address address;
 
-    public String getFirstName() {
-        return firstName;
+   
+    public Long getId() {
+        return id;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
+    public void setId(Long id) {
+        this.id = id;
     }
-
-    public String getMiddleName() {
-        return middleName;
-    }
-
-    public void setMiddleName(String middleName) {
-        this.middleName = middleName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public Date getDateOfBirth() {
-        return dateOfBirth;
-    }
-
-    public void setDateOfBirth(Date dateOfBirth) {
-        this.dateOfBirth = dateOfBirth;
-    }
-
+    
     public String getPhoneNumber() {
         return phoneNumber;
     }
@@ -102,4 +83,12 @@ public class UserProfile extends Profile {
     public void setAddress(Address address) {
         this.address = address;
     }
+
+	public String getCountry() {
+		return country;
+	}
+
+	public void setCountry(String country) {
+		this.country = country;
+	}
 }
