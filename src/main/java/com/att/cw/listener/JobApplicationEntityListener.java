@@ -5,6 +5,8 @@
  */
 package com.att.cw.listener;
 
+import com.att.cw.dto.mappers.BaseEntityMapper;
+import com.att.cw.dto.mappers.JobApplicationDtoMapper;
 import com.att.cw.model.Job;
 import com.att.cw.model.JobApplication;
 import com.att.cw.model.JobQuestion;
@@ -12,19 +14,25 @@ import com.att.cw.model.JobQuestionAnswer;
 import com.att.cw.model.JobVacancy;
 import com.att.cw.support.EntityHelper;
 import com.att.cw.exception.JobApplicationException;
+import com.att.cw.model.Participant;
+import com.att.cw.model.User;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
+import javax.persistence.PostPersist;
+import javax.persistence.PostUpdate;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
+import org.apache.commons.lang3.ArrayUtils;
 
 /**
  * Job Application entity listener
  *
  * @author ebrimatunkara
  */
-public class JobApplicationEntityListener {
+public class JobApplicationEntityListener extends BaseEntityListener{
 
     @PrePersist
     void onCreate(JobApplication entity) {
@@ -33,7 +41,7 @@ public class JobApplicationEntityListener {
     }
 
     @PreUpdate
-    void onPersist(JobApplication entity) {
+    void beforePersist(JobApplication entity) {
         //submitted job application cannot be saved
 //        if(entity.isSubmitted()){
 //            throw new JobApplicationException("Submitted Job application cannot be saved");
@@ -41,6 +49,31 @@ public class JobApplicationEntityListener {
         //validate job application
         validate(entity);
     }
+    
+     @PostPersist
+     public void postPersist(JobApplication entity) {
+          entity.getQuestionAnswers().stream().forEach(x->{
+              if(x.getApplication() == null){
+                x.setApplication(entity);
+             }
+         });
+          
+        //publish event message
+        User user = entity.getCandidate().getUser();
+        Set<Participant> recipients = Collections.singleton(new Participant(user.getEmail()));
+        String subject = "Job application submitted";
+        String content = "Your job application was successfully submitted";  
+        publishEventMessage(subject, recipients, content);
+     }
+     
+     public void postUpdateMessage(JobApplication entity) {
+        //publish event message
+        User user = entity.getCandidate().getUser();
+        Set<Participant> recipients = Collections.singleton(new Participant(user.getEmail()));
+        String subject = "Job application submitted";
+        String content = "Your job application was successfully submitted on "+entity.getLastModifiedDate();  
+        publishEventMessage(subject, recipients, content);
+     }
 
     //validate job application 
     private void validate(JobApplication entity) throws JobApplicationException {
@@ -95,4 +128,13 @@ public class JobApplicationEntityListener {
         }
     }
 
+    @Override
+    public BaseEntityMapper getEntityMapper() {
+         return new JobApplicationDtoMapper();
+    }
+
+    @Override
+    protected String[] getExcludedFields() {
+        return ArrayUtils.EMPTY_STRING_ARRAY;
+    }
 }

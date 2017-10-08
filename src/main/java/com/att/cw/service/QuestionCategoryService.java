@@ -36,6 +36,7 @@ public class QuestionCategoryService implements CrudService<QuestionCategory, Lo
 
     @Override
     public List<QuestionCategory> findAll() {
+        System.out.println("count all >>> " + questionCategoryRespository.count());
         return (List<QuestionCategory>) questionCategoryRespository.findAll();
     }
 
@@ -60,6 +61,11 @@ public class QuestionCategoryService implements CrudService<QuestionCategory, Lo
 
     @Override
     public boolean exists(Long id) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void delete(QuestionCategory object) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

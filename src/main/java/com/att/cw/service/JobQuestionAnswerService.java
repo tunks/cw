@@ -51,12 +51,17 @@ public class JobQuestionAnswerService implements CrudService<JobQuestionAnswer, 
 
     @Override
     public void deleteAll() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        jobQuestionAnswerRepository.deleteAll();
     }
 
     @Override
     public boolean exists(Long id) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void delete(JobQuestionAnswer object) {
+        jobQuestionAnswerRepository.delete(object);
     }
 
 }

@@ -12,7 +12,6 @@ import java.util.Objects;
  * @author ebrimatunkara
  */
 public class QuestionOptionDto {
-
     private Long id;
     private String value;
 

@@ -19,31 +19,31 @@ import java.util.Map;
 
 @Service
 public class SessionService {
-    
+
     private static final Logger logger = LoggerFactory.getLogger(SessionService.class);
-    
+
     @Autowired
     @Qualifier("sessionRepository")
     private SessionRepository sessionRepo;
-    
+
     @Autowired
     private UserService userService;
-    
+
     @Autowired
     private JwtUtil jwtUtil;
-    
+
     public void save(UserSession session) {
         this.sessionRepo.save(session);
-        
+
     }
-    
+
     public UserSession find(String emailID) {
         return this.sessionRepo.find(emailID);
     }
-    
+
     public void delete(String emailID) {
         this.sessionRepo.delete(emailID);
-        
+
     }
 
 //    public String login(UserLogin userLogin) {

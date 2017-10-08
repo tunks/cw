@@ -6,13 +6,17 @@
 package com.att.cw.model;
 
 import com.att.cw.listener.JobAnswerListener;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import javax.persistence.CascadeType;
+import static javax.persistence.CascadeType.ALL;
+import static javax.persistence.CascadeType.MERGE;
+import static javax.persistence.CascadeType.REMOVE;
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 /**
@@ -25,12 +29,20 @@ import javax.persistence.Table;
 @Table(name = "JOB_ANSWER")
 @EntityListeners(JobAnswerListener.class)
 public class JobQuestionAnswer extends Component {
+    @OneToOne(cascade = ALL, orphanRemoval = true, mappedBy="questionAnswer")
+    private JobAnswerEntry answerEntry;
 
-    @OneToMany
-    private Set<JobAnswerOption> answerOptions = new HashSet();
-
-    @ManyToOne
+    @ManyToOne//(cascade = {MERGE})
+    @JoinTable(
+            name = "JOB_QUESTION_ANSWER",
+            joinColumns = {
+                @JoinColumn(name = "QUESTION_ID", nullable = false,updatable = false, referencedColumnName = "ID")},
+            inverseJoinColumns = {
+                @JoinColumn(name = "ANSWER_ID", nullable = false, referencedColumnName = "ID")})
     private JobQuestion question;
+    
+    @ManyToOne//(cascade={MERGE,REMOVE})
+    private JobApplication application;
 
     public JobQuestionAnswer() {
     }
@@ -47,15 +59,19 @@ public class JobQuestionAnswer extends Component {
         this.question = question;
     }
 
-    public Set<JobAnswerOption> getAnswerOptions() {
-        return answerOptions;
+    public JobAnswerEntry getAnswerEntry() {
+        return answerEntry;
     }
 
-    public void setAnswerOptions(Set<JobAnswerOption> answerOptions) {
-        this.answerOptions = answerOptions;
+    public void setAnswerEntry(JobAnswerEntry answerEntry) {
+        this.answerEntry = answerEntry;
     }
 
-    public void addAnswerOption(JobAnswerOption answerOption) {
-        this.answerOptions.add(answerOption);
+    public JobApplication getApplication() {
+        return application;
+    }
+
+    public void setApplication(JobApplication application) {
+        this.application = application;
     }
 }

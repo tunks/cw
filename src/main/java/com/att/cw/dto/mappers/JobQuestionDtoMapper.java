@@ -6,11 +6,16 @@
 package com.att.cw.dto.mappers;
 
 import com.att.cw.dto.JobQuestionDto;
+import com.att.cw.dto.QuestionCategoryDto;
 import com.att.cw.dto.QuestionOptionDto;
 import com.att.cw.dto.QuestionTypeDto;
 import com.att.cw.model.QuestionType;
 import com.att.cw.model.JobQuestion;
+import com.att.cw.model.QuestionCategory;
+import com.att.cw.model.QuestionOption;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import static java.util.stream.Collectors.toList;
 import static java.util.stream.Collectors.toSet;
 import org.springframework.data.domain.Page;
@@ -23,6 +28,7 @@ import org.springframework.data.domain.Pageable;
  * @author ebrimatunkara
  */
 public final class JobQuestionDtoMapper {
+
     public static List<JobQuestionDto> mapEntitiesIntoDTOs(List<JobQuestion> entities) {
         return entities.stream()
                 .map(JobQuestionDtoMapper::mapEntityIntoDTO)
@@ -30,24 +36,43 @@ public final class JobQuestionDtoMapper {
     }
 
     public static JobQuestionDto mapEntityIntoDTO(JobQuestion entity) {
-        QuestionType qt = entity.getQuestionType();
-        JobQuestionDto dto = new JobQuestionDto();
-        dto.setId(entity.getId());
-        dto.setQuestion(entity.getQuestion());
-        dto.setRequired(entity.isRequired());
-        dto.setReferenceNumber(entity.getReferenceNumber());
-        dto.setQuestionType(new QuestionTypeDto(qt.getId(),
-                qt.getName(),
-                qt.getDescription(),
-                qt.getShowOptions(),
-                qt.getStyle()));
-        dto.setOptions(entity.getOptions()
+        if(entity != null){
+            QuestionType qt = entity.getQuestionType();
+            QuestionCategory category = entity.getCategory();
+            JobQuestionDto dto = new JobQuestionDto();
+            dto.setId(entity.getId());
+            dto.setQuestion(entity.getQuestion());
+            dto.setAssociatedId(entity.getAssociatedId());
+            dto.setRequired(entity.isRequired());
+            dto.setReferenceNumber(entity.getReferenceNumber());
+            dto.setCategory(mapCategory(category));
+            dto.setQuestionType(mapQuestionType(qt));
+            dto.setOptions(mapQuestionOptions(entity.getOptions()));
+            dto.setRank(entity.getRank());
+            return dto;
+        }
+        return new JobQuestionDto(); 
+    }
+   
+
+    public static QuestionCategoryDto mapCategory(QuestionCategory category) {
+        return (category != null) ? new QuestionCategoryDto(category.getId(), category.getCategory()) : null;
+    }
+
+    public static Set<QuestionOptionDto> mapQuestionOptions(Set<QuestionOption> options) {
+        return (options != null) ? options
                 .stream()
                 .map(op -> {
                     return new QuestionOptionDto(op.getId(), op.getValue());
-                }).collect(toSet()));
+                }).collect(toSet()) : new HashSet();
+    }
 
-        return dto;
+    public static QuestionTypeDto mapQuestionType(QuestionType qt) {
+        return (qt != null) ? new QuestionTypeDto(qt.getId(),
+                qt.getName(),
+                qt.getDescription(),
+                qt.getShowOptions(),
+                qt.getStyle()) : null;
     }
 
     public static Page<JobQuestionDto> mapEntityPageIntoDTOPage(Pageable page, Page<JobQuestion> source) {

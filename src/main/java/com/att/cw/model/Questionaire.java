@@ -11,9 +11,6 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -29,9 +26,14 @@ public class Questionaire extends Component {
     @Column(nullable = false)
     private String name;
 
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true,mappedBy="questionaire")
     private Set<JobQuestion> questions = new HashSet();
 
+        /**
+     * Question Ranking
+     */
+    private int rank = 0; 
+    
     public Set<JobQuestion> getQuestions() {
         return questions;
     }
@@ -46,5 +48,13 @@ public class Questionaire extends Component {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public int getRank() {
+        return rank;
+    }
+
+    public void setRank(int rank) {
+        this.rank = rank;
     }
 }

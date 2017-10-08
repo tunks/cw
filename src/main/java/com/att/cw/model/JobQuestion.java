@@ -5,7 +5,7 @@
  */
 package com.att.cw.model;
 
-import com.att.cw.listener.JobComponentListener;
+import com.att.cw.listener.JobQuestionListener;
 import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.CascadeType;
@@ -31,7 +31,7 @@ import javax.validation.constraints.NotNull;
  */
 @Entity
 @Table(name = "JOB_QUESTION")
-@EntityListeners(JobComponentListener.class)
+@EntityListeners(JobQuestionListener.class)
 public class JobQuestion extends Component {
 
     @Column(nullable = false)
@@ -53,7 +53,7 @@ public class JobQuestion extends Component {
     /**
      * Question option
      */
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(cascade = {MERGE,REMOVE}, fetch = FetchType.EAGER, orphanRemoval = true)
     private Set<QuestionOption> options = new HashSet();
 
     /**
@@ -66,9 +66,19 @@ public class JobQuestion extends Component {
      */
     private Boolean required = Boolean.FALSE;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
     private Questionaire questionaire;
-    
+    /**
+     * Question Ranking
+     */
+    private int rank = 0;  
+    /**
+     * Associated question id
+     */
+    private Long associatedId;
+
+    @OneToMany(cascade = {MERGE,REMOVE}, mappedBy="question")
+    private  Set <JobQuestionAnswer> questionAnswers = new HashSet();
     /**
      * Job question category
      */
@@ -165,5 +175,29 @@ public class JobQuestion extends Component {
 
     public void setQuestionaire(Questionaire questionaire) {
         this.questionaire = questionaire;
+    }
+
+    public int getRank() {
+        return rank;
+    }
+
+    public void setRank(int rank) {
+        this.rank = rank;
+    }
+
+    public Long getAssociatedId() {
+        return associatedId;
+    }
+
+    public void setAssociatedId(Long associatedId) {
+        this.associatedId = associatedId;
+    }
+
+    public Set<JobQuestionAnswer> getQuestionAnswers() {
+        return questionAnswers;
+    }
+
+    public void setQuestionAnswers(Set<JobQuestionAnswer> questionAnswers) {
+        this.questionAnswers = questionAnswers;
     }
 }

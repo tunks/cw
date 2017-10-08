@@ -26,7 +26,10 @@ public class JobDto {
      * job description
      */
     private String description;
-
+    /**
+     * Job responsibilities
+     */
+    private String responsibilities;
     /**
      * job skills
      */
@@ -69,6 +72,14 @@ public class JobDto {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public String getResponsibilities() {
+        return responsibilities;
+    }
+
+    public void setResponsibilities(String responsibilities) {
+        this.responsibilities = responsibilities;
     }
 
     public Set<JobComponentDto> getCategories() {

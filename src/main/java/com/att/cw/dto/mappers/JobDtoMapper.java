@@ -10,7 +10,7 @@ import com.att.cw.dto.JobDto;
 import com.att.cw.dto.JobQuestionDto;
 import com.att.cw.model.Job;
 import com.att.cw.model.JobType;
-import com.att.cw.support.DataTypeHelper;
+import com.att.cw.support.DataUtils;
 import java.util.List;
 import static java.util.stream.Collectors.toList;
 import static java.util.stream.Collectors.toSet;
@@ -23,7 +23,8 @@ import org.springframework.data.domain.Pageable;
  *
  * @author ebrimatunkara
  */
-public final class JobDtoMapper {
+public final class JobDtoMapper implements BaseEntityMapper<JobDto,Job>{
+
     public static List<JobDto> mapEntitiesIntoDTOs(List<Job> entities) {
         return entities.stream()
                 .map(JobDtoMapper::mapEntityIntoDTO)
@@ -42,8 +43,9 @@ public final class JobDtoMapper {
         dto.setLocation(entity.getLocation());
         dto.setTitle(entity.getTitle());
         dto.setVacancy(entity.getVacancy());
-        dto.setDescription(DataTypeHelper.bytesToString(entity.getDescription()));
-        dto.setSkills(DataTypeHelper.bytesToString(entity.getSkills()));
+        dto.setDescription(DataUtils.bytesToString(entity.getDescription()));
+        dto.setResponsibilities(DataUtils.bytesToString(entity.getResponsibilities()));
+        dto.setSkills(DataUtils.bytesToString(entity.getSkills()));
         return dto;
     }
 
@@ -57,5 +59,10 @@ public final class JobDtoMapper {
     public static Page<JobDto> mapEntityPageIntoDTOPage(Pageable page, Page<Job> source) {
         List<JobDto> dtos = mapEntitiesIntoDTOs(source.getContent());
         return new PageImpl<>(dtos, page, source.getTotalElements());
+    }
+
+    @Override
+    public JobDto map(Job entity) {
+         return JobDtoMapper.mapEntityIntoDTO(entity);
     }
 }

@@ -1,14 +1,24 @@
 package com.att.cw.model;
 
 import com.att.cw.listener.CandidateEntityListener;
-import java.util.UUID;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+import javax.persistence.CascadeType;
+import static javax.persistence.CascadeType.ALL;
+import static javax.persistence.CascadeType.MERGE;
+import static javax.persistence.CascadeType.PERSIST;
+import static javax.persistence.CascadeType.REMOVE;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 /**
@@ -32,18 +42,22 @@ public class JobCandidate extends Audit<Long> {
      * Job candidate mapped to user
      *
      */
-
-    @ManyToOne
+    @OneToOne(cascade={MERGE,REMOVE})
     private User user;
-//    /**
-//     * Job candidate application
-//         *
-//     */
-//    @OneToOne(mappedBy = "candidate")
-//    private JobApplication application;
-    @Column(name = "candiate_number", columnDefinition = "BINARY(16)")
-    private UUID candidateNumber;
 
+    @Column(name = "candiate_number")
+    private Long candidateNumber;
+    
+    @OneToMany( cascade={MERGE}, fetch = FetchType.EAGER, mappedBy="candidate", orphanRemoval = true)
+    private List<JobApplication> applications = new  ArrayList();
+
+    public JobCandidate() {
+    }
+
+    public JobCandidate(User user) {
+        this.user = user;
+    }
+   
     /**
      * object id
      *
@@ -66,19 +80,25 @@ public class JobCandidate extends Audit<Long> {
         this.user = user;
     }
 
-//    public JobApplication getApplication() {
-//        return application;
-//    }
-//
-//    public void setApplication(JobApplication application) {
-//        this.application = application;
-//    }
-    public UUID getCandidateNumber() {
+    public Long getCandidateNumber() {
         return candidateNumber;
     }
 
-    public void setCandidateNumber(UUID candidateNumber) {
+    public void setCandidateNumber(Long candidateNumber) {
         this.candidateNumber = candidateNumber;
     }
 
+    public List<JobApplication> getApplications() {
+        return applications;
+    }
+
+    public void setApplications(List<JobApplication> applications) {
+        this.applications = applications;
+    }
+
+    
+    @Override
+    public String toString() {
+        return "JobCandidate{" + "id=" + id + ", user=" + user + ", candidateNumber=" + candidateNumber + ", applications=" + applications + '}';
+    }
 }

@@ -24,6 +24,8 @@ public interface CrudService<T, ID extends Serializable> {
 
     public void delete(ID id);
 
+    public void delete(T object);
+
     public void deleteAll();
 
     public boolean exists(ID id);

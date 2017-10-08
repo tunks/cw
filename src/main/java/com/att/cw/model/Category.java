@@ -5,11 +5,13 @@
  */
 package com.att.cw.model;
 
+import java.io.Serializable;
+
 /**
  *
  * @author ebrimatunkara
  */
-public enum Category {
+public enum Category implements Serializable{
     RESUME,
     PROFILE,
     EDUCATION_BACKGROUND,

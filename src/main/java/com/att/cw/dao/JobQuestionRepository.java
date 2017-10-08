@@ -6,6 +6,7 @@
 package com.att.cw.dao;
 
 import com.att.cw.model.JobQuestion;
+import java.util.List;
 import org.springframework.data.repository.PagingAndSortingRepository;
 
 /**
@@ -14,5 +15,5 @@ import org.springframework.data.repository.PagingAndSortingRepository;
  * @author ebrimatunkara
  */
 public interface JobQuestionRepository extends PagingAndSortingRepository<JobQuestion, Long> {
-
+       public List<JobQuestion> findByAssociatedId(Long associatedId);
 }

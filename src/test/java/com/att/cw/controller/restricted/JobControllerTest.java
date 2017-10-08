@@ -2,7 +2,7 @@ package com.att.cw.controller.restricted;
 
 import com.att.cw.model.Job;
 import com.att.cw.model.JobVacancy;
-import com.att.cw.support.DataTypeHelper;
+import com.att.cw.support.DataUtils;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.nio.charset.StandardCharsets;
@@ -26,6 +26,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.MvcResult;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
@@ -40,7 +41,9 @@ import org.springframework.web.context.WebApplicationContext;
  */
 @ActiveProfiles({"test", "dev"})
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = {"classpath:springmvc-servlet.xml"})
+@ContextConfiguration(locations = {"file:src/main/webapp/WEB-INF/springmvc-servlet.xml",
+    "file:src/main/webapp/WEB-INF/root-context.xml",
+    "file:src/main/webapp/WEB-INF/applicationContext-security.xml"})
 @WebAppConfiguration
 public class JobControllerTest {
 
@@ -69,16 +72,17 @@ public class JobControllerTest {
 
     @Before
     public void setUp() throws JsonProcessingException {
+        endPointUrl = "/restricted/jobs";
+        mockMvc = webAppContextSetup(context).build();
+
         Calendar cal = Calendar.getInstance();
         Date startDate = cal.getTime();
         cal.add(Calendar.MONTH, 2);
         Date endDate = cal.getTime();
-        endPointUrl = "/restricted/jobs";
-        mockMvc = webAppContextSetup(context).build();
         JobVacancy vacancy = new JobVacancy();
         vacancy.setOpenDate(startDate);
         vacancy.setCloseDate(endDate);
-        byte[] description = DataTypeHelper.stringToByte("Technical Architect description 10001");
+        byte[] description = DataUtils.stringToByte("Technical Architect description 10001");
         job = new Job("Technical Architect", description);
         job.setVacancy(vacancy);
         content = objectToJson(job);
@@ -115,12 +119,12 @@ public class JobControllerTest {
      */
     @Test
     public void testDeleteAll() {
-        try {
-            mockMvc.perform(delete(endPointUrl))
-                    .andExpect(status().isMethodNotAllowed());
-        } catch (Exception ex) {
-            Logger.getLogger(JobControllerTest.class.getName()).log(Level.SEVERE, null, ex);
-        }
+//        try {
+//             mockMvc.perform(delete(endPointUrl).param("ids", "6"))
+//                    .andExpect(status().is2xxSuccessful());
+//        } catch (Exception ex) {
+//            Logger.getLogger(JobControllerTest.class.getName()).log(Level.SEVERE, null, ex);
+//        }
     }
 
     /**
@@ -128,7 +132,13 @@ public class JobControllerTest {
      */
     @Test
     public void testDelete() {
-        System.out.println("delete");
+//        System.out.println("delete");
+//        try {
+//            mockMvc.perform(delete(endPointUrl).param("ids", "7","8"))
+//                   .andExpect(status().isMethodNotAllowed());
+//        } catch (Exception ex) {
+//            Logger.getLogger(JobControllerTest.class.getName()).log(Level.SEVERE, null, ex);
+//        }
     }
 
     /**
@@ -138,12 +148,7 @@ public class JobControllerTest {
     public void testCreate() {
         try {
             System.out.println("content ==> " + content);
-            mockMvc.perform(post(endPointUrl)
-                    .contentType(MediaType.APPLICATION_JSON)
-                    .content(content))
-                    .andExpect(status().isOk())
-                    .andExpect(jsonPath("title").value(job.getTitle()))
-                    .andExpect(jsonPath("description").value(job.getDescription()));
+            createJob();
         } catch (Exception ex) {
             Logger.getLogger(JobControllerTest.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -157,10 +162,23 @@ public class JobControllerTest {
         System.out.println("update");
 
     }
+    
 
     private String objectToJson(Job job) throws JsonProcessingException {
         ObjectMapper mapper = new ObjectMapper();
         return mapper.writeValueAsString(job);
     }
+    
+    
+    protected MvcResult createJob() throws Exception {
+        return mockMvc.perform(post(endPointUrl)
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(content))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("title").value(job.getTitle()))
+                .andExpect(jsonPath("description").value(job.getDescription()))
+                .andReturn();
+    }
+
 
 }

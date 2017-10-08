@@ -42,7 +42,7 @@ public class FileDocumentRepositoryTest {
 
     public static FileDocument createMockDocument() throws IOException {
         FileDocument doc = new FileDocument();
-        doc.setResourceType(ResourceType.USER);
+       // doc.setResourceType(ResourceType.USER);
         doc.setContentType(MediaType.IMAGE_JPEG_VALUE);
         //store file data as bytes
         ByteArrayOutputStream output = new ByteArrayOutputStream(1024);

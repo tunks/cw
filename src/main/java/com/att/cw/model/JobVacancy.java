@@ -5,6 +5,7 @@
  */
 package com.att.cw.model;
 
+import com.att.cw.support.solr.SearchField;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Column;
@@ -26,17 +27,20 @@ public class JobVacancy implements Serializable {
      */
     @Column(name = "open_date", nullable = false)
     @Temporal(javax.persistence.TemporalType.TIMESTAMP)
+    @SearchField
     private Date openDate;
     /**
      * job deadline closing date
      */
     @Column(name = "close_date", nullable = false)
     @Temporal(javax.persistence.TemporalType.TIMESTAMP)
+    @SearchField
     private Date closeDate;
     /**
      * Job status enumerated value
      */
     @Enumerated(EnumType.STRING)
+    @SearchField
     private JobStatus status;
 
     public JobVacancy() {

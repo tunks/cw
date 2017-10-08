@@ -8,6 +8,7 @@ package com.att.cw.service;
 import com.att.cw.dao.JobCandidateRepository;
 import com.att.cw.model.Job;
 import com.att.cw.model.JobCandidate;
+import com.att.cw.model.User;
 import java.util.List;
 import javax.annotation.Resource;
 import org.springframework.data.domain.Page;
@@ -45,6 +46,16 @@ public class JobCandidateService implements CrudService<JobCandidate, Long> {
     @Override
     public JobCandidate find(Long id) {
         return candidateRepository.findOne(id);
+    }
+    
+       /**
+     * Find job candidate by user
+     *
+     * @param user
+     * @return
+     */
+    public JobCandidate findByUser(User user) {
+        return candidateRepository.findByUser(user);
     }
 
     /**
@@ -94,6 +105,11 @@ public class JobCandidateService implements CrudService<JobCandidate, Long> {
 
     @Override
     public boolean exists(Long id) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void delete(JobCandidate object) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

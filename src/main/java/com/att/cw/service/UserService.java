@@ -1,18 +1,15 @@
 package com.att.cw.service;
 
 import com.att.cw.dao.UserRepository;
+import com.att.cw.model.JobCandidate;
 
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import com.att.cw.model.User;
 import javax.annotation.Resource;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-import com.att.cw.model.Authority;
-import com.att.cw.model.AuthorityName;
 
 /**
  * User service concrete class - to manager user objects
@@ -22,7 +19,6 @@ public class UserService implements CrudService<User, Long> {
 
     @Resource
     private UserRepository userRepository;
-
     /**
      * Save and persist user object
      *
@@ -31,7 +27,6 @@ public class UserService implements CrudService<User, Long> {
      */
     @Override
     public User save(User object) {
-
         return userRepository.save(object);
     }
 
@@ -146,4 +141,8 @@ public class UserService implements CrudService<User, Long> {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    @Override
+    public void delete(User object) {
+        userRepository.delete(object);
+    }
 }

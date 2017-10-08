@@ -8,6 +8,7 @@ package com.att.cw.listener;
 import com.att.cw.model.JobQuestionAnswer;
 import com.att.cw.model.JobQuestion;
 import com.att.cw.exception.JobApplicationException;
+import javax.persistence.PostPersist;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 
@@ -22,14 +23,21 @@ public class JobAnswerListener {
     void onCreate(JobQuestionAnswer entity) {
         //get job question
         JobQuestion question = entity.getQuestion();
-        validate(entity, question);
+        //validate(entity, question);
     }
 
     @PreUpdate
     void onPersist(JobQuestionAnswer entity) {
         //get job question
         JobQuestion question = entity.getQuestion();
-        validate(entity, question);
+        //validate(entity, question);
+    }
+     @PostPersist
+    void afterPersist(JobQuestionAnswer entity) {
+        //get job question
+        if (entity.getAnswerEntry() != null){
+            entity.getAnswerEntry().setQuestionAnswer(entity);
+        }
     }
 
     //validate the entity
@@ -40,7 +48,7 @@ public class JobAnswerListener {
         }
 
         //if(question.)
-        if (entity.getAnswerOptions().isEmpty() && question.isRequired()) {
+        if (entity.getAnswerEntry() == null && question.isRequired()) {
             throw new JobApplicationException("Question must be answer!!");
         }
     }

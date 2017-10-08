@@ -8,8 +8,10 @@ package com.att.cw.controller.restricted.job;
 import com.att.cw.controller.BaseController;
 import com.att.cw.dto.JobQuestionDto;
 import com.att.cw.dto.JobQuestionListDto;
+import com.att.cw.dto.QuestionCategoryDto;
 import com.att.cw.dto.QuestionOptionDto;
 import com.att.cw.dto.mappers.JobQuestionDtoMapper;
+import com.att.cw.dto.mappers.QuestionCategoryDtoMapper;
 import com.att.cw.dto.mappers.QuestionOptionDtoMapper;
 import com.att.cw.exception.NotFoundException;
 import com.att.cw.model.Job;
@@ -18,8 +20,8 @@ import com.att.cw.model.QuestionOption;
 import com.att.cw.service.JobQuestionOptionService;
 import com.att.cw.service.JobQuestionService;
 import com.att.cw.service.JobService;
+import com.att.cw.service.QuestionCategoryService;
 import java.util.List;
-import static java.util.stream.Collectors.toList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -35,7 +37,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequestMapping("/restricted/questions")
-public class JobQuestionController implements BaseController<JobQuestion, Long> {
+public class JobQuestionController implements BaseController<JobQuestionDto, Long> {
 
     @Autowired
     private JobQuestionService jobQuestionService;
@@ -46,6 +48,9 @@ public class JobQuestionController implements BaseController<JobQuestion, Long> 
     @Autowired
     private JobService jobService;
 
+    @Autowired
+    private QuestionCategoryService questionCategoryService;
+
     /**
      * Find Job question
      *
@@ -54,8 +59,8 @@ public class JobQuestionController implements BaseController<JobQuestion, Long> 
      */
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     @Override
-    public JobQuestion find(@PathVariable Long id) {
-        return jobQuestionService.find(id);
+    public JobQuestionDto find(@PathVariable Long id) {
+        return JobQuestionDtoMapper.mapEntityIntoDTO(jobQuestionService.find(id));
     }
 
     /**
@@ -66,8 +71,8 @@ public class JobQuestionController implements BaseController<JobQuestion, Long> 
      */
     @RequestMapping(method = RequestMethod.POST)
     @Override
-    public JobQuestion create(JobQuestion object) {
-        return jobQuestionService.save(object);
+    public JobQuestionDto create(JobQuestionDto object) {  
+        return JobQuestionDtoMapper.mapEntityIntoDTO(jobQuestionService.save(object));
     }
 
     /**
@@ -78,8 +83,8 @@ public class JobQuestionController implements BaseController<JobQuestion, Long> 
      */
     @RequestMapping(method = RequestMethod.PUT)
     @Override
-    public JobQuestion update(JobQuestion object) {
-        return jobQuestionService.save(object);
+    public JobQuestionDto update(JobQuestionDto object) {
+        return JobQuestionDtoMapper.mapEntityIntoDTO(jobQuestionService.save(object));
     }
 
     @Override
@@ -88,13 +93,14 @@ public class JobQuestionController implements BaseController<JobQuestion, Long> 
     }
 
     /**
-     * Find all jobs by question id
+     * Find all jobs by question id and user id
      *
      * @param id
+     * @param userId
      * @return
      */
     @RequestMapping(method = RequestMethod.GET)
-    public JobQuestionListDto findAll(@RequestParam("jobid") Long id) {
+    public JobQuestionListDto findAll(@RequestParam("jobid") Long id, @RequestParam("userId") Long userId) {
         Job job = jobService.find(id);
         if (job != null) {
             return JobQuestionListDto.build(job);
@@ -111,9 +117,10 @@ public class JobQuestionController implements BaseController<JobQuestion, Long> 
     @Override
     public void delete(@PathVariable Long id) {
         Job job = jobService.findByQuestionId(id);//jobService  (id);
-        JobQuestion question = find(id);
+        JobQuestion question = jobQuestionService.find(id);
         if (job != null) {
             job.getQuestions().remove(question);
+
             jobService.save(job);
         }
         jobQuestionService.delete(question);
@@ -132,7 +139,6 @@ public class JobQuestionController implements BaseController<JobQuestion, Long> 
         if (question != null) {
             QuestionOption entity = QuestionOptionDtoMapper.mapDtoIntoEntity(optionDto);
             //set question entity and save option entity
-            entity.setQuestion(question);
             entity = jobQuestionOptionService.save(entity);
             //append question option entity to question
             question.getOptions().add(entity);
@@ -160,5 +166,15 @@ public class JobQuestionController implements BaseController<JobQuestion, Long> 
         } else {
             throw new NotFoundException("Either question  or option entity not found");
         }
+    }
+
+    /**
+     * Get all questions category
+     *
+     * @return
+     */
+    @RequestMapping(value = "/categories", method = RequestMethod.GET)
+    public List<QuestionCategoryDto> getQuestionCategories() {
+        return QuestionCategoryDtoMapper.mapEntitiesIntoDTOs(questionCategoryService.findAll());
     }
 }
