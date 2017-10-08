@@ -1,6 +1,7 @@
 --
 -- Table structure for table `AUTHORITY`
 --
+DROP TABLE IF EXISTS `USER_AUTHORITY`;
 DROP TABLE IF EXISTS `AUTHORITY`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
@@ -18,3 +19,4 @@ CREATE TABLE `AUTHORITY` (
 
 INSERT INTO AUTHORITY (ID, NAME) VALUES (1, 'ROLE_USER');
 INSERT INTO AUTHORITY (ID, NAME) VALUES (2, 'ROLE_ADMIN');
+INSERT INTO AUTHORITY (ID, NAME) VALUES (3, 'ROLE_DEPTMT');

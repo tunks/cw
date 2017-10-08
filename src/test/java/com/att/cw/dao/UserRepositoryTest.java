@@ -69,9 +69,10 @@ public class UserRepositoryTest {
     public void testSave() {
         System.out.println("save");
         User user = new User();
+        
         user.setEmail(email);
         user.setPassword(password);
-        user.setDateOfBirth(new LocalDate());
+        //user.setDateOfBirth(new LocalDate());
         User result = userRepository.save(user);
         assertEquals(user, result);
     }
