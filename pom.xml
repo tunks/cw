@@ -22,7 +22,7 @@
         <jackson.version>2.8.8</jackson.version>
         <deployment.name>${project.build.finalName}</deployment.name>
         <flyway.version>4.1.2</flyway.version>
-        <solr.version>6.5.0</solr.version>
+        <solr.version>8.8.2</solr.version>
     </properties>
     <!--    <repositories>
         <repository>
