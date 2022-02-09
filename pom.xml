@@ -13,7 +13,7 @@
         <org.springsecurity-version>4.0.1.RELEASE</org.springsecurity-version>
         <org.aspectj-version>1.7.4</org.aspectj-version>
         <org.slf4j-version>1.7.5</org.slf4j-version>
-        <hibernate.version>4.3.5.Final</hibernate.version>
+        <hibernate.version>5.4.24.Final</hibernate.version>
         <jdk.version>1.8</jdk.version>
         <springjpa.version>1.11.3.RELEASE</springjpa.version>
         <spring-data-redis.version>1.8.2.RELEASE</spring-data-redis.version>
